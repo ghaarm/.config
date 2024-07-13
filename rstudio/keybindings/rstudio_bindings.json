@@ -1,0 +1,11 @@
+{
+    "newSourceDoc": "Cmd+N",
+    "moveTabLeft": "Ctrl+Left",
+    "moveTabRight": "Ctrl+Right",
+    "popoutDoc": "Ctrl+Shift+W",
+    "viewerPopout": "Shift+Cmd+E",
+    "saveSourceDocAs": "Shift+Cmd+S",
+    "goToLine": "Cmd+G",
+    "restartR": "Shift+Cmd+/"
+
+}
