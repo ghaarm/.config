@@ -6,7 +6,28 @@ return {
     "xuhdev/vim-latex-live-preview",
   },
   config = function()
-    -- Setze den lokalen Leader auf ','
+    -- Set the Python 3 host program to the virtual environment Pythoni
+    -- für vimtex live preview
+    vim.g.python3_host_prog = "/Users/g/.venvs/neovim/bin/python"
+
+    -- Lokale Funktion zum Schreiben des Servernamens
+    -- https://jdhao.github.io/2021/02/20/inverse_search_setup_neovim_vimtex/
+    -- der eigentliche code der Homepage hatte nicht funktioniert, aber dieser hier
+    local function write_server_name()
+      local nvim_server_file = (vim.fn.has("win32") == 1 and os.getenv("TEMP") or "/tmp") .. "/vimtexserver.txt"
+      local servername = vim.v.servername
+      local file = io.open(nvim_server_file, "w")
+      file:write(servername)
+      file:close()
+    end
+
+    -- Auto-Befehle für VimTeX
+    vim.api.nvim_create_augroup("vimtex_common", { clear = true })
+    vim.api.nvim_create_autocmd("FileType", {
+      pattern = "tex",
+      callback = write_server_name,
+      group = "vimtex_common",
+    })
 
     -- Vimtex Konfiguration
 
@@ -50,33 +71,3 @@ return {
     -- vim.api.nvim_set_keymap('n', '<Localleader>c', ':lua CleanLatexFiles()<CR>', { noremap = true, silent = true })
   end,
 }
--- https://github.com/ericlovesmath/dotfiles/blob/master/.config/nvim/lua/plugins/vimtex.lua
--- return {
---   "lervag/vimtex",
---   dependencies = {
---     "xuhdev/vim-latex-live-preview",
---   },
---   ft = { "tex" },
---   config = function()
---     vim.cmd([[
---         let g:vimtex_compiler_progname = "nvr"
---         let g:vimtex_view_method = "skim"
---         let g:vimtex_imaps_enabled = 1
---         let g:vimtex_complete_enabled = 0
---         " let g:vimtex_quickfix_enabled = 0
---
---         call vimtex#init()
---
---         set conceallevel=2
---         let g:vimtex_syntax_conceal["math_super_sub"]=0
---         highlight Conceal guifg=#d19a66 guibg=NONE
---
---         augroup vimtex_config
---             au!
---             au User VimtexEventQuit call vimtex#compiler#clean(0)
---         augroup END
---
---         " autocmd FileType tex nmap <buffer> <C-T> :!latexmk -pvc -pdf %<CR>
---         ]])
---   end,
--- }

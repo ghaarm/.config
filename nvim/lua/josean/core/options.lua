@@ -9,17 +9,29 @@ opt.number = true
 -- Setze 'scrolloff' auf 10 Zeilen, es soll max 10 Zeilen unter das Ende gescrollt werden, funktioniert nicht
 -- vim.opt.scrolloff = 10
 
--- tabs & indentation
-opt.tabstop = 2 -- 2 spaces for tabs (prettier default)
-opt.shiftwidth = 2 -- 2 spaces for indent width
-opt.expandtab = true -- expand tab to spaces
+-- tabs & indentation & linebreak
+opt.tabstop = 3       -- 2 spaces for tabs (prettier default)
+opt.shiftwidth = 2    -- 2 spaces for indent width
+opt.expandtab = true  -- expand tab to spaces
 opt.autoindent = true -- copy indent from current line when starting new one
 
-opt.wrap = false
+
+-- Zeilenumbruch aktivieren
+opt.wrap = true
+
+-- Zeilen an Wortgrenzen umbrechen
+vim.opt.linebreak = true
+
+-- Indentation für umgebrochene Zeilen beibehalten
+vim.opt.breakindent = true
+
+-- Symbol für umgebrochene Zeilen
+vim.opt.showbreak = "↪"
+
 
 -- search settings
 opt.ignorecase = true -- ignore case when searching
-opt.smartcase = true -- if you include mixed case in your search, assumes you want case-sensitive
+opt.smartcase = true  -- if you include mixed case in your search, assumes you want case-sensitive
 
 opt.cursorline = true
 
@@ -27,7 +39,7 @@ opt.cursorline = true
 -- (have to use iterm2 or any other true color terminal)
 opt.termguicolors = true
 opt.background = "dark" -- colorschemes that can be light or dark will be made dark
-opt.signcolumn = "yes" -- show sign column so that text doesn't shift
+opt.signcolumn = "yes"  -- show sign column so that text doesn't shift
 
 -- backspace
 opt.backspace = "indent,eol,start" -- allow backspace on indent, end of line or insert mode start position
