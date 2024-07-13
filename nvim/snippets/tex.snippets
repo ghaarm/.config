@@ -397,6 +397,8 @@ snippet ecmopdf "ecmopdf" b
     	\label{fig:${3:Name}}
 	\end{figure}
 	${0}
+#
+
 
 # png ecmo 
 snippet ecmotbl "ecmotbl" b
@@ -408,10 +410,10 @@ snippet ecmotbl "ecmotbl" b
     	\label{fig:${3:Name}}
 	\end{table}
 	${0}
-
+#
 
 # pdf include 
-snippet pdfi "odf include" b
+snippet pdfi "pdf include" b
 	
 	\begin{figure}[h]
     	\centering
@@ -424,4 +426,20 @@ snippet pdfi "odf include" b
 # snippet underline
 snippet url " url"
 	\href{${1:Link}}{${2:Bescheibung}, Stand ${3:Datum}} ${0}
+#
+
+
+
+
+# rmd chunk
+snippet chunk "chunk rmd" 
+	```{r}
+	${0}
+
+
+
+	```
+#
+
+
 

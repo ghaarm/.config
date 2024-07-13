@@ -3,6 +3,7 @@ vim.g.maplocalleader = ","
 return {
   {
     "R-nvim/R.nvim",
+    lazy = false,
     config = function()
       -- Create a table with the options to be passed to setup()
       local opts = {
@@ -38,8 +39,27 @@ return {
       end
 
       require("r").setup(opts)
-    end,
-    lazy = false,
+
+      -- https://github.com/R-nvim/R.nvim/blob/main/doc/R.nvim.txt
+      -- macht die Farben so wie in meinem eingestellten colorscheme, andere varianten auf der Homepage
+      vim.g.rout_follow_colorscheme = true
+
+      -- Funktion um nach dem Knitten in R automatisch die geknittete HTML im Browser zu öffnen
+      local function knit_and_open()
+        -- Run the KnitRhtml command
+        vim.cmd("KnitRhtml")
+        -- Get the name of the resulting HTML file
+        local filename = vim.fn.expand("%:p:r") .. ".html"
+        -- Escape special characters in the filename for shell command
+        local escaped_filename = vim.fn.shellescape(filename)
+        -- Open the HTML file in the default web browser
+        os.execute("open " .. escaped_filename)
+      end
+
+      -- Create a custom command KnitRhtmlAndOpen that knits the file and opens it
+      vim.api.nvim_create_user_command("KnitRhtmlAndOpen", knit_and_open, {})
+    end, -- Ende der config = function
+    
   },
   {
     "nvim-treesitter/nvim-treesitter",
