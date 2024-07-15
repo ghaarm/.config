@@ -2,13 +2,10 @@ vim.g.maplocalleader = ","
 
 return {
   "lervag/vimtex",
-  dependencies = {
-    "xuhdev/vim-latex-live-preview",
-  },
+  -- dependencies = {
+  --   "xuhdev/vim-latex-live-preview",
+  -- },
   config = function()
-    -- Set the Python 3 host program to the virtual environment Pythoni
-    -- für vimtex live preview
-    vim.g.python3_host_prog = "/Users/g/.venvs/neovim/bin/python"
 
     -- Lokale Funktion zum Schreiben des Servernamens
     -- https://jdhao.github.io/2021/02/20/inverse_search_setup_neovim_vimtex/
