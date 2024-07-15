@@ -4,6 +4,7 @@ return {
   config = function()
     require("luasnip.loaders.from_snipmate").load({ paths = "~/.config/nvim/snippets/" })
 
+    -- https://github.com/L3MON4D3/LuaSnip/issues/988 für leader es um 
     vim.keymap.set(
       'n',
       '<Leader>es',

@@ -3,13 +3,23 @@ title: "____"
 author: "GH"
 date: "`r format(Sys.Date(), '%Y %m%d')`"
 output:  
-  pdf_document:
+ pdf_document:
+    toc: true
     keep_tex: true
-    geometry: margin=1cm
-    fontsize: 11pt
 header-includes:
-  - \usepackage{helvet}
-   # - \linenumbers
+  - \usepackage{xcolor}
+  - \usepackage{hyperref}
+  - \hypersetup{
+      colorlinks = true,
+      linkcolor=red!70!black,
+      urlcolor=blue,
+      citecolor=black
+    }
+  - \usepackage{geometry}
+  - \geometry{margin=2cm}
+  - \fontsize{11}{13}\selectfont
+  - \renewcommand{\contentsname}{Inhaltsverzeichnis}
+latex_engine: pdflatex
 ---
 
 ```{r setup, include=FALSE}
@@ -22,5 +32,8 @@ source("/Users/g/Library/Mobile
     projects/ECMO Diplom/.Rprofile")
 ```
 
+\label{toc}
+\tableofcontents
 
 
+[Zurück zum Inhaltsverzeichnis](#toc)

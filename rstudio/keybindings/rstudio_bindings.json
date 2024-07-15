@@ -6,6 +6,6 @@
     "viewerPopout": "Shift+Cmd+E",
     "saveSourceDocAs": "Shift+Cmd+S",
     "goToLine": "Cmd+G",
-    "restartR": "Shift+Cmd+/"
-
+    "restartR": "Shift+Cmd+/",
+    "quartoRenderDocument": ""
 }
