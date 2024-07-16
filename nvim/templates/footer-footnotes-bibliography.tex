@@ -1,13 +1,22 @@
 \documentclass{article}
-% \documentclass[twocolumn]{article}
-
-% \usepackage{pdfsync} % ggf für Synchronization mit skiim, aber ggf wegen Serverlösung gar nicht mehr notwendig
-
 
 \input{/Users/g/Library/Mobile Documents/com~apple~CloudDocs/#Docs iCloud/R Statistik, icloud/Latex, icloud/Latex Projekte/@Vorlagen-Latex/preamble-footnotes-bibliographie-neu.tex}
 
+\usepackage{textgreek}
 
-%-------------------------- TEXT FUßZEILE ----------------------------
+\usepackage{titlesec} % kann z.B. subsubsubsubsections erstellen, kann Schriftgröße, Schriftart und Farbe von Titeln anpassen.
+
+\titlespacing*{\section}{0pt}{2.5ex plus 1ex minus .2ex}{1.3ex plus .2ex}
+
+
+%========================== KOPF - UND FUßZEILE ============================
+\usepackage{fancyhdr} % für Fußzeilen
+\renewcommand{\headrulewidth}{0pt} % Entfernt die Linie unter der Kopfzeile
+%
+\renewcommand{\footrulewidth}{0.4} % Fügt eine Linie oberhalb der Fußzeile auf jeder Seite ein
+
+\pagestyle{fancy} % definiert den style "fancy"
+\fancyhf{} % Löscht die aktuellen Einstellungen für Kopf- und Fußzeile
 
 \rfoot{\hfill ____, G. Haarmeyer, Stand: \today, S.  \thepage} % Zentrale Fußzeile mit Datum und Seitenzahl rechts
 \lfoot{\hyperlink{toc}{Zurück zum Inhaltsverzeichnis}} % Linke Seite der Fußzeile
@@ -28,24 +37,24 @@
 \date{} % wenn leer kein Datum
 
 \begin{document}
-%\maketitle % Erstellt das Titelblatt
+\maketitle % Erstellt das Titelblatt
 \thispagestyle{fancy} % Ermöglicht die Fußzeile auf der Titelseite
 \hypertarget{toc}{}
-
-% Hyperlinks schwarz für das Inhaltsverzeichnis
-\hypersetup{linkcolor=black}
+\vspace{-1.5}
 % Anpassen der Überschriftsabstände
 
 %-------------------------- INHALTSVERZEICHNIS ----------------------------  
-\tableofcontents % Erzeugt das Inhaltsverzeichnis
+% Hyperlinks schwarz für das Inhaltsverzeichnis
+% \hypersetup{linkcolor=black}
 
+\tableofcontents % Erzeugt das Inhaltsverzeichnis
+\listoftables
+\listoffigures
 % Hyperlinks dunkelrot für den Rest des Dokuments
 \hypersetup{
   linkcolor = red!70!black,
   citecolor = black, % Farbe für Zitate
-  urlcolor = blue,    % Farbe für URL-Links
-% Änderung nur der Fußnotenlinkfarbe:
-  footnotecolor = black
+  urlcolor = blue    % Farbe für URL-Links
 }
 
 

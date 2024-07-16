@@ -7,5 +7,6 @@
     "saveSourceDocAs": "Shift+Cmd+S",
     "goToLine": "Cmd+G",
     "restartR": "Shift+Cmd+/",
-    "quartoRenderDocument": ""
+    "quartoRenderDocument": "",
+    "knitDocument": "Ctrl+Cmd+K"
 }
