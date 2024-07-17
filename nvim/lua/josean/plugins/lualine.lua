@@ -10,7 +10,7 @@ return {
       -- blue = "#00008B", -- von mir dunkles blau
       -- green = "#3EFFDC", -- von josean
       -- green = "#006400", -- von mir dunkelgrün
-      green = "#b8bb26", -- von mir dunkelgrün nach gruvbox https://github.com/morhetz/gruvbox
+      green = "#b8bb26",  -- von mir dunkelgrün nach gruvbox https://github.com/morhetz/gruvbox
       violet = "#FF61EF", -- von josean
       violet = "#d3869b", -- von mir purple nach Gruvbox
       yellow = "#FFDA7B",
@@ -63,48 +63,18 @@ return {
 
         theme = "kanagawa",
       },
---       sections = {
---         lualine_x = {
---           {
---             lazy_status.updates,
---             cond = lazy_status.has_updates,
---             color = { fg = "#ff9e64" },
---           },
---           { "encoding" },
---           { "fileformat" },
---           { "filetype" },
---         },
---       },
---     })
---   end,
--- }
-sections = {
-  lualine_a = {'mode'},
-  lualine_b = {'branch', 'diff', {'diagnostics', sources={'nvim_diagnostic'}}},
-  lualine_c = {{'filename', path = 1}}, -- Zeigt den vollen Pfad der Datei
-  lualine_x = {
-    {
-      lazy_status.updates,
-      cond = lazy_status.has_updates,
-      color = { fg = "#ff9e64" },
-    },
-    { "encoding" },
-    { "fileformat" },
-    { "filetype" },
-  },
-  lualine_y = {'progress'},
-  lualine_z = {'location'}
-},
-inactive_sections = {
-  lualine_a = {},
-  lualine_b = {},
-  lualine_c = {'filename'},
-  lualine_x = {'location'},
-  lualine_y = {},
-  lualine_z = {}
-},
-tabline = {},
-extensions = {}
-})
-end,
+      sections = {
+        lualine_x = {
+          {
+            lazy_status.updates,
+            cond = lazy_status.has_updates,
+            color = { fg = "#ff9e64" },
+          },
+          { "encoding" },
+          { "fileformat" },
+          { "filetype" },
+        },
+      },
+    })
+  end,
 }
