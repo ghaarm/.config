@@ -45,6 +45,8 @@ return {
       dashboard.button("r", "󰈚  Recent", ":Telescope oldfiles <CR>"),
       dashboard.button("e", "󰱼  Explorer", "<cmd>NvimTreeToggle<CR>"),
       dashboard.button("f", "  Find", ":Telescope find_files <CR>"),
+      -- dashboard.button("t, "Templates", "<leader> t <CR>"),
+      dashboard.button("t", "  Templates", ":Telescope find_files cwd=~/.config/nvim/templates<cr>"),
       -- dashboard.button("c", "  Config", ":e $MYVIMRC <CR>"),
       -- dashboard.button("i", "  Info", "<cmd>e ~/.config/CheatSheet.md<cr>"),
       dashboard.button("p", "  Plugins", "<cmd>Lazy<cr>"),

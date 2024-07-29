@@ -2,6 +2,11 @@ vim.cmd("let g:netrw_liststyle = 3")
 
 local opt = vim.opt
 
+-- Maus aktivieren
+-- vim.opt.mouse = "a"
+vim.opt.mouse = "" -- Maus deaktivieren
+
+
 opt.relativenumber = true
 
 opt.number = true
