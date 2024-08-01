@@ -82,4 +82,5 @@ return {
       require("cmp_r").setup({})
     end,
   },
+  vim.api.nvim_set_keymap('t', 'jj', [[<C-\><C-n>]], { noremap = true, silent = true })
 }
