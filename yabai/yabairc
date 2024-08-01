@@ -6,6 +6,10 @@ yabai -m config layout bsp
 # New window spawns to the right if vertical split, or bottom if horizontal split
 yabai -m config window_placement second_child
 
+
+# New window spawns to the links if vertical split, or bottom if horizontal split
+yabai -m config window_placement first_child
+
 # padding set to 10gpx
 yabai -m config top_padding 10g
 yabai -m config bottom_padding 10g

@@ -388,10 +388,46 @@ snippet example "Example" bi
 	\end{example}
 
 
+# png 
+snippet png "png" b
+	
+	\begin{figure}[H]
+    	\centering
+    	\includegraphics[width=0.8\textwidth]{../bilder/${1:Name}}
+    	\caption{${2:Name}}
+    	\label{fig:${3:Name}}
+	\end{figure}
+	${0}
+#
+
+# png same folder
+snippet pngsame "png same folder" b
+	
+	\begin{figure}[H]
+    	\centering
+    	\includegraphics[width=0.8\textwidth]{${1:Name}}
+    	\caption{${2:Name}}
+    	\label{fig:${3:Name}}
+	\end{figure}
+	${0}
+#
+
+# png multi
+snippet pngmulti "pngmulti" b
+	
+	\begin{figure}[H]
+    	\centering
+    	\includegraphics[width=\linewidth]{../bilder/${1:Name}}
+    	\caption{${2:Name}}
+    	\label{fig:${3:Name}}
+	\end{figure}
+	${0}
+#
+
 # png ecmo 
 snippet ecmopng "ecmopng" b
 	
-	\begin{figure}[h]
+	\begin{figure}[H]
     	\centering
     	\includegraphics[width=0.5\textwidth]{../ECMO-latex-png/${1:Name}.png}
     	\caption{${2:Name}}
@@ -399,10 +435,12 @@ snippet ecmopng "ecmopng" b
 	\end{figure}
 	${0}
 #
+
+
 # png ecmo 
 snippet ecmopdf "ecmopdf" b
 	
-	\begin{figure}[h]
+	\begin{figure}[H]
     	\centering
     	\includegraphics[width=0.5\textwidth]{../ECMO-latex-png/${1:Name}.pdf}
     	\caption{${2:Name}}
@@ -415,7 +453,7 @@ snippet ecmopdf "ecmopdf" b
 # png ecmo 
 snippet ecmotbl "ecmotbl" b
 	
-	\begin{table}[h]
+	\begin{table}[H]
     	\centering
     	\includegraphics[width=0.5\textwidth]{../ECMO-latex-png/${1:Name}.pdf}
     	\caption{${2:Name}}
@@ -427,7 +465,7 @@ snippet ecmotbl "ecmotbl" b
 # pdf include 
 snippet pdfi "pdf include" b
 	
-	\begin{figure}[h]
+	\begin{figure}[H]
     	\centering
     	\includegraphics[width=0.5\textwidth]${1:Name}/${2:Name}.pdf}
     	\caption{${3:Name}}
@@ -443,15 +481,63 @@ snippet url " url"
 
 
 
-# rmd chunk
-snippet chunk "chunk rmd" 
-	```{r}
+# Linie
+snippet linie "linie" 
+	\rule{${1:Länge}cm}{${2:Breite}mm}
 	${0}
+#
 
+# Lüccke
+snippet lücke "lücke"
+  \hspace{${1:Länge}cm} ${0}
+#
 
-
-	```
+# Tabelle
+snippet tabelle3x3 "tabelle 3x4"
+  \begin{table}[H]
+	 \centering
+	 \caption{${1:Titel der Tabelle}}
+		\label{tab:${2:$1}}
+		  \begin{tabular}{|l|c|c|}
+			 \hline
+			 ${3:\ignore{überschrift 1}} & ${4:überschrift 2} & ${5:überschrift 3} \\\\
+			 \hline
+			 ${6:Zelle} & Zelle & Zelle \\\\
+			 \hline
+			 Zelle & Zelle & Zelle \\\\
+			 \hline
+			 Zelle & Zelle & Zelle \\\\
+			 \hline
+		  \end{tabular}
+  \end{table}
 #
 
 
+# Tabelle
+snippet tabelle2x3 "tabelle 2x3"
+  \begin{table}[H]
+	 \centering
+	 \caption{${1:Titel der Tabelle}}
+		\label{tab:${2:$1}}
+		  \begin{tabular}{|l|c|}
+			 \hline
+			 ${3:\ignore{überschrift 1}} & ${4:überschrift 2} \\\\
+			 \hline
+			 ${6:Zelle} & Zelle \\\\
+			 \hline
+			 Zelle & Zelle \\\\
+			 \hline
+			 Zelle & Zelle \\\\
+			 \hline
+		  \end{tabular}
+  \end{table}
+#
+# ignore
+snippet ignore "ignore"
+  \ignore{${1:wort}}$ ${0}
+#
 
+# & escaped in Tabelle
+snippet && "& escape"
+  \& ${0}
+#

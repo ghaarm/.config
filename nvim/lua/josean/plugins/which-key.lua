@@ -70,7 +70,10 @@ return {
           "<cmd>read ~/.config/nvim/templates/cheat-sheet.md<CR>",
           "cheat-sheet.md",
         },
-
+        u = {
+          "<cmd>read ~/.config/nvim/templates/übergabeprotokoll.tex<CR>",
+          "übergabeprotokoll.tex",
+        },
       },
     },
   },

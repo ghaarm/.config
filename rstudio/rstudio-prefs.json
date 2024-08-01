@@ -16,5 +16,6 @@
     "document_author": "GH",
     "default_encoding": "UTF-8",
     "save_files_before_build": true,
-    "indent_guides": "gray"
+    "indent_guides": "gray",
+    "default_sweave_engine": "knitr"
 }
