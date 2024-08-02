@@ -541,3 +541,36 @@ snippet ignore "ignore"
 snippet && "& escape"
   \& ${0}
 #
+
+# include pdf
+snippet inpdf "include pdf"
+  \includepdf[pages=-, pagecommand={\thispagestyle{fancy}}]{${1:Datei}}
+  ${0}
+#
+
+# Link
+snippet link "link"
+  \url{${1:url}${0}}
+##
+
+# toc Inhaltsverzeichnis
+snippet toc "toc und href"
+  \hypertarget{toc}{}
+  \vspace{-1.5cm}
+  % Anpassen der Überschriftsabstände
+
+  %-------------------------- INHALTSVERZEICHNIS ----------------------------  
+  % Hyperlinks schwarz für das Inhaltsverzeichnis
+  % \hypersetup{linkcolor=black}
+
+  \tableofcontents % Erzeugt das Inhaltsverzeichnis
+  \listoftables
+  \listoffigures
+  % Hyperlinks dunkelrot für den Rest des Dokuments
+  \hypersetup{
+    linkcolor = red!70!black,
+              citecolor = black, % Farbe für Zitate
+                urlcolor = blue    % Farbe für URL-Links
+  }
+  ${0}
+#
