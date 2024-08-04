@@ -97,6 +97,15 @@ vim.api.nvim_set_keymap('n', '<C-u>', '<C-u>zz', { noremap = true, silent = true
 vim.api.nvim_set_keymap('i', '<M-BS>', '<C-w>', { noremap = true, silent = true })
 -- cmd + backspace löscht ganze Zeile
 vim.api.nvim_set_keymap('i', '<D-BS>', '<C-u>', { noremap = true, silent = true })
+--
+------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------
+-- datei im Finder öffnen
+--
+-- datei im Finder öffnen
+
 -- Initialize tables to avoid nil errors
 -- _G.cmp_mappings = _G.cmp_mappings or {}
 -- _G.bibtex_mappings = _G.bibtex_mappings or {}
@@ -148,3 +157,6 @@ vim.api.nvim_set_keymap('i', '<D-BS>', '<C-u>', { noremap = true, silent = true 
 -- end
 -----------------------------------------------------------------------------
 -----------------------------------------------------------------
+-- aus functions.lua um dabtei im Finder zu öffnen
+vim.api.nvim_set_keymap('n', '<leader>o', ':lua OpenInFinder()<CR>', { noremap = true, silent = true })
+---
