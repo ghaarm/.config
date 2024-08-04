@@ -92,6 +92,11 @@ keymap.set("i", "<D-i>", "<cmd>Telescope bibtex<cr>", { desc = "Open Telescope B
 vim.api.nvim_set_keymap('n', '<C-d>', '<C-d>zz', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<C-u>', '<C-u>zz', { noremap = true, silent = true })
 
+-- alt + backspace soll word löschen und dann insert modus machen
+
+vim.api.nvim_set_keymap('i', '<M-BS>', '<C-w>', { noremap = true, silent = true })
+-- cmd + backspace löscht ganze Zeile
+vim.api.nvim_set_keymap('i', '<D-BS>', '<C-u>', { noremap = true, silent = true })
 -- Initialize tables to avoid nil errors
 -- _G.cmp_mappings = _G.cmp_mappings or {}
 -- _G.bibtex_mappings = _G.bibtex_mappings or {}
