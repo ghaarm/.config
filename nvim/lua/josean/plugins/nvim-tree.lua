@@ -33,6 +33,15 @@ function duplicate_file()
   print("Datei dupliziert: " .. new_filepath)
 end
 
+-- Funktion zum Öffnen von PDF-Dateien mit sioyek
+function open_with_sioyek(node)
+  if node.name:match("%.pdf$") then
+    local cmd = "sioyek " .. vim.fn.fnameescape(node.absolute_path)
+    vim.fn.jobstart(cmd, { detach = true })
+    require 'nvim-tree.actions.node.open-file'.fn('edit')
+  end
+end
+
 return {
   "nvim-tree/nvim-tree.lua",
   dependencies = "nvim-tree/nvim-web-devicons",
@@ -91,5 +100,12 @@ return {
     keymap.set("n", "<leader>er", "<cmd>NvimTreeRefresh<CR>", { desc = "Refresh file explorer" })                       -- refresh file explorer
 
     keymap.set("n", "<leader>d", ":lua duplicate_file()<CR>", { noremap = true, silent = true, desc = "Duplicate file" })
+
+    keymap.set(
+      'n',
+      '<leader>p',
+      function() open_with_sioyek(require 'nvim-tree.lib'.get_node_at_cursor()) end,
+      { noremap = true, silent = true, desc = "Open PDF with sioyek" }
+    )
   end
 }
