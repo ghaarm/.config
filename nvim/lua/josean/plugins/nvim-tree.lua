@@ -5,6 +5,34 @@ function get_nvim_tree_width()
   return tree_width
 end
 
+-- Funktion zum Duplizieren einer Datei
+function duplicate_file()
+  local api = require('nvim-tree.api')
+  local node = api.tree.get_node_under_cursor()
+
+  if node == nil then
+    print("Keine Datei unter dem Cursor")
+    return
+  end
+
+  local filepath = node.absolute_path
+  local extension = filepath:match("^.+(%..+)$")
+  local new_filepath
+
+  if extension then
+    new_filepath = filepath:gsub("%" .. extension .. "$", "-kopie" .. extension)
+  else
+    new_filepath = filepath .. "-kopie"
+  end
+
+  -- Datei kopieren
+  vim.fn.system({ 'cp', filepath, new_filepath })
+
+  -- Nvim-tree aktualisieren, um die neue Datei anzuzeigen
+  api.tree.reload()
+  print("Datei dupliziert: " .. new_filepath)
+end
+
 return {
   "nvim-tree/nvim-tree.lua",
   dependencies = "nvim-tree/nvim-web-devicons",
@@ -55,11 +83,13 @@ return {
 
     -- set keymaps
     local keymap = vim
-    .keymap                                                                                                             -- for conciseness
+        .keymap                                                                                                         -- for conciseness
 
     keymap.set("n", "<leader>ee", "<cmd>NvimTreeToggle<CR>", { desc = "Toggle file explorer" })                         -- toggle file explorer
     keymap.set("n", "<leader>ef", "<cmd>NvimTreeFindFileToggle<CR>", { desc = "Toggle file explorer on current file" }) -- toggle file explorer on current file
     keymap.set("n", "<leader>ec", "<cmd>NvimTreeCollapse<CR>", { desc = "Collapse file explorer" })                     -- collapse file explorer
     keymap.set("n", "<leader>er", "<cmd>NvimTreeRefresh<CR>", { desc = "Refresh file explorer" })                       -- refresh file explorer
+
+    keymap.set("n", "<leader>d", ":lua duplicate_file()<CR>", { noremap = true, silent = true, desc = "Duplicate file" })
   end
 }
