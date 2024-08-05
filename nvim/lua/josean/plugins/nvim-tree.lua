@@ -1,3 +1,10 @@
+-- Funktion zum Berechnen der relativen Breite
+function get_nvim_tree_width()
+  local total_width = vim.api.nvim_get_option("columns")
+  local tree_width = math.floor(total_width * 0.25) -- 25% der Gesamtbreite
+  return tree_width
+end
+
 return {
   "nvim-tree/nvim-tree.lua",
   dependencies = "nvim-tree/nvim-web-devicons",
@@ -10,7 +17,8 @@ return {
 
     nvimtree.setup({
       view = {
-        width = 35,
+        -- width = 35,
+        width = get_nvim_tree_width(),
         relativenumber = true,
       },
       -- change folder arrow icons
@@ -46,11 +54,12 @@ return {
     })
 
     -- set keymaps
-    local keymap = vim.keymap -- for conciseness
+    local keymap = vim
+    .keymap                                                                                                             -- for conciseness
 
-    keymap.set("n", "<leader>ee", "<cmd>NvimTreeToggle<CR>", { desc = "Toggle file explorer" }) -- toggle file explorer
+    keymap.set("n", "<leader>ee", "<cmd>NvimTreeToggle<CR>", { desc = "Toggle file explorer" })                         -- toggle file explorer
     keymap.set("n", "<leader>ef", "<cmd>NvimTreeFindFileToggle<CR>", { desc = "Toggle file explorer on current file" }) -- toggle file explorer on current file
-    keymap.set("n", "<leader>ec", "<cmd>NvimTreeCollapse<CR>", { desc = "Collapse file explorer" }) -- collapse file explorer
-    keymap.set("n", "<leader>er", "<cmd>NvimTreeRefresh<CR>", { desc = "Refresh file explorer" }) -- refresh file explorer
+    keymap.set("n", "<leader>ec", "<cmd>NvimTreeCollapse<CR>", { desc = "Collapse file explorer" })                     -- collapse file explorer
+    keymap.set("n", "<leader>er", "<cmd>NvimTreeRefresh<CR>", { desc = "Refresh file explorer" })                       -- refresh file explorer
   end
 }
