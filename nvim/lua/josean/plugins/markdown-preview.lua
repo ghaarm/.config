@@ -39,5 +39,15 @@ return {
     vim.g.mkdp_theme = 'dark'
     vim.g.mkdp_combine_preview = 0
     vim.g.mkdp_combine_preview_auto_refresh = 1
+
+    -- Setze Keybindings für Markdown Preview
+
+    vim.keymap.set('n', '<leader>ml', ':MarkdownPreview<CR>',
+      { noremap = true, silent = true, desc = 'Markdown Preview' })
+    vim.keymap.set('n', '<leader>mt', ':MarkdownPreviewToggle<CR>',
+      { noremap = true, silent = true, desc = 'Toggle Markdown Preview' })
+
+    vim.keymap.set('n', '<leader>ms', ':MarkdownPreviewStop<CR>',
+      { noremap = true, silent = true, desc = 'Markdown Preview Stop' })
   end
 }

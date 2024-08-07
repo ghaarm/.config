@@ -43,6 +43,18 @@ local function open_with_sioyek(node)
   end
 end
 
+-- Funktion zum Öffnen von PDF-Dateien mit zathura
+-- local function open_with_sioyek(node)
+--   if node.name:match("%.pdf$") then
+--     -- local cmd = "sioyek " .. vim.fn.fnameescape(node.absolute_path)
+--     local cmd = "preview" .. vim.fn.shellescape(node.absolute_path)
+--     vim.fn.jobstart(cmd, { detach = true })
+--     require 'nvim-tree.actions.node.open-file'.fn('edit')
+--   end
+-- end
+
+
+
 return {
   "nvim-tree/nvim-tree.lua",
   dependencies = "nvim-tree/nvim-web-devicons",
