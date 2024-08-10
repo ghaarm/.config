@@ -37,14 +37,35 @@
 -- }
 
 -- https://github.com/rebelot/kanagawa.nvim
-return {
-  "rebelot/kanagawa.nvim",
+-- return {
+--   "rebelot/kanagawa.nvim",
+--
+--   priority = 1000,
+--   enabled = true,
+--   config = function()
+--     vim.cmd("colorscheme kanagawa")
+--   end,
+-- }
 
-  priority = 1000,
-  enabled = true,
+-- auch colorscheme in Lualine.lua anpassen
+--
+--
+-- https://github.com/oxalica/nightfox.vim
+
+return {
+  "EdenEast/nightfox.nvim",
   config = function()
-    vim.cmd("colorscheme kanagawa")
+    -- Zuerst das Plugin mit den Standardoptionen initialisieren
+    require('nightfox').setup({
+      options = {
+        -- Optionen hier, wenn nötig
+      }
+    })
+
+    -- Nordfox als dein Colorscheme setzen
+    vim.cmd("colorscheme nordfox")
   end,
 }
 
 -- auch colorscheme in Lualine.lua anpassen
+--

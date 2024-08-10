@@ -11,7 +11,7 @@ return {
       -- green = "#3EFFDC", -- von josean
       -- green = "#006400", -- von mir dunkelgrün
       green = "#b8bb26",  -- von mir dunkelgrün nach gruvbox https://github.com/morhetz/gruvbox
-      violet = "#FF61EF", -- von josean
+      -- violet = "#FF61EF", -- von josean
       violet = "#d3869b", -- von mir purple nach Gruvbox
       yellow = "#FFDA7B",
       -- red = "#FF4A4A", -- von josean
@@ -61,7 +61,8 @@ return {
         -- theme = my_lualine_theme,
         -- theme = 'gruvbox-flat',
 
-        theme = "kanagawa",
+        -- theme = "kanagawa",
+        theme = "nightfox",
       },
       sections = {
         lualine_x = {
