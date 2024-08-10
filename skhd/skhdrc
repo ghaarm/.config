@@ -1,10 +1,10 @@
 # https://www.josean.com/posts/yabai-setup 
 
 # change window focus within space
-shift + alt - j : yabai -m window --focus south
-shift + alt - k : yabai -m window --focus north
-shift + alt - h : yabai -m window --focus west
-shift + alt - l : yabai -m window --focus east
+shift + alt - j : yabai -m window --focus south;
+shift + alt - k : yabai -m window --focus north;
+shift + alt - h : yabai -m window --focus west;
+shift + alt - l : yabai -m window --focus east;
 
 #change focus between external displays (left and right)
 # alt - s: yabai -m display --focus west
@@ -20,13 +20,13 @@ shift + alt - l : yabai -m window --focus east
 # shift + alt - x : yabai -m space --mirror x-axis
 
 # toggle window float
-shift + alt - t : yabai -m window --toggle float --grid 4:4:1:1:2:270
+shift + alt - t : yabai -m window --toggle float --grid 4:4:1:1:2:270;
 
 # maximize a window
-shift + alt - m : yabai -m window --toggle zoom-fullscreen
+shift + alt - m : yabai -m window --toggle zoom-fullscreen;
 
 # balance out tree of windows (resize to occupy same area)
-shift + alt - e : yabai -m space --balance
+shift + alt - e : yabai -m space --balance;
 
 # swap windows
 # shift + alt - j : yabai -m window --swap south
@@ -59,3 +59,4 @@ shift + alt - 6 : yabai -m window --space 6;
 # ctrl + alt - q : yabai --stop-service
 # ctrl + alt - s : yabai --start-service
 # ctrl + alt - r : yabai --restart-service
+
