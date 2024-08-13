@@ -42,7 +42,7 @@ return {
 
     -- Setze Keybindings für Markdown Preview
 
-    vim.keymap.set('n', '<leader>ml', ':MarkdownPreview<CR>',
+    vim.keymap.set('n', '<leader>ll', ':MarkdownPreview<CR>',
       { noremap = true, silent = true, desc = 'Markdown Preview' })
     vim.keymap.set('n', '<leader>mt', ':MarkdownPreviewToggle<CR>',
       { noremap = true, silent = true, desc = 'Toggle Markdown Preview' })

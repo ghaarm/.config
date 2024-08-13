@@ -22,7 +22,7 @@ vim.api.nvim_set_keymap("v", "<Right>", "<NOP>", { noremap = true, silent = true
 vim.api.nvim_set_keymap("n", "<D-a>", "ggVG$", { noremap = true, silent = true })
 
 -- control r für redo umlegen auf cmd r
-vim.api.nvim_set_keymap("n", "<D-r>", "<C-r>", { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap("n", "<D-r>", "<C-r>", { noremap = true, silent = true })
 
 -- Datei speichern mit cmd + s im normal modus
 vim.api.nvim_set_keymap("n", "<D-s>", ":w<CR>", { noremap = true, silent = true })

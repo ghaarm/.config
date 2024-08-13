@@ -164,3 +164,14 @@ snippet textArea "textAreaInput"
   textAreaInput("${1:df-name}", "${2:display-name}"),
   ${0}
 
+snippet rcsv "read csv"
+  read.csv("${1:name}.csv", header = TRUE, sep = ",")
+  ${0}
+
+snippet rrds "read rds"
+  readRDS("${1:name}.rds")
+  ${0}
+
+snippet srds "save rds"
+  saveRDS(${1:r-name}, file = "${2:rds-name}.rds")
+  ${0}
