@@ -179,4 +179,79 @@ snippet srds "save rds"
 snippet pipe "%>%"
   %>%
 
+snippet gtssmall "gtssmall"
+  reset_gtsummary_theme()
+  set_gtsummary_theme(ds_theme)
 
+  ${1:df-name} %>%
+  select(${5:abh-Variable},
+          ${0}
+  ) %>%
+  tbl_summary(by = ${5:abh-Variable},
+  label = list(
+          # ____ ~ "_____ " # aber nicht die "by" Variable)
+  ) %>%
+  add_overall() %>%
+  add_p() %>%
+  bold_p() %>% 
+  bold_labels() %>%   
+
+  #========================== Titel einfügen ============================
+  modify_caption("**<span style='font-size: 24px;'> ${2:Titel} </span>**") %>%
+  modify_header(    
+    update = list(     
+      stat_1 ~ "**${3:label-für-0}**, N={n} ({style_percent(p, digits = 1)} %)",     
+      stat_2 ~ "**${4:label-für-1}**, N={n} ({style_percent(p, digits = 1)} %)"     
+      )
+    )
+
+
+
+snippet gtsmid "gtsmid"
+  reset_gtsummary_theme()
+  set_gtsummary_theme(ds_theme)
+
+  ${1:df-name} %>%
+  # filter(
+  #
+  # ) %>%
+  select(${5:abh-Variable},
+          ${0}
+  ) %>%
+  tbl_summary(by = ${5:abh-Variable},
+  label = list(
+          # ____ ~ "_____ " # aber nicht die "by" Variable)
+  ),
+  type = c(
+    all_continuous(),
+    # ____,
+    # ____
+  ) ~ "continuous2", # macht sonst aus dem PRESET eine ordinale Variable, re: Homepage danielsjoberg 
+
+  missing = "ifany", # zeigt die Anzahl der fehlenden werte, wenn nicht erwünscht, dann auf "no" ändern
+  missing_text = "fehlend", # ändert die Bezeichnung von "unknown" für fehlende Werte in "fehlend"              
+
+  statistic = list(       
+    all_continuous() ~ c(         
+      "{N_nonmiss}",         
+      "{median} ({p25}, {p75})",      
+      "{mean} ({sd})",        
+      "{min}, {max}"            
+      ),         
+      all_categorical() ~ "{n} ({p} %)" #gibt die Prozente für kategoriale Variablen aus
+      )
+  ) %>%
+  add_overall() %>%
+  add_p() %>%
+  bold_p() %>% 
+  bold_labels() %>%   
+
+  #========================== Titel einfügen ============================
+  modify_caption("**<span style='font-size: 24px;'> ${2:Titel} </span>**") %>%
+  modify_header(    
+    update = list(     
+      stat_1 ~ "**${3:label-für-0}**, N={n} ({style_percent(p, digits = 1)} %)",     
+      stat_2 ~ "**${4:label-für-1}**, N={n} ({style_percent(p, digits = 1)} %)" #,    
+      # add_stat_1 ~ "**Effect size**" # functionen für cramer und spearman einfügen (für spearman muss die abh. numerisch umkodiert werden)
+      )
+    )
