@@ -1,3 +1,5 @@
+vim.g.maplocalleader = ","
+
 return {
   "iamcco/markdown-preview.nvim",
   cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },

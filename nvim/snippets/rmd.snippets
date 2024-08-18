@@ -142,15 +142,26 @@ snippet copt
 	\`\`\` {r setup, echo = FALSE}
 		opts_chunk$set(fig.path='../figures/${1:}', cache.path='../cache/-'
 		, fig.align='center', fig.show='hold', par=TRUE)	
-		#opts_knit$set(upload.fun = imgur_upload) # upload images
+		#opts_knit$set(upload.fun = imgur_upload) # u pload images
 	\`\`\`
 
 # chunk
 snippet chunk "chunk rmd" 
-	```{r}
+	\`\`\`{r}
 	${0}
-	```
-#
-	
+	\`\`\`
+# heutige Datum
+snippet sysdatermd "heutiges Datum rmd"
+  "\`r format(Sys.Date(), '%d %m %Y')\`"
+
+# table
+snippet table "table()"
+  table(${1:df}$${2:variable}, useNA = "always")
+  ${0}
+
+
+
+
+
 # End of File ===================================================================
 # vim: set noexpandtab:
