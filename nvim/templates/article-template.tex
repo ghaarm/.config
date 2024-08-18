@@ -1,0 +1,108 @@
+\documentclass{article}
+
+
+%========================== GRAPHIKEN & PDFS ============================
+
+\usepackage{graphicx} % Required for inserting images
+\usepackage[space]{grffile} % ermöglicht Leerzeichen in den Dateinamen
+
+\usepackage{xcolor}
+
+\usepackage{pdfpages} %ermöglich das Einfügen von PDFs z.B mit includeodf
+
+\usepackage{pdflscape} % macht landscape = Querformat
+
+\usepackage{float} % kann Graphiken, Tabellen genau an einer bestimmten Stelle einfügen
+
+%========================== "GLOBALE" Formatierung ============================
+\usepackage[utf8]{inputenc} % Erlaubt die direkte Eingabe von UTF-8-kodierten Zeichen
+\usepackage[T1]{fontenc}    % Verwendet die T1-Schriftcodierung für die Ausgabe
+
+\usepackage[ngerman]{babel} % macht deutsche Lokalisierung z.B. Datumformate
+
+\usepackage{datetime2} % macht z.B. aktuelles Datum
+
+\usepackage{amsmath} % für mathematische Zeichen
+%\usepackage{amssymb} % für mathematische Zeichen
+
+
+%========================== TEXTKÖRPER ============================
+\usepackage[textwidth=18cm]{geometry} % kann die Textbreite auf dem Paper ändern
+
+\geometry{ 
+a4paper, % Setzt das Papierformat auf A4
+  textwidth = 18 cm, % Textbreite
+  textheight = 26 cm % Texthöhe
+}
+
+%-------------------------- TEXT FORMATIERUNG ----------------------------
+
+\usepackage{parskip} % macht einen vertikalen Einzug anstatt eines Absatzes
+
+\usepackage[normalem]{ulem} % Die Option 'normalem' behält die übliche Betonung bei (\emph{} wird nicht unterstrichen
+
+\usepackage{csquotes} % macht Anführungnszeichenn
+
+\newcommand{\ignore}[1]{} % um einzelne Wörter auszublenden
+
+\usepackage{multicol}
+%========================== HYPERLINKS ============================
+
+\usepackage{hyperref}
+\hypersetup{
+			colorlinks = true,	
+			linkcolor = red!70!black,
+			citecolor = black,
+			urlcolor = blue
+			}
+
+
+\usepackage{titlesec} % kann z.B. subsubsubsubsections erstellen, kann Schriftgröße, Schriftart und Farbe von Titeln anpassen.
+
+% \titlespacing*{\section}{0pt}{2.5ex plus 1ex minus .2ex}{1.3ex plus .2ex}
+
+\titlespacing*{\section}
+{0pt}             % Linker Abstand
+{0.5cm}           % Abstand vor dem Abschnitt
+{0.3cm}           % Abstand nach dem Abschnitt
+{0pt}             % Linker Abstand
+{0.5cm plus 0.1cm minus 0.05cm} % Abstand vor dem Abschnitt
+{0.3cm plus 0.1cm minus 0.05cm} % Abstand nach dem Abschnitt
+%========================== KOPF - UND FUßZEILE ============================
+% \usepackage{fancyhdr} % für Fußzeilen
+% \renewcommand{\headrulewidth}{0pt} % Entfernt die Linie unter der Kopfzeile
+% %
+% \renewcommand{\footrulewidth}{0.4} % Fügt eine Linie oberhalb der Fußzeile auf jeder Seite ein
+%
+% \pagestyle{fancy} % definiert den style "fancy"
+% \fancyhf{} % Löscht die aktuellen Einstellungen für Kopf- und Fußzeile
+%
+% \rfoot{\hfill ____, G. Haarmeyer, Stand: \today, S.  \thepage} % Zentrale Fußzeile mit Datum und Seitenzahl rechts
+% \lfoot{\hyperlink{toc}{Zurück zum Inhaltsverzeichnis}} % Linke Seite der Fußzeile
+%
+%========================== TITEL ============================
+% \usepackage{titling}
+% % Define a new command for the subtitle
+% \newcommand{\subtitle}[1]{
+%     \posttitle{
+%         \par\large#1\end{center}
+%     }
+% }
+
+\title{____}
+% \subtitle{____}
+
+\date{} % wenn leer kein Datum
+
+\begin{document}
+\maketitle
+% \thispagestyle{fancy}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+                    % BEGINN DOKUMENT
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\end{document}
