@@ -1,7 +1,7 @@
 -- Funktion zum Berechnen der relativen Breite
 function get_nvim_tree_width()
   local total_width = vim.api.nvim_get_option("columns")
-  local tree_width = math.floor(total_width * 0.25) -- 25% der Gesamtbreite
+  local tree_width = math.floor(total_width * 0.33) -- 25% der Gesamtbreite
   return tree_width
 end
 
