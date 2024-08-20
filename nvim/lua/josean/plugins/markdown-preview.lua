@@ -44,12 +44,12 @@ return {
 
     -- Setze Keybindings für Markdown Preview
 
-    vim.keymap.set('n', '<leader>ll', ':MarkdownPreview<CR>',
+    vim.keymap.set('n', '<localleader>ll', ':MarkdownPreview<CR>',
       { noremap = true, silent = true, desc = 'Markdown Preview' })
-    vim.keymap.set('n', '<leader>mt', ':MarkdownPreviewToggle<CR>',
+    vim.keymap.set('n', '<localleader>mt', ':MarkdownPreviewToggle<CR>',
       { noremap = true, silent = true, desc = 'Toggle Markdown Preview' })
 
-    vim.keymap.set('n', '<leader>ms', ':MarkdownPreviewStop<CR>',
+    vim.keymap.set('n', '<localleader>ms', ':MarkdownPreviewStop<CR>',
       { noremap = true, silent = true, desc = 'Markdown Preview Stop' })
   end
 }
