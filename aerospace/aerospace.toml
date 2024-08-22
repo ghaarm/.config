@@ -194,6 +194,10 @@ if.app-id = 'com.goodsnooze.MenuGPT'
 run = "move-node-to-workspace B"
 
 [[on-window-detected]]
+if.app-id = 'com.microsoft.excel'
+run = "move-node-to-workspace E"
+
+[[on-window-detected]]
 if.app-id = 'it.bloop.airmail2'
 run = "move-node-to-workspace M"
 
