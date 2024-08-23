@@ -32,3 +32,14 @@ linebreak
 gescrollt
 scrolloff
 termguicolors
+Colorscheme
+Nordfox
+colorscheme
+Lualine
+lua
+kanagawa
+config
+cmd
+gruvbox
+nvim
+github

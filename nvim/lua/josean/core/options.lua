@@ -68,4 +68,4 @@ vim.opt.spelllang = { "de_de", "en_gb" }
 -- Rechtschreibung aktivieren
 vim.opt.spell = true
 
-vim.cmd [[highlight SpellBad ctermfg=white ctermbg=red guifg=#E0E0E0 guibg=#990000]]
+-- vim.cmd [[highlight SpellBad ctermfg=white ctermbg=red guifg=#E0E0E0 guibg=#990000]] -- muss in der Colorscheme.lua stehen weil das Colorscheme sonst diese Einstellung überschreibt

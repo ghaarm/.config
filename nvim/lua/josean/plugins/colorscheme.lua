@@ -64,7 +64,9 @@ return {
 
     -- Nordfox als dein Colorscheme setzen
     vim.cmd("colorscheme nordfox")
+    vim.cmd [[highlight SpellBad ctermfg=white ctermbg=red guifg=#E0E0E0 guibg=#990000]] -- kann nicht in der Options stehen, weil sonst das colorscheme die Einstellung überschreibt.
   end,
+
 }
 
 -- auch colorscheme in Lualine.lua anpassen
