@@ -76,6 +76,8 @@ return {
   -- dependencies = {
   --   "xuhdev/vim-latex-live-preview",
   -- },
+  lazy = true,    -- Lädt das Plugin nur, wenn es benötigt wird
+  ft = { "tex" }, -- Lädt das Plugin nur für LaTeX-Dateien
   config = function()
     -- Lokale Funktion zum Schreiben des Servernamens
     -- https://jdhao.github.io/2021/02/20/inverse_search_setup_neovim_vimtex/
