@@ -2,12 +2,14 @@ vim.g.maplocalleader = ","
 
 return {
   "iamcco/markdown-preview.nvim",
+  lazy = true,   -- Lädt das Plugin nur, wenn es benötigt wird
+  ft = { "md" }, -- Lädt das Plugin nur für LaTeX-Dateien
   cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
   build = "cd app && yarn install",
   init = function()
     vim.g.mkdp_filetypes = { "markdown" }
   end,
-  ft = { "markdown" },
+  -- ft = { "markdown" },
   config = function()
     vim.g.mkdp_auto_start = 0
     vim.g.mkdp_auto_close = 1

@@ -1,5 +1,7 @@
 return {
   "micangl/cmp-vimtex",
+  lazy = true,           -- Lädt das Plugin nur, wenn es benötigt wird
+  ft = { "tex", "nrw" }, -- Lädt das Plugin nur für LaTeX-Dateien und R sweave dateien
   config = function()
     require('cmp_vimtex').setup({
       additional_information = {
