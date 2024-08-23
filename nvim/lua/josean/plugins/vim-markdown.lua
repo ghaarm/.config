@@ -4,6 +4,8 @@ return {
   'plasticboy/vim-markdown',
   branch = 'master',
   require = { 'godlygeek/tabular' },
+  lazy = true, -- Lädt das Plugin nur, wenn es benötigt wird
+  ft = { "md", "markdown" },
   config = function()
     vim.cmd([[
     let g:vim_markdown_folding_disabled = 1 " disable header folding
