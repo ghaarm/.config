@@ -17,8 +17,8 @@ return {
           nav = false,          -- misc bindings to work with windows
           z = false,            -- bindings for folds, spelling and others prefixed with z
           g = false,            -- bindings for prefixed with g
-          marks = false,        -- shows a list of your marks on ' and `
-          registers = false,    -- shows your registers on " in NORMAL or <C-r> in INSERT mode
+          marks = true,         -- shows a list of your marks on ' and `
+          registers = true,     -- shows your registers on " in NORMAL or <C-r> in INSERT mode
           spelling = {
             enabled = false,    -- enabling this will show WhichKey when pressing z= to select spelling suggestions
             suggestions = 10,   -- how many suggestions should be shown in the list?
@@ -30,10 +30,10 @@ return {
       triggers = { "<leader>" }, -- or specify a list manually
     },
     defaults = {
-      buffer = nil,   -- Global mappings. Specify a buffer number for buffer local mappings
-      silent = true,  -- use `silent` when creating keymaps
-      noremap = true, -- use `noremap` when creating keymaps
-      nowait = true,  -- use `nowait` when creating keymaps
+      buffer = nil,     -- Global mappings. Specify a buffer number for buffer local mappings
+      silent = true,    -- use `silent` when creating keymaps
+      noremap = true,   -- use `noremap` when creating keymaps
+      nowait = true,    -- use `nowait` when creating keymaps
       prefix = "<leader>",
       t = {
         name = "TEMPLATES",
