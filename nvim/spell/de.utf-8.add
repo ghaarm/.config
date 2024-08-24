@@ -51,3 +51,6 @@ WhichKey
 tex
 txt
 md
+luarocks
+luasnip
+treesitter
