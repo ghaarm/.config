@@ -43,3 +43,11 @@ cmd
 gruvbox
 nvim
 github
+Neovim
+keymaps
+noremap
+nowait
+WhichKey
+tex
+txt
+md
