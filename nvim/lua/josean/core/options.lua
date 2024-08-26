@@ -70,4 +70,4 @@ vim.opt.spell = true
 
 -- vim.cmd [[highlight SpellBad ctermfg=white ctermbg=red guifg=#E0E0E0 guibg=#990000]] -- muss in der Colorscheme.lua stehen weil das Colorscheme sonst diese Einstellung überschreibt
 --
-vim.opt.foldlevel = 99 -- Öffnet alle Folds, außer die sehr tiefen
+-- vim.opt.foldlevel = 99 -- Öffnet alle Folds, außer die sehr tiefen

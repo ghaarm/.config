@@ -14,8 +14,8 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
   { import = "josean.plugins" },
-  { import = "josean.plugins.lsp" },
-  { import = "josean.plugins.nvim-cmp" } -- Lädt nvim-cmp explizit
+  { import = "josean.plugins.nvim-cmp" }, -- Lädt nvim-cmp explizit
+  { import = "josean.plugins.lsp" }
 }, {
   checker = {
     enabled = true,
