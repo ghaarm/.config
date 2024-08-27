@@ -44,9 +44,11 @@
 --   enabled = true,
 --   config = function()
 --     vim.cmd("colorscheme kanagawa")
+--     -- vim.cmd [[highlight SpellBad ctermfg=white ctermbg=red guifg=#E0E0E0 guibg=#990000]]  -- crimson red und grau im foreground,kann nicht in der Options stehen, weil sonst das colorscheme die Einstellung überschreibt.
+--     vim.cmd [[highlight SpellBad ctermfg=red guifg=#991F00]] -- weinrot, kann nicht in der Options stehen, weil sonst das colorscheme die Einstellung überschreibt.
 --   end,
 -- }
-
+--
 -- auch colorscheme in Lualine.lua anpassen
 --
 --
@@ -64,10 +66,31 @@ return {
 
     -- Nordfox als dein Colorscheme setzen
     vim.cmd("colorscheme nordfox")
-    vim.cmd [[highlight SpellBad ctermfg=white ctermbg=red guifg=#E0E0E0 guibg=#990000]] -- kann nicht in der Options stehen, weil sonst das colorscheme die Einstellung überschreibt.
+    -- vim.cmd [[highlight SpellBad ctermfg=white ctermbg=red guifg=#E0E0E0 guibg=#990000]] -- crimson red und grau im foreground,kann nicht in der Options stehen, weil sonst das colorscheme die Einstellung überschreibt.
+    vim.cmd [[highlight SpellBad ctermfg=red guifg=#991F00]] -- weinrot, kann nicht in der Options stehen, weil sonst das colorscheme die Einstellung überschreibt.
   end,
 
 }
 
+
+-- catpPuccin
+
+-- return {
+--   "catppuccin/nvim", -- Stelle sicher, dass das catppuccin Plugin geladen wird
+--   config = function()
+--     -- Zuerst das Plugin mit den gewünschten Einstellungen initialisieren
+--     require('catppuccin').setup({
+--       flavour = "frappe", -- Stelle das gewünschte Flavour ein
+--       -- Weitere Konfigurationsoptionen hier
+--     })
+--
+--     -- Catppuccin Frappe als dein Colorscheme setzen
+--     vim.cmd("colorscheme catppuccin")
+--
+--     -- Anpassen der SpellBad-Highlighting nach dem Laden des Colorschemes
+--     -- Verwende hier die Farbe Weinrot für den Text und keine Änderung am Hintergrund
+--     vim.cmd [[highlight SpellBad ctermfg=red guifg=#991F00]]
+--   end,
+-- }
 -- auch colorscheme in Lualine.lua anpassen
 --
