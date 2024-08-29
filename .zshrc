@@ -190,3 +190,11 @@ eval $(thefuck --alias fk)
 
 # Created by `pipx` on 2024-07-04 16:51:32
 export PATH="$PATH:/Users/g/.local/bin"
+
+# pnpm
+export PNPM_HOME="/Users/g/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
