@@ -195,3 +195,474 @@ snippet absatzrbreit "absatz R breit"
 
   ##############################################################################
   ${0}
+
+snippet grep "grep suchen"
+  grep("${1:wort}", names(${2:df}), value = TRUE, ignore.case = TRUE) 
+  ${0}
+
+
+snippet table "table ()"
+  table(${1:df}$${2:var_name}, useNA = "always")
+  ${0}
+
+
+snippet übersichtschnell "übersicht schnell"
+  source("/Users/g/Library/Mobile Documents/com~apple~CloudDocs/#Docs iCloud/R Statistik, icloud/R, projects/RScript Vorlagen/clean and reload environment.R")
+
+  class(ECMO_ARDS$ECMOIndikation1b9)
+  class(ECMO_ARDSfactor$ECMOIndikation1b9)
+  class(ECMO_VV$ECMOIndikation1b9)
+
+  table(ECMO_ARDS$ ECMOIndikation1b9, useNA = "always")
+  table(ECMO_ARDSfactor$ ECMOIndikation1b9, useNA = "always")
+  table(ECMO_VV$ ECMOIndikation1b9, useNA = "always")
+
+  #========================== Spaltennamen suchen ============================
+  grep("blutung", names(ECMO_Diplom), value = TRUE, ignore.case = TRUE) 
+  # ignore.case bewirkt das Groß-/Kleinschreibung egal
+  grep("blutung", names(ECMO_ARDS), value = TRUE, ignore.case = TRUE) 
+
+  grep("^ECMOVent.*Datum$", names(ECMO_Diplomfactor), value = TRUE, ignore.case = TRUE)
+
+
+
+  col_names <- names(ECMO_VVfactor)
+  names(ECMO_VVfactor)
+
+  grep("Nor", col_names, value = TRUE) 
+  matching_cols <- grep("MAP", col_names, value = TRUE) 
+  matching_cols
+
+
+  #-------------------------- Anzahl nach Jahr ----------------------------
+  ECMO_ARDS %>%
+    group_by(Jahr) %>%
+    summarise(Anzahl_Nicht_Leer = sum(!is.na(_____))) #zählt wenn Variable nicht NA
+
+  ECMO_ARDS %>%
+    group_by(Jahr) %>%
+    summarise(Anzahl_Nicht_Leer = sum(!is.na(_____) & _____ != 0)) # #zählt wenn Variable nicht NA und nicht Null
+
+
+  head(ECMO_VVfactor$IBW) # zeigt die ersten Werte der Spalte an
+
+
+  #========================== Anzahl zählen ============================
+  ECMO_ARDS %>%
+    filter(!is.na(ECMOTageDAYS), ECMOTageDAYS < 22) %>%
+    nrow()
+
+  #-------------------------- "NA" zöhlen ----------------------------
+  ECMO_Diplom %>%
+    summarise(na_count = sum(is.na(dP_base))) %>%
+    pull(na_count)
+
+  #-------------------------- NICHT "NA" zöhlen ----------------------------
+  ECMO_Diplom %>%
+    summarise(na_count = sum(!is.na(dP_base))) %>%
+    pull(na_count)
+
+  #-------------------------- Anzahl zählen von - bis ----------------------------
+
+  EMCO_ARDS %>%
+    filter(!is.na(ECMOTageDAYS), ECMOTageDAYS > 14, ECMOTageDAYS < 22) %>%
+    nrow()
+
+
+  #========================== Spaltennamen suchen ============================
+  grep("Oxy3", names(ECMO_ARDS), value = TRUE)
+
+  col_names <- names(ECMO_VVfactor)
+  names(ECMO_VVfactor)
+
+  grep("Nor", col_names, value = TRUE) 
+  matching_cols <- grep("MAP", col_names, value = TRUE) 
+  matching_cols
+
+  #-------------------------- Spaltennamen gt Tabelle ----------------------------
+  # aktuelle Spaltennamen anzeigen der _data liste anzeigen
+  column_names <- colnames(test_results_homogeneity_mean_yes_gt[["_data"]])
+  print(column_names)
+
+  column_names <- colnames(test_results_normality_yes_gt[["_data"]])
+  print(column_names)
+
+
+  # Ursprüngliche Spaltennamen anzeigen
+  test_results_homogeneity_mean_yes_gt[["_boxhead"]][["var"]]
+  test_results_normality_yes_gt[["_boxhead"]][["var"]]
+
+  # zeigt welche Listen es in der gt Datei gibt die auc eine liste ist
+  names(test_results_homogeneity_mean_yes_gt)
+
+  str(test_results_homogeneity_mean_yes_gt)
+
+
+  #-------------------------- Spaltennamen anzeigen GTS ----------------------------
+  # aktuelle Spaltennamen anzeigen
+  names(tblname)
+
+  # Ursprüngliche Spaltennamen anzeigen
+  show_header_names(tblname)
+
+  VVInd_Beatmung_strata %>%
+    show_header_names()
+
+  #========================== numerische Variablennamen extrahieren ============================
+
+  numeric_variables <- ECMO_VVfactor[, sapply(ECMO_VVfactor, is.numeric)]
+  numeric_variable_names <- colnames(numeric_variables)
+  print(numeric_variable_names)
+
+
+snippet gtssmall "gtssmall"
+  reset_gtsummary_theme()
+
+  set_gtsummary_theme(ds_theme)
+
+  ${1:df} %>%
+  select(${2:var_dependent},
+         ${0} 
+         
+         ) %>%
+
+  tbl_summary(by = ${2:var_dependent},
+    label = list(
+                # ____ ~ "_____ " # aber nicht die "by" Variable
+              )
+  ) %>%
+    add_overall() %>%
+    add_p() %>%
+    bold_p() %>%
+    bold_labels() %>%
+    
+    #========================== Titel einfügen ============================
+  modify_caption("**<span style='font-size: 24px;'> ${3:titel} </span>**") %>%
+    
+    modify_header(
+      update = list(
+        stat_1 ~ "**Überlebt**, N={n} ({style_percent(p, digits = 1)} %)", # für 0
+        stat_2 ~ "**Verstorben**, N={n} ({style_percent(p, digits = 1)} %)" # für 1
+        )
+      )
+
+snippet gtsmid "gtsmid"
+  reset_gtsummary_theme()
+
+  set_gtsummary_theme(ds_theme)
+  
+
+    # Benutzerdefinierte Funktion, um den Prozentsatz der fehlenden Werte anzuzeigen
+  missing_percentage <- function(x) {
+    missing_count <- sum(is.na(x))
+    total_count <- length(x)
+    percentage <- (missing_count / total_count) * 100
+    return(paste0(missing_count, " (", round(percentage, 1), "%)"))
+  }
+
+  # Funktionen für Effekstärken
+  my_spearman <- function(data, by, variable, ...) {
+    corr <- cor.test(data[[variable]], data[[by]], method = "spearman",...)
+    return(corr$estimate)
+  }
+  my_cramer_v <- function(data, variable, by, ...) {
+    table(data[[variable]], data[[by]]) %>%
+      rstatix::cramer_v()
+  }
+
+  ${1:df}$${2:var_dependent} <- as.numeric(${1:df}$${2:var_dependent}) # abhängige Variable in numeric ändern da sonst Spearman nicht klappt
+
+
+  ${1:df} %>%
+  select(${2:var_dependent},
+         ${0} 
+         
+         ) %>%
+
+
+  tbl_summary(by = ${2:var_dependent},
+              label = list(
+                # ____ ~ "_____ " # aber nicht die "by" Variable              
+              ),
+              type = c(
+            all_continuous(), # macht sonst aus Var mit zu wenig numerischen Ausprägiungen eine ordinale Variable, re: Homepage danielsjoberg
+
+             # ____,
+             # ____
+            ) ~ "continuous2", # gibt median, mean, min, max aus           
+        
+        
+          missing = "ifany", # zeigt die Anzahl der fehlenden werte, wenn nicht erwünscht, dann auf "no" ändern
+          missing_text = "fehlend", # ändert die Bezeichnung von "unknown" für fehlende Werte in "fehlend"
+          
+        statistic = list(
+            all_continuous() ~ c(
+            "{N_nonmiss}",
+            "{median} ({p25}, {p75})",
+            "{mean} ({sd})",
+            "{min}, {max}"
+                ),
+            all_categorical() ~ "{n} ({p} %)" #gibt die Prozente für kategoriale Variablen aus
+            )
+        )  %>%
+    add_overall() %>%
+    add_p() %>%
+    bold_p() %>%
+    bold_labels() %>%
+    
+    #========================== Titel einfügen ============================
+  modify_caption("**<span style='font-size: 24px;'> ${3:titel} </span>**") %>%
+    
+    modify_header(
+      update = list(
+        stat_1 ~ "**Überlebt**, N={n} ({style_percent(p, digits = 1)} %)", # für 0
+        stat_2 ~ "**Verstorben**, N={n} ({style_percent(p, digits = 1)} %)"# , # für 1, für effect size die Funktionen zur Berechnung noch einfügen
+  #      add_stat_1 ~ "**Effect size**"
+        )
+      )
+
+snippet gtscomplete "gtscomplete"
+  reset_gtsummary_theme()
+
+  set_gtsummary_theme(ds_theme)
+
+  # Benutzerdefinierte Funktion, um den Prozentsatz der fehlenden Werte anzuzeigen
+  missing_percentage <- function(x) {
+    missing_count <- sum(is.na(x))
+    total_count <- length(x)
+    percentage <- (missing_count / total_count) * 100
+    return(paste0(missing_count, " (", round(percentage, 1), "%)"))
+  }
+
+  # Funktionen für Effekstärken
+  my_spearman <- function(data, by, variable, ...) {
+    corr <- cor.test(data[[variable]], data[[by]], method = "spearman",...)
+    return(corr$estimate)
+  }
+  my_cramer_v <- function(data, variable, by, ...) {
+    table(data[[variable]], data[[by]]) %>%
+      rstatix::cramer_v()
+  }
+
+
+  ${1:df}$${2:var_dependent} <- as.numeric(${1:df}$${2:var_dependent}) # abhängige Variable in numeric ändern da sonst Spearman nicht klappt
+
+
+  reset_gtsummary_theme()
+
+  set_gtsummary_theme(ds_theme)
+
+  ${1:df} %>%
+  select(${2:var_dependent},
+         ${0} 
+         
+         ) %>%
+
+
+  tbl_summary(by = ${2:var_dependent},
+    tbl_summary(
+      by = ${2:var_dependent},
+      type = c(
+        all_continuous(), 
+
+        # Variablennamen falls notwendig # macht sonst aus Var mit zu wenig numerischen Ausprägiungen eine ordinale Variable, re: Homepage danielsjoberg
+          
+        )) ~ "continuous2", # gibt die kontinuierlichen Variablen mit median, mean, min, max aus
+      
+      missing = "ifany", # zeigt die Anzahl der fehlenden werte, wenn nicht erwünscht, dann auf "no" ändern
+      missing_text = "fehlend", # ändert die Bezeichnung von "unknown" für fehlende Werte in "fehlend"
+      
+      statistic = list(
+        all_continuous() ~ c(
+          "{N_nonmiss}",
+          "{median} ({p25}, {p75})",
+          "{mean} ({sd})",
+          "{min}, {max}"
+        ),
+        all_categorical() ~ "{n} ({p} %)" #gibt die Prozente für kategoriale Variablen aus
+      )
+    ) %>%
+    add_overall() %>%
+    # add_n() %>% # Anzahl von wievielen Patienten die Daten stammen
+    add_p(pvalue_fun = ~ style_pvalue(.x, digits = 4)) %>% 
+    # p nur mit 4 stellen
+    bold_p() %>%
+
+  # neue Spalte für Effektstärke
+    add_stat(
+      fns = list(all_continuous() ~ my_spearman),
+      notes = "Spearman's Korrelationskoeffizient"
+    ) %>%
+    add_stat(
+      fns = list(all_categorical() ~ my_cramer_v),
+      notes = "Effektgröße nach Cramer V"
+    ) %>%
+    bold_labels() %>%
+    
+    #========================== Titel einfügen ============================
+    modify_spanning_header(
+      update = all_stat_cols() ~ "___TITEL___"
+    ) %>% # ändert die Hauptüberschrift
+    
+    modify_caption("**<span style='font-size: 24px;'> ${3:titel} </span>**") %>%
+    
+     modify_header(
+      update = list(
+        stat_1 ~ "**Überlebt**, N={n} ({style_percent(p, digits = 1)} %)", # für 0
+        stat_2 ~ "**Verstorben**, N={n} ({style_percent(p, digits = 1)} %)" # für 1
+        )
+      )
+    ) %>%
+    # Namen für die neuen Spalten füe Effektstärke
+    modify_header(
+      list(
+        add_stat_1 ~"**Korrelationskoeffizient**",
+        add_stat_2 ~ "**Effekstärke Cramer**"
+      )
+    )
+
+snippet gtspub "gtspub"
+  reset_gtsummary_theme()
+
+  set_gtsummary_theme(ds_theme)
+
+  # Benutzerdefinierte Funktion, um den Prozentsatz der fehlenden Werte anzuzeigen
+  missing_percentage <- function(x) {
+    missing_count <- sum(is.na(x))
+    total_count <- length(x)
+    percentage <- (missing_count / total_count) * 100
+    return(paste0(missing_count, " (", round(percentage, 1), "%)"))
+  }
+
+  # Funktionen für Effekstärken
+  # Spearman nur für signifikante
+  my_spearman <- function(data, by, variable, ...) {
+    test_result <- cor.test(data[[variable]], data[[by]], method = "spearman", ...)
+    if (test_result$p.value <= 0.05) {
+      return(test_result$estimate)
+    } else {
+      return(NA) # oder eine andere Form der Kennzeichnung, dass keine Berechnung erfolgte
+    }
+  }
+
+  # Cramers V nur für signifikante
+  my_cramer_v <- function(data, variable, by, ...) {
+    
+    # Berechnung von Cramer's V
+    
+    cramer_v_value <- table(data[[variable]], data[[by]]) %>%
+      rstatix::cramer_v()
+    
+    #Durchführung des Chi-Quadrat-Tests
+    
+    chi_squared_test <- chisq.test(table(data[[variable]], data[[by]]))
+    
+    # Überprüfung des P-Werts und Entscheidung, was zurückgegeben werden soll
+    
+    if (chi_squared_test$p.value <= 0.05) {
+      return(cramer_v_value)
+    } else {
+      return(NA) # Oder eine andere Kennzeichnung für nicht signifikante Ergebnisse
+    }
+  }
+
+  ${1:df}$${2:var_dependent} <- as.numeric(${1:df}$${2:var_dependent}) # abhängige Variable in numeric ändern da sonst Spearman nicht klappt
+
+
+  reset_gtsummary_theme()
+
+  set_gtsummary_theme(ds_theme)
+
+  ${1:df} %>%
+  select(${2:var_dependent},
+         ${0} 
+         
+         ) %>%
+
+
+  tbl_summary(
+      by = ${2:var_dependent},
+      # label = list( # ändert die Namen der unten stehenden variablen
+      #  var-name ~ "label-name",
+      #  ),
+
+      
+      type = c(
+        all_continuous(), 
+
+        # Variablennamen falls notwendig # macht sonst aus Var mit zu wenig numerischen Ausprägiungen eine ordinale Variable, re: Homepage danielsjoberg
+
+        ) ~ "continuous2", # macht sonst aus dem PRESET eine ordinale Variable, re: Homepage danielsjoberg
+      
+      
+      missing = "ifany", # zeigt die Anzahl der fehlenden werte, wenn nicht erwünscht, dann auf "no" ändern
+      missing_text = "fehlend", # ändert die Bezeichnung von "unknown" für fehlende Werte in "fehlend"
+      
+      statistic = list(
+        all_continuous() ~ c(
+          "{N_nonmiss}",
+          "{median} ({p25}, {p75})",
+          "{mean} ({sd})",
+          "{min}, {max}"
+        ),
+        all_categorical() ~ "{n} ({p} %)" #gibt die Prozente für kategoriale Variablen aus
+      ))%>%
+    
+    
+    add_overall() %>%
+    # add_n() %>% # Anzahl von wievielen Patienten die Daten stammen
+    add_p(pvalue_fun = ~ style_pvalue(.x, digits = 4)) %>% 
+    # p nur mit 4 stellen
+    bold_p() %>% # Macht signifikante p fettgedruckt
+    # filter_p(t = 0.1) %>% # filter nur p werte bis 1
+    # sort_p() %>% # sortiert Variablen nach p wert
+    
+    # neue Spalte füe Effektstärke
+    add_stat(
+      fns = list( # berechnet Effektgröße
+        all_continuous() ~ my_spearman,
+        all_categorical() ~ my_cramer_v
+      ),
+    notes = c(
+        "Spearman's Korrelationskoeffizient",
+        "Effektgröße nach Cramer V")
+      ) %>% 
+    bold_labels() %>%
+    
+    modify_spanning_header(
+      update = all_stat_cols() ~ "____TITEL____"
+    ) %>% # ändert die Hauptüberschrift
+     modify_header(
+      update = list(
+        stat_1 ~ "**Überlebt**, N={n} ({style_percent(p, digits = 1)} %)", # für 0
+        stat_2 ~ "**Verstorben**, N={n} ({style_percent(p, digits = 1)} %)", # für 1
+        add_stat_1 ~ "**Effect size**"
+        )
+      )
+
+
+
+
+
+snippet idordnen "Var nach id ordnen"
+  ${1:df-name} %>%
+  # filter(!is.na(var-name)) %>%
+  select(
+    ${2:id-name},
+    ${0}, 
+    
+    ) %>%
+  distinct() %>%
+  arrange(${2:id-name}) %>%
+  print(n = Inf, width = Inf)
+
+snippet idsuchen "id suchen"
+  ${1:df-name} %>%
+  filter(${2:id-name} == ${3:id-number}) %>%
+  select(
+    ${0}, 
+    
+    ${2:id-name}) %>%
+  distinct() %>%
+  arrange(${2:id-name}) %>%
+  print(n = Inf, width = Inf)
