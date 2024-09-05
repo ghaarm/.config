@@ -151,13 +151,9 @@ snippet chunk "chunk rmd"
 	${0}
 	\`\`\`
 # heutige Datum
-snippet sysdatermd "heutiges Datum rmd"
+snippet sysdatermd "heutiges Datum rmd in line code"
   "\`r format(Sys.Date(), '%d %m %Y')\`"
 
-# table
-snippet table "table()"
-  table(${1:df}$${2:variable}, useNA = "always")
-  ${0}
 
 
 
