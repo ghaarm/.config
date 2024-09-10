@@ -73,7 +73,6 @@
                 ]
             },
             "name": "default",
-            "selected": true,
             "simple_modifications": [
                 {
                     "from": { "key_code": "delete_or_backspace" },
@@ -159,6 +158,7 @@
                 ]
             },
             "name": "Lily Colemak",
+            "selected": true,
             "simple_modifications": [
                 {
                     "from": { "key_code": "delete_or_backspace" },
