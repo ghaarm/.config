@@ -38,6 +38,12 @@ return {
           inc_rename = false,            -- aktiviert einen Eingabedialog für inc-rename.nvim
           lsp_doc_border = false,        -- fügt einen Rahmen zu Hover-Dokumenten und Signaturhilfe hinzu
         },
+        routes = {
+          {
+            view = "notify",
+            filter = { event = "msg_showmode" },
+          },
+        },
       })
     end,
   },
