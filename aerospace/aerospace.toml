@@ -91,7 +91,7 @@ alt-comma = 'layout accordion horizontal vertical'
 # See: https://nikitabobko.github.io/AeroSpace/commands#focus
 cmd-shift-h = 'focus left'
 cmd-shift-j = 'focus down'
-cmd-shift-k = 'focus up'
+# cmd-shift-k = 'focus up'
 cmd-shift-l = 'focus right'
 
 
@@ -162,8 +162,8 @@ alt-shift-tab = 'move-workspace-to-monitor --wrap-around next'
 #
 #
 # # See: https://nikitabobko.github.io/AeroSpace/commands#resize
-cmd-alt-shift-ctrl-minus = 'resize smart -150' # da es qwerty ist ist minus = 0 Taste
-cmd-alt-shift-ctrl-equal = 'resize smart +150' # da qwerty eingestellt ist ist = die backtick taste
+cmd-alt-shift-ctrl-equal = 'resize smart -150' # da es qwerty ist ist minus = 0 Taste
+cmd-alt-shift-ctrl-minus = 'resize smart +150' # da qwerty eingestellt ist ist = die backtick taste
 #
 # enter = 'mode main'
 # esc = 'mode main'
