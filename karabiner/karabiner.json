@@ -4,67 +4,64 @@
             "complex_modifications": {
                 "rules": [
                     {
-                        "description": "Double press on j activates Escape, single press outputs j",
-                        "enabled": false,
+                        "description": "Double tap on left_shift -> escape, single tap -> left_shift, hold -> normal shift",
                         "manipulators": [
                             {
                                 "conditions": [
                                     {
-                                        "name": "j_double_press",
+                                        "name": "left_shift_pressed",
                                         "type": "variable_if",
                                         "value": 1
                                     }
                                 ],
                                 "from": {
-                                    "key_code": "j",
+                                    "key_code": "left_shift",
                                     "modifiers": { "optional": ["any"] }
                                 },
                                 "to": [{ "key_code": "escape" }],
+                                "to_after_key_up": [
+                                    {
+                                        "set_variable": {
+                                            "name": "left_shift_pressed",
+                                            "value": 0
+                                        }
+                                    }
+                                ],
                                 "type": "basic"
                             },
                             {
                                 "from": {
-                                    "key_code": "j",
+                                    "key_code": "left_shift",
                                     "modifiers": { "optional": ["any"] }
                                 },
-                                "parameters": {
-                                    "basic.to_if_alone_timeout_milliseconds": 300,
-                                    "basic.to_if_held_down_threshold_milliseconds": 500
+                                "parameters": { "basic.to_if_alone_timeout_milliseconds": 200 },
+                                "to_delayed_action": {
+                                    "to_if_invoked": [
+                                        {
+                                            "set_variable": {
+                                                "name": "left_shift_pressed",
+                                                "value": 0
+                                            }
+                                        },
+                                        { "key_code": "left_shift" }
+                                    ]
                                 },
-                                "to": [
+                                "to_if_alone": [
                                     {
                                         "set_variable": {
-                                            "name": "j_double_press",
+                                            "name": "left_shift_pressed",
                                             "value": 1
                                         }
                                     }
                                 ],
-                                "to_delayed_action": {
-                                    "to_if_canceled": [
-                                        {
-                                            "set_variable": {
-                                                "name": "j_double_press",
-                                                "value": 0
-                                            }
-                                        },
-                                        { "key_code": "j" }
-                                    ],
-                                    "to_if_invoked": [
-                                        {
-                                            "set_variable": {
-                                                "name": "j_double_press",
-                                                "value": 0
-                                            }
-                                        }
-                                    ]
-                                },
+                                "to_if_held_down": [{ "key_code": "left_shift" }],
                                 "type": "basic"
                             }
                         ]
                     },
                     {
+                        "comment": "https://ke-complex-modifications.pqrs.org/?q=vim",
                         "description": "(Vim 1/11) Double press on ctrl activates Vim mode, holding ctrl keeps normal control function",
-                        "enabled": false,
                         "manipulators": [
                             {
                                 "conditions": [
@@ -73,7 +70,8 @@
                                             "com.googlecode.iterm2",
                                             "com.github.atom",
                                             "com.jetbrains.pycharm",
-                                            "com.visualstudio.code.oss"
+                                            "com.visualstudio.code.oss",
+                                            "net.kovidgoyal.kitty"
                                         ],
                                         "type": "frontmost_application_unless"
                                     },
@@ -88,8 +86,8 @@
                                     "modifiers": { "optional": ["any"] }
                                 },
                                 "parameters": {
-                                    "basic.to_if_alone_timeout_milliseconds": 300,
-                                    "basic.to_if_held_down_threshold_milliseconds": 500
+                                    "basic.to_if_alone_timeout_milliseconds": 200,
+                                    "basic.to_if_held_down_threshold_milliseconds": 300
                                 },
                                 "to_after_key_up": [
                                     {
@@ -129,7 +127,8 @@
                                             "com.googlecode.iterm2",
                                             "com.github.atom",
                                             "com.jetbrains.pycharm",
-                                            "com.visualstudio.code.oss"
+                                            "com.visualstudio.code.oss",
+                                            "net.kovidgoyal.kitty"
                                         ],
                                         "type": "frontmost_application_unless"
                                     },
@@ -163,7 +162,8 @@
                                             "com.googlecode.iterm2",
                                             "com.github.atom",
                                             "com.jetbrains.pycharm",
-                                            "com.visualstudio.code.oss"
+                                            "com.visualstudio.code.oss",
+                                            "net.kovidgoyal.kitty"
                                         ],
                                         "type": "frontmost_application_unless"
                                     },
@@ -197,7 +197,8 @@
                                             "com.googlecode.iterm2",
                                             "com.github.atom",
                                             "com.jetbrains.pycharm",
-                                            "com.visualstudio.code.oss"
+                                            "com.visualstudio.code.oss",
+                                            "net.kovidgoyal.kitty"
                                         ],
                                         "type": "frontmost_application_unless"
                                     },
@@ -234,7 +235,8 @@
                                             "com.googlecode.iterm2",
                                             "com.github.atom",
                                             "com.jetbrains.pycharm",
-                                            "com.visualstudio.code.oss"
+                                            "com.visualstudio.code.oss",
+                                            "net.kovidgoyal.kitty"
                                         ],
                                         "type": "frontmost_application_if"
                                     },
@@ -4129,54 +4131,6 @@
         {
             "complex_modifications": {
                 "rules": [
-                    {
-                        "description": "Double-tap j to send Escape or single-tap j to send j",
-                        "manipulators": [
-                            {
-                                "conditions": [
-                                    {
-                                        "name": "j",
-                                        "type": "variable_if",
-                                        "value": 1
-                                    }
-                                ],
-                                "from": { "key_code": "j" },
-                                "to": [{ "key_code": "escape" }],
-                                "type": "basic"
-                            },
-                            {
-                                "from": { "key_code": "j" },
-                                "to": [
-                                    {
-                                        "set_variable": {
-                                            "name": "j",
-                                            "value": 1
-                                        }
-                                    }
-                                ],
-                                "to_delayed_action": {
-                                    "to_if_canceled": [
-                                        {
-                                            "set_variable": {
-                                                "name": "j",
-                                                "value": 0
-                                            }
-                                        },
-                                        { "key_code": "j" }
-                                    ],
-                                    "to_if_invoked": [
-                                        {
-                                            "set_variable": {
-                                                "name": "j",
-                                                "value": 0
-                                            }
-                                        }
-                                    ]
-                                },
-                                "type": "basic"
-                            }
-                        ]
-                    },
                     {
                         "manipulators": [
                             {
