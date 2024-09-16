@@ -1,21 +1,21 @@
 vim.g.mapleader = " "
 -- Deaktivieren der Pfeiltasten im normalen Modus
-vim.api.nvim_set_keymap("n", "<Up>", "<NOP>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<Down>", "<NOP>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<Left>", "<NOP>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<Right>", "<NOP>", { noremap = true, silent = true })
-
--- Deaktivieren der Pfeiltasten im Einfügemodus
-vim.api.nvim_set_keymap("i", "<Up>", "<NOP>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("i", "<Down>", "<NOP>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("i", "<Left>", "<NOP>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("i", "<Right>", "<NOP>", { noremap = true, silent = true })
-
--- Deaktivieren der Pfeiltasten im visuellen Modus
-vim.api.nvim_set_keymap("v", "<Up>", "<NOP>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("v", "<Down>", "<NOP>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("v", "<Left>", "<NOP>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("v", "<Right>", "<NOP>", { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap("n", "<Up>", "<NOP>", { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap("n", "<Down>", "<NOP>", { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap("n", "<Left>", "<NOP>", { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap("n", "<Right>", "<NOP>", { noremap = true, silent = true })
+--
+-- -- Deaktivieren der Pfeiltasten im Einfügemodus
+-- vim.api.nvim_set_keymap("i", "<Up>", "<NOP>", { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap("i", "<Down>", "<NOP>", { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap("i", "<Left>", "<NOP>", { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap("i", "<Right>", "<NOP>", { noremap = true, silent = true })
+--
+-- -- Deaktivieren der Pfeiltasten im visuellen Modus
+-- vim.api.nvim_set_keymap("v", "<Up>", "<NOP>", { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap("v", "<Down>", "<NOP>", { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap("v", "<Left>", "<NOP>", { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap("v", "<Right>", "<NOP>", { noremap = true, silent = true })
 --
 --
 -- alles markieren
