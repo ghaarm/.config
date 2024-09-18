@@ -195,6 +195,10 @@ if.app-id = 'com.goodsnooze.MenuGPT'
 run = "move-node-to-workspace B"
 
 [[on-window-detected]]
+if.app-id = 'TeXShop'
+run = "move-node-to-workspace B"
+
+[[on-window-detected]]
 if.app-id = 'com.microsoft.excel'
 run = "move-node-to-workspace O"
 
