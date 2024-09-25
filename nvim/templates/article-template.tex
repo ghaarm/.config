@@ -59,20 +59,13 @@ a4paper, % Setzt das Papierformat auf A4
 
 \usepackage{titlesec} % kann z.B. subsubsubsubsections erstellen, kann Schriftgröße, Schriftart und Farbe von Titeln anpassen.
 
-% \titlespacing*{\section}{0pt}{2.5ex plus 1ex minus .2ex}{1.3ex plus .2ex}
+\titlespacing*{\section}{0pt}{2.5ex plus 1ex minus .2ex}{1.3ex plus .2ex}
 
-\titlespacing*{\section}
-{0pt}             % Linker Abstand
-{0.5cm}           % Abstand vor dem Abschnitt
-{0.3cm}           % Abstand nach dem Abschnitt
-{0pt}             % Linker Abstand
-{0.5cm plus 0.1cm minus 0.05cm} % Abstand vor dem Abschnitt
-{0.3cm plus 0.1cm minus 0.05cm} % Abstand nach dem Abschnitt
 %========================== KOPF - UND FUßZEILE ============================
 % \usepackage{fancyhdr} % für Fußzeilen
 % \renewcommand{\headrulewidth}{0pt} % Entfernt die Linie unter der Kopfzeile
 % %
-% \renewcommand{\footrulewidth}{0.4} % Fügt eine Linie oberhalb der Fußzeile auf jeder Seite ein
+% \renewcommand{\footrulewidth}{0.4pt} % Fügt eine Linie oberhalb der Fußzeile auf jeder Seite ein
 %
 % \pagestyle{fancy} % definiert den style "fancy"
 % \fancyhf{} % Löscht die aktuellen Einstellungen für Kopf- und Fußzeile
@@ -82,6 +75,7 @@ a4paper, % Setzt das Papierformat auf A4
 %
 %========================== TITEL ============================
 % \usepackage{titling}
+% \setlength{\droptitle}{-1cm} % Ändert den vertikalen Abstand zwischen Titel oberen Rand der Seite
 % % Define a new command for the subtitle
 % \newcommand{\subtitle}[1]{
 %     \posttitle{
@@ -90,6 +84,7 @@ a4paper, % Setzt das Papierformat auf A4
 % }
 
 \title{____}
+% \title{____\vspace{-0.5cm}} %vspace rücht Datum näher an den Titel
 % \subtitle{____}
 
 \date{} % wenn leer kein Datum

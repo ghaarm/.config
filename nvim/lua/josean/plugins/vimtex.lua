@@ -102,16 +102,17 @@ return {
 
     -- vim.g.tex_flavor = "latex"
     vim.g.vimtex_compiler_method = "latexmk"
-    vim.g.vimtex_view_method = "sioyek"
+    -- vim.g.vimtex_view_method = "sioyek"
+    vim.g.vimtex_view_method = "skim"
 
     vim.g.vimtex_view_skim_sync = 1     -- Value 1 allows forward search after every successful compilation
     vim.g.vimtex_view_skim_activate = 1 --# Value 1 allows change focus to skim after command `:VimtexView` is given
 
     -- Skim Konfiguration für Vimtex
-    -- vim.g.vimtex_view_skim = {
-    --   executable = 'open',
-    --   args = {'-a', 'Skim'}
-    -- }
+    vim.g.vimtex_view_skim = {
+      executable = 'open',
+      args = { '-a', 'Skim' }
+    }
 
     -- Kürzel für Vimtex-Funktionen über den lokalen Leader
     vim.api.nvim_set_keymap("n", "<Localleader>v", ":VimtexView<CR>", { noremap = true, silent = true })
@@ -144,3 +145,12 @@ return {
     -- vim.api.nvim_set_keymap('n', '<Localleader>c', ':lua CleanLatexFiles()<CR>', { noremap = true, silent = true })
   end,
 }
+
+-- https://gist.github.com/kha-dinh/c8540052854f3c6954b047abd506b799
+-- Versuch Sioyek mit nvim remote für inverse search
+-- funktioniert nicht
+
+
+
+-- anderer Versuch aus git https://github.com/lervag/vimtex/issues/2323#issuecomment-1047021336
+-- funktioniert nicht
