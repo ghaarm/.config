@@ -183,6 +183,23 @@ _fzf_compgen_dir() {
 }
 
 
+# # Normales `cd` Verhalten ohne fzf
+# alias cd="builtin cd"
+#
+# # Funktion für `cd` mit fzf-Unterstützung
+# cdz() {
+#   local dir
+#   dir=$(fd --type d --hidden --exclude .git . | fzf)
+#   if [[ -n "$dir" ]]; then
+#     cd "$dir"
+#   fi
+# }
+
+
+# für imagemagick um images in nvim anzeigen zu lassen https://github.com/3rd/image.nvim
+export DYLD_LIBRARY_PATH="$(brew --prefix)/lib:$DYLD_LIBRARY_PATH"
+
+
 # ---- TheFuck ----
 # thefuck alias
 eval $(thefuck --alias)

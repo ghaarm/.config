@@ -135,6 +135,8 @@ return {
         "-interaction=nonstopmode",
         "-synctex=1",
       },
+      -- Hier den `aux_dir` einfügen, um die Hilfsdateien in einem speziellen Verzeichnis abzulegen
+      aux_dir = "auxiliary_files",
     }
 
     -- Zusätzliche Konfigurationen damit vimtex immer das Verzeichnis der tex datei als arbeitsverzeichnis benutzt
