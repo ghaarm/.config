@@ -38,7 +38,7 @@ return {
     vim.g.mkdp_highlight_css = ''
     vim.g.mkdp_port = ''
     vim.g.mkdp_page_title = '「${name}」'
-    vim.g.mkdp_images_path = '/home/user/.markdown_images'
+    -- vim.g.mkdp_images_path = '/home/user/.markdown_images'
     vim.g.mkdp_filetypes = { 'markdown' }
     vim.g.mkdp_theme = 'dark'
     vim.g.mkdp_combine_preview = 0
