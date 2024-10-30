@@ -145,10 +145,10 @@ setopt hist_verify
 # setopt hist_verifysource /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # completion using arrow keys (based on history)
-bindkey '^[[A' history-search-backward
-bindkey '^[[B' history-search-forward
-source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# bindkey '^[[A' history-search-backward
+# bindkey '^[[B' history-search-forward
+# source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+# source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # ---- Eza (better ls) -----
 
@@ -202,8 +202,8 @@ export DYLD_LIBRARY_PATH="$(brew --prefix)/lib:$DYLD_LIBRARY_PATH"
 
 # ---- TheFuck ----
 # thefuck alias
-eval $(thefuck --alias)
-eval $(thefuck --alias fk)
+# eval $(thefuck --alias)
+# eval $(thefuck --alias fk)
 
 # Created by `pipx` on 2024-07-04 16:51:32
 export PATH="$PATH:/Users/g/.local/bin"
