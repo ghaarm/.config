@@ -1,5 +1,9 @@
+-- brew install jesseduffield/lazygit/lazygit  to install lazygit 
+-- Joseans lazy git video https://www.youtube.com/watch?v=Ihg37znaiBo
+
 return {
   "kdheepak/lazygit.nvim",
+  lazy = true,
   cmd = {
     "LazyGit",
     "LazyGitConfig",
