@@ -44,6 +44,7 @@ return {
     wk.add({
       { "<leader>t",   group = "TEMPLATES",                                                        nowait = true,                              remap = false },
       { "<leader>ta",  "<cmd>read ~/.config/nvim/templates/article-template.tex<CR>",              desc = "article-template.tex",              nowait = true, remap = false },
+      { "<leader>tt",  "<cmd>read ~/.config/nvim/templates/article-template-toc.tex<CR>",              desc = "article-template-toc.tex",              nowait = true, remap = false },
       { "<leader>tb",  "<cmd>read ~/.config/nvim/templates/footer-footnotes-bibliography.tex<CR>", desc = "footer-footnotes-bibliography.tex", nowait = true, remap = false },
       { "<leader>tc",  "<cmd>read ~/.config/nvim/templates/chapter.tex<CR>",                       desc = "chapter template tex",              nowait = true, remap = false },
       { "<leader>tl",  "<cmd>read ~/.config/nvim/templates/footer-footnotes.tex<CR>",              desc = "footer-footnotes.tex",              nowait = true, remap = false },

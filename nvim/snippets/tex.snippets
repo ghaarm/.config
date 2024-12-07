@@ -187,12 +187,12 @@ snippet iben "Item" b
 #
 
 #Item normal mit Spiegelstrich
-snippet in "Item"
+snippet i- "Item"
 	\item[-] ${0}
 #
 
 #Item für enumerate
-snippet ien "Item"
+snippet ie "Item"
 	\item ${0}
 #
 
@@ -393,7 +393,7 @@ snippet png "png" b
 	
 	\begin{figure}[H]
     	\centering
-    	\includegraphics[width=0.8\textwidth]{../bilder/${1:Name}}
+    	\includegraphics[width=0.8\textwidth]{./bilder/${1:Name}}
     	\caption{${2:Name}}
     	\label{fig:${3:Name}}
 	\end{figure}
@@ -417,7 +417,7 @@ snippet pngmulti "pngmulti" b
 	
 	\begin{figure}[H]
     	\centering
-    	\includegraphics[width=\linewidth]{../bilder/${1:Name}}
+    	\includegraphics[width=\linewidth]{./bilder/${1:Name}}
     	\caption{${2:Name}}
     	\label{fig:${3:Name}}
 	\end{figure}
