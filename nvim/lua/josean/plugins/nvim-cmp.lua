@@ -89,7 +89,19 @@ return {
           end
         end, { 'i', 's' }),
 
-        ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Bestätigt die Auswahl mit Enter
+        -- ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Bestätigt die Auswahl mit Enter
+        -- https://github.com/hrsh7th/nvim-cmp/wiki/Example-mappings#safely-select-entries-with-cr damit bei enter nicht etwas ausgewählt wird auch wenn nicht markiert ist
+        ["<CR>"] = cmp.mapping({
+       i = function(fallback)
+         if cmp.visible() and cmp.get_active_entry() then
+           cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
+         else
+           fallback()
+         end
+       end,
+       s = cmp.mapping.confirm({ select = true }),
+       c = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
+     }),
         ['<C-b>'] = cmp.mapping.scroll_docs(-4),
         ['<C-f>'] = cmp.mapping.scroll_docs(4),
       }),

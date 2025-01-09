@@ -85,10 +85,10 @@ outer.right =      3
 # alt-enter = 'exec-and-forget open -n /System/Applications/Utilities/Terminal.app'
 
 # https://nikitabobko.github.io/AeroSpace/commands#enable
-cmd-alt-shift-ctrl-e = 'enable toggle'
+ctrl-alt-shift-e = 'enable toggle'
 
-# cmd-alt-shift-ctrl-e = 'enable on'
-# cmd-alt-shift-ctrl-e = 'enable off'
+# alt-shift-ctrl-e = 'enable on'
+# alt-shift-ctrl-d = 'enable off'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#layout
 alt-period = 'layout tiles horizontal vertical'

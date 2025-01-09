@@ -120,8 +120,11 @@ source $ZSH/oh-my-zsh.sh
 
 # textbausteine für Ordner
 # alias pr="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/'#Docs iCloud'/R\ Statistik,\ icloud/R,\ projects"
-
+# alias cd="/Users/g/qmk_firmware/keyboards/beekeeb/piantor_pro/keymaps"
+alias cdpi="cd /Users/g/qmk_firmware/keyboards/beekeeb/piantor_pro/keymaps && nvim" # öffnet neovim automatisch
 # alias plat="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/'#Docs iCloud'/R\ Statistik,\ icloud/Latex,\ icloud/Latex\ Projekte"
+
+alias ic="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/'#Docs iCloud'"
 
 # alias projtemp="cd ~/.config/nvim/templates"
 
@@ -215,3 +218,16 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
+#
+#
+# for yazi https://www.josean.com/posts/how-to-use-yazi-file-manager
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	yazi "$@" --cwd-file="$tmp"
+	if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+		builtin cd -- "$cwd"
+	fi
+	rm -f -- "$tmp"
+}
+
+export EDITOR=nvim
