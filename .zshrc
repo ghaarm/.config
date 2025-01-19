@@ -118,6 +118,7 @@ source $ZSH/oh-my-zsh.sh
 # For a full list of active aliases, run `alias`.
 
 
+export PATH="/path/to/lua-language-server/bin:$PATH"
 # textbausteine für Ordner
 # alias pr="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/'#Docs iCloud'/R\ Statistik,\ icloud/R,\ projects"
 # alias cd="/Users/g/qmk_firmware/keyboards/beekeeb/piantor_pro/keymaps"
@@ -126,6 +127,9 @@ alias cdpi="cd /Users/g/qmk_firmware/keyboards/beekeeb/piantor_pro/keymaps && nv
 
 alias ic="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/'#Docs iCloud'"
 
+alias bs="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/'#Docs iCloud'/R\ Statistik,\ icloud/R,\ projects/shiny-app/shiny-bslib && nvim"
+
+alias aero="cd ~/.config/aerospace && nvim aerospace.toml"
 # alias projtemp="cd ~/.config/nvim/templates"
 
 

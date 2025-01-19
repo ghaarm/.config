@@ -56,11 +56,11 @@ return {
     -- find more here: https://www.nerdfonts.com/cheat-sheet
 
     cmp.setup({
-      completion = {
-        completeopt = "menu,noselect",
-        -- completeopt = "menuone,preview,noinsert,noselect",
-        keyword_length = 1,
-      },
+      -- completion = {
+      --   completeopt = "menu,noselect",
+      --   -- completeopt = "menuone,preview,noinsert,noselect",
+      --   keyword_length = 1,
+      -- },
       snippet = { -- configure how nvim-cmp interacts with snippet engine
         expand = function(args)
           luasnip.lsp_expand(args.body)
@@ -92,16 +92,16 @@ return {
         -- ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Bestätigt die Auswahl mit Enter
         -- https://github.com/hrsh7th/nvim-cmp/wiki/Example-mappings#safely-select-entries-with-cr damit bei enter nicht etwas ausgewählt wird auch wenn nicht markiert ist
         ["<CR>"] = cmp.mapping({
-       i = function(fallback)
-         if cmp.visible() and cmp.get_active_entry() then
-           cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
-         else
-           fallback()
-         end
-       end,
-       s = cmp.mapping.confirm({ select = true }),
-       c = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
-     }),
+          i = function(fallback)
+            if cmp.visible() and cmp.get_active_entry() then
+              cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
+            else
+              fallback()
+            end
+          end,
+          s = cmp.mapping.confirm({ select = true }),
+          c = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
+        }),
         ['<C-b>'] = cmp.mapping.scroll_docs(-4),
         ['<C-f>'] = cmp.mapping.scroll_docs(4),
       }),
@@ -173,21 +173,63 @@ return {
       },
     })
 
-    -- `/` cmdline setup.
+
+    -- -- `/` cmdline setup für suche.
+    -- cmp.setup.cmdline('/', {
+    --   mapping = cmp.mapping.preset.cmdline(),
+    --   sources = {
+    --     { name = 'buffer' }
+    --   }
+    -- })
+    --
+    -- -- `:` cmdline setup für commandline.
+    -- cmp.setup.cmdline(':', {
+    --   mapping = cmp.mapping.preset.cmdline(),
+    --   sources = {
+    --     { name = 'path' },
+    --     { name = 'cmdline' }
+    --   }
+    -- })
+
+
+    -- -- `/` cmdline setup für suche.
     cmp.setup.cmdline('/', {
-      mapping = cmp.mapping.preset.cmdline(),
-      sources = {
-        { name = 'buffer' }
-      }
+      mapping = cmp.mapping.preset.cmdline({
+        ["<CR>"] = cmp.mapping(function(fallback)
+          if cmp.visible() and cmp.get_active_entry() then
+            cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
+          else
+            fallback()
+          end
+        end, { "c" })
+      }),
+      sources = cmp.config.sources({
+        { name = 'buffer', keyword_length = 3 }, -- Nur Wörter mit mindestens 3 Zeichen vorschlagen
+        { name = 'spell' }                       -- Optionale Rechtschreibprüfung
+      }),
+      completion = {
+        completeopt = 'menu,menuone,noselect', -- Verhindert automatische Auswahl
+      },
     })
 
-    -- `:` cmdline setup.
+    -- -- `:` cmdline setup für commandline.
     cmp.setup.cmdline(':', {
-      mapping = cmp.mapping.preset.cmdline(),
-      sources = {
+      mapping = cmp.mapping.preset.cmdline({
+        ["<CR>"] = cmp.mapping(function(fallback)
+          if cmp.visible() and cmp.get_active_entry() then
+            cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
+          else
+            fallback()
+          end
+        end, { "c" })
+      }),
+      sources = cmp.config.sources({
         { name = 'path' },
         { name = 'cmdline' }
-      }
+      }),
+      completion = {
+        completeopt = 'menu,menuone,noselect', -- Verhindert automatische Auswahl
+      },
     })
   end,
 }

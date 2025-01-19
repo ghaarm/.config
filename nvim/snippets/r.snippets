@@ -1,3 +1,6 @@
+
+extends shiny
+
 snippet #!
 	#!/usr/bin/env Rscript
 
@@ -141,28 +144,6 @@ snippet kvt
 
 # Shiny
 
-snippet selectIn "selectInput"
-  selectInput("${1:df-name}", "${2:display-name}",
-  choices = c(
-				  "${3:wahl-1}",
-				  "${4:wahl-2}",
-				  "${5:wahl-3}"),
-  selected = "${6:voreingestellt}",
-  ),
-  ${0}
-
-
-snippet textIn "textInput"
-  textInput("${1:df-name}", "${2:display-name}"),
-  ${0}
-
-snippet numericIn "numericInput"
-  numericInput("${1:df-name}", "${2:display-name}", value = "NULL"),
-  ${0}
-
-snippet textArea "textAreaInput"
-  textAreaInput("${1:df-name}", "${2:display-name}"),
-  ${0}
 
 snippet rcsv "read csv"
   read.csv("${1:name}.csv", header = TRUE, sep = ",")
@@ -666,3 +647,4 @@ snippet idsuchen "id suchen"
   distinct() %>%
   arrange(${2:id-name}) %>%
   print(n = Inf, width = Inf)
+

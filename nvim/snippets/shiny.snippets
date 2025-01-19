@@ -1,0 +1,115 @@
+
+snippet selectIn "selectInput"
+  selectInput("${1:df-name}", "${2:display-name}",
+  choices = c(
+				  "${3:wahl-1}",
+				  "${4:wahl-2}",
+				  "${5:wahl-3}"),
+  selected = "${6:voreingestellt}",
+  ),
+  ${0}
+
+
+snippet textIn "textInput"
+  textInput("${1:df-name}", "${2:display-name}")
+  ${0}
+
+snippet numericIn "numericInput"
+  numericInput("${1:df-name}", "${2:display-name}", value = "NULL")
+  ${0}
+
+
+snippet numericInMod "numericInput module ns()"
+  numericInput(ns("${1:df-name}", "${2:display-name}", value = "NULL"))
+  ${0}
+
+snippet textArea "textAreaInput"
+  textAreaInput("${1:df-name}", "${2:display-name}")
+  ${0}
+
+snippet uiOutputMod "uiInput module ns()"
+  uiOutput(ns)("${0}"))
+
+snippet uiOutput "uiInput"
+  uiOutput("${0}")
+
+
+snippet tags$table "ui table"
+  tags\$table(
+    ${0}
+  )
+
+snippet tags$tr "ui row"
+  tags\$tr(
+    ${0}
+  )
+
+snippet tags$td "ui cell"
+  tags\$td(${0})
+
+
+snippet output " server output"
+  output\$${1}  <- renderUI({
+    ${0}
+
+  })
+
+snippet htmlrot "html rot"
+  <span style='color: darkred;'> ${0} </span>
+
+
+snippet reactive "reactive shiny"
+  reactive({
+
+    ${0}
+  
+  })
+
+snippet bsaccHtml "bslib accordion html output"
+  bslib::accordion(
+    open = FALSE,
+    id = "${1:id-name}", # Eindeutige ID für das innere Accordion
+    bslib::accordion_panel(
+      "${2:anzeige-in-html}",
+      htmlOutput("${3:ui-name}")
+    )
+  ),
+
+snippet includeHTML "include HTML output"
+  includeHTML("www/${1}.html")
+
+snippet renderui "renderUI"
+  renderUI({
+
+  ${0}
+
+  })
+
+snippet moduleTemp "rhiny module template"
+  ${1:module-name}_module_ui <- function(id) {
+    ns <- NS(id)  # Namespace für das Modul
+      tagList(
+          tags$table(
+            tags$tr(
+              tags$td(
+                class = "custom-vertical-align",
+                numericInput(ns("${0}"), "xxxx", value = NULL)),
+              tags$td(
+                class = "custom-vertical-align",
+                uiOutput(ns("xxxx")))  # ns für den Output
+              )
+            )
+          )
+  }
+
+  ${2:$1}_module_server <- function(id, gewicht_main, groesse_main, geschlecht_main) {
+  moduleServer(id, function(input, output, session) {
+
+      geschlecht_input <- reactive({geschlecht_main()})
+      gewicht_input <- reactive({gewicht_main()})
+      groesse_input <- reactive({groesse_main()})
+
+
+
+      })
+  } 

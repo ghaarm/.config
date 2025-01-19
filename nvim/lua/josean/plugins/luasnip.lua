@@ -66,5 +66,36 @@ return {
       end,
       { desc = 'Edit snippet' }
     )
-  end,
+
+    -- Keymaps für LuaSnip
+    local ls = require("luasnip")
+    -- from TJ DeVries https://www.youtube.com/watch?v=Dn800rlPIho&t=964s Min 9:17
+    -- c-k is expansion key
+    -- expand the current item or jump to the next item in the snippet
+    vim.keymap.set({ "i" }, "<C-K>", function()
+      if ls.expand_or_jumpable() then
+        ls.expand_or_jump()
+      end
+    end, { silent = true })
+
+    -- c-j is jump backwards key
+    -- this always moves to the previous idem in the snippet
+    vim.keymap.set({ "i", "s" }, "<C-J>", function()
+      if ls.jumpable(-1) then
+        ls.jump(-1)
+      end
+    end, { silent = true })
+
+    -- c-l is selecting within a list of options
+    -- this is useful for choiec nodes (introduced in episode 2)
+    vim.keymap.set({ "i", "s" }, "<C-L>", function()
+      if ls.choice_active() then
+        ls.change_choice(1)
+      end
+    end)
+
+    -- shortcut to source luasnip file again, which will reload snippets
+    vim.keymap.set("n", "<leader><leader>s", "<cmd>source ~/.config/nvim/lua/josean/plugins/luasnip.lua<CR>",
+      { noremap = true, silent = true })
+  end
 }

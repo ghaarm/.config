@@ -160,3 +160,5 @@ vim.api.nvim_set_keymap('i', '<D-BS>', '<C-u>', { noremap = true, silent = true 
 -- aus functions.lua um dabtei im Finder zu öffnen
 vim.api.nvim_set_keymap('n', '<leader>o', ':lua OpenInFinder()<CR>', { noremap = true, silent = true })
 ---
+---
+
