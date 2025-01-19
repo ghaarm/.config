@@ -62,6 +62,9 @@ return {
       "rcarriga/nvim-notify", -- Optional
     },
     config = function()
+      -- Deaktiviere die standardmäßige Modusanzeige von Vim
+      vim.opt.showmode = false
+
       local noice_notify_enabled = true
 
       function ToggleNoiceNotify()
@@ -92,7 +95,6 @@ return {
           backend = "nui", -- backend to use to show regular cmdline completions
           kind_icons = {}, -- set to `false` to disable icons
         },
-
         lsp = {
           -- Überschreibt das Markdown-Rendering, damit **cmp** und andere Plugins **Treesitter** verwenden
           override = {
@@ -114,6 +116,14 @@ return {
             view = "notify",
             filter = { event = "msg_showmode" },
           },
+          -- {
+          --   filter = {
+          --     event = "msg_show",
+          --     kind = "echomsg",
+          --     find = "INSERT",
+          --   },
+          --   opts = { skip = true },
+          -- },
         },
       })
     end,

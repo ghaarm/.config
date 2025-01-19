@@ -4321,6 +4321,7 @@
                 }
             ],
             "name": "vanilla",
+            "selected": true,
             "virtual_hid_keyboard": {
                 "country_code": 2,
                 "indicate_sticky_modifier_keys_state": false,
@@ -8637,7 +8638,6 @@
                 }
             ],
             "name": "vim",
-            "selected": true,
             "virtual_hid_keyboard": {
                 "country_code": 2,
                 "indicate_sticky_modifier_keys_state": false,

@@ -1,10 +1,10 @@
+-- https://www.youtube.com/watch?v=6pAG3BHurdM&t=873s Josean time 55:00
 return {
   "folke/todo-comments.nvim",
   event = { "BufReadPre", "BufNewFile" },
   dependencies = { "nvim-lua/plenary.nvim" },
   config = function()
     local todo_comments = require("todo-comments")
-
     -- set keymaps
     local keymap = vim.keymap -- for conciseness
 
