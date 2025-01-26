@@ -2,7 +2,7 @@ return {
   "gbprod/substitute.nvim",
   event = { "BufReadPre", "BufNewFile" },
   config = function()
-    local substitute = require("substitute")
+    local substitute = require("josean.plugins.delayed.substitute")
 
     substitute.setup()
 

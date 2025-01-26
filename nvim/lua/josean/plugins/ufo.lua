@@ -1,4 +1,5 @@
-# :https://github.com/kevinhwang91/nvim-ufo/issues/117
+-- https://github.com/kevinhwang91/nvim-ufo/issues/117
+-- https://www.youtube.com/watch?v=f_f08KnAJOQ Andrew Courter
 
 return {
   "kevinhwang91/nvim-ufo",
@@ -18,7 +19,7 @@ return {
       end,
     },
     {
-      "K",
+      "zK",
       function()
         local winid = require("ufo").peekFoldedLinesUnderCursor()
         if not winid then
@@ -32,6 +33,14 @@ return {
     vim.o.foldlevel = 99
     vim.o.foldlevelstart = 99
     vim.o.foldenable = true
+
+    -- UFO setup for fold providers
+    require("ufo").setup({
+      -- provider_selector = function(bufnr, filetype, buftype) -- bufnr usw nicht gefunden in local
+      provider_selector = function()
+        return { "lsp", "indent" } -- Use LSP and indent-based folding
+      end,
+    })
     -- To show number of folded lines
     local handler = function(virtText, lnum, endLnum, width, truncate)
       local newVirtText = {}

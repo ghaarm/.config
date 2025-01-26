@@ -224,6 +224,8 @@ return {
         end, { "c" })
       }),
       sources = cmp.config.sources({
+        { name = 'luasnip' },
+        { name = 'buffer' },
         { name = 'path' },
         { name = 'cmdline' }
       }),
