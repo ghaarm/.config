@@ -34,7 +34,8 @@ return {
   event = { "BufReadPre", "BufNewFile" },
   config = function()
     require("luasnip.loaders.from_snipmate").load({ paths = vim.fn.expand("~/.config/nvim/snippets/") })
-
+    -- Lade LuaSnip-Snippets aus einem separaten Ordner
+    require("luasnip.loaders.from_lua").load({ paths = "~/.config/nvim/snippets/" })
     vim.keymap.set(
       'n',
       '<Leader>es',
