@@ -64,19 +64,38 @@ return {
         -- theme = "kanagawa",
         theme = "nightfox",
         -- theme = "catppuccin",
+        component_separators = "", -- Entfernt die kleinen Pfeile zwischen Komponenten
+        -- section_separators = "", -- Entfernt die großen Pfeile zwischen den Sektionen
       },
+
       sections = {
-        lualine_x = {
+        lualine_a = { 'mode' },   -- Zeigt den Modus wie NORMAL, INSERT etc.
+        lualine_b = { 'branch' }, -- Zeigt den Git-Branch wie main
+
+        lualine_c = {
+          '%=', -- Aligner für die Mitte
+          {
+            'filename',
+            path = 2,             -- Absoluter Pfad
+            shorting_target = 40, -- Kürzt den Pfad bei Bedarf
+          },
+          '%=',                   -- Aligner für die Mitte
+        },
+
+        lualine_x = { -- Rechtsbündige Infos
           {
             lazy_status.updates,
             cond = lazy_status.has_updates,
             color = { fg = "#ff9e64" },
           },
-          { "encoding" },
-          { "fileformat" },
-          { "filetype" },
+          { 'encoding' },
+          { 'fileformat' },
+          { 'filetype' },
         },
-      },
+
+        lualine_y = {},
+        lualine_z = {},
+      }
     })
   end,
 }

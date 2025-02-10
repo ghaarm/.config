@@ -393,9 +393,21 @@ snippet png "png" b
 	
 	\begin{figure}[H]
     	\centering
-    	\includegraphics[width=0.8\textwidth]{./bilder/${1:Name}}
+    	\includegraphics[width=0.8\textwidth]{../bilder/${1:Name}}
     	\caption{${2:Name}}
-    	\label{fig:${3:Name}}
+    	\label{fig:${3:$2}}
+	\end{figure}
+	${0}
+#
+# png 
+
+snippet ppp "png" b
+	
+	\begin{figure}[H]
+    	\centering
+    	\includegraphics[width=0.8\textwidth]{../bilder/${1:Name}}
+    	\caption{${2:Name}}
+    	\label{fig:${3:$2}}
 	\end{figure}
 	${0}
 #
@@ -407,7 +419,7 @@ snippet pngsame "png same folder" b
     	\centering
     	\includegraphics[width=0.8\textwidth]{${1:Name}}
     	\caption{${2:Name}}
-    	\label{fig:${3:Name}}
+    	\label{fig:${3:$2}}
 	\end{figure}
 	${0}
 #
@@ -419,7 +431,7 @@ snippet pngmulti "pngmulti" b
     	\centering
     	\includegraphics[width=\linewidth]{./bilder/${1:Name}}
     	\caption{${2:Name}}
-    	\label{fig:${3:Name}}
+    	\label{fig:${3:$2}}
 	\end{figure}
 	${0}
 #
@@ -431,7 +443,7 @@ snippet ecmopng "ecmopng" b
     	\centering
     	\includegraphics[width=0.5\textwidth]{../ECMO-latex-png/${1:Name}.png}
     	\caption{${2:Name}}
-    	\label{fig:${3:Name}}
+    	\label{fig:${3:$2}}
 	\end{figure}
 	${0}
 #
@@ -444,7 +456,7 @@ snippet ecmopdf "ecmopdf" b
     	\centering
     	\includegraphics[width=0.5\textwidth]{../ECMO-latex-png/${1:Name}.pdf}
     	\caption{${2:Name}}
-    	\label{fig:${3:Name}}
+    	\label{fig:${3:$2}}
 	\end{figure}
 	${0}
 #
@@ -473,10 +485,6 @@ snippet pdfi "pdf include" b
 	\end{figure}
 	${0}
 
-# snippet underline
-snippet url " url"
-	\href{${1:Link}}{${2:Bescheibung}, Stand ${3:Datum}} ${0}
-#
 
 
 
@@ -549,10 +557,22 @@ snippet inpdf "include pdf"
 #
 
 # Link
-snippet link "link"
+snippet link "link tex ohne Namen"
   \url{${1:url}${0}}
 ##
 
+# snippet underline
+snippet link-name " link tex mit Namen"
+	\href{${1:Link}}{${2:Bescheibung}, Stand ${3:Datum}} ${0}
+#
+
+snippet url "url tex ohne Namen"
+  \url{${1:url}${0}}
+##
+# snippet underline
+snippet url-name " url tex mit Namen"
+	\href{${1:Link}}{${2:Bescheibung}, Stand ${3:Datum}} ${0}
+#
 # toc Inhaltsverzeichnis
 snippet toc "toc und href"
   \hypertarget{toc}{}
@@ -574,3 +594,6 @@ snippet toc "toc und href"
   }
   ${0}
 #
+
+snippet todo "todo tex"
+  %TODO: ${0}
