@@ -8,7 +8,7 @@ return
     -- use labels with f, t, F, T
     modes = {
       char = {
-        jump_labels = true
+        jump_labels = false
       }
     }
   },

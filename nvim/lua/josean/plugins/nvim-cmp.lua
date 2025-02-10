@@ -66,29 +66,69 @@ return {
           luasnip.lsp_expand(args.body)
         end,
       },
+      -- mapping = cmp.mapping.preset.insert({
+      --   ['<Tab>'] = cmp.mapping(function(fallback)
+      --     if cmp.visible() then
+      --       cmp.select_next_item()
+      --     elseif luasnip.expandable() then
+      --       luasnip.expand()
+      --     elseif luasnip.jumpable() then
+      --       luasnip.jump(1)
+      --     else
+      --       fallback()
+      --     end
+      --   end, { 'i', 's' }),
+      --
+      --   ['<S-Tab>'] = cmp.mapping(function(fallback)
+      --     if cmp.visible() then
+      --       cmp.select_prev_item()
+      --     elseif luasnip.jumpable(-1) then
+      --       luasnip.jump(-1)
+      --     else
+      --       fallback()
+      --     end
+      --   end, { 'i', 's' }),
+
       mapping = cmp.mapping.preset.insert({
+        -- Tab springt nur zwischen Snippet-Platzhaltern
         ['<Tab>'] = cmp.mapping(function(fallback)
-          if cmp.visible() then
-            cmp.select_next_item()
-          elseif luasnip.expandable() then
-            luasnip.expand()
-          elseif luasnip.jumpable() then
-            luasnip.jump(1)
+          if luasnip.jumpable(1) then
+            luasnip.jump(1) -- Springe zum nächsten Platzhalter im Snippet
           else
-            fallback()
+            fallback()      -- Führe Standard-Tab-Verhalten aus (Einrücken)
           end
         end, { 'i', 's' }),
 
+        -- Shift+Tab springt zum vorherigen Platzhalter im Snippet
         ['<S-Tab>'] = cmp.mapping(function(fallback)
-          if cmp.visible() then
-            cmp.select_prev_item()
-          elseif luasnip.jumpable(-1) then
-            luasnip.jump(-1)
+          if luasnip.jumpable(-1) then
+            luasnip.jump(-1) -- Springe zum vorherigen Platzhalter
           else
-            fallback()
+            fallback()       -- Standard Shift+Tab-Verhalten
           end
         end, { 'i', 's' }),
 
+        -- Control + K für den nächsten Eintrag in der Autocompletion
+        ['<D-j>'] = cmp.mapping(function(fallback)
+          if cmp.visible() then
+            cmp.select_next_item() -- Wähle den nächsten Autocomplete-Eintrag
+          else
+            fallback()             -- Wenn kein Menü offen ist, mache nichts
+          end
+        end, { 'i', 'c' }),
+
+        -- Control + J für den vorherigen Eintrag in der Autocompletion (optional)
+        ['<D-k>'] = cmp.mapping(function(fallback)
+          if cmp.visible() then
+            cmp.select_prev_item() -- Wähle den vorherigen Autocomplete-Eintrag
+          else
+            fallback()
+          end
+        end, { 'i', 'c' }),
+
+        ['<D-b>'] = cmp.mapping.scroll_docs(-4),
+
+        ['<D-f>'] = cmp.mapping.scroll_docs(4),
         -- ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Bestätigt die Auswahl mit Enter
         -- https://github.com/hrsh7th/nvim-cmp/wiki/Example-mappings#safely-select-entries-with-cr damit bei enter nicht etwas ausgewählt wird auch wenn nicht markiert ist
         ["<CR>"] = cmp.mapping({
@@ -102,8 +142,9 @@ return {
           s = cmp.mapping.confirm({ select = true }),
           c = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
         }),
-        ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-        ['<C-f>'] = cmp.mapping.scroll_docs(4),
+        -- ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+        --
+        -- ['<C-f>'] = cmp.mapping.scroll_docs(4),
       }),
       -- formatting for autocompletion
       formatting = {

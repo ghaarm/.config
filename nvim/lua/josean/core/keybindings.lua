@@ -33,7 +33,8 @@ vim.api.nvim_set_keymap("i", "<D-s>", "<C-\\><C-n>:w<CR>", { noremap = true, sil
 -- markierten Bereich kopieren im visuellen Modus
 vim.api.nvim_set_keymap("v", "<D-c>", "y", { noremap = true, silent = true })
 --
---
+-- im insert mode mit alt del das folgende Wort löschen
+vim.api.nvim_set_keymap('i', '<M-d>', '<C-o>dW', { noremap = true, silent = true })
 --
 -- nicht in den insertmodus wechseln ibei o oder O
 vim.api.nvim_set_keymap("n", "o", "o<Esc>", { noremap = true, silent = true })
@@ -45,6 +46,12 @@ vim.api.nvim_set_keymap("v", "<D-c>", '"+y', { noremap = true, silent = true })
 local keymap = vim.keymap -- for conciseness
 
 keymap.set("i", "jj", "<ESC>", { desc = "Exit insert mode with jj" })
+
+
+keymap.set("n", "<leader><leader>n", ":source $MYVIMRC<CR>", { desc = "Reload Neovim Config" })
+
+
+vim.keymap.set("n", "<leader><leader>a", ":Alpha<CR>", { desc = "Return to Alpha Dashboard" })
 
 keymap.set("n", "<leader>nh", ":nohl<CR>", { desc = "Clear search highlights" })
 
@@ -161,4 +168,3 @@ vim.api.nvim_set_keymap('i', '<D-BS>', '<C-u>', { noremap = true, silent = true 
 vim.api.nvim_set_keymap('n', '<leader>o', ':lua OpenInFinder()<CR>', { noremap = true, silent = true })
 ---
 ---
-

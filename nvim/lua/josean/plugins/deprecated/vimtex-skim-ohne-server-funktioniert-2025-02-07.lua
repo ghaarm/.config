@@ -104,19 +104,17 @@ return {
 
     -- vim.g.tex_flavor = "latex"
     vim.g.vimtex_compiler_method = "latexmk"
-    vim.g.vimtex_view_method = "sioyek"
-    --
-    -- SKIM
-    -- vim.g.vimtex_view_method = "skim"
-    --
-    -- vim.g.vimtex_view_skim_sync = 1     -- Value 1 allows forward search after every successful compilation
-    -- vim.g.vimtex_view_skim_activate = 1 --# Value 1 allows change focus to skim after command `:VimtexView` is given
-    --
-    -- -- Skim Konfiguration für Vimtex
-    -- vim.g.vimtex_view_skim = {
-    --   executable = 'open',
-    --   args = { '-a', 'Skim' }
-    -- }
+    -- vim.g.vimtex_view_method = "sioyek"
+    vim.g.vimtex_view_method = "skim"
+
+    vim.g.vimtex_view_skim_sync = 1     -- Value 1 allows forward search after every successful compilation
+    vim.g.vimtex_view_skim_activate = 1 --# Value 1 allows change focus to skim after command `:VimtexView` is given
+
+    -- Skim Konfiguration für Vimtex
+    vim.g.vimtex_view_skim = {
+      executable = 'open',
+      args = { '-a', 'Skim' }
+    }
 
     -- Kürzel für Vimtex-Funktionen über den lokalen Leader
     vim.api.nvim_set_keymap("n", "<Localleader>v", ":VimtexView<CR>", { noremap = true, silent = true })
