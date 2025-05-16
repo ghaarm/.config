@@ -85,7 +85,7 @@ snippet renderui "renderUI"
 
   })
 
-snippet moduleTemp "rhiny module template"
+snippet moduleTemp "shiny module template"
   ${1:module-name}_module_ui <- function(id) {
     ns <- NS(id)  # Namespace für das Modul
       tagList(
@@ -113,3 +113,43 @@ snippet moduleTemp "rhiny module template"
 
       })
   } 
+
+snippet tooltip ui "tooltip ui"
+   span(
+          tooltip(
+            bs_icon("info-circle"),
+            HTML("${1:Text}"),
+            placement = "right"
+          )
+        ),${0}
+
+snippet tooltip input "tooltip in input Beschreibung"
+  tags\$td(
+    class = "custom-vertical-align", # benutzerdefinierte Klasse
+
+    # Manuelles Label mit Tooltip-Icon dahinter
+    tags\$label(
+      HTML("${1:Name ui} "), # Label-Text, mit HTML() für Tag-Integration
+      bslib::tooltip(
+        bs_icon("info-circle"),
+        HTML("${3:Text für Tooltip}"), # Tooltip-Text
+        placement = "right" # Optional: Position des Tooltips anpassen (z.B. top, bottom, left, right)
+      ),
+      \`for\` = ns("${2:Name id}") # Verknüpfung mit der Input-ID # *Escapeter* Backtick um for
+    ),
+    # Numeric Input ohne eigenes Label
+    numericInput(
+      inputId = ns("${2:Name id}"),
+      label = NULL, # Label wird manuell oben erstellt
+      value = NULL
+    )),${0}
+
+snippet link shiny "html link shiny"
+  "<a href=\"${2:Link}\" target=\"_blank\">
+  ${1:Link Name}</a>"${0}
+
+snippet printbeschreibung "print shiny mit Beschreibung"
+  print(paste0("${1:Beschreibung}: ", ${2:Variable}) )
+  ${0}
+
+

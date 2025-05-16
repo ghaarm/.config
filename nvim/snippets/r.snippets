@@ -188,76 +188,76 @@ snippet table "table ()"
 
 
 snippet übersichtschnell "übersicht schnell"
-  source("/Users/g/Library/Mobile Documents/com~apple~CloudDocs/#Docs iCloud/R Statistik, icloud/R, projects/RScript Vorlagen/clean and reload environment.R")
+  source("/Users/g/Library/Mobile Documents/com~apple~CloudDocs/!Docs iCloud/R Statistik, icloud/R, projects/RScript Vorlagen/clean and reload environment.R")
 
-  class(ECMO_ARDS$ECMOIndikation1b9)
-  class(ECMO_ARDSfactor$ECMOIndikation1b9)
-  class(ECMO_VV$ECMOIndikation1b9)
+  class(ECMO_ARDS\$ ecmoindikation1b9)
+  class(ECMO_ARDSfactor\$ ecmoindikation1b9)
+  class(ECMO_VV\$ ecmoindikation1b9)
 
-  table(ECMO_ARDS$ ECMOIndikation1b9, useNA = "always")
-  table(ECMO_ARDSfactor$ ECMOIndikation1b9, useNA = "always")
-  table(ECMO_VV$ ECMOIndikation1b9, useNA = "always")
+  table(ECMO_ARDS\$ ecmoindikation1b9, useNA = "always")
+  table(ECMO_ARDSfactor\$ ecmoindikation1b9, useNA = "always")
+  table(ECMO_VV\$ ecmoindikation1b9, useNA = "always")
 
   #========================== Spaltennamen suchen ============================
   grep("blutung", names(ECMO_Diplom), value = TRUE, ignore.case = TRUE) 
   # ignore.case bewirkt das Groß-/Kleinschreibung egal
   grep("blutung", names(ECMO_ARDS), value = TRUE, ignore.case = TRUE) 
 
-  grep("^ECMOVent.*Datum$", names(ECMO_Diplomfactor), value = TRUE, ignore.case = TRUE)
+  grep("^ecmovent.*datum$", names(ECMO_Diplomfactor), value = TRUE, ignore.case = TRUE)
 
 
 
   col_names <- names(ECMO_VVfactor)
   names(ECMO_VVfactor)
 
-  grep("Nor", col_names, value = TRUE) 
-  matching_cols <- grep("MAP", col_names, value = TRUE) 
+  grep("nor", col_names, value = TRUE) 
+  matching_cols <- grep("map", col_names, value = TRUE) 
   matching_cols
 
 
   #-------------------------- Anzahl nach Jahr ----------------------------
   ECMO_ARDS %>%
-    group_by(Jahr) %>%
+    group_by(jahr) %>%
     summarise(Anzahl_Nicht_Leer = sum(!is.na(_____))) #zählt wenn Variable nicht NA
 
   ECMO_ARDS %>%
-    group_by(Jahr) %>%
+    group_by(jahr) %>%
     summarise(Anzahl_Nicht_Leer = sum(!is.na(_____) & _____ != 0)) # #zählt wenn Variable nicht NA und nicht Null
 
 
-  head(ECMO_VVfactor$IBW) # zeigt die ersten Werte der Spalte an
+  head(ECMO_VVfactor$ ibw) # zeigt die ersten Werte der Spalte an
 
 
   #========================== Anzahl zählen ============================
   ECMO_ARDS %>%
-    filter(!is.na(ECMOTageDAYS), ECMOTageDAYS < 22) %>%
+    filter(!is.na(ecmotagedays), ecmotagedays < 22) %>%
     nrow()
 
   #-------------------------- "NA" zöhlen ----------------------------
   ECMO_Diplom %>%
-    summarise(na_count = sum(is.na(dP_base))) %>%
+    summarise(na_count = sum(is.na(dp_base))) %>%
     pull(na_count)
 
   #-------------------------- NICHT "NA" zöhlen ----------------------------
   ECMO_Diplom %>%
-    summarise(na_count = sum(!is.na(dP_base))) %>%
+    summarise(na_count = sum(!is.na(dp_base))) %>%
     pull(na_count)
 
   #-------------------------- Anzahl zählen von - bis ----------------------------
 
   EMCO_ARDS %>%
-    filter(!is.na(ECMOTageDAYS), ECMOTageDAYS > 14, ECMOTageDAYS < 22) %>%
+    filter(!is.na(ecmotagedays), ecmotagedays > 14, ecmotagedays < 22) %>%
     nrow()
 
 
   #========================== Spaltennamen suchen ============================
-  grep("Oxy3", names(ECMO_ARDS), value = TRUE)
+  grep("oxy3", names(ECMO_ARDS), value = TRUE)
 
   col_names <- names(ECMO_VVfactor)
   names(ECMO_VVfactor)
 
   grep("Nor", col_names, value = TRUE) 
-  matching_cols <- grep("MAP", col_names, value = TRUE) 
+  matching_cols <- grep("map", col_names, value = TRUE) 
   matching_cols
 
   #-------------------------- Spaltennamen gt Tabelle ----------------------------
@@ -295,6 +295,26 @@ snippet übersichtschnell "übersicht schnell"
   numeric_variable_names <- colnames(numeric_variables)
   print(numeric_variable_names)
 
+  #========================== id finden ============================
+
+  ECMO_ARDSfactor %>%
+    filter(!is.na(BIPAP_last)) %>%
+    select(BIPAP_last,
+          ID
+    ) %>%  
+    distinct() %>%
+    arrange(ID) %>%
+    print(n = Inf, width = Inf)
+
+  ECMO_ARDSfactor %>%
+    filter(ID == 143) %>%
+    select(
+      Modus_ECMO_d10,
+      id
+    ) %>% 
+    distinct() %>%
+    arrange(id) %>%
+    print(n = Inf, width = Inf)
 
 snippet gtssmall "gtssmall"
   reset_gtsummary_theme()
@@ -321,10 +341,8 @@ snippet gtssmall "gtssmall"
   modify_caption("**<span style='font-size: 24px;'> ${3:titel} </span>**") %>%
     
     modify_header(
-      update = list(
         stat_1 ~ "**Überlebt**, N={n} ({style_percent(p, digits = 1)} %)", # für 0
         stat_2 ~ "**Verstorben**, N={n} ({style_percent(p, digits = 1)} %)" # für 1
-        )
       )
 
 snippet gtsmid "gtsmid"
@@ -395,12 +413,18 @@ snippet gtsmid "gtsmid"
   modify_caption("**<span style='font-size: 24px;'> ${3:titel} </span>**") %>%
     
     modify_header(
-      update = list(
         stat_1 ~ "**Überlebt**, N={n} ({style_percent(p, digits = 1)} %)", # für 0
         stat_2 ~ "**Verstorben**, N={n} ({style_percent(p, digits = 1)} %)"# , # für 1, für effect size die Funktionen zur Berechnung noch einfügen
-  #      add_stat_1 ~ "**Effect size**"
-        )
-      )
+  #      add_stat_1 ~ "**Effektstärke**"
+      ) %>%
+
+    # https://www.danieldsjoberg.com/gtsummary/reference/modify_footnote2.html
+    modify_footnote_header(
+      # footnote = "Spearman's Korrelatiionskoeffizient; Effektgröße nach Kramer",
+      # # columns = all_stat_cols(),
+      # columns = add_stat_1,
+      # replace = FALSE
+    )
 
 snippet gtscomplete "gtscomplete"
   reset_gtsummary_theme()
@@ -465,7 +489,7 @@ snippet gtscomplete "gtscomplete"
     ) %>%
     add_overall() %>%
     # add_n() %>% # Anzahl von wievielen Patienten die Daten stammen
-    add_p(pvalue_fun = ~ style_pvalue(.x, digits = 4)) %>% 
+    add_p(pvalue_fun = ~ style_pvalue(.x, digits = 3)) %>% 
     # p nur mit 4 stellen
     bold_p() %>%
 
@@ -487,20 +511,17 @@ snippet gtscomplete "gtscomplete"
     
     modify_caption("**<span style='font-size: 24px;'> ${3:titel} </span>**") %>%
     
-     modify_header(
-      update = list(
-        stat_1 ~ "**Überlebt**, N={n} ({style_percent(p, digits = 1)} %)", # für 0
-        stat_2 ~ "**Verstorben**, N={n} ({style_percent(p, digits = 1)} %)" # für 1
-        )
-      )
-    ) %>%
-    # Namen für die neuen Spalten füe Effektstärke
     modify_header(
-      list(
-        add_stat_1 ~"**Korrelationskoeffizient**",
-        add_stat_2 ~ "**Effekstärke Cramer**"
+        
+          stat_1 ~ "**Überlebt**, N={n} ({style_percent(p, digits = 1)} %)", # für 0
+          stat_2 ~ "**Verstorben**, N={n} ({style_percent(p, digits = 1)} %)", # für 1
+        
+      # Namen für die neuen Spalten füe Effektstärke
+      
+          add_stat_1 = "**Korrelationskoeffizient**",
+          add_stat_2 = "**Effekstärke Cramer**"
       )
-    )
+
 
 snippet gtspub "gtspub"
   reset_gtsummary_theme()
@@ -592,7 +613,7 @@ snippet gtspub "gtspub"
     
     add_overall() %>%
     # add_n() %>% # Anzahl von wievielen Patienten die Daten stammen
-    add_p(pvalue_fun = ~ style_pvalue(.x, digits = 4)) %>% 
+    add_p(pvalue_fun = ~ style_pvalue(.x, digits = 3)) %>% 
     # p nur mit 4 stellen
     bold_p() %>% # Macht signifikante p fettgedruckt
     # filter_p(t = 0.1) %>% # filter nur p werte bis 1
@@ -613,14 +634,20 @@ snippet gtspub "gtspub"
     modify_spanning_header(
       update = all_stat_cols() ~ "____TITEL____"
     ) %>% # ändert die Hauptüberschrift
-     modify_header(
-      update = list(
-        stat_1 ~ "**Überlebt**, N={n} ({style_percent(p, digits = 1)} %)", # für 0
-        stat_2 ~ "**Verstorben**, N={n} ({style_percent(p, digits = 1)} %)", # für 1
-        add_stat_1 ~ "**Effect size**"
-        )
-      )
-
+    modify_header(
+    
+      stat_1 ~ "**Überlebt**, N={n} ({style_percent(p, digits = 1)} %)",
+      stat_2 ~ "**Verstorben**, N={n} ({style_percent(p, digits = 1)} %)",
+      add_stat_1 ~ "**Effektstärke**"
+    
+    ) %>%
+    # https://www.danieldsjoberg.com/gtsummary/reference/modify_footnote2.html
+    modify_footnote_header(
+      footnote = "Spearman's Korrelationskoeffizient; Effektgröße nach Kramer",
+      # columns = all_stat_cols(),
+      columns = add_stat_1,
+      replace = FALSE
+    )
 
 
 
@@ -647,4 +674,51 @@ snippet idsuchen "id suchen"
   distinct() %>%
   arrange(${2:id-name}) %>%
   print(n = Inf, width = Inf)
+
+snippet loadprofilelukas "load profile lukas"
+  source("/Users/g/Library/Mobile Documents/com~apple~CloudDocs/!Docs iCloud/Diplomarbeit 10 II/Diplomarbeit Lukas Rücker/lukas-analysen-r/.Rprofile")
+
+snippet loadprofileluisa "load profile luisa"
+  source("/Users/g/Library/Mobile Documents/com~apple~CloudDocs/!Docs iCloud/Diplomarbeit 10 II/Diplomarbeit Luisa Holzheu/luisa-analysen-r/.Rprofile")
+
+
+snippet saveexcel "save as excel"
+  ${0} library(writexl)
+
+  write_xlsx(${1:Name} ,"/Users/g/Library/Mobile Documents/com~apple~CloudDocs/!Docs iCloud/R Statistik, icloud/R, projects/ECMO Diplom/#Datensätze Diplomarbeit Excel/${1:Name} 2025 ${2:Datum}.xlsx")
+
+  detach(package:writexl, unload = TRUE)
+
+snippet gtsuv "gts regression uv"
+  reset_gtsummary_theme()
+
+    set_gtsummary_theme(ds_theme)
+
+    ${1:dataframe}_regression_uv <- ${1:dataframe} %>%
+    select(
+      ${2:var_dependent}, 
+      #____MEHR Variablen____ (nach der letzten kein KOMMA), 
+      ${0} 
+    ) %>%
+    # ========================== UV-REGRESSION ============================
+    # add_glance_table() funktioniert bei tbl_uvregression nicht, da ja eigentlich mehrere Modelle
+    tbl_uvregression(
+      method = glm,
+      y = ${2:var_dependent},
+      method.args =
+        list(family = binomial),
+      exponentiate = TRUE
+    ) %>% # exponentiate bereichnet direkt die ODDs Ratio aus der logOR
+
+    add_global_p(keep = TRUE) %>% # gibt p werte für label und seine levels an
+    bold_p() %>%
+    modify_table_styling(
+      columns = c(estimate, conf.low),
+      rows = reference_row == TRUE,
+      missing_symbol = "Ref."
+    ) 
+
+  #========================== Ausgabe ============================
+  ${1:dataframe}r_regression_uv %>%
+    modify_caption("**<span style='font-size: 24px;'>${3:Titel}</span>**")
 

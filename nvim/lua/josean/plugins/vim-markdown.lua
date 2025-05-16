@@ -7,6 +7,9 @@ return {
   lazy = true, -- Lädt das Plugin nur, wenn es benötigt wird
   ft = { "md", "markdown" },
   config = function()
+    -- Deaktiviere die Default-Keymappings von vim-markdown, damit gx von gx funktioniert
+    vim.g.vim_markdown_no_default_key_mappings = true
+
     vim.cmd([[
     let g:vim_markdown_folding_disabled = 1 " disable header folding
 

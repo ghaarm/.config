@@ -122,22 +122,51 @@ export PATH="/path/to/lua-language-server/bin:$PATH"
 # textbausteine für Ordner
 # alias pr="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/'#Docs iCloud'/R\ Statistik,\ icloud/R,\ projects"
 # alias cd="/Users/g/qmk_firmware/keyboards/beekeeb/piantor_pro/keymaps"
-alias cdpian="cd /Users/g/qmk_firmware/keyboards/beekeeb/piantor_pro/keymaps && nvim" # öffnet neovim automatisch
-alias cdlat="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/'#Docs iCloud'/R\ Statistik,\ icloud/Latex,\ icloud/Latex\ Projekte && nvim"
 
-alias cdplug="cd ~/.config/nvim/lua/josean/plugins && nvim"
-alias ic="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/'#Docs iCloud'"
 
-alias bs="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/'#Docs iCloud'/R\ Statistik,\ icloud/R,\ projects/shiny-app/shiny-bslib && nvim"
-alias bsmod="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/'#Docs iCloud'/R\ Statistik,\ icloud/R,\ projects/shiny-app/shiny-bslib-mod && nvim"
+# cd configuration
 
-alias aero="cd ~/.config/aerospace && nvim aerospace.toml"
-# alias projtemp="cd ~/.config/nvim/templates"
+alias cdconf="cd ~/.config && nvim" 
+
+alias cdzsh="cd ~/.config && nvim .zshrc" 
+
+alias aero="cd ~/.config/aerospace && nvim aerospace.toml" 
+
+alias cdplug="cd ~/.config/nvim/lua/josean/plugins && nvim" 
+
+alias cdpian="cd /Users/g/qmk_firmware/keyboards/beekeeb/piantor_pro/keymaps && nvim" # öffnet neovim automatisch 
+
+# cd iCloud
+alias ic="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/'!Docs iCloud'" 
+
+alias cdscan="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/@Tabea\ \&\ Golo\ iCloud/@Scans" 
+
+alias bs="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/'!Docs iCloud'/R\ Statistik,\ icloud/R,\ projects/shiny-app/shiny-bslib && nvim" 
+
+alias bsmod="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/'!Docs iCloud'/R\ Statistik,\ icloud/R,\ projects/shiny-app/shiny-bslib-mod && nvim" 
+
+alias cdlat="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/'!Docs iCloud'/R\ Statistik,\ icloud/Latex,\ icloud/Latex\ Projekte && nvim" 
+
+alias cdr="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/'!Docs iCloud'/R\ Statistik,\ icloud/R,\ projects && nvim" 
+
+alias cdrecmo="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/'!Docs iCloud'/R\ Statistik,\ icloud/R,\ projects/ECMO\ Diplom && nvim" 
+
+alias cdrlukas="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/'!Docs iCloud'/Diplomarbeit\ 10\ II/Diplomarbeit\ Lukas\ Rücker/lukas-analysen-r && nvim" 
+
+alias cdrluisa="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/'!Docs iCloud'/Diplomarbeit\ 10\ II/Diplomarbeit\ Luisa\ Holzheu/luisa-analysen-r && nvim" 
+
+# Zaboracker
+alias cdzabo="cd /Users/g/Library/Mobile\ Documents/com~apple~CloudDocs/'@Tabea & Golo iCloud'/'Naomi (直美)'/Zaboracker && nvim" 
+alias cdnext="cd /Users/g/Library/Mobile\ Documents/com~apple~CloudDocs/'@Tabea & Golo iCloud'/'Naomi (直美)'/Zaboracker/nextcloud-zaboracker && nvim" 
+alias cdvorstand="cd /Users/g/Library/Mobile\ Documents/com~apple~CloudDocs/'@Tabea & Golo iCloud'/'Naomi (直美)'/Zaboracker/vorstand-zaboracker && nvim" 
+alias cdvorstandlat="cd /Users/g/Library/Mobile\ Documents/com~apple~CloudDocs/'@Tabea & Golo iCloud'/'Naomi (直美)'/Zaboracker/vorstand-zaboracker/vorstand-latex && nvim" 
+
+# alias projtemp="cd ~/.config/nvim/templates" 
 
 
 # Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
+# alias zshconfig="mate ~/.zshrc" 
+# alias ohmyzsh="mate ~/.oh-my-zsh" 
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

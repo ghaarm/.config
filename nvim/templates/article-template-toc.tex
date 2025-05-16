@@ -62,17 +62,17 @@ a4paper, % Setzt das Papierformat auf A4
 \titlespacing*{\section}{0pt}{2.5ex plus 1ex minus .2ex}{1.3ex plus .2ex}
 
 %========================== KOPF - UND FUßZEILE ============================
-% \usepackage{fancyhdr} % für Fußzeilen
-% \renewcommand{\headrulewidth}{0pt} % Entfernt die Linie unter der Kopfzeile
-% %
-% \renewcommand{\footrulewidth}{0.4pt} % Fügt eine Linie oberhalb der Fußzeile auf jeder Seite ein
+\usepackage{fancyhdr} % für Fußzeilen
+\renewcommand{\headrulewidth}{0pt} % Entfernt die Linie unter der Kopfzeile
 %
-% \pagestyle{fancy} % definiert den style "fancy"
-% \fancyhf{} % Löscht die aktuellen Einstellungen für Kopf- und Fußzeile
-%
-% \rfoot{\hfill ____, G. Haarmeyer, Stand: \today, S.  \thepage} % Zentrale Fußzeile mit Datum und Seitenzahl rechts
-% \lfoot{\hyperlink{toc}{Zurück zum Inhaltsverzeichnis}} % Linke Seite der Fußzeile
-%
+\renewcommand{\footrulewidth}{0.4pt} % Fügt eine Linie oberhalb der Fußzeile auf jeder Seite ein
+
+\pagestyle{fancy} % definiert den style "fancy"
+\fancyhf{} % Löscht die aktuellen Einstellungen für Kopf- und Fußzeile
+
+\rfoot{\hfill ____, G. Haarmeyer, Stand: \today, S.  \thepage} % Zentrale Fußzeile mit Datum und Seitenzahl rechts
+\lfoot{\hyperlink{toc}{Zurück zum Inhaltsverzeichnis}} % Linke Seite der Fußzeile
+
 %========================== TITEL ============================
 % \usepackage{titling}
 % \setlength{\droptitle}{-1cm} % Ändert den vertikalen Abstand zwischen Titel oberen Rand der Seite

@@ -1,3 +1,5 @@
+-- https://github.com/svermeulen/vim-easyclip
+
 return {
   "svermeulen/vim-easyclip",
   dependencies = {
@@ -13,5 +15,6 @@ return {
     -- vim.cmd("normal! m")
     -- vim.fn.feedkeys("m", "n")
     -- end
+    -- Löscht ausschließlich das 'dm'-Mapping von EasyClip
   end,
 }

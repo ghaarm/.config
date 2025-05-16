@@ -75,11 +75,35 @@ return {
         lualine_c = {
           '%=', -- Aligner für die Mitte
           {
-            'filename',
-            path = 2,             -- Absoluter Pfad
-            shorting_target = 40, -- Kürzt den Pfad bei Bedarf
+            function()
+              -- Absoluter Pfad der Datei
+              local filepath = vim.fn.expand('%:p')
+              local path_sep = package.config:sub(1, 1) -- OS-spezifischer Separator
+
+              -- Zerlege den Pfad in Teile
+              local parts = {}
+              for part in string.gmatch(filepath, '[^' .. path_sep .. ']+') do
+                table.insert(parts, part)
+              end
+
+              -- Letzte 3 Ordner + Dateiname
+              local start_idx = math.max(#parts - 3, 1)
+              local display_path = table.concat(vim.list_slice(parts, start_idx), path_sep)
+
+              -- Füge den Dateinamen hinzu
+              local filename = vim.fn.expand('%:t')
+
+              -- Gesamter Pfad inkl. Dateiname
+              return display_path .. path_sep .. filename
+            end,
+            shorting_target = 30, -- Kürzt den Pfad bei Bedarf
           },
-          '%=',                   -- Aligner für die Mitte
+          -- {
+          --   'filename',
+          --   path = 2,             -- 2 Absoluter Pfad, q relativer Pfad
+          --   shorting_target = 30, -- Kürzt den Pfad bei Bedarf
+          -- },
+          -- '%=',                   -- Aligner für die Mitte
         },
 
         lualine_x = { -- Rechtsbündige Infos
