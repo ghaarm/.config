@@ -23,3 +23,23 @@ snippet linkhtml "html link"
 
 snippet tabHtml "tab mit HTML"
   style="padding-left: 2em"
+
+snippet suphtml "superscript HTML"
+  <sup>${1:Eingabe}</sup>  
+
+
+snippet subhtml "subscript HTML"
+  <sub>${1:Eingabe}</sub>  
+
+
+snippet pnghtml "PNG HTML"
+  <img src="${1:Pfad zu PNG}" alt="${2:Beschreibung}" width="300" />
+  ${0}
+
+snippet pnghtmlnebeneinander "PNG HTML nebeneinander"
+
+  <img src="${1:Pfad zu PNG}" alt="${2:Beschreibung}" style="float: left; margin-right: 10px;" width="300" />
+  <img src="${3:Pfad zu PNG}" alt="${2:Beschreibung}" style="float: left; margin-right: 10px;" width="300" />
+  <div style="clear: both;"></div>
+  ${0}
+

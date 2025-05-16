@@ -155,9 +155,33 @@ snippet sysdatermd "heutiges Datum rmd in line code"
   "\`r format(Sys.Date(), '%d %m %Y')\`"
 
 
+snippet yamlhtml "yaml html rmd"
+  ---
+  title: "${1:Titel}"
+  author: "GH"
+  date: "2025-${2:Datum}"
+  # date: "\`r Sys.Date()\`" 
+  output:
+    html_document:
+      toc: yes
+  ---
+
+  \`\`\`{r setup, include=FALSE}
+  knitr::opts_chunk\$set(echo = TRUE)
+  # knitr::opts_chunk\$set(echo = FALSE) #r code wird nicht kompiliert (kein echo)
+  # knitr::opts_chunk\$set(warning = FALSE) #Warnungen werden nicht kompiliert 
+  # knitr::opts_chunk\$set(echo = FALSE, warning = FALSE) #Warnungen und r code werden nicht kompiliert 
+  \`\`\`
 
 
 
+  \`\`\`{r}
+  ${0}
+
+  \`\`\`
+
+snippet backtotop "back to top rmd"
+  **<a href="#top">zurück zum Inhaltsverzeichnis </a>**
 
 # End of File ===================================================================
 # vim: set noexpandtab:

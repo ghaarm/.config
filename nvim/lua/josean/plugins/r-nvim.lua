@@ -1,3 +1,5 @@
+-- um pdfviewer zu setzen https://github.com/R-nvim/R.nvim/issues/112
+
 vim.g.maplocalleader = ","
 
 return {
@@ -31,6 +33,7 @@ return {
           "RSPlot",
           "RSaveClose",
         },
+        pdfviewer = "Sioyek",
       }
 
       -- Check if the environment variable "R_AUTO_START" exists.

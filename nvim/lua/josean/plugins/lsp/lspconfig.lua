@@ -47,7 +47,7 @@ return {
     lspconfig["lua_ls"].setup({
       capabilities = default,
       settings = {
-                   -- custom settings for lua
+        -- custom settings for lua
         Lua = {
           -- make the language server recognize "vim" global
           diagnostics = {
@@ -59,6 +59,31 @@ return {
               [vim.fn.expand("$VIMRUNTIME/lua")] = true,
               [vim.fn.stdpath("config") .. "/lua"] = true,
             },
+          },
+        },
+      },
+    })
+    -- configure texlab (LaTeX LSP)
+    lspconfig["texlab"].setup({
+      capabilities = default,
+      settings = {
+        texlab = {
+          build = {
+            executable = "latexmk",
+            args = { "-pdf", "-interaction=nonstopmode", "-synctex=1", "%f" },
+            onSave = true, -- Automatisches Bauen beim Speichern
+          },
+          forwardSearch = {
+            executable = "zathura", -- Falls du Zathura als PDF-Viewer nutzt
+            args = { "--synctex-forward", "%l:1:%f", "%p" },
+          },
+          chktex = {
+            onEdit = true,
+            onOpenAndSave = true,
+          },
+          latexFormatter = "latexindent",
+          latexindent = {
+            modifyLineBreaks = true,
           },
         },
       },

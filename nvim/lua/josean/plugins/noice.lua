@@ -62,6 +62,10 @@ return {
       "rcarriga/nvim-notify", -- Optional
     },
     config = function()
+      -- sollte eigentlich die Dauer der Messages zb für Autosave verkürzen, funktioniert aber nicht
+      require("notify").setup({
+        timeout = 1000,
+      })
       -- Deaktiviere die standardmäßige Modusanzeige von Vim
       vim.opt.showmode = false
 
@@ -125,6 +129,11 @@ return {
           --   opts = { skip = true },
           -- },
         },
+        messages = {
+          enabled = true, -- Deaktiviere dies, wenn `cleaning_interval` von autosave funktionieren soll
+          -- view = "notify", -- Ändere dies zu "notify" oder mini, falls `MsgArea` überschrieben wird, auto save wird damit unten rechts angezeigt
+          view = "mini",  -- Ändere dies zu "notify" oder mini, falls `MsgArea` überschrieben wird, auto save wird damit unten rechts angezeigt
+        }
       })
     end,
   },

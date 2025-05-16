@@ -2,7 +2,7 @@
     "initial_working_directory": "~/Library/Mobile Documents/com~apple~CloudDocs/#Docs iCloud/R Statistik, icloud/R, projects",
     "editor_theme": "Kandle",
     "posix_terminal_shell": "bash",
-    "default_project_location": "/Users/g/Library/Mobile Documents/com~apple~CloudDocs/#Docs iCloud/R Statistik, icloud/R, projects",
+    "default_project_location": "/Users/g/Library/Mobile Documents/com~apple~CloudDocs/!Docs iCloud/R Statistik, icloud/R, projects",
     "jobs_tab_visibility": "shown",
     "save_workspace": "never",
     "rmd_viewer_type": "pane",
@@ -17,5 +17,6 @@
     "default_encoding": "UTF-8",
     "save_files_before_build": true,
     "indent_guides": "gray",
-    "default_sweave_engine": "knitr"
+    "default_sweave_engine": "knitr",
+    "editor_keybindings": "vim"
 }

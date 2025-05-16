@@ -4,7 +4,10 @@
 
 # The suffix `c` stands for "Clipboard".
 
-snippet link:#[
+
+extends html
+
+snippet link:#[ "link md"
 	[${1:text}](${2:address})
 snippet [*
 	[${1:link}](${2:`@*`})
@@ -153,4 +156,11 @@ snippet : Definition list
 	: $0
 snippet :: Alternate definition list
 	$1
-	  - $0
+	  - $0 
+
+snippet todo "TODO Markdown"
+  <!-- TODO: ${0}  -->
+
+snippet pngmd "png Markdown"
+	![${1:Beschreibung}](${2:/images/image.png})
+

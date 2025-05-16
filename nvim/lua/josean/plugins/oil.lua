@@ -12,11 +12,18 @@ return {
       delete_to_trash = true,
       skip_confirm_for_simple_edits = true,
       view_options = {
-        show_hidden = true, -- Use `show_hidden` instead of `how_hidden`
+        show_hidden = true,      -- Use `show_hidden` instead of `how_hidden`
         natural_order = true,
-        is_always_hidden = function(name, _)
-          return name == '..' or name == '.git'
-        end,
+        case_insensitive = true, -- Diese Zeile ändert die Sortierung auf case-insensitive
+        sort = {
+          -- Behalte die Sortierung nach Typ (Ordner zuerst) bei
+          { "type", "asc" },
+          -- Füge case_insensitive für die alphabetische Sortierung hinzu
+          { "name", "asc" },
+        },
+        -- is_always_hidden = function(name, _)
+        --   return name == '..' or name == '.git'
+        -- end,
       },
       win_options = {
         wrap = true,
