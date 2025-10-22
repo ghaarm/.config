@@ -164,3 +164,13 @@ snippet todo "TODO Markdown"
 snippet pngmd "png Markdown"
 	![${1:Beschreibung}](${2:/images/image.png})
 
+snippet yaml-for-link "yaml link cornflower blue"
+  ---
+  header-includes: |
+    \usepackage{xcolor}
+    \definecolor{cornflowerblue}{HTML}{6495ED}
+  ---
+
+snippet link-md-cornflowerblue-for-latex "link markdown cornflower-blue for latex"
+  [\textcolor{cornflowerblue}{${1:Text}}](${2:Link})
+

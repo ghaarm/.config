@@ -54,9 +54,20 @@ snippet output " server output"
 
   })
 
-snippet htmlrot "html rot"
+snippet htmlrotdark "html darkred"
   <span style='color: darkred;'> ${0} </span>
 
+snippet htmlrot "html red"
+  <span style='color: red;'> ${0} </span>
+
+snippet htmlgreendark "html darkgreen"
+  <span style='color: #006400;'> ${0} </span>
+
+snippet htmlgreen "html green"
+  <span style='color: green;'> ${0} </span>
+
+snippet htmlviolet "html violet"
+  <span style='color: #9400D3;'> ${0} </span>
 
 snippet reactive "reactive shiny"
   reactive({
@@ -144,12 +155,25 @@ snippet tooltip input "tooltip in input Beschreibung"
       value = NULL
     )),${0}
 
-snippet link shiny "html link shiny"
-  "<a href=\"${2:Link}\" target=\"_blank\">
-  ${1:Link Name}</a>"${0}
+snippet linkshiny "html link shiny"
+
+  <a href=\"${2:Link}\" target=\"_blank\">${1:Link Name}</a>
 
 snippet printbeschreibung "print shiny mit Beschreibung"
   print(paste0("${1:Beschreibung}: ", ${2:Variable}) )
   ${0}
 
+snippet br "<br>"
+  "<br>", ${0}
 
+snippet brbr "<br><br>"
+  "<br><br>", ${0}
+
+snippet validate "validate shiny"
+  validate(
+    need(!is.na(gewicht_input()), "Für Berechung Gewicht angeben.")
+  )
+
+snippet verticalalign "vertical align shiny"
+  class = "custom-vertical-align",
+  ${0}

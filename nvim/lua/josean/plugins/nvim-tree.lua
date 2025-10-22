@@ -33,15 +33,15 @@ function duplicate_file()
   print("Datei dupliziert: " .. new_filepath)
 end
 
--- Funktion zum Öffnen von PDF-Dateien mit sioyek
-local function open_with_sioyek(node)
-  if node.name:match("%.pdf$") then
-    -- local cmd = "sioyek " .. vim.fn.fnameescape(node.absolute_path)
-    local cmd = "sioyek " .. vim.fn.shellescape(node.absolute_path)
-    vim.fn.jobstart(cmd, { detach = true })
-    require 'nvim-tree.actions.node.open-file'.fn('edit')
-  end
-end
+-- -- Funktion zum Öffnen von PDF-Dateien mit sioyek
+-- local function open_with_sioyek(node)
+--   if node.name:match("%.pdf$") then
+--     -- local cmd = "sioyek " .. vim.fn.fnameescape(node.absolute_path)
+--     local cmd = "sioyek " .. vim.fn.shellescape(node.absolute_path)
+--     vim.fn.jobstart(cmd, { detach = true })
+--     require 'nvim-tree.actions.node.open-file'.fn('edit')
+--   end
+-- e
 
 -- Funktion zum Öffnen von PDF-Dateien mit zathura
 -- local function open_with_sioyek(node)
@@ -114,11 +114,11 @@ return {
 
     keymap.set("n", "<leader>d", ":lua duplicate_file()<CR>", { noremap = true, silent = true, desc = "Duplicate file" })
 
-    keymap.set(
-      'n',
-      '<leader>p',
-      function() open_with_sioyek(require 'nvim-tree.lib'.get_node_at_cursor()) end,
-      { noremap = true, silent = true, desc = "Open PDF with sioyek" }
-    )
+    -- keymap.set(
+    --   'n',
+    --   '<leader>p',
+    --   function() open_with_sioyek(require 'nvim-tree.lib'.get_node_at_cursor()) end,
+    --   { noremap = true, silent = true, desc = "Open PDF with sioyek" }
+    -- )
   end
 }

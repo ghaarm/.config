@@ -12,8 +12,14 @@ after-login-command = []
 # You can use it to add commands that run after AeroSpace startup.
 # 'after-startup-command' is run after 'after-login-command'
 # Available commands : https://nikitabobko.github.io/AeroSpace/commands
-after-startup-command = []
+after-startup-command = [
+# janky borders start befehl
+  # 'exec-and-forget borders active_color="glow(0xffe1e3e4)" inactive_color=0xff494d64 width=5.0'
 
+'exec-and-forget borders active_color="0xff388e3c" inactive_color=0xff494d64 width=5.0' # pastell hell grün
+
+# 'exec-and-forget borders active_color=0xffa8e6cf inactive_color=0xff494d64 width=5.0' # pastell hell grün ohne glow
+]
 # Start AeroSpace at login
 start-at-login = true
 
@@ -53,12 +59,12 @@ on-focus-changed = "move-mouse window-lazy-center"
 #                 Monitor pattern is the same as for 'workspace-to-monitor-force-assignment'.
 #                 See: https://nikitabobko.github.io/AeroSpace/guide#assign-workspaces-to-monitors
 [gaps]
-inner.horizontal = 3
-inner.vertical =   3
-outer.left =       3
-outer.bottom =     3
-outer.top =        3
-outer.right =      3
+inner.horizontal = 6
+inner.vertical =   6
+outer.left =       6
+outer.bottom =     6
+outer.top =        6
+outer.right =      6
 
 # 'main' binding mode declaration
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
@@ -94,12 +100,19 @@ ctrl-alt-shift-e = 'enable toggle'
 alt-period = 'layout tiles horizontal vertical'
 alt-comma = 'layout accordion horizontal vertical'
 
-# See: https://nikitabobko.github.io/AeroSpace/commands#focus
-ctrl-alt-shift-h = 'focus left'
-ctrl-alt-shift-j = 'focus down'
-ctrl-alt-shift-k = 'focus up'
-ctrl-alt-shift-l = 'focus right'
+# Toggle float <-> tile für das fokussierte Fenster
+alt-shift-space = 'layout floating tiling'
 
+# See: https://nikitabobko.github.io/AeroSpace/commands#focus
+# ctrl-alt-shift-h = 'focus left'
+# ctrl-alt-shift-j = 'focus down'
+# ctrl-alt-shift-k = 'focus up'
+# ctrl-alt-shift-l = 'focus right'
+
+ctrl-alt-h = 'focus left'
+ctrl-alt-j = 'focus down'
+ctrl-alt-k = 'focus up'
+ctrl-alt-l = 'focus right'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#move
 alt-shift-h = 'move left'
@@ -119,11 +132,12 @@ alt-4 = 'workspace 4'
 # alt-8 = 'workspace 8'
 # alt-9 = 'workspace 9'
 alt-b = 'workspace B'
+alt-i = 'workspace I'
 # alt-o = 'workspace O' # geht nicht wegen ö für lily
 alt-m = 'workspace M'
 # alt-n = 'workspace N'
 alt-p = 'workspace P'
-alt-r = 'workspace R'
+# alt-r = 'workspace R'
 alt-t = 'workspace T'
 alt-v = 'workspace V'
 alt-c = 'workspace W'
@@ -142,6 +156,7 @@ alt-shift-5 = 'move-node-to-workspace 5'
 # alt-shift-9 = 'move-node-to-workspace 9'
 alt-shift-b = 'move-node-to-workspace B'
 # alt-shift-e = 'move-node-to-workspace E'
+alt-shift-i = 'move-node-to-workspace I'
 alt-shift-m = 'move-node-to-workspace M'
 # alt-shift-n = 'move-node-to-workspace N'
 # alt-shift-o = 'move-node-to-workspace O'
@@ -175,7 +190,8 @@ alt-shift-tab = 'move-workspace-to-monitor --wrap-around next'
 #
 #
 # # See: https://nikitabobko.github.io/AeroSpace/commands#resize
-cmd-alt-shift-ctrl-equal = 'resize smart -150' # da es qwerty ist ist minus = 0 Taste
+# - Special keys.   minus, equal, period, comma, slash, backslash, quote, semicolon, backtick,
+cmd-alt-shift-ctrl-equal = 'resize smart -150' # da es qwerty ist ist equal = ? Taste
 cmd-alt-shift-ctrl-minus = 'resize smart +150' # da qwerty eingestellt ist ist = die backtick taste
 #
 # enter = 'mode main'
@@ -194,6 +210,12 @@ cmd-alt-shift-ctrl-minus = 'resize smart +150' # da qwerty eingestellt ist ist =
 # alt-shift-j = ['join-with down', 'mode main']
 # alt-shift-k = ['join-with up', 'mode main']
 # alt-shift-l = ['join-with right', 'mode main']
+
+# # mit Tabs im Finder funktioniert es nicht
+# [[on-window-detected]]
+# if.app-id = 'com.apple.finder'
+# if.window-title-regex-substring = "(?i)(Sichern(?:\s*unter)?|Speichern(?:\s*unter)?|Save(?:\s*As)?|Öffnen|Open|Export(?:ieren)?|Drucken|Print|Teilen|Share|Neuer\\s*Tab|New\\s*Tab)(?:\s*\u2026|\s*\.{3})?" # … = echtes Ellipsis-Zeichen (U+2026) mit ... ging es nicht
+# run = 'layout floating'
 
 [[on-window-detected]]
 if.app-id = 'net.kovidgoyal.kitty'
@@ -219,13 +241,23 @@ run = "move-node-to-workspace P"
 # if.app-id = 'com.microsoft.Word'
 # run = "move-node-to-workspace W"
 
+
+
+
 [[on-window-detected]]
-if.app-id = 'com.ThomsonResearchSoft.EndNote'
-run = "move-node-to-workspace Z"
+if.app-id = 'org.mozilla.thunderbird'
+if.window-title-regex-substring = "(?i)(Sichern(?:\\s*unter)?|Speichern(?:\\s*unter)?|Save(?:\\s*As)?|Öffnen|Open|Export(?:ieren)?|Drucken|Print|Teilen|Share|Neue\\s*Nachricht |\\bVerfassen\\b.*|\\bRe:\\b.*)(?:\\s*\\u2026|\\s*\\.{3})?"
+run = 'layout floating'
+
 
 [[on-window-detected]]
 if.app-id = 'org.mozilla.thunderbird'
 run = "move-node-to-workspace M"
+
+[[on-window-detected]]
+if.app-id = 'it.bloop.airmail2'
+if.window-title-regex-substring = "(?i)(Sichern(?:\\s*unter)?|Speichern(?:\\s*unter)?|Save(?:\\s*As)?|Öffnen|Open|Export(?:ieren)?|Drucken|Print|Teilen|Share|Neue\\s*Nachricht|\\bVerfassen\\b.*|\\bRe:\\b.*)(?:\\s*\\u2026|\\s*\\.{3})?"
+run = 'layout floating'
 
 [[on-window-detected]]
 if.app-id = 'it.bloop.airmail2'
@@ -256,25 +288,64 @@ run = "move-node-to-workspace M"
 if.app-id = 'com.apple.MobileSMS'
 run = "move-node-to-workspace M"
 
-[[on-window-detected]]
-if.app-id = 'com.trankynam.aText'
-run = "move-node-to-workspace R"
+# [[on-window-detected]]
+# if.app-id = 'com.trankynam.aText'
+# run = "move-node-to-workspace a"
 
-[[on-window-detected]]
-if.app-id = '"com.rstudio.desktop'
-run = "move-node-to-workspace R"
+# [[on-window-detected]]
+# if.app-id = '"com.rstudio.desktop'
+# run = "move-node-to-workspace R"
 
 # deaktiviert da sonst drop down menus in einem anderen Space geöffnet wird, wenn excel nicht mehr in 2 ist
 # [[on-window-detected]]
 # if.app-id = 'com.microsoft.Excel'
 # run = "move-node-to-workspace 2"
 
+# 1) Erst Dialoge erkennen und floaten (Stop nach erstem Treffer!)
 [[on-window-detected]]
 if.app-id = 'com.readdle.PDFExpert-Mac'
-run = "move-node-to-workspace V"
+
+if.window-title-regex-substring = "(?i)(Sichern(?:\\s*unter)?|Speichern(?:\\s*unter)?|Save(?:\\s*As)?|Öffnen|Open|Export(?:ieren)?|Drucken|Print|Teilen|Share)(?:\\s*\\u2026|\\s*\\.{3})?"
+# if.window-title-regex-substring = '(Sichern|Speichern|Save|Öffnen|Open|Export|Drucken|Print|Teilen|Share)'
+run = 'layout floating'
+
 
 [[on-window-detected]]
 if.app-id = 'com.todoist.mac.Todoist'
 run = "move-node-to-workspace X"
 
 
+# [[on-window-detected]]
+# if.app-id = 'com.readdle.PDFExpert-Mac'
+# # # matcht: Speichern, Speichern unter…, Sichern unter..., Save, Save As..., Open, Export(ieren), Drucken, Teilen/Share
+# # if.window-title-regex-substring = '(?i)(Sichern(?:\s*unter)?|Speichern(?:\s*unter)?|Save(?:\s*As)?|Öffnen|Open|Export(?:ieren)?|Drucken|Print|Teilen|Share)(?:\s*…|\s*\.\.\.)?'
+#
+# if.window-title-regex-substring = "(?i)(Sichern(?:\s*unter)?|Speichern(?:\s*unter)?|Save(?:\s*As)?|Öffnen|Open|Export(?:ieren)?|Drucken|Print|Teilen|Share)(?:\s*\u2026|\s*\.{3})?" # … = echtes Ellipsis-Zeichen (U+2026) mit ... ging es nicht
+# run = 'layout floating'
+
+# 1) Alles von PDF Expert, das in t auftaucht, NICHT weg bewegen
+# [[on-window-detected]]
+# if.app-id = 'com.readdle.PDFExpert-Mac'
+# if.workspace = 'T'
+# # irgendein harmloser Befehl, Hauptsache die Regel greift und stoppt
+# run = 'layout floating'   # (oder 'layout tiling')
+
+# 2) Alle übrigen Preview-Fenster weiterhin nach v
+
+[[on-window-detected]]
+if.app-id = 'com.readdle.PDFExpert-Mac'
+run = "move-node-to-workspace V"
+
+
+# [[on-window-detected]]
+# if.app-id = 'com.ThomsonResearchSoft.EndNote'
+# if.window-title-regex-substring = "(?i)(Sichern(?:\s*unter)?|Speichern(?:\s*unter)?|Save(?:\s*As)?|Öffnen|Open|Export(?:ieren)?|Drucken|Print|Teilen|Share)(?:\s*\u2026|\s*\.{3})?" # … = echtes Ellipsis-Zeichen (U+2026) mit ... ging es nicht
+#
+[[on-window-detected]]
+if.app-id = 'com.ThomsonResearchSoft.EndNote'
+if.window-title-regex-substring = "(?i)(Sichern(?:\\s*unter)?|Speichern(?:\\s*unter)?|Save(?:\\s*As)?|Öffnen|Open|Export(?:ieren)?|Drucken|Print|Teilen|Share)(?:\\s*\\u2026|\\s*\\.{3})?"
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.ThomsonResearchSoft.EndNote'
+run = "move-node-to-workspace V"
