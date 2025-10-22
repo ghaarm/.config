@@ -43,6 +43,17 @@ vim.api.nvim_set_keymap("n", "O", "O<Esc>", { noremap = true, silent = true })
 -- auch mit cmd + c kopieren können und nicht nur yank
 vim.api.nvim_set_keymap("v", "<D-c>", '"+y', { noremap = true, silent = true })
 
+-- shift K um zeile zu trennen und leader K um alte K Funktion zu erhalten
+-- vim.keymap.set('n', 'K', [[:silent keeppatterns s/\%#/\r/<CR>]], { noremap = true, silent = true }) -- ohne reindent
+-- mit reindent
+vim.keymap.set('n', 'K', [[:silent keeppatterns s/\%#/\r/<CR>==]], { noremap = true, silent = true })
+
+vim.keymap.set('n', '<leader>K', function()
+  vim.cmd('normal! K') -- führt die ursprüngliche K-Aktion aus
+end, { noremap = true, silent = true })
+
+
+
 local keymap = vim.keymap -- for conciseness
 
 keymap.set("i", "jj", "<ESC>", { desc = "Exit insert mode with jj" })
