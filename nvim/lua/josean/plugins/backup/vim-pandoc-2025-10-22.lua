@@ -2,9 +2,6 @@
 return {
   "vim-pandoc/vim-pandoc",
   config = function()
-    -- globale Default-Marge (kann später pro Datei via YAML überschrieben werden)
-    vim.g.pandoc_pdf_margin = "top=3.5cm,bottom=3.5cm,left=2.5cm,right=2.5cm"
-    --
     -- Automatische Erkennung von pandoc Dateien aktivieren
     vim.g["pandoc#filetypes#pandoc_markdown"] = 1
     -- Verwende pandoc als Compiler
@@ -40,8 +37,6 @@ return {
       print('📁 Arbeitsverzeichnis: ' .. dir)
       print('🔍 Resource-Path: ' .. dir)
 
-
-      local margin = vim.g.pandoc_pdf_margin or "top=3.5cm,bottom=3.5cm,left=2.5cm,right=2.5cm"
       -- 4) Pandoc-Kommando mit resource-path und datiertem Ausgabename
       local cmd = {
         'pandoc',
@@ -49,7 +44,6 @@ return {
         '-o', dated_basename .. '.pdf',
         '--pdf-engine=' .. engine,
         '--resource-path=' .. dir,
-        '-V', 'geometry:' .. margin, -- <<— kleinere Ränder
         '--verbose'
       }
 

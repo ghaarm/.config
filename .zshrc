@@ -126,9 +126,9 @@ export PATH="/path/to/lua-language-server/bin:$PATH"
 
 # cd configuration
 
-alias cdconf="cd ~/.config && nvim" 
+alias cdconf="cd ~/.config && nvim"
 
-alias cdzsh="cd ~/.config && nvim .zshrc" 
+alias cdzsh="cd ~/.config && nvim .zshrc"
 
 alias aero="cd ~/.config/aerospace && nvim aerospace.toml" 
 
@@ -137,9 +137,15 @@ alias cdplug="cd ~/.config/nvim/lua/josean/plugins && nvim"
 alias cdpian="cd /Users/g/qmk_firmware/keyboards/beekeeb/piantor_pro/keymaps && nvim" # öffnet neovim automatisch 
 
 # cd iCloud
-alias ic="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/'!Docs iCloud'" 
+alias cdic="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/'!Docs iCloud'" 
+
+alias cdedit="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/'!Docs iCloud'/Vorlagen && nvim vorlage-edit-nvim.md" 
 
 alias cdscan="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/@Tabea\ \&\ Golo\ iCloud/@Scans" 
+
+alias cddown="/Users/g/Library/Mobile\ Documents/com~apple~CloudDocs/\#Downloads\ iCloud && yazi"
+
+alias cdessen="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/@Tabea\ \&\ Golo\ iCloud/Rezepte\ Essen\ Golo" 
 
 alias bs="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/'!Docs iCloud'/R\ Statistik,\ icloud/R,\ projects/shiny-app/shiny-bslib && nvim" 
 
@@ -161,6 +167,13 @@ alias cdnext="cd /Users/g/Library/Mobile\ Documents/com~apple~CloudDocs/'@Tabea 
 alias cdvorstand="cd /Users/g/Library/Mobile\ Documents/com~apple~CloudDocs/'@Tabea & Golo iCloud'/'Naomi (直美)'/Zaboracker/vorstand-zaboracker && nvim" 
 alias cdvorstandlat="cd /Users/g/Library/Mobile\ Documents/com~apple~CloudDocs/'@Tabea & Golo iCloud'/'Naomi (直美)'/Zaboracker/vorstand-zaboracker/vorstand-latex && nvim" 
 
+# privat
+alias cdwomo="cd /Users/g/Library/Mobile Documents/com~apple~CloudDocs/@Tabea & Golo iCloud/Wohnmobil-icloud && nvim" 
+
+
+# Arbeit 10 II
+
+alias cdat="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/'!Docs iCloud'/atmungstherapie-knn && nvim" 
 # alias projtemp="cd ~/.config/nvim/templates" 
 
 

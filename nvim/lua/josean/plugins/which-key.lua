@@ -54,6 +54,7 @@ return {
       { "<leader>tr",  "<cmd>read ~/.config/nvim/templates/book.tex<CR>",                          desc = "report template tex",               nowait = true, remap = false },
       { "<leader>ts",  "<cmd>read ~/.config/nvim/templates/cheat-sheet.md<CR>",                    desc = "cheat-sheet.md",                    nowait = true, remap = false },
       { "<leader>tu",  "<cmd>read ~/.config/nvim/templates/übergabeprotokoll.tex<CR>",             desc = "übergabeprotokoll.tex",             nowait = true, remap = false },
+      { "<leader>ss",  "<cmd>setlocal spell!<CR>",                                                 desc = "Spell toggle",                      nowait = true, remap = false },
     })
     -- wk.setup(opts.setup)
     -- wk.register(opts.defaults)
