@@ -134,7 +134,12 @@ alias aero="cd ~/.config/aerospace && nvim aerospace.toml"
 
 alias cdplug="cd ~/.config/nvim/lua/josean/plugins && nvim" 
 
-alias cdpian="cd /Users/g/qmk_firmware/keyboards/beekeeb/piantor_pro/keymaps && nvim" # öffnet neovim automatisch 
+alias cdpianmac="cd /Users/g/qmk_firmware/keyboards/beekeeb/piantor_pro/keymaps/piantor_colemak && nvim keymap.c" # öffnet neovim automatisch 
+
+alias cdpianwin="cd /Users/g/qmk_firmware/keyboards/beekeeb/piantor_pro/keymaps/piantor_win && nvim keymap.c" # öffnet neovim automatisch 
+
+
+alias cdpianbt="/Users/g/Library/Mobile\ Documents/com~apple~CloudDocs/'!Docs iCloud'/GitHub,\ iCloud/piantor-bt-colemak/config && nvim piantor_pro_bt.keymap"
 
 # cd iCloud
 alias cdic="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/'!Docs iCloud'" 
@@ -145,13 +150,25 @@ alias cdscan="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/@Tabea\ \&\ Gol
 
 alias cddown="/Users/g/Library/Mobile\ Documents/com~apple~CloudDocs/\#Downloads\ iCloud && yazi"
 
+alias cdgit="/Users/g/Library/Mobile\ Documents/com~apple~CloudDocs/'!Docs iCloud'/GitHub,\ iCloud"
+
 alias cdessen="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/@Tabea\ \&\ Golo\ iCloud/Rezepte\ Essen\ Golo" 
 
 alias bs="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/'!Docs iCloud'/R\ Statistik,\ icloud/R,\ projects/shiny-app/shiny-bslib && nvim" 
 
+alias cdalpha="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/'!Docs iCloud'/R\ Statistik,\ icloud/R,\ projects/shiny-app/ShinyICUalpha && nvim server.r" 
+
 alias bsmod="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/'!Docs iCloud'/R\ Statistik,\ icloud/R,\ projects/shiny-app/shiny-bslib-mod && nvim" 
 
 alias cdlat="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/'!Docs iCloud'/R\ Statistik,\ icloud/Latex,\ icloud/Latex\ Projekte && nvim" 
+
+alias cdicu="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/'!Docs iCloud'/R\ Statistik,\ icloud/Latex,\ icloud/Latex\ Projekte/icu-latex && nvim" 
+
+alias cdgmics="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/'!Docs iCloud'/R\ Statistik,\ icloud/Latex,\ icloud/Latex\ Projekte/icu-latex/gmics-latex && nvim" 
+
+alias cdrpmu="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/'!Docs iCloud'/R\ Statistik,\ icloud/R,\ projects/r-statistik-pmu && nvim" 
+
+alias cddienstplan="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/'!Docs iCloud'/R\ Statistik,\ icloud/R,\ projects/r-dienstplan && nvim" 
 
 alias cdr="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/'!Docs iCloud'/R\ Statistik,\ icloud/R,\ projects && nvim" 
 
@@ -163,8 +180,13 @@ alias cdrluisa="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/'!Docs iCloud
 
 # Zaboracker
 alias cdzabo="cd /Users/g/Library/Mobile\ Documents/com~apple~CloudDocs/'@Tabea & Golo iCloud'/'Naomi (直美)'/Zaboracker && nvim" 
+
 alias cdnext="cd /Users/g/Library/Mobile\ Documents/com~apple~CloudDocs/'@Tabea & Golo iCloud'/'Naomi (直美)'/Zaboracker/nextcloud-zaboracker && nvim" 
+
+alias cdagenda="cd /Users/g/Library/Mobile\ Documents/com~apple~CloudDocs/'@Tabea & Golo iCloud'/'Naomi (直美)'/Zaboracker/nextcloud-zaboracker/Vorstand && nvim !agenda-vorstandstreffen.md" 
+
 alias cdvorstand="cd /Users/g/Library/Mobile\ Documents/com~apple~CloudDocs/'@Tabea & Golo iCloud'/'Naomi (直美)'/Zaboracker/vorstand-zaboracker && nvim" 
+
 alias cdvorstandlat="cd /Users/g/Library/Mobile\ Documents/com~apple~CloudDocs/'@Tabea & Golo iCloud'/'Naomi (直美)'/Zaboracker/vorstand-zaboracker/vorstand-latex && nvim" 
 
 # privat
@@ -200,6 +222,13 @@ setopt hist_verify
 # bindkey '^[[B' history-search-forward
 # source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 # source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+
+# Befehle
+alias pianmac="qmk compile -kb beekeeb/piantor_pro -km piantor_colemak"
+
+alias pianwin="qmk compile -kb beekeeb/piantor_pro -km piantor_win"
+
 
 # ---- Eza (better ls) -----
 
@@ -279,3 +308,15 @@ function y() {
 }
 
 export EDITOR=nvim
+
+
+# Homebrew keg-only tools für CBC zum schnelleren Dienstplan berechnen statt GLPK
+export PATH="/opt/homebrew/opt/cbc/bin:$PATH"
+
+# pkg-config: COIN-OR libs für rcbc / ROI.plugin.cbc
+export PKG_CONFIG_PATH="/opt/homebrew/opt/cbc/lib/pkgconfig:/opt/homebrew/opt/clp/lib/pkgconfig:/opt/homebrew/opt/coinutils/lib/pkgconfig:/opt/homebrew/opt/osi/lib/pkgconfig:/opt/homebrew/opt/cgl/lib/pkgconfig:$PKG_CONFIG_PATH"
+
+# hilft beim kompilieren (rcbc)
+export CPPFLAGS="-I/opt/homebrew/opt/cbc/include -I/opt/homebrew/opt/clp/include -I/opt/homebrew/opt/coinutils/include -I/opt/homebrew/opt/osi/include -I/opt/homebrew/opt/cgl/include $CPPFLAGS"
+export LDFLAGS="-L/opt/homebrew/opt/cbc/lib -L/opt/homebrew/opt/clp/lib -L/opt/homebrew/opt/coinutils/lib -L/opt/homebrew/opt/osi/lib -L/opt/homebrew/opt/cgl/lib $LDFLAGS"
+

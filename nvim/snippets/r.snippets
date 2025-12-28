@@ -1,5 +1,6 @@
 
 extends shiny
+extends html
 
 snippet #!
 	#!/usr/bin/env Rscript
@@ -721,4 +722,8 @@ snippet gtsuv "gts regression uv"
   #========================== Ausgabe ============================
   ${1:dataframe}r_regression_uv %>%
     modify_caption("**<span style='font-size: 24px;'>${3:Titel}</span>**")
+
+snippet newproject "new r project"
+  install.packages("usethis")
+  usethis::create_project(".", rstudio = TRUE)
 

@@ -117,7 +117,9 @@ return {
 
     local trouble = require("trouble")
     local trouble_telescope = require("trouble.sources.telescope")
-
+    -- -- HIER NEU: für Telescope Buffer
+    -- local builtin = require("telescope.builtin")
+    -- local themes = require("telescope.themes")
     -- or create your custom action
     local custom_actions = transform_mod({
       open_trouble_qflist = function(prompt_bufnr)
@@ -197,7 +199,7 @@ return {
     end
 
     vim.keymap.set("n", "<C-e>", function() toggle_telescope(harpoon:list()) end, { desc = "Open harpoon window" })
-    
+
     -- set keymaps
     local keymap = vim.keymap -- for conciseness
 
@@ -208,5 +210,43 @@ return {
     keymap.set("n", "<leader>ft", "<cmd>TodoTelescope<cr>", { desc = "Find todos" })
     -- keymap.set("n", "<leader>fb", "<cmd>Telescope bibtex<cr>", { desc = "Suche Bibtex-Einträge" })
     keymap.set("i", "<D-i>", "<cmd>Telescope bibtex<cr>", { desc = "Open Telescope BibTeX search" }) -- D steht für die Command taste
+
+    -- keymap.set("n", "<S-h>", function()
+    --   builtin.buffers(themes.get_ivy({
+    --     sort_mru = true,
+    --     sort_lastused = true,
+    --     ignore_current_buffer = true,
+    --     initial_mode = "normal", -- optional
+    --   }))
+    -- end, { desc = "[P]Open telescope buffers" })
+    --
+    -- multigrep von tj devries https://www.youtube.com/watch?v=xdXE1tOT-qg
+    require "josean.plugins.telescope.multigrep".setup()
+    local function set_telescope_prompt_orange()
+      local orange = "#d78700" -- dunkles Orange; alternativ: "#c25f00"
+
+      -- Text im Eingabefeld
+      vim.api.nvim_set_hl(0, "TelescopePromptNormal", { fg = orange })
+
+      -- Das Prefix links vom Prompt (Lupe / >)
+      vim.api.nvim_set_hl(0, "TelescopePromptPrefix", { fg = orange })
+
+      -- Rahmen um das Prompt-Fenster
+      vim.api.nvim_set_hl(0, "TelescopePromptBorder", { fg = orange })
+
+      -- Optional: Titel des Prompt-Fensters
+      vim.api.nvim_set_hl(0, "TelescopePromptTitle", { fg = orange, bold = true })
+
+      -- Optional: Cursor im Prompt gut sichtbar (je nach Theme)
+      -- vim.api.nvim_set_hl(0, "TelescopePromptCursor", { fg = orange })
+    end
+
+    -- Bei jedem Colorscheme erneut anwenden
+    vim.api.nvim_create_autocmd("ColorScheme", {
+      callback = set_telescope_prompt_orange,
+    })
+
+    -- Sofort anwenden (falls Colorscheme schon aktiv ist)
+    set_telescope_prompt_orange()
   end,
 }

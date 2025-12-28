@@ -177,3 +177,77 @@ snippet validate "validate shiny"
 snippet verticalalign "vertical align shiny"
   class = "custom-vertical-align",
   ${0}
+
+snippet tagbottom "Abstand unten"
+  tags$div(
+      style = "margin-bottom: 20px;",
+      HTML(paste0(
+          "${0}"
+          ))
+      )
+
+snippet moduletaglist "Module tagList"
+ ${1:name} _module_ui <- function(id) {
+  ns <- NS(id)  # Namespace für das Modul
+  tagList(
+    tags$table(
+      tags$tr(
+        tags$td(
+         ${0}
+        )
+      ),  
+      tags$tr(
+        tags$td(
+        ),
+        tags$td(
+      ),
+    )
+  )
+  }
+
+  ${1:name}_module_server <- function(id, gewicht_main, groesse_main, geschlecht_main) {
+  moduleServer(id, function(input, output, session) {
+    # Dynamische Ausgabe basierend auf Natrium-Eingabe
+
+    geschlecht_input <- reactive({geschlecht_main()})
+    gewicht_input <- reactive({gewicht_main()})
+    groesse_input <- reactive({groesse_main()})
+
+    
+
+  })
+  }
+
+
+snippet modulenavpanel "Module navpanel"
+ ${1:name} _module_ui <- function(id) {
+  ns <- NS(id)  # Namespace für das Modul
+  nav_panel(
+    tags$table(
+      tags$tr(
+        tags$td(
+         ${0}
+        )
+      ),  
+      tags$tr(
+        tags$td(
+        ),
+        tags$td(
+      ),
+    )
+  )
+  }
+
+  ${1:name}_module_server <- function(id, gewicht_main, groesse_main, geschlecht_main) {
+  moduleServer(id, function(input, output, session) {
+    # Dynamische Ausgabe basierend auf Natrium-Eingabe
+
+    geschlecht_input <- reactive({geschlecht_main()})
+    gewicht_input <- reactive({gewicht_main()})
+    groesse_input <- reactive({groesse_main()})
+
+    
+
+  })
+  }
+

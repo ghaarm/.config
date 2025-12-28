@@ -59,19 +59,6 @@ return {
   },
 
   config = function()
-    -- Importiere nvim-ts-autotag Plugin und setze die Optionen
-    require('nvim-ts-autotag').setup({
-      opts = {
-        enable_close = true,          -- Auto schließt Tags
-        enable_rename = true,         -- Auto umbenennen von Paaren
-        enable_close_on_slash = false -- Kein automatisches Schließen bei </
-      },
-      -- per_filetype = {
-      --   ["html"] = {
-      --     enable_close = false -- Deaktiviert Auto-Close für HTML
-      --   },
-      -- },
-    })
     -- import nvim-treesitter plugin
     local treesitter = require("nvim-treesitter.configs")
 
