@@ -4,7 +4,8 @@ return {
   event = "VimEnter",
   dependencies = {
     "nvim-tree/nvim-web-devicons",
-    "Shatur/neovim-session-manager",
+    "jedrzejboczar/possession.nvim",
+    -- "Shatur/neovim-session-manager",
   },
   config = function()
     local alpha = require("alpha")
@@ -39,9 +40,26 @@ return {
     -- Set color
     dashboard.section.header.opts.hl = "Title" -- lookup other hl groups with :highlight
 
+    -- für possessions nvim
+    vim.api.nvim_create_user_command("AlphaSessions", function()
+      -- Telescope possession list (robust, lädt Extension bei Bedarf)
+      local ok_telescope, telescope = pcall(require, "telescope")
+      if ok_telescope then
+        pcall(telescope.load_extension, "possession")
+        local ok_ext = pcall(function()
+          telescope.extensions.possession.list({})
+        end)
+        if ok_ext then return end
+      end
+
+      -- Fallback, falls Telescope/Extension nicht verfügbar
+      pcall(vim.cmd, "PossessionPick")
+    end, {})
+
     -- Set menu
     dashboard.section.buttons.val = {
-      dashboard.button("s", "  Sessions", "<cmd>SessionManager load_session<CR>"),
+      -- dashboard.button("s", "  Sessions", "<cmd>SessionManager load_session<CR>"),
+      dashboard.button("s", "  Sessions", "<cmd>AlphaSessions<CR>"),
       dashboard.button("r", "󰈚  Recent", ":Telescope oldfiles <CR>"),
       dashboard.button("e", "󰱼  Explorer", "<cmd>NvimTreeToggle<CR>"),
       dashboard.button("f", "  Find", ":Telescope find_files <CR>"),

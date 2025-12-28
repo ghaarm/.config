@@ -76,8 +76,8 @@ keymap.set("n", "<leader>+", "<C-a>", { desc = "Increment number" }) -- incremen
 keymap.set("n", "<leader>-", "<C-x>", { desc = "Decrement number" }) -- decrement
 
 -- window management
-keymap.set("n", "<leader>sv", "<C-w>v", { desc = "Split window vertically" })                   -- split window vertically
-keymap.set("n", "<leader>sh", "<C-w>s", { desc = "Split window horizontally" })                 -- split window horizontally
+keymap.set("n", "<leader>vs", "<C-w>v", { desc = "Split window vertically" })                   -- split window vertically
+keymap.set("n", "<leader>hs", "<C-w>s", { desc = "Split window horizontally" })                 -- split window horizontally
 keymap.set("n", "<leader>se", "<C-w>=", { desc = "Make splits equal size" })                    -- make split windows equal width & height
 keymap.set("n", "<leader>sx", "<cmd>close<CR>", { desc = "Close current split" })               -- close current split window
 
@@ -86,6 +86,7 @@ keymap.set("n", "<leader>tx", "<cmd>tabclose<CR>", { desc = "Close current tab" 
 keymap.set("n", "<leader>tn", "<cmd>tabn<CR>", { desc = "Go to next tab" })                     --  go to next tab
 keymap.set("n", "<leader>tp", "<cmd>tabp<CR>", { desc = "Go to previous tab" })                 --  go to previous tab
 keymap.set("n", "<leader>tf", "<cmd>tabnew %<CR>", { desc = "Open current buffer in new tab" }) --  move current buffer to new tab
+keymap.set("n", "<leader>xa", "<cmd>xa<cr>", { desc = "Save all and exit" })
 
 -- Vimtex-specific keybindings
 vim.api.nvim_create_autocmd("FileType", {
@@ -184,3 +185,46 @@ vim.api.nvim_set_keymap('i', '<D-BS>', '<C-u>', { noremap = true, silent = true 
 vim.api.nvim_set_keymap('n', '<leader>o', ':lua OpenInFinder()<CR>', { noremap = true, silent = true })
 ---
 ---
+--- HACK: How I navigate between buffers in neovim
+-- https://youtu.be/ldfxEda_mzc
+--
+-- I'm switching from bufexplorer to telescope buffers as I get a file preview,
+-- that's basically the main benefit lamw25wmal
+-- vim.keymap.set("n", "<S-h>", function()
+--   require("telescope.builtin").buffers(require("telescope.themes").get_ivy({
+--     sort_mru = true,
+--     -- -- Sorts current and last buffer to the top and selects the lastused (default: false)
+--     -- -- Leave this at false, otherwise when put in normal mode, the buffer
+--     -- -- below is selected, not the one at the top
+--     sort_lastused = false,
+--     initial_mode = "normal",
+--     -- Pre-select the current buffer
+--     -- ignore_current_buffer = false,
+--     -- select_current = true,
+--     layout_config = {
+--       -- Set preview width, 0.7 sets it to 70% of the window width
+--       preview_width = 0.45,
+--     },
+--   }))
+-- end, { desc = "[P]Open telescope buffers" }) --
+--
+-- vim.keymap.set(
+--   "n",
+--   "<S-h>",
+--   "<cmd>Telescope buffers sort_mru=true sort_lastused=true initial_mode theme=ivy<cr>",
+--   { desc = "[P]Open telescope buffers" }
+-- )
+-- local builtin = require("telescope.builtin")
+-- local themes = require("telescope.themes")
+--
+-- -- ...
+--
+-- -- ganz unten bei den Keymaps
+-- keymap.set("n", "<S-h>", function()
+--   builtin.buffers(themes.get_ivy({
+--     sort_mru = true,
+--     sort_lastused = true,
+--     ignore_current_buffer = true,
+--     initial_mode = "normal", -- optional
+--   }))
+-- end, { desc = "[P]Open telescope buffers" })

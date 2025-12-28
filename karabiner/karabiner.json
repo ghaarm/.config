@@ -4321,6 +4321,7 @@
                 }
             ],
             "name": "vanilla",
+            "selected": true,
             "virtual_hid_keyboard": {
                 "country_code": 2,
                 "indicate_sticky_modifier_keys_state": false,
@@ -7553,6 +7554,7 @@
                     },
                     {
                         "description": "(Vim 8/11) h,j,k,l (+ control/option/command/shift),e,b,0,^,$,gg,G,{,}",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "conditions": [
@@ -8165,6 +8167,7 @@
                     },
                     {
                         "description": "(Vim 10/11) s,m,spacebar -> Hammerspoon modals",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "conditions": [
@@ -8275,6 +8278,7 @@
                     },
                     {
                         "description": "(Vim 11/11) disable unused keys",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "conditions": [
@@ -8637,7 +8641,6 @@
                 }
             ],
             "name": "vim",
-            "selected": true,
             "virtual_hid_keyboard": {
                 "country_code": 2,
                 "indicate_sticky_modifier_keys_state": false,

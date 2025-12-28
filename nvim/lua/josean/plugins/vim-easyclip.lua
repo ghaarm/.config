@@ -5,6 +5,13 @@ return {
   dependencies = {
     "tpope/vim-repeat",
   },
+  init = function()
+    vim.g.EasyClipUseGlobalPasteToggle = 0 -- weil es sonst einen error mit easyclip gibt
+    -- Optional: wenn du pastetoggle trotzdem nutzen willst:
+    -- vim.o.pastetoggle = "<Plug>PasteToggle"
+  end,
+
+  -- Läuft NACH dem Laden des Plugins: Keymaps/Overrides
   config = function()
     -- Erstellt eine Tastenkombination für 'gm', um einen Marker zu setzen
     -- vim.api.nvim_set_keymap("n", "gm", ":lua set_mark()<CR>", { noremap = true, silent = true })

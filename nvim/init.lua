@@ -5,5 +5,5 @@ require("josean.core")
 -- für vimtex live preview, brauche eine virtuelle Umgebung damit pynvim läuft
 vim.g.python3_host_prog = "/Users/g/neovim-venv/bin/python3"
 
-vim.g.EasyClipUseGlobalPasteToggle = 0 -- weil es sonst einen error mit easyclip gibt
+-- vim.g.EasyClipUseGlobalPasteToggle = 0 -- weil es sonst einen error mit easyclip gibt
 require("josean.lazy")

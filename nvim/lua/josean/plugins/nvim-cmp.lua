@@ -107,7 +107,7 @@ return {
             fallback()       -- Standard Shift+Tab-Verhalten
           end
         end, { 'i', 's' }),
-
+        ["<C-Space>"] = cmp.mapping.complete(), -- <── das hier ergänzen
         -- Control + K für den nächsten Eintrag in der Autocompletion
         ['<D-j>'] = cmp.mapping(function(fallback)
           if cmp.visible() then
@@ -125,6 +125,14 @@ return {
             fallback()
           end
         end, { 'i', 'c' }),
+        -- NEU: Pfeiltasten für Menü-Navigation, sonst normales Cursorverhalten
+        ["<Down>"] = cmp.mapping(function(fallback)
+          if cmp.visible() then cmp.select_next_item() else fallback() end
+        end, { "i", "c" }),
+        ["<Up>"] = cmp.mapping(function(fallback)
+          if cmp.visible() then cmp.select_prev_item() else fallback() end
+        end, { "i", "c" }),
+
 
         ['<D-b>'] = cmp.mapping.scroll_docs(-4),
 

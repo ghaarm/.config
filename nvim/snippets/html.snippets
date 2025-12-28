@@ -19,7 +19,7 @@ snippet h6custom "h6 weniger Abstand"
   <h4 class="custom-h6"><u>${1}</u></h4>
 
 snippet linkhtml "html link"
-  <a href="${1:linkadresse}">${2:angezeigter Name}</a>
+  <a href="${1:link}">${2:Text}</a>${0}
 
 snippet tabHtml "tab mit HTML"
   style="padding-left: 2em"
@@ -45,3 +45,77 @@ snippet pnghtmlnebeneinander "PNG HTML nebeneinander"
 
 snippet htmlred "HTML darkred"
   <span style='color: darkred;'> ${1:Text} </span>
+
+snippet infocircle "infocircle HTML"
+  <i class="bi bi-info-circle"></i>
+
+snippet underlineHTML "underline HTML"
+ <u>${1:Text}</u> ${0}
+
+
+snippet strongHTML "strong HTML"
+ <strong>${1:Text}</strong> ${0}
+
+snippet TODOhtml "TODO HTML"
+  <!-- TODO: ${1:Text} --> ${0}
+
+snippet brHTML "<br>"
+  <br>
+
+snippet brbrHTML "<br><br>"
+  <br><br>
+
+snippet htmlvorlage "html vorlage shiny"
+  <html>
+
+  <head>
+
+  <style>
+    ul.custom-list {
+      list-style-type: none;
+      /* Entfernt das Standard-Symbol */
+      padding-left: 1em;
+      /* Abstand für das neue Symbol */
+      margin-top: 5px;
+      /* Reduzierter Abstand oberhalb der Liste */
+    }
+
+    ul.custom-list li {
+      margin-bottom: 5px;
+      /* Reduzierter Abstand zwischen den Listenelementen */
+    }
+
+    ul.custom-list li::before {
+      content: "- ";
+      /* Definiert den Spiegelstrich */
+      color: black;
+      /* Farbe des Spiegelstrichs */
+      font-weight: normal;
+      /* Schriftart bleibt normal */
+    }
+
+    .custom-h6 {
+      margin-bottom: 5px;
+      /* Reduzierter Abstand unter der Überschrift */
+      margin-top: 10px;
+      /* Optional: Abstand oberhalb der Überschrift */
+    }
+
+    .half-br {
+      line-height: 0.3;
+      /* Reduzierter Zeilenabstand */
+  </style>
+  </head>
+
+  <body>
+  <ul class="custom-list">
+
+    <li>
+
+    </li>
+
+
+  </body>
+
+  </html>
+

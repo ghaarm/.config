@@ -132,7 +132,8 @@ return {
       continuous = 1,
       executable = "latexmk",
       options = {
-        "-pdf",
+        -- "-pdf",
+        "-xelatex", -- damit ich mit Iosevka kompilieren kann
         "-shell-escape",
         "-verbose",
         "-file-line-error",
