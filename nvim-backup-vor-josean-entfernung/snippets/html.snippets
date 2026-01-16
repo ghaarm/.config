@@ -1,0 +1,121 @@
+snippet ulcustom "unordered list custom"
+  <ul class="custom-list">
+      <li>${1}</li>
+  </ul>
+
+snippet brhalf "halber br"
+  <p class="half-br">${1}</p>
+
+snippet halfbr "halber br"
+  <p class="half-br">${1}</p>
+
+snippet brhalfTab "halber br und Tab"
+  <p style="padding-left: 2em" class="half-br">${1}</p>
+
+snippet halfbrTab "halber br und Tab"
+  <p style="padding-left: 2em" class="half-br">${1}</p>
+
+snippet h6custom "h6 weniger Abstand"
+  <h4 class="custom-h6"><u>${1}</u></h4>
+
+snippet linkhtml "html link"
+  <a href="${1:link}">${2:Text}</a>${0}
+
+snippet tabHtml "tab mit HTML"
+  style="padding-left: 2em"
+
+snippet suphtml "superscript HTML"
+  <sup>${1:Eingabe}</sup>  
+
+
+snippet subhtml "subscript HTML"
+  <sub>${1:Eingabe}</sub>  
+
+
+snippet pnghtml "PNG HTML"
+  <img src="${1:Pfad zu PNG}" alt="${2:Beschreibung}" width="300" />
+  ${0}
+
+snippet pnghtmlnebeneinander "PNG HTML nebeneinander"
+
+  <img src="${1:Pfad zu PNG}" alt="${2:Beschreibung}" style="float: left; margin-right: 10px;" width="300" />
+  <img src="${3:Pfad zu PNG}" alt="${2:Beschreibung}" style="float: left; margin-right: 10px;" width="300" />
+  <div style="clear: both;"></div>
+  ${0}
+
+snippet htmlred "HTML darkred"
+  <span style='color: darkred;'> ${1:Text} </span>
+
+snippet infocircle "infocircle HTML"
+  <i class="bi bi-info-circle"></i>
+
+snippet underlineHTML "underline HTML"
+ <u>${1:Text}</u> ${0}
+
+
+snippet strongHTML "strong HTML"
+ <strong>${1:Text}</strong> ${0}
+
+snippet TODOhtml "TODO HTML"
+  <!-- TODO: ${1:Text} --> ${0}
+
+snippet brHTML "<br>"
+  <br>
+
+snippet brbrHTML "<br><br>"
+  <br><br>
+
+snippet htmlvorlage "html vorlage shiny"
+  <html>
+
+  <head>
+
+  <style>
+    ul.custom-list {
+      list-style-type: none;
+      /* Entfernt das Standard-Symbol */
+      padding-left: 1em;
+      /* Abstand für das neue Symbol */
+      margin-top: 5px;
+      /* Reduzierter Abstand oberhalb der Liste */
+    }
+
+    ul.custom-list li {
+      margin-bottom: 5px;
+      /* Reduzierter Abstand zwischen den Listenelementen */
+    }
+
+    ul.custom-list li::before {
+      content: "- ";
+      /* Definiert den Spiegelstrich */
+      color: black;
+      /* Farbe des Spiegelstrichs */
+      font-weight: normal;
+      /* Schriftart bleibt normal */
+    }
+
+    .custom-h6 {
+      margin-bottom: 5px;
+      /* Reduzierter Abstand unter der Überschrift */
+      margin-top: 10px;
+      /* Optional: Abstand oberhalb der Überschrift */
+    }
+
+    .half-br {
+      line-height: 0.3;
+      /* Reduzierter Zeilenabstand */
+  </style>
+  </head>
+
+  <body>
+  <ul class="custom-list">
+
+    <li>
+
+    </li>
+
+
+  </body>
+
+  </html>
+

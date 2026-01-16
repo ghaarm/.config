@@ -148,25 +148,27 @@ alias cdedit="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/'!Docs iCloud'/
 
 alias cdscan="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/@Tabea\ \&\ Golo\ iCloud/@Scans" 
 
+alias cdsteuer="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/@Tabea\ \&\ Golo\ iCloud/steuer-icloud && nvim" 
+
 alias cddown="/Users/g/Library/Mobile\ Documents/com~apple~CloudDocs/\#Downloads\ iCloud && yazi"
 
 alias cdgit="/Users/g/Library/Mobile\ Documents/com~apple~CloudDocs/'!Docs iCloud'/GitHub,\ iCloud"
 
 alias cdessen="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/@Tabea\ \&\ Golo\ iCloud/Rezepte\ Essen\ Golo" 
 
+
+# cd für r
 alias bs="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/'!Docs iCloud'/R\ Statistik,\ icloud/R,\ projects/shiny-app/shiny-bslib && nvim" 
 
 alias cdalpha="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/'!Docs iCloud'/R\ Statistik,\ icloud/R,\ projects/shiny-app/ShinyICUalpha && nvim server.r" 
 
+alias cdpmustatistik="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/'!Docs iCloud'/Statistik/statistik-pmu && nvim" 
+
 alias bsmod="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/'!Docs iCloud'/R\ Statistik,\ icloud/R,\ projects/shiny-app/shiny-bslib-mod && nvim" 
 
-alias cdlat="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/'!Docs iCloud'/R\ Statistik,\ icloud/Latex,\ icloud/Latex\ Projekte && nvim" 
-
-alias cdicu="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/'!Docs iCloud'/R\ Statistik,\ icloud/Latex,\ icloud/Latex\ Projekte/icu-latex && nvim" 
-
-alias cdgmics="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/'!Docs iCloud'/R\ Statistik,\ icloud/Latex,\ icloud/Latex\ Projekte/icu-latex/gmics-latex && nvim" 
-
 alias cdrpmu="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/'!Docs iCloud'/R\ Statistik,\ icloud/R,\ projects/r-statistik-pmu && nvim" 
+
+alias cdrallgemein="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/'!Docs iCloud'/R\ Statistik,\ icloud/R,\ projects/r-allgemein && nvim" 
 
 alias cddienstplan="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/'!Docs iCloud'/R\ Statistik,\ icloud/R,\ projects/r-dienstplan && nvim" 
 
@@ -177,6 +179,14 @@ alias cdrecmo="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/'!Docs iCloud'
 alias cdrlukas="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/'!Docs iCloud'/Diplomarbeit\ 10\ II/Diplomarbeit\ Lukas\ Rücker/lukas-analysen-r && nvim" 
 
 alias cdrluisa="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/'!Docs iCloud'/Diplomarbeit\ 10\ II/Diplomarbeit\ Luisa\ Holzheu/luisa-analysen-r && nvim" 
+
+# cd für latex
+alias cdlat="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/'!Docs iCloud'/R\ Statistik,\ icloud/Latex,\ icloud/Latex\ Projekte && nvim" 
+
+alias cdicu="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/'!Docs iCloud'/R\ Statistik,\ icloud/Latex,\ icloud/Latex\ Projekte/icu-latex && nvim" 
+
+alias cdgmics="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/'!Docs iCloud'/R\ Statistik,\ icloud/Latex,\ icloud/Latex\ Projekte/icu-latex/gmics-latex && nvim" 
+
 
 # Zaboracker
 alias cdzabo="cd /Users/g/Library/Mobile\ Documents/com~apple~CloudDocs/'@Tabea & Golo iCloud'/'Naomi (直美)'/Zaboracker && nvim" 

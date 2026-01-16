@@ -1,0 +1,222 @@
+\documentclass{article}
+
+
+%========================== GRAPHIKEN & PDFS ============================
+
+\usepackage{graphicx} % Required for inserting images
+\usepackage[space]{grffile} % ermöglicht Leerzeichen in den Dateinamen
+
+\usepackage{xcolor}
+
+\usepackage{pdfpages} %ermöglich das Einfügen von PDFs z.B mit includeodf
+
+\usepackage{pdflscape} % macht landscape = Querformat
+
+\usepackage{float} % kann Graphiken, Tabellen genau an einer bestimmten Stelle einfügen
+
+%========================== "GLOBALE" Formatierung ============================
+\usepackage[utf8]{inputenc} % Erlaubt die direkte Eingabe von UTF-8-kodierten Zeichen
+\usepackage[T1]{fontenc}    % Verwendet die T1-Schriftcodierung für die Ausgabe
+
+\usepackage[ngerman]{babel} % macht deutsche Lokalisierung z.B. Datumformate
+
+\usepackage{datetime2} % macht z.B. aktuelles Datum
+
+\usepackage{amsmath} % für mathematische Zeichen
+%\usepackage{amssymb} % für mathematische Zeichen
+
+
+%========================== TEXTKÖRPER ============================
+\usepackage[textwidth=18cm]{geometry} % kann die Textbreite auf dem Paper ändern
+
+\geometry{ 
+a4paper, % Setzt das Papierformat auf A4
+  textwidth = 18 cm, % Textbreite
+  textheight = 26 cm % Texthöhe
+}
+%-------------------------- TEXT FORMATIERUNG ----------------------------
+
+\usepackage{parskip} % macht einen vertikalen Einzug anstatt eines Absatzes
+
+\usepackage[normalem]{ulem} % Die Option 'normalem' behält die übliche Betonung bei (\emph{} wird nicht unterstrichen
+
+\usepackage{csquotes} % macht Anführungnszeichenn
+
+\newcommand{\ignore}[1]{} % um einzelne Wörter auszublenden
+
+\usepackage{multicol}
+%========================== HYPERLINKS ============================
+
+\usepackage{hyperref}
+\hypersetup{
+			colorlinks = true,	
+			linkcolor = red!70!black,
+			citecolor = black,
+			urlcolor = blue
+			}
+
+
+\usepackage{titlesec} % kann z.B. subsubsubsubsections erstellen, kann Schriftgröße, Schriftart und Farbe von Titeln anpassen.
+
+\titlespacing*{\section}{0pt}{2.5ex plus 1ex minus .2ex}{1.3ex plus .2ex}
+
+%========================== KOPF - UND FUßZEILE ============================
+\usepackage{fancyhdr} % für Fußzeilen
+\renewcommand{\headrulewidth}{0pt} % Entfernt die Linie unter der Kopfzeile
+%
+\renewcommand{\footrulewidth}{0.4} % Fügt eine Linie oberhalb der Fußzeile auf jeder Seite ein
+
+\pagestyle{fancy} % definiert den style "fancy"
+\fancyhf{} % Löscht die aktuellen Einstellungen für Kopf- und Fußzeile
+
+\rfoot{\hfill replace-date, S.  \thepage\ von 2} % Zentrale Fußzeile mit Datum und Seitenzahl rechts
+\lfoot{Übergabeprotokoll \enquote{An der Krücke 36} 1. OG links, G. Haarmeyer, Stand: 07/2024} % Linke Seite der Fußzeile
+%
+%========================== TITEL ============================
+\usepackage{titling}
+% Define a new command for the subtitle
+\newcommand{\subtitle}[1]{
+    \posttitle{
+        \par\large#1\end{center}
+    }
+}
+
+\title{Übergabeprotokoll}
+\subtitle{- bei Einzug -}
+
+\date{replace-date} % wenn leer kein Datum
+
+\begin{document}
+\maketitle
+\thispagestyle{fancy}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+                    % BEGINN DOKUMENT
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Zwischen
+
+Golo-Sung Haarmeyer
+
+Blütenstraße 22
+
+90480 Nürnberg
+
+\hfill - folgend Vermieter genannt -
+
+und
+
+Name
+
+geboren am: 
+
+derzeitiger Wohnsitz: 
+
+\hfill - folgend Mieter:in genannt - 
+
+\vspace{1cm}
+
+\textbf{Objekt: Mietwohnung 1. OG links in \enquote{An der Krücke 36}}
+
+Hiermit bestätige ich, dass mir die Mieträume, entsprechend § 8 des Mietvertrages vom replace-vertrag, übergeben wurden.
+
+\section{Zählerstände}%
+  \label{sec:Zählerstände}
+  
+    \begin{tabular}{|l|r|r|}
+      \hline
+      Ort & Zählerstände & Zählernummer \\
+      \hline
+      Küche (Wasser, m\textsuperscript{3}): & Zelle & 2 412 501 \\
+      \hline
+      Bad (Wasser, m\textsuperscript{3}): & Zelle & 2 412 499 \\
+      \hline
+      Waschkeller (Wasser, m\textsuperscript{3}, 3. Anschluss von links): & Zelle & 08 358 847 \\
+      \hline
+      Gas (m\textsuperscript{3}) & Zelle & 162 832 \\
+      \hline
+      Strom (kW/h) & Zelle & 457 024 \\
+      \hline
+    \end{tabular}
+
+\section{Schlüssel}%
+  \label{sec:Schlüssel}
+  
+Folgende Schlüssel wurden ausgehändigt:
+    \newline
+    \newline
+    \begin{tabular}{|l|r|r|}
+      \hline
+      Beschreibung & Anzahl \\
+      \hline
+      Wohnungstür & 2 \\
+      \hline
+      Briefkasten & 2 \\
+      \hline
+      Haustür & 2 \\
+      \hline
+      Haushintertür & 2 \\
+      \hline
+      Schloss Keller & 2 \\
+      \hline
+    \end{tabular}
+
+
+\section{Bemerkungen}%
+  \label{sec:Bemerkungen}
+  
+    \begin{enumerate}
+      \item 
+      \item 
+      \item
+      \item 
+    \end{enumerate}
+\end{enumerate}
+
+
+\vspace{3cm}
+
+Bielefeld, replace-date
+
+\rule{5cm}{0.3mm}
+
+Ort, Datum
+
+\vspace{1.5cm}
+
+\noindent\begin{minipage}{0.5\textwidth}
+Unterschrift
+
+\vspace{2cm} % Vertikaler Abstand für die Unterschrift
+
+\rule{5cm}{0.2mm} % Unterschriftslinie
+
+Mieter:in
+\end{minipage}
+\hfill % Füllt den horizontalen Raum zwischen den minipages
+\begin{minipage}{0.5\textwidth}
+Unterschrift
+
+\vspace{1.5cm} % Vertikaler Abstand für die Unterschrift
+
+\rule{5cm}{0.2mm} % Unterschriftslinie
+
+Vermieter
+\end{minipage}
+
+% Seitenzahl anpassen
+% \newpage
+% \begin{landscape}
+%   \section{Anhang}%
+%   \label{sec:Anhang}
+%
+%   \begin{multicols}{2}
+%
+%
+%
+%   \end{multicols}
+% \end{landscape}
+  
+\end{document}
+

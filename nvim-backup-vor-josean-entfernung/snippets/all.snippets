@@ -1,0 +1,136 @@
+# Link
+snippet link "link"
+  \url{${1:url}${0}}
+#
+# Rprofile erstellen
+
+snippet rprofile "Rprofile erstellen"
+  # Arbeitsverzeichnis erstellen 
+
+  setwd("/Users/g/Library/Mobile Documents/com~apple~CloudDocs/!Docs iCloud/R Statistik, icloud/R, projects/${1:name}")
+
+  #======================= Pakete und functions Vorlage laden ============================
+
+  library(lintr)
+  #library(psych)
+  library(ggpubr)
+  library(gtsummary)
+  library(gt)
+  library(glue)
+  pacman::p_load(pacman, GGally, ggthemes, ggvis, httr, lubridate, plotly, rmarkdown, shiny) 
+    # rausgenommen stringr, tidyr, ggplot2 
+  library(conflicted)
+  library(skimr)
+  library(labelled)
+  library(tidyverse) # enthalten: ggplot2, dplyr, tidyr, readr, purrr, tibble, stringr, forcats
+  library(car)
+  # library(bstfun)
+  # library(httpgd)
+  library(styler)
+  library(htmlwidgets)
+  # library(bookmarkr) # https://github.com/jmcphers/bookmarkr
+
+  if (interactive()) {
+    require(conflicted)
+  }
+
+  filter <- dplyr::filter
+
+  dfilter <- function(...) droplevels(filter(...))
+  filterd <- function(...) droplevels(filter(...))
+  # nach: https://stackoverflow.com/questions/32059343/when-filtering-with-dplyr-in-r-why-do-filtered-out-levels-of-a-variable-remain
+
+  tidy <- broom::tidy
+
+  #========================== Theme für gt summary erstellen ============================
+
+  ds_theme <-
+    list(
+      # round large pvalues to 2 places
+      "pkgwide-fn:pvalue_fun" = function (x) gtsummary::style_pvalue(x, digits = 3),
+      # some gt customization
+      "as_gt-lst:addl_cmds"= list(
+        # make the font size small
+        tab_spanner = rlang::expr(gt::tab_options(table.font.size = 'small')),
+        # stripe the table rows
+        user_added1 = rlang::expr(gt::opt_row_striping()),
+        user_added2 = rlang::expr(gt::opt_table_lines("none")),
+        # add a custom data source note
+        user_added3 = rlang::expr(gt::tab_source_note(
+          source_note = paste("Tabelle erstellt am:", Sys.Date())))#,
+      )
+    )
+  # add a custom title and subtitle to every table
+  # user_added4 = rlang::expr(gt::tab_header(
+  #   title = "10 II ECMO Analyse", subtitle = "For Internal Use Only"))
+
+  #========================== Theme für gt Tabelle erstellen ============================
+
+  # Funktion zum Anwenden des benutzerdefinierten Themes auf gt-Tabellen
+  gt_theme <- function(table) {
+    # Anpassungen an der Tabelle vornehmen
+    table <- table %>%
+      fmt_number(
+        decimals = 3,
+        drop_trailing_zeros = TRUE,
+        drop_trailing_dec_mark = TRUE,
+        use_seps = FALSE
+      ) %>%
+      tab_options(
+        heading.title.font.size = "small",
+        heading.subtitle.font.size = "small",
+        table.font.size = "small"
+      ) %>%
+      opt_table_lines("none") %>% # Tabellenlinien entfernen
+      tab_style(
+        style = list(
+          cell_text(weight = "bold")
+        ),
+        locations = list(
+          cells_body(columns = 1),
+          cells_column_labels()
+        )
+      )
+    
+    # Benutzerdefinierte Quellenangabe hinzufügen
+    table <- tab_source_note(
+      table,
+      source_note = paste("Tabelle erstellt am:", Sys.Date())
+    )
+    
+    return(table)
+  }
+
+
+  #========================== Datensätze laden ============================
+
+snippet alpha "α"
+  α
+
+snippet alpha-fehler "α-Fehler"
+  α-Fehler
+
+snippet beta "β"
+  β
+
+snippet beta-fehler "β-Fehler"
+  β-Fehler
+
+snippet gamma "γ"
+  γ
+
+snippet delta "δ"
+  δ
+
+snippet arzneiaktuell "arznei aktuell app"
+  Arznei aktuell App Version 3.17.0, Stand: 15.06.2025
+
+
+snippet arzneiaktuellhtml "arznei aktuell app html link shiny"
+  <a href=\"https://www.ifap.de/deu_de/app.html\" target=\"_blank\"> Arznei aktuell App Version 3.17.0, Stand: 15.06.2025</a>
+
+snippet sanford "sanford guide"
+  Sanford Guide 2025 App Version 7.0.6, Stand: 17.06.2025
+
+snippet sanfordhtml "sanford guide html link shiny"
+  <a href=\"https://www.sanfordguide.com\" target=\"_blank\"> Sanford Guide 2025 App Version 7.0.6, Stand: 17.06.2025</a>

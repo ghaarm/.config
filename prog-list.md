@@ -16,6 +16,8 @@
   - [ ] brew install --cask --no-quarantine syntax-highlight
 
 - [ ] brew install --cask betterzip
+- [ ] brew install stow 
+  - [ ] gnu stow for dotfiles syncing via github and symlinks
 
 
 Nachdem die Installation abgeschlossen ist, starte den Finder einmal neu (du kannst z. B. mit cmd + option + esc den Finder neu starten).
@@ -91,6 +93,7 @@ Nachdem die Installation abgeschlossen ist, starte den Finder einmal neu (du kan
 - [ ] (Texifier)
 
 - [x] R
+  - [ ] cbc, um Dienstplanerstellung schneller zu machen
 
 - [x] RStudio
 
