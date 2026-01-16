@@ -1,0 +1,253 @@
+
+snippet selectIn "selectInput"
+  selectInput("${1:df-name}", "${2:display-name}",
+  choices = c(
+				  "${3:wahl-1}",
+				  "${4:wahl-2}",
+				  "${5:wahl-3}"),
+  selected = "${6:voreingestellt}",
+  ),
+  ${0}
+
+
+snippet textIn "textInput"
+  textInput("${1:df-name}", "${2:display-name}")
+  ${0}
+
+snippet numericIn "numericInput"
+  numericInput("${1:df-name}", "${2:display-name}", value = "NULL")
+  ${0}
+
+
+snippet numericInMod "numericInput module ns()"
+  numericInput(ns("${1:df-name}", "${2:display-name}", value = "NULL"))
+  ${0}
+
+snippet textArea "textAreaInput"
+  textAreaInput("${1:df-name}", "${2:display-name}")
+  ${0}
+
+snippet uiOutputMod "uiInput module ns()"
+  uiOutput(ns)("${0}"))
+
+snippet uiOutput "uiInput"
+  uiOutput("${0}")
+
+
+snippet tags$table "ui table"
+  tags\$table(
+    ${0}
+  )
+
+snippet tags$tr "ui row"
+  tags\$tr(
+    ${0}
+  )
+
+snippet tags$td "ui cell"
+  tags\$td(${0})
+
+
+snippet output " server output"
+  output\$${1}  <- renderUI({
+    ${0}
+
+  })
+
+snippet htmlrotdark "html darkred"
+  <span style='color: darkred;'> ${0} </span>
+
+snippet htmlrot "html red"
+  <span style='color: red;'> ${0} </span>
+
+snippet htmlgreendark "html darkgreen"
+  <span style='color: #006400;'> ${0} </span>
+
+snippet htmlgreen "html green"
+  <span style='color: green;'> ${0} </span>
+
+snippet htmlviolet "html violet"
+  <span style='color: #9400D3;'> ${0} </span>
+
+snippet reactive "reactive shiny"
+  reactive({
+
+    ${0}
+  
+  })
+
+snippet bsaccHtml "bslib accordion html output"
+  bslib::accordion(
+    open = FALSE,
+    id = "${1:id-name}", # Eindeutige ID für das innere Accordion
+    bslib::accordion_panel(
+      "${2:anzeige-in-html}",
+      htmlOutput("${3:ui-name}")
+    )
+  ),
+
+snippet includeHTML "include HTML output"
+  includeHTML("www/${1}.html")
+
+snippet renderui "renderUI"
+  renderUI({
+
+  ${0}
+
+  })
+
+snippet moduleTemp "shiny module template"
+  ${1:module-name}_module_ui <- function(id) {
+    ns <- NS(id)  # Namespace für das Modul
+      tagList(
+          tags$table(
+            tags$tr(
+              tags$td(
+                class = "custom-vertical-align",
+                numericInput(ns("${0}"), "xxxx", value = NULL)),
+              tags$td(
+                class = "custom-vertical-align",
+                uiOutput(ns("xxxx")))  # ns für den Output
+              )
+            )
+          )
+  }
+
+  ${2:$1}_module_server <- function(id, gewicht_main, groesse_main, geschlecht_main) {
+  moduleServer(id, function(input, output, session) {
+
+      geschlecht_input <- reactive({geschlecht_main()})
+      gewicht_input <- reactive({gewicht_main()})
+      groesse_input <- reactive({groesse_main()})
+
+
+
+      })
+  } 
+
+snippet tooltip ui "tooltip ui"
+   span(
+          tooltip(
+            bs_icon("info-circle"),
+            HTML("${1:Text}"),
+            placement = "right"
+          )
+        ),${0}
+
+snippet tooltip input "tooltip in input Beschreibung"
+  tags\$td(
+    class = "custom-vertical-align", # benutzerdefinierte Klasse
+
+    # Manuelles Label mit Tooltip-Icon dahinter
+    tags\$label(
+      HTML("${1:Name ui} "), # Label-Text, mit HTML() für Tag-Integration
+      bslib::tooltip(
+        bs_icon("info-circle"),
+        HTML("${3:Text für Tooltip}"), # Tooltip-Text
+        placement = "right" # Optional: Position des Tooltips anpassen (z.B. top, bottom, left, right)
+      ),
+      \`for\` = ns("${2:Name id}") # Verknüpfung mit der Input-ID # *Escapeter* Backtick um for
+    ),
+    # Numeric Input ohne eigenes Label
+    numericInput(
+      inputId = ns("${2:Name id}"),
+      label = NULL, # Label wird manuell oben erstellt
+      value = NULL
+    )),${0}
+
+snippet linkshiny "html link shiny"
+
+  <a href=\"${2:Link}\" target=\"_blank\">${1:Link Name}</a>
+
+snippet printbeschreibung "print shiny mit Beschreibung"
+  print(paste0("${1:Beschreibung}: ", ${2:Variable}) )
+  ${0}
+
+snippet br "<br>"
+  "<br>", ${0}
+
+snippet brbr "<br><br>"
+  "<br><br>", ${0}
+
+snippet validate "validate shiny"
+  validate(
+    need(!is.na(gewicht_input()), "Für Berechung Gewicht angeben.")
+  )
+
+snippet verticalalign "vertical align shiny"
+  class = "custom-vertical-align",
+  ${0}
+
+snippet tagbottom "Abstand unten"
+  tags$div(
+      style = "margin-bottom: 20px;",
+      HTML(paste0(
+          "${0}"
+          ))
+      )
+
+snippet moduletaglist "Module tagList"
+ ${1:name} _module_ui <- function(id) {
+  ns <- NS(id)  # Namespace für das Modul
+  tagList(
+    tags$table(
+      tags$tr(
+        tags$td(
+         ${0}
+        )
+      ),  
+      tags$tr(
+        tags$td(
+        ),
+        tags$td(
+      ),
+    )
+  )
+  }
+
+  ${1:name}_module_server <- function(id, gewicht_main, groesse_main, geschlecht_main) {
+  moduleServer(id, function(input, output, session) {
+    # Dynamische Ausgabe basierend auf Natrium-Eingabe
+
+    geschlecht_input <- reactive({geschlecht_main()})
+    gewicht_input <- reactive({gewicht_main()})
+    groesse_input <- reactive({groesse_main()})
+
+    
+
+  })
+  }
+
+
+snippet modulenavpanel "Module navpanel"
+ ${1:name} _module_ui <- function(id) {
+  ns <- NS(id)  # Namespace für das Modul
+  nav_panel(
+    tags$table(
+      tags$tr(
+        tags$td(
+         ${0}
+        )
+      ),  
+      tags$tr(
+        tags$td(
+        ),
+        tags$td(
+      ),
+    )
+  )
+  }
+
+  ${1:name}_module_server <- function(id, gewicht_main, groesse_main, geschlecht_main) {
+  moduleServer(id, function(input, output, session) {
+    # Dynamische Ausgabe basierend auf Natrium-Eingabe
+
+    geschlecht_input <- reactive({geschlecht_main()})
+    gewicht_input <- reactive({gewicht_main()})
+    groesse_input <- reactive({groesse_main()})
+
+    
+
+  })
+  }
+

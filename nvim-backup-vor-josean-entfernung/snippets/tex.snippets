@@ -1,0 +1,658 @@
+# -- SNIPPETS --
+#
+# new glossary entry
+snippet gloss "Glossary Entry"  b
+	\newglossaryentry{${1:entry}}{
+			name = {${2:name}},
+			symbol = {\ensuremath{${3:symbol}}},
+			description = {${4:description}}
+	}
+#
+
+
+
+# beamer frame enviornment
+snippet frame "Beamer Frame" b
+	\begin{frame}
+
+		\textbf{${1:label}} ${2:claim}
+		\vspace{.2in}
+		\pause
+
+
+	\end{frame}
+
+	%%% -------------------------------------------------------
+#
+
+
+
+
+# beamer item enviornment
+snippet bemit "Beamer Item" b
+	\textbf{${1:label}} ${2:claim}
+	\vspace{.2in}
+	\pause
+#
+
+
+
+
+# custom theorem enviornment
+snippet customthm "Custom Theorem" b
+	\vspace{.1in}
+	\begin{customthm}{(${1:label})}
+		${2:claim}
+	\end{customthm}
+
+	\begin{Answer}
+		${0}
+	\end{Answer}
+#
+
+
+# factoidbox enviornment
+snippet factoidbox "Factoid Box" b
+	\label{rule:${2:$1}}
+	\factoidbox{
+		\textbf{(${1:name})} ${0}
+	}
+#
+
+# framed text enviornment
+snippet textbox "Text Box" b
+	\begin{tcolorbox}
+		${0}
+	\end{tcolorbox}
+#
+
+# new command
+snippet qt "New Command" b
+	\qt{${1:\forall}}{${2:\alpha}}${0}
+#
+
+# new command
+snippet qte "New Command" b
+	\qt{${1:\exists}}{${2:\alpha}}${0}
+#
+
+# new command
+snippet nc "New Command" b
+	\newcommand{${1:cmd}}[${2:opt}]{${3:realcmd}} ${0}
+#
+
+#usepackage
+snippet up "Use Package" b
+	\usepackage[${1:options}]{${2:package}} ${0}
+#
+
+# \begin{}...\end{}
+snippet begin "Begin End"
+	\begin{${1:env}}
+		${2:${VISUAL}}
+	\end{$1}${0}
+#
+
+# Align(ed)
+snippet align "Align Env" b
+	\begin{align${1:ed}}
+		\label{${2:name}}
+		${0}
+	\end{align$1}
+#
+
+# Quote
+snippet quote "Quotation" b
+	\vspace{-.1in}
+	\begin{quote}\singlespacing\small
+		${0}
+		\hfill(p.~${1})
+	\end{quote}
+	\vspace{.1in}
+#
+
+# enquote ""
+snippet "" "Anführungszeichen" 
+	\enquote{${1:name}}${0}
+#
+
+# zitat normal 
+snippet citen "Zitat normal" 
+	\cite{${1:name}}${0}
+#
+
+# zitat foot 
+snippet cf "Zitat foot" i
+	\footnote{\cite{${1:name}}, S. ${2:Seite}}${0}
+#
+
+# zitat foot 
+snippet citef "Zitat foot" i
+	\footnote{\cite{${1:name}}, S. ${2:Seite}}${0}
+#
+
+
+
+# zitat foot 
+snippet cf "Zitat foot" i
+	\footnote{\cite{${1:name}}, S. ${2:Seite}}${0}
+#
+
+# Labelalign
+snippet labelalign "Label Align" b
+	\vspace{.05in}
+	\begin{labelalign} %\small\onehalfspacing
+		\item[${2:\it} ${3:Label:}] ${0}
+	\end{labelalign}
+	\vspace{.05in}
+#
+
+# Enumerate
+snippet enumb "Enumerate" b
+	\begin{enumerate}
+		\item[${1:\it }${2}:] ${0}
+	\end{enumerate}
+#
+
+# Enumerate
+snippet enum "Enumerate" b
+	\begin{enumerate}
+		\item ${0}
+		\item 
+		\item
+		\item 
+	\end{enumerate}
+#
+
+# Itemize ben
+snippet itemben "Itemize" b
+	\begin{itemize}
+		\item[${1:\it} ${2:Label:}] ${0}
+	\end{itemize}
+#
+
+# Itemize
+snippet item "Itemize" 
+	\begin{itemize}
+		\item[-] ${0}
+		\item[-] 
+		\item[-] 
+		\item[-]
+	\end{itemize}
+#
+
+#Item ben
+snippet iben "Item" b
+	\item[${1:\it} ${2}:] ${0}
+#
+
+#Item normal mit Spiegelstrich
+snippet i- "Item"
+	\item[-] ${0}
+#
+
+#Item für enumerate
+snippet ie "Item"
+	\item ${0}
+#
+
+# item für labelled mit wiederholung
+snippet ilabelcom "item labelled command"
+	\newcommand{\labeleditem}[2]{\item \label{#1} #2 \edef\@currentlabelname{#2}}${0}
+#	
+
+
+
+# item für labelled mit wiederholung
+snippet ilabelcom "item labelled command"
+	\labeleditem{${1:label}}{${2:text}}
+#
+
+
+# Cases
+snippet case "Cases" 
+	${1:LHS}=	
+	\begin{cases}
+		${2:Value}, &\text{ if } ${3:case}\\
+		${4:Value}, &\text{ otherwise.} ${5:otherwise}.
+	\end{cases}${0}
+#
+snippet chapter "chapter tex"
+   \chapter{${1:Name}}
+   \label{chap:${2:$1}}
+   \minitoc % Inhaltsverzeichnis für dieses Kapitel
+
+   % \addbibresource{/Users/g//Library/texmf/bibtex/bib/Zotero.bib} %Hinzufügen der Bibliografiedatei
+   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Radiologische Befunde anschauen (Ashvin)%
+
+   % BEGINN DOKUMENT
+
+   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+   ${0}
+
+
+# Section
+snippet sec "Section" b
+	\section{${1:Name}}%
+		\label{sec:${2:$1}}
+		${0}
+#
+
+
+# Sub Section ben
+snippet sub "Sub Section" b
+	\subsection{${1:Name}}%
+		\label{sub:${2:$1}}
+		${0}
+#
+
+# Sub Sub Sectionben
+snippet ssub "Sub Sub Section" b
+	\subsubsection{${1:Name}}%
+		\label{sub:${2:$1}}
+		${0}
+#
+
+
+# Hyper Section
+snippet hsec "Hyper Section" b
+	\hypsection{${1:Name}}%
+		\label{sec:${2:$1}}
+		${0}
+#
+
+# Hyper Sub Section
+snippet hsub "Hyper Sub Section" b
+	\hypsubsection{${1:Name}}%
+		\label{sub:${2:$1}}
+		${0}
+#
+
+# Hyper Sub Sub Section
+snippet hssub "Hyper Sub Sub Section" b
+	\hypsubsubsection{${1:Name}}%
+		\label{sub:${2:$1}}
+		${0}
+#
+
+#Formating text: italic, bold, underline, small capital, emphase ..
+snippet uline "underline"
+  \uline{${1:text}}${0}
+
+snippet it "Italics" wi
+	\textit{${1}}${0}
+#
+
+snippet tt "Teletype" wi
+	\texttt{${1}}${0}
+#
+
+snippet bf "Bold" wi
+	\textbf{${1}}${0}
+#
+
+snippet sc "Small Caps" wi
+	\textsc{${1}}${0}
+#
+
+# snippet tsub "Subscripted" i
+# 	\textsubscript{${1}}${0}
+#
+#
+# snippet tsup "Superscripted" i
+# 	\textsuperscript{${1}}${0}
+#
+
+#Math font
+snippet mf "Mathfrak" w
+	\mathfrak{${1}}${0}
+#
+
+snippet mc "Mathcal" w
+	\mathcal{${1}}${0}
+#
+
+snippet ms "Mathscr" w
+	\mathscr{${1}}${0}
+#
+
+snippet bref "Bold Ref" w
+	\textbf{\ref{${1:Ref}}}${0}
+#
+
+#misc
+snippet fproof "Footnote Proof" bi
+	\footnote{\textit{Proof:} ${1:Begin} \qed}${0}
+#
+
+snippet lab "Label" wi
+	\label{${1:LABEL}}${0}
+#
+
+snippet fn "Footnote" wi
+	\footnote{${1:FOOTNOTE}}${0}
+#
+
+snippet fig "Figure environment" b
+	\begin{figure}
+	\begin{center}
+		\includegraphics[scale=${1}]{Figures/${2}}
+	\end{center}
+	\caption{${3}}
+	\label{fig:${4}}
+	\end{figure}
+	${0}
+#
+
+snippet tikz "Tikz environment" b
+	\begin{figure}[htpb]
+	\begin{center}
+	\begin{tikzpicture}[scale=${1:1}, transform shape]
+		${2}
+	\end{tikzpicture}
+	\end{center}
+	\caption{${3}}%
+	\label{fig:${4}}
+	\end{figure}
+	${0}
+
+snippet rule "Rule" bi
+	\factoidbox{
+	\begin{Rthm} \label{rule:${4:label}}
+		\textbf{($${1:\boldsymbol}${2:SYM}$${3:IE})}~~ ${0:${VISUAL}}
+	\end{Rthm}
+	}
+
+snippet lemma "Lemma" bi
+	\begin{Lthm} \label{lemma:${1:label}}
+		${0:${VISUAL}}
+	\end{Lthm}
+
+snippet prop "Proposition" bi
+	\begin{Pthm} \label{${1:label}}
+		${0:${VISUAL}}
+	\end{Pthm}
+
+snippet thrm "Theorem" bi
+	\begin{theorem} \label{${1:label}}
+		${0:${VISUAL}}
+	\end{theorem}
+
+snippet prf "Proof" bi
+	\begin{quote} 
+		\textit{Proof:} ${0:${VISUAL}}
+	\end{quote}
+
+snippet def "Definition" bi
+	\begin{definition}[$1]
+		${0:${VISUAL}}
+	\end{definition}
+
+snippet prob "Problem" bi
+	\begin{problem}[$1]
+		${0:${VISUAL}}
+	\end{problem}
+
+snippet corl "Corollary" bi
+	\begin{corollary}[$1]
+		${0:${VISUAL}}
+	\end{corollary}
+
+snippet example "Example" bi
+	\begin{example}[$1]
+		${0:${VISUAL}}
+	\end{example}
+
+
+snippet png "png" b
+	
+	\begin{figure}[H]
+    	\centering
+    	\includegraphics[width=0.8\textwidth]{./bilder/${1:Name}}
+    	\caption{${2:Name}}
+    	\label{fig:${3:$2}}
+	\end{figure}
+	${0}
+
+snippet pppup "png ./bilder" b
+	
+	\begin{figure}[H]
+    	\centering
+    	\includegraphics[width=0.8\textwidth]{./bilder/${1:Name}}
+    	\caption{${2:Name}}
+    	\label{fig:${3:$2}}
+	\end{figure}
+	${0}
+#
+snippet pppdown "png /bilder" b
+	
+	\begin{figure}[H]
+    	\centering
+    	\includegraphics[width=0.8\textwidth]{bilder/${1:Name}}
+    	\caption{${2:Name}}
+    	\label{fig:${3:$2}}
+	\end{figure}
+	${0}
+#
+
+# png same folder
+snippet pppsame "png same folder" b
+	
+	\begin{figure}[H]
+    	\centering
+    	\includegraphics[width=0.8\textwidth]{${1:Name}}
+    	\caption{${2:Name}}
+    	\label{fig:${3:$2}}
+	\end{figure}
+	${0}
+#
+# png same folder
+snippet pngsame "png same folder" b
+	
+	\begin{figure}[H]
+    	\centering
+    	\includegraphics[width=0.8\textwidth]{${1:Name}}
+    	\caption{${2:Name}}
+    	\label{fig:${3:$2}}
+	\end{figure}
+	${0}
+#
+
+# png multi
+snippet pppmulti "png multi" b
+	
+	\begin{figure}[H]
+    	\centering
+    	\includegraphics[width=\linewidth]{./bilder/${1:Name}}
+    	\caption{${2:Name}}
+    	\label{fig:${3:$2}}
+	\end{figure}
+	${0}
+#
+# png multi
+snippet pngmulti "pngmulti" b
+	
+	\begin{figure}[H]
+    	\centering
+    	\includegraphics[width=\linewidth]{./bilder/${1:Name}}
+    	\caption{${2:Name}}
+    	\label{fig:${3:$2}}
+	\end{figure}
+	${0}
+#
+
+# png ecmo 
+snippet ecmopng "ecmopng" b
+	
+	\begin{figure}[H]
+    	\centering
+    	\includegraphics[width=0.5\textwidth]{./ECMO-latex-png/${1:Name}.png}
+    	\caption{${2:Name}}
+    	\label{fig:${3:$2}}
+	\end{figure}
+	${0}
+#
+
+
+# png ecmo 
+snippet ecmopdf "ecmopdf" b
+	
+	\begin{figure}[H]
+    	\centering
+    	\includegraphics[width=0.5\textwidth]{./ECMO-latex-png/${1:Name}.pdf}
+    	\caption{${2:Name}}
+    	\label{fig:${3:$2}}
+	\end{figure}
+	${0}
+#
+
+
+# png ecmo 
+snippet ecmotbl "ecmotbl" b
+	
+	\begin{table}[H]
+    	\centering
+    	\includegraphics[width=0.5\textwidth]{./ECMO-latex-png/${1:Name}.pdf}
+    	\caption{${2:Name}}
+    	\label{fig:${3:Name}}
+	\end{table}
+	${0}
+#
+
+# pdf include 
+snippet pdfi "pdf include" b
+	
+	\begin{figure}[H]
+    	\centering
+    	\includegraphics[width=0.5\textwidth]${1:Name}/${2:Name}.pdf}
+    	\caption{${3:Name}}
+    	\label{fig:${4:Name}}
+	\end{figure}
+	${0}
+
+
+
+
+
+# Linie
+snippet linie "linie" 
+	\rule{${1:Länge}cm}{${2:Breite}mm}
+	${0}
+#
+
+# Lüccke
+snippet lücke "lücke"
+  \hspace{${1:Länge}cm} ${0}
+#
+
+# Tabelle
+snippet tabelle3x3 "tabelle 3x4"
+  \begin{table}[H]
+	 \centering
+	 \caption{${1:Titel der Tabelle}}
+		\label{tab:${2:$1}}
+		  \begin{tabular}{|l|c|c|}
+			 \hline
+			 ${3:\ignore{überschrift 1}} & ${4:überschrift 2} & ${5:überschrift 3} \\\\
+			 \hline
+			 ${6:Zelle} & Zelle & Zelle \\\\
+			 \hline
+			 Zelle & Zelle & Zelle \\\\
+			 \hline
+			 Zelle & Zelle & Zelle \\\\
+			 \hline
+		  \end{tabular}
+  \end{table}
+#
+
+
+# Tabelle
+snippet tabelle2x3 "tabelle 2x3"
+  \begin{table}[H]
+	 \centering
+	 \caption{${1:Titel der Tabelle}}
+		\label{tab:${2:$1}}
+		  \begin{tabular}{|l|c|}
+			 \hline
+			 ${3:\ignore{überschrift 1}} & ${4:überschrift 2} \\\\
+			 \hline
+			 ${6:Zelle} & Zelle \\\\
+			 \hline
+			 Zelle & Zelle \\\\
+			 \hline
+			 Zelle & Zelle \\\\
+			 \hline
+		  \end{tabular}
+  \end{table}
+#
+# ignore
+snippet ignore "ignore"
+  \ignore{${1:wort}}$ ${0}
+#
+
+# & escaped in Tabelle
+snippet && "& escape"
+  \& ${0}
+#
+
+# include pdf
+snippet inpdf "include pdf"
+  \includepdf[pages=-, pagecommand={\thispagestyle{fancy}}]{${1:Datei}}
+  ${0}
+#
+
+# Link
+snippet link "link tex ohne Namen"
+  \url{${1:url}${0}}
+##
+
+snippet link-name " link tex mit Namen"
+	\href{${1:Link}}{${2:Bescheibung}, Stand ${3:Datum}} ${0}
+#
+
+snippet url "url tex ohne Namen"
+  \url{${1:url}${0}}
+
+snippet url-name " url tex mit Namen"
+	\href{${1:Link}}{${2:Bescheibung}, Stand ${3:Datum}} ${0}
+#
+# toc Inhaltsverzeichnis
+snippet toc "toc und href"
+  \hypertarget{toc}{}
+  \vspace{-1.5cm}
+  % Anpassen der Überschriftsabstände
+
+  %-------------------------- INHALTSVERZEICHNIS ----------------------------  
+  % Hyperlinks schwarz für das Inhaltsverzeichnis
+  % \hypersetup{linkcolor=black}
+
+  \tableofcontents % Erzeugt das Inhaltsverzeichnis
+  \listoftables
+  \listoffigures
+  % Hyperlinks dunkelrot für den Rest des Dokuments
+  \hypersetup{
+    linkcolor = red!70!black,
+              citecolor = black, % Farbe für Zitate
+                urlcolor = blue    % Farbe für URL-Links
+  }
+  ${0}
+#
+
+snippet todo "todo tex"
+  %TODO: ${0}
+
+snippet latred "latex rot"
+  \textcolor{red!70!black}{${1:Text}} ${0}
+
+snippet vfvj "Vf - Vj"
+ V\textsubscript{f} - V\textsubscript{j}${0}
+
+snippet vavf "Va - Vf"
+ V\textsubscript{f} - V\textsubscript{j}${0}
+
+snippet latp "Latex Prozent"
+ \SI{${1:zahl}}{\percent}${0}
+
+snippet latpp "Latex p < "
+ $\mathrm{p} ${1:< = >} \num{0.0${2:zahl}}$${0}

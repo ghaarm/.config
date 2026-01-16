@@ -1,4 +1,4 @@
-require("core")
+require("josean.core")
 
 
 -- Set the Python 3 host program to the virtual environment Pythoni
@@ -6,4 +6,4 @@ require("core")
 vim.g.python3_host_prog = "/Users/g/neovim-venv/bin/python3"
 
 -- vim.g.EasyClipUseGlobalPasteToggle = 0 -- weil es sonst einen error mit easyclip gibt
-require("lazy_bootstrap")
+require("josean.lazy")
