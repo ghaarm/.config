@@ -132,7 +132,7 @@ alias cdzsh="cd ~/.config && nvim .zshrc"
 
 alias aero="cd ~/.config/aerospace && nvim aerospace.toml" 
 
-alias cdplug="cd ~/.config/nvim/lua/josean/plugins && nvim" 
+alias cdplug="cd ~/.config/nvim/lua/plugins && nvim" 
 
 alias cdpianmac="cd /Users/g/qmk_firmware/keyboards/beekeeb/piantor_pro/keymaps/piantor_colemak && nvim keymap.c" # öffnet neovim automatisch 
 
@@ -184,6 +184,8 @@ alias cdrluisa="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/'!Docs iCloud
 alias cdlat="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/'!Docs iCloud'/R\ Statistik,\ icloud/Latex,\ icloud/Latex\ Projekte && nvim" 
 
 alias cdicu="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/'!Docs iCloud'/R\ Statistik,\ icloud/Latex,\ icloud/Latex\ Projekte/icu-latex && nvim" 
+
+alias cdicubook="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/'!Docs iCloud'/R\ Statistik,\ icloud/Latex,\ icloud/Latex\ Projekte/icu-latex/icu-book-latex && nvim" 
 
 alias cdgmics="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/'!Docs iCloud'/R\ Statistik,\ icloud/Latex,\ icloud/Latex\ Projekte/icu-latex/gmics-latex && nvim" 
 

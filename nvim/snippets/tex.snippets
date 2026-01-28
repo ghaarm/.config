@@ -102,19 +102,21 @@ snippet align "Align Env" b
 #
 
 # Quote
-snippet quote "Quotation" b
-	\vspace{-.1in}
-	\begin{quote}\singlespacing\small
-		${0}
-		\hfill(p.~${1})
-	\end{quote}
-	\vspace{.1in}
+# snippet quote "Quotation" b
+# 	\vspace{-.1in}
+# 	\begin{quote}\singlespacing\small
+# 		${0}
+# 		\hfill(p.~${1})
+# 	\end{quote}
+# 	\vspace{.1in}
 #
 
-# enquote ""
-snippet "" "Anführungszeichen" 
-	\enquote{${1:name}}${0}
+# enquote quote
+snippet quote "Anführungszeichen" 
+	\enquote{${1:name}}
 #
+snippet enquote "Anführungszeichen" 
+	\enquote{${1:name}}
 
 # zitat normal 
 snippet citen "Zitat normal" 
@@ -128,7 +130,7 @@ snippet cf "Zitat foot" i
 
 # zitat foot 
 snippet citef "Zitat foot" i
-	\footnote{\cite{${1:name}}, S. ${2:Seite}}${0}
+	\footnote{\cite{${1:name}}, S. ${2:Seite}}
 #
 
 
@@ -415,21 +417,21 @@ snippet png "png" b
 	\end{figure}
 	${0}
 
-snippet pppup "png ./bilder" b
+snippet pngup "png bilder im Überordner" b
 	
 	\begin{figure}[H]
     	\centering
-    	\includegraphics[width=0.8\textwidth]{./bilder/${1:Name}}
+    	\includegraphics[width=0.8\textwidth]{../bilder/${1:Name}}
     	\caption{${2:Name}}
     	\label{fig:${3:$2}}
 	\end{figure}
 	${0}
 #
-snippet pppdown "png /bilder" b
+snippet pngdown "png bilder im Unterordner" b
 	
 	\begin{figure}[H]
     	\centering
-    	\includegraphics[width=0.8\textwidth]{bilder/${1:Name}}
+    	\includegraphics[width=0.8\textwidth]{./bilder/${1:Name}}
     	\caption{${2:Name}}
     	\label{fig:${3:$2}}
 	\end{figure}
@@ -608,14 +610,14 @@ snippet link "link tex ohne Namen"
 ##
 
 snippet link-name " link tex mit Namen"
-	\href{${1:Link}}{${2:Bescheibung}, Stand ${3:Datum}} ${0}
+	\href{${1:Link}}{${2:Beschreibung}, Stand ${3:Datum}}
 #
 
 snippet url "url tex ohne Namen"
   \url{${1:url}${0}}
 
-snippet url-name " url tex mit Namen"
-	\href{${1:Link}}{${2:Bescheibung}, Stand ${3:Datum}} ${0}
+snippet url-name "url tex mit Namen"
+	\href{${1:Link}}{${2:Beschreibung}, Stand ${3:Datum}}
 #
 # toc Inhaltsverzeichnis
 snippet toc "toc und href"
@@ -656,3 +658,12 @@ snippet latp "Latex Prozent"
 
 snippet latpp "Latex p < "
  $\mathrm{p} ${1:< = >} \num{0.0${2:zahl}}$${0}
+
+snippet kernpunkte "Kernpunkte gmics"
+  \section*{Kernpunkte} % Sternchen nach section macht dass die Section nicht nummeriert wird und auch nicht im Inhaltsverzeichnis erscheint
+  \begin{enumerate}
+    \item Key Point 1
+    \item Key Point 2
+    \item Key Point 3
+  \end{enumerate}
+

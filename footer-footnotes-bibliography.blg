@@ -1,0 +1,9 @@
+[0] Config.pm:308> INFO - This is Biber 2.20
+[0] Config.pm:311> INFO - Logfile is 'footer-footnotes-bibliography.blg'
+[24] biber-darwin:340> INFO - === Wed Jan 21, 2026, 20:33:36
+[29] Biber.pm:420> INFO - Reading 'footer-footnotes-bibliography.bcf'
+[55] Biber.pm:994> INFO - Found 0 citekeys in bib section 0
+[60] bbl.pm:676> INFO - Writing 'footer-footnotes-bibliography.bbl' with encoding 'UTF-8'
+[60] bbl.pm:779> INFO - Output to footer-footnotes-bibliography.bbl
+[61] Biber.pm:131> WARN - The file 'footer-footnotes-bibliography.bcf' does not contain any citations!
+[61] Biber.pm:133> INFO - WARNINGS: 1

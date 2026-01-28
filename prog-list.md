@@ -62,6 +62,7 @@ Nachdem die Installation abgeschlossen ist, starte den Finder einmal neu (du kan
 - [ ] gnu sed oder brew install sd für spectre
 
 - [ ] gnupg zum verschlüsseln von Datein APIs , install mit homebrew
+- [ ] brew install leader-key https://github.com/mikker/LeaderKey
 
 ## Editing
 - [x] Nvim
