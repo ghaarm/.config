@@ -533,7 +533,20 @@ snippet pdfi "pdf include" b
 	\end{figure}
 	${0}
 
+snippet pdfinclude-anhang "pdf direkt unter Anhang"
+  \includepdf[
+    pages=1,
+    scale=0.9,
+    pagecommand={\section{Anhang}\label{sec:Anhang}\subsection{${1:name-für-toc}}%
+      \label{sub:${1}}
+      \thispagestyle{plain}}
+  ]{${2:name}.pdf}
 
+  \includepdf[
+    pages=2-,
+    scale=0.9,
+    pagecommand={\thispagestyle{plain}}
+  ]{${2}.pdf}
 
 
 

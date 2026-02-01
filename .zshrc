@@ -139,6 +139,7 @@ alias cdpianmac="cd /Users/g/qmk_firmware/keyboards/beekeeb/piantor_pro/keymaps/
 alias cdpianwin="cd /Users/g/qmk_firmware/keyboards/beekeeb/piantor_pro/keymaps/piantor_win && nvim keymap.c" # öffnet neovim automatisch 
 
 
+alias cdpianpro="/Users/g/Library/Mobile\ Documents/com~apple~CloudDocs/'!Docs iCloud'/GitHub,\ iCloud/piantor-bt-colemak/config && nvim piantor_pro_bt.keymap"
 alias cdpianbt="/Users/g/Library/Mobile\ Documents/com~apple~CloudDocs/'!Docs iCloud'/GitHub,\ iCloud/piantor-bt-colemak/config && nvim piantor_pro_bt.keymap"
 
 # cd iCloud

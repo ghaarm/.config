@@ -1,16 +1,17 @@
 # Fdb version 4
-["biber footer-footnotes-bibliography"] 1769024006.40586 "footer-footnotes-bibliography.bcf" "footer-footnotes-bibliography.bbl" "footer-footnotes-bibliography" 1769201293.25071 0
-  "footer-footnotes-bibliography.bcf" 1769201293.12285 108540 d3b37df3f3309f2bd8c6fbc38564146e "pdflatex"
+["biber footer-footnotes-bibliography"] 1769869007.28794 "footer-footnotes-bibliography.bcf" "footer-footnotes-bibliography.bbl" "footer-footnotes-bibliography" 1769869028.1656 0
+  "footer-footnotes-bibliography.bcf" 1769869028.03528 108540 d3b37df3f3309f2bd8c6fbc38564146e "pdflatex"
   (generated)
   "footer-footnotes-bibliography.bbl"
   "footer-footnotes-bibliography.blg"
   (rewritten before read)
-["pdflatex"] 1769201292.30645 "/Users/g/.config/nvim/templates/footer-footnotes-bibliography.tex" "footer-footnotes-bibliography.pdf" "footer-footnotes-bibliography" 1769201293.25092 2
-  "/Users/g/.config/nvim/templates/footer-footnotes-bibliography.tex" 1769201292.19395 2833 0c1c0c0d6248bef9fe8db00289b7fab8 ""
+["pdflatex"] 1769869027.21388 "/Users/g/.config/nvim/templates/footer-footnotes-bibliography.tex" "footer-footnotes-bibliography.pdf" "footer-footnotes-bibliography" 1769869028.1658 2
+  "/Users/g/.config/nvim/templates/footer-footnotes-bibliography.tex" 1769869027.14411 2910 010b3d6ac95276afcced0110bce7206a ""
   "/Users/g/Library/Mobile Documents/com~apple~CloudDocs/!Docs iCloud/R Statistik, icloud/Latex, icloud/Latex Projekte/@Vorlagen-Latex/preamble-footnotes-bibliographie-neu.tex" 1766094124.30521 2971 f55001f30f0cbaea3792aa49e0921267 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1246382020 1004 54797486969f23fa377b128694d548df ""
   "/usr/local/texlive/2025/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex8.tfm" 1246382020 988 bdf658c3bfc2d96d3c8b02cfc1c94c20 ""
+  "/usr/local/texlive/2025/texmf-dist/fonts/tfm/public/cm/cmbx10.tfm" 1136768653 1328 c834bbb027764024c09d3d2bf908b5f0 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm" 1136768653 1324 c910af8c371558dc20f2d7822f66fe64 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/tfm/public/cm/cmex10.tfm" 1136768653 992 662f679a0b3d2d53c1b94050fdaa3f50 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/tfm/public/cm/cmmi12.tfm" 1136768653 1524 4414a8315f39513458b80dfc63bff03a ""
@@ -24,6 +25,7 @@
   "/usr/local/texlive/2025/texmf-dist/fonts/tfm/public/cm/cmsy6.tfm" 1136768653 1116 933a60c408fc0a863a92debe84b2d294 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/tfm/public/cm/cmsy8.tfm" 1136768653 1120 8b7d695260f3cff42e636090a8002094 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/tfm/public/latex-fonts/lasy6.tfm" 1136768653 520 4889cce2180234b97cad636b6039c722 ""
+  "/usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb" 1248133631 34811 78b52f49e893bcba91bd7581cdc144c0 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb" 1248133631 32080 340ef9bf63678554ee606688e7b5339d ""
   "/usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb" 1248133631 37912 77d683123f92148345f3fc36a38d9ab1 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb" 1248133631 35752 024fb6c41858982481f6968b5fc26508 ""
@@ -149,14 +151,14 @@
   "/usr/local/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1744895183 5467155 19efa205003f9ecad95fbbaa6ff24da1 ""
   "/usr/local/texlive/2025/texmf-var/web2c/pdftex/pdflatex.fmt" 1744895154 3345739 22dc1c30dad1f7cf4b6f8f893c9bf91c ""
   "/usr/local/texlive/2025/texmf.cnf" 1741450484 577 418a7058ec8e006d8704f60ecd22c938 ""
-  "footer-footnotes-bibliography.aux" 1769201293.11954 416 044dc74a05b611b358ebe7fc2c002190 "pdflatex"
-  "footer-footnotes-bibliography.bbl" 1769024016.27301 466 76d65a242ec496c9b4361af646ff12cb "biber footer-footnotes-bibliography"
-  "footer-footnotes-bibliography.lof" 1769201293.12344 30 dd9a1bdf2f8dbad8adb0552ea4fb4223 "pdflatex"
-  "footer-footnotes-bibliography.lot" 1769201293.12343 30 dd9a1bdf2f8dbad8adb0552ea4fb4223 "pdflatex"
-  "footer-footnotes-bibliography.out" 1769201292.99887 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
-  "footer-footnotes-bibliography.run.xml" 1769201293.12335 2512 a5583ff306e0a060d827f3d08c8ff2af "pdflatex"
-  "footer-footnotes-bibliography.toc" 1769201293.1234 30 dd9a1bdf2f8dbad8adb0552ea4fb4223 "pdflatex"
-  "nvim/templates/footer-footnotes-bibliography.tex" 1769201292.19395 2833 0c1c0c0d6248bef9fe8db00289b7fab8 ""
+  "footer-footnotes-bibliography.aux" 1769869028.03179 729 a5c47362e6b26885be4a4386e4794eb0 "pdflatex"
+  "footer-footnotes-bibliography.bbl" 1769869008.56782 466 76d65a242ec496c9b4361af646ff12cb "biber footer-footnotes-bibliography"
+  "footer-footnotes-bibliography.lof" 1769869028.03589 30 dd9a1bdf2f8dbad8adb0552ea4fb4223 "pdflatex"
+  "footer-footnotes-bibliography.lot" 1769869028.03587 30 dd9a1bdf2f8dbad8adb0552ea4fb4223 "pdflatex"
+  "footer-footnotes-bibliography.out" 1769869028.03307 140 44ce28b248519c9820f9025bc8e14189 "pdflatex"
+  "footer-footnotes-bibliography.run.xml" 1769869028.03579 2512 a5583ff306e0a060d827f3d08c8ff2af "pdflatex"
+  "footer-footnotes-bibliography.toc" 1769869028.03584 160 bd52a64615545498a57b9f88094fe26a "pdflatex"
+  "nvim/templates/footer-footnotes-bibliography.tex" 1769869027.14411 2910 010b3d6ac95276afcced0110bce7206a ""
   (generated)
   "footer-footnotes-bibliography.aux"
   "footer-footnotes-bibliography.bcf"

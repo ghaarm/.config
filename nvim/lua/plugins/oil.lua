@@ -1,7 +1,7 @@
 -- Andrew Courter https://www.youtube.com/watch?v=q1QhV-24DNA
 
 return {
-  'stevearc/oil.nvim',
+  "stevearc/oil.nvim",
   opts = {},
   -- Optional dependencies
   -- dependencies = { { "echasnovski/mini.icons", opts = {} } },
@@ -12,7 +12,7 @@ return {
       delete_to_trash = true,
       skip_confirm_for_simple_edits = true,
       view_options = {
-        show_hidden = true,      -- Use `show_hidden` instead of `how_hidden`
+        show_hidden = true, -- Use `show_hidden` instead of `how_hidden`
         natural_order = true,
         case_insensitive = true, -- Diese Zeile ändert die Sortierung auf case-insensitive
         sort = {
@@ -29,10 +29,15 @@ return {
         wrap = true,
       },
       keymaps = {
+
+        ["R"] = "actions.refresh", -- Refresh auf R legen
+        ["<C-l>"] = "actions.refresh",
         ["<CR>"] = function()
           local oil = require("oil")
           local entry = oil.get_cursor_entry()
-          if not entry then return end
+          if not entry then
+            return
+          end
 
           local dir = oil.get_current_dir() or ""
           local path = dir .. entry.name
@@ -47,7 +52,6 @@ return {
             vim.fn.jobstart({ "sioyek", path }, { detach = true })
             return
           end
-
           -- Standard-Enter-Verhalten für alles andere (Ordner/Dateien)
           require("oil.actions").select.callback()
         end,
@@ -89,7 +93,9 @@ return {
           vim.keymap.set("n", "<leader>p", function()
             local oil = require("oil")
             local entry = oil.get_cursor_entry()
-            if not entry then return end
+            if not entry then
+              return
+            end
             local dir = oil.get_current_dir() or ""
             local path = dir .. entry.name
             if path:match("%.pdf$") then
@@ -104,8 +110,8 @@ return {
             end
           end, { buffer = bufnr, noremap = true, silent = true, desc = "Open PDF with sioyek" })
         end,
-      })
+      }),
     })
   end,
-  vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
+  vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" }),
 }

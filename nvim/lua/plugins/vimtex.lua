@@ -131,6 +131,14 @@ return {
       callback = 1,
       continuous = 1,
       executable = "latexmk",
+      -- options = {
+      --   "-pdfxe", -- <- wichtig: PDF-Modus mit xelatex
+      --   "-shell-escape",
+      --   "-verbose",
+      --   "-file-line-error",
+      --   "-interaction=nonstopmode",
+      --   "-synctex=1",
+      -- },
       options = {
         -- "-pdf",
         "-xelatex", -- damit ich mit Iosevka kompilieren kann
@@ -156,8 +164,6 @@ return {
 -- https://gist.github.com/kha-dinh/c8540052854f3c6954b047abd506b799
 -- Versuch Sioyek mit nvim remote für inverse search
 -- funktioniert nicht
-
-
 
 -- anderer Versuch aus git https://github.com/lervag/vimtex/issues/2323#issuecomment-1047021336
 -- funktioniert nicht

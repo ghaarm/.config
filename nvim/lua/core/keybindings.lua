@@ -34,7 +34,7 @@ vim.api.nvim_set_keymap("i", "<D-s>", "<C-\\><C-n>:w<CR>", { noremap = true, sil
 vim.api.nvim_set_keymap("v", "<D-c>", "y", { noremap = true, silent = true })
 
 -- im insert mode mit alt del das folgende Wort löschen, fängt die Einstellung von Kitty ab
-vim.api.nvim_set_keymap('i', "\x1bd", '<C-o>dW', { noremap = true, silent = true })
+vim.api.nvim_set_keymap("i", "\x1bd", "<C-o>dW", { noremap = true, silent = true })
 
 -- nicht in den insertmodus wechseln ibei o oder O
 vim.api.nvim_set_keymap("n", "o", "o<Esc>", { noremap = true, silent = true })
@@ -46,28 +46,26 @@ vim.api.nvim_set_keymap("v", "<D-c>", '"+y', { noremap = true, silent = true })
 -- shift K um zeile zu trennen und leader K um alte K Funktion zu erhalten
 -- vim.keymap.set('n', 'K', [[:silent keeppatterns s/\%#/\r/<CR>]], { noremap = true, silent = true }) -- ohne reindent
 -- mit reindent
-vim.keymap.set('n', 'K', [[:silent keeppatterns s/\%#/\r/<CR>==]], { noremap = true, silent = true })
+vim.keymap.set("n", "K", [[:silent keeppatterns s/\%#/\r/<CR>==]], { noremap = true, silent = true })
 
-vim.keymap.set('n', '<leader>K', function()
-  vim.cmd('normal! K') -- führt die ursprüngliche K-Aktion aus
+vim.keymap.set("n", "<leader>K", function()
+  vim.cmd("normal! K") -- führt die ursprüngliche K-Aktion aus
 end, { noremap = true, silent = true })
-
-
 
 local keymap = vim.keymap -- for conciseness
 
 keymap.set("i", "jj", "<ESC>", { desc = "Exit insert mode with jj" })
-
+keymap.set("i", "jk", "<ESC>", { desc = "Exit insert mode with jj" })
+keymap.set("i", "jl", "<ESC>", { desc = "Exit insert mode with jj" })
+keymap.set("i", "tn", "<ESC>", { desc = "Exit insert mode with jj" })
 
 keymap.set("n", "<leader><leader>n", ":source $MYVIMRC<CR>", { desc = "Reload Neovim Config" })
 
 -- Navigation
 vim.keymap.set("n", "<leader><leader>a", ":Alpha<CR>", { desc = "Return to Alpha Dashboard" })
 
-
 vim.keymap.set("n", "<leader>bn", ":bn<CR>", { desc = "Nächster Buffer" })
 vim.keymap.set("n", "<leader>bp", ":bp<CR>", { desc = "Vorheriger Buffer" })
-
 
 keymap.set("n", "<leader>nh", ":nohl<CR>", { desc = "Clear search highlights" })
 
@@ -76,15 +74,15 @@ keymap.set("n", "<leader>+", "<C-a>", { desc = "Increment number" }) -- incremen
 keymap.set("n", "<leader>-", "<C-x>", { desc = "Decrement number" }) -- decrement
 
 -- window management
-keymap.set("n", "<leader>vs", "<C-w>v", { desc = "Split window vertically" })                   -- split window vertically
-keymap.set("n", "<leader>hs", "<C-w>s", { desc = "Split window horizontally" })                 -- split window horizontally
-keymap.set("n", "<leader>se", "<C-w>=", { desc = "Make splits equal size" })                    -- make split windows equal width & height
-keymap.set("n", "<leader>sx", "<cmd>close<CR>", { desc = "Close current split" })               -- close current split window
+keymap.set("n", "<leader>vs", "<C-w>v", { desc = "Split window vertically" }) -- split window vertically
+keymap.set("n", "<leader>hs", "<C-w>s", { desc = "Split window horizontally" }) -- split window horizontally
+keymap.set("n", "<leader>se", "<C-w>=", { desc = "Make splits equal size" }) -- make split windows equal width & height
+keymap.set("n", "<leader>sx", "<cmd>close<CR>", { desc = "Close current split" }) -- close current split window
 
-keymap.set("n", "<leader>to", "<cmd>tabnew<CR>", { desc = "Open new tab" })                     -- open new tab
-keymap.set("n", "<leader>tx", "<cmd>tabclose<CR>", { desc = "Close current tab" })              -- close current tab
-keymap.set("n", "<leader>tn", "<cmd>tabn<CR>", { desc = "Go to next tab" })                     --  go to next tab
-keymap.set("n", "<leader>tp", "<cmd>tabp<CR>", { desc = "Go to previous tab" })                 --  go to previous tab
+keymap.set("n", "<leader>to", "<cmd>tabnew<CR>", { desc = "Open new tab" }) -- open new tab
+keymap.set("n", "<leader>tx", "<cmd>tabclose<CR>", { desc = "Close current tab" }) -- close current tab
+keymap.set("n", "<leader>tn", "<cmd>tabn<CR>", { desc = "Go to next tab" }) --  go to next tab
+keymap.set("n", "<leader>tp", "<cmd>tabp<CR>", { desc = "Go to previous tab" }) --  go to previous tab
 keymap.set("n", "<leader>tf", "<cmd>tabnew %<CR>", { desc = "Open current buffer in new tab" }) --  move current buffer to new tab
 keymap.set("n", "<leader>xa", "<cmd>xa<cr>", { desc = "Save all and exit" })
 keymap.set("n", "<leader>bd", "<cmd>bd<cr>", { desc = "Delete buffer" })
@@ -111,17 +109,16 @@ keymap.set("n", "<leader>fc", "<cmd>Telescope grep_string<cr>", { desc = "Find s
 keymap.set("n", "<leader>ft", "<cmd>TodoTelescope<cr>", { desc = "Find todos" })
 keymap.set("i", "<D-i>", "<cmd>Telescope bibtex<cr>", { desc = "Open Telescope BibTeX search" }) -- D steht für die Command taste
 
-
 -- Scrollen vom Primagen damit Cursor immer in der Mitte, dann neoscroll entfernen
 
-vim.api.nvim_set_keymap('n', '<C-d>', '<C-d>zz', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<C-u>', '<C-u>zz', { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<C-d>", "<C-d>zz", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<C-u>", "<C-u>zz", { noremap = true, silent = true })
 
 -- alt + backspace soll word löschen und dann insert modus machen
 
-vim.api.nvim_set_keymap('i', '<M-BS>', '<C-w>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap("i", "<M-BS>", "<C-w>", { noremap = true, silent = true })
 -- cmd + backspace löscht ganze Zeile
-vim.api.nvim_set_keymap('i', '<D-BS>', '<C-u>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap("i", "<D-BS>", "<C-u>", { noremap = true, silent = true })
 --
 ------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------
@@ -183,7 +180,7 @@ vim.api.nvim_set_keymap('i', '<D-BS>', '<C-u>', { noremap = true, silent = true 
 -----------------------------------------------------------------------------
 -----------------------------------------------------------------
 -- aus functions.lua um dabtei im Finder zu öffnen
-vim.api.nvim_set_keymap('n', '<leader>o', ':lua OpenInFinder()<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>o", ":lua OpenInFinder()<CR>", { noremap = true, silent = true })
 ---
 ---
 --- HACK: How I navigate between buffers in neovim
