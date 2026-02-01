@@ -5,6 +5,18 @@ local i = ls.insert_node
 local f = ls.function_node
 return {
   -- tsup: Superscript hinter bereits getipptem Text
+
+  s({ trig = "g%", wordTrig = false, desr = "~\\% geschütztes Prozent", snippetType = "autosnippet" }, {
+    t([[~\%]]),
+  }),
+  -- s({
+  --   trig = "g%",
+  --   wordTrig = false, -- cmtsub, O2tsub, ...
+  --   dscr = "~\\% geschütztes Prozent",
+  -- }, {
+  --   t("~\\%"),
+  --   i(1),
+  -- }),
   s({
     trig = "tsup",
     wordTrig = false, -- darf mitten im Wort stehen (cmtsup, O2tsup, ...)

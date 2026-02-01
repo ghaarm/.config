@@ -129,7 +129,24 @@ return {
     -- set keymaps
     local keymap = vim.keymap -- for conciseness
 
-    keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "Fuzzy find files in cwd" })
+    -- keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "Fuzzy find files in cwd" })
+    -- keymap.set("n", "<leader>ff", function()
+    keymap.set("n", "<leader>fp", function()
+      require("telescope.builtin").find_files({
+        hidden = true,
+        no_ignore = true,
+        no_ignore_parent = true,
+      })
+    end, { desc = "Find files (ALL, no ignore)" })
+
+    -- keymap.set("n", "<leader>fF", function()
+    keymap.set("n", "<leader>fP", function()
+      require("telescope.builtin").find_files({
+        hidden = false, -- optional
+        no_ignore = false,
+        no_ignore_parent = false,
+      })
+    end, { desc = "Find files (restricted)" })
     keymap.set("n", "<leader>fr", "<cmd>Telescope oldfiles<cr>", { desc = "Fuzzy find recent files" })
     keymap.set("n", "<leader>fs", "<cmd>Telescope live_grep<cr>", { desc = "Find string in cwd" })
     keymap.set("n", "<leader>fc", "<cmd>Telescope grep_string<cr>", { desc = "Find string under cursor in cwd" })
