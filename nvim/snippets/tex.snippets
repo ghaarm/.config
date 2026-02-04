@@ -407,7 +407,7 @@ snippet example "Example" bi
 	\end{example}
 
 
-snippet png "png" b
+snippet pngfig "png bild" b
 	
 	\begin{figure}[H]
     	\centering
@@ -416,8 +416,17 @@ snippet png "png" b
     	\label{fig:${3:$2}}
 	\end{figure}
 	${0}
+snippet pngtab "png Tabelle" b
+	
+	\begin{table}[H]
+    	\centering
+    	\caption{${2:Name}}
+    	\label{tab:${3:$2}}
+    	\includegraphics[width=0.8\textwidth]{./bilder/${1:Name}}
+	\end{table}
+	${0}
 
-snippet pngup "png bilder im Überordner" b
+snippet pngfigup "png bilder im Überordner" b
 	
 	\begin{figure}[H]
     	\centering
@@ -427,7 +436,7 @@ snippet pngup "png bilder im Überordner" b
 	\end{figure}
 	${0}
 #
-snippet pngdown "png bilder im Unterordner" b
+snippet pngfigdown "png bilder im Unterordner" b
 	
 	\begin{figure}[H]
     	\centering
@@ -435,6 +444,26 @@ snippet pngdown "png bilder im Unterordner" b
     	\caption{${2:Name}}
     	\label{fig:${3:$2}}
 	\end{figure}
+	${0}
+#
+snippet pngtabup "png Tabelle im Überordner" b
+	
+	\begin{table}[H]
+    	\centering
+    	\includegraphics[width=0.8\textwidth]{../bilder/${1:Name}}
+    	\caption{${2:Name}}
+    	\label{tab:${3:$2}}
+	\end{table}
+	${0}
+#
+snippet pngtabdown "png Tabelle im Unterordner" b
+	
+	\begin{table}[H]
+    	\centering
+    	\includegraphics[width=0.8\textwidth]{./bilder/${1:Name}}
+    	\caption{${2:Name}}
+    	\label{tab:${3:$2}}
+	\end{table}
 	${0}
 #
 
@@ -680,3 +709,8 @@ snippet kernpunkte "Kernpunkte gmics"
     \item Key Point 3
   \end{enumerate}
 
+
+snippet beginmulticols2 "begin multicols 2"
+  \begin{multicols}{2}
+snippet endmulticols "end multicols"
+  \end{multicols}

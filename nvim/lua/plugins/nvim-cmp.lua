@@ -2,15 +2,15 @@ return {
   "hrsh7th/nvim-cmp",
   event = { "InsertEnter", "CmdlineEnter" },
   dependencies = {
-    "hrsh7th/cmp-buffer",       -- source for text in buffer
-    "hrsh7th/cmp-path",         -- source for file system paths
-    "L3MON4D3/LuaSnip",         -- snippet engine
+    "hrsh7th/cmp-buffer", -- source for text in buffer
+    "hrsh7th/cmp-path", -- source for file system paths
+    "L3MON4D3/LuaSnip", -- snippet engine
     "saadparwaiz1/cmp_luasnip", -- for autocompletion
     -- "rafamadriz/friendly-snippets", -- useful snippets
     -- "onsails/lspkind.nvim", -- vs-code like pictograms
     "hrsh7th/cmp-cmdline",
     "petertriho/cmp-git",
-    "f3fora/cmp-spell",
+    -- "f3fora/cmp-spell", -- auskommentieren, wenn spell vorschläge nicht im dropdown angezeigt werden tollen
     "micangl/cmp-vimtex",
     -- "aspeddro/cmp-pandoc.nvim",
   },
@@ -91,52 +91,59 @@ return {
 
       mapping = cmp.mapping.preset.insert({
         -- Tab springt nur zwischen Snippet-Platzhaltern
-        ['<Tab>'] = cmp.mapping(function(fallback)
+        ["<Tab>"] = cmp.mapping(function(fallback)
           if luasnip.jumpable(1) then
             luasnip.jump(1) -- Springe zum nächsten Platzhalter im Snippet
           else
-            fallback()      -- Führe Standard-Tab-Verhalten aus (Einrücken)
+            fallback() -- Führe Standard-Tab-Verhalten aus (Einrücken)
           end
-        end, { 'i', 's' }),
+        end, { "i", "s" }),
 
         -- Shift+Tab springt zum vorherigen Platzhalter im Snippet
-        ['<S-Tab>'] = cmp.mapping(function(fallback)
+        ["<S-Tab>"] = cmp.mapping(function(fallback)
           if luasnip.jumpable(-1) then
             luasnip.jump(-1) -- Springe zum vorherigen Platzhalter
           else
-            fallback()       -- Standard Shift+Tab-Verhalten
+            fallback() -- Standard Shift+Tab-Verhalten
           end
-        end, { 'i', 's' }),
+        end, { "i", "s" }),
         ["<C-Space>"] = cmp.mapping.complete(), -- <── das hier ergänzen
         -- Control + K für den nächsten Eintrag in der Autocompletion
-        ['<D-j>'] = cmp.mapping(function(fallback)
+        ["<D-j>"] = cmp.mapping(function(fallback)
           if cmp.visible() then
             cmp.select_next_item() -- Wähle den nächsten Autocomplete-Eintrag
           else
-            fallback()             -- Wenn kein Menü offen ist, mache nichts
+            fallback() -- Wenn kein Menü offen ist, mache nichts
           end
-        end, { 'i', 'c' }),
+        end, { "i", "c" }),
 
         -- Control + J für den vorherigen Eintrag in der Autocompletion (optional)
-        ['<D-k>'] = cmp.mapping(function(fallback)
+        ["<D-k>"] = cmp.mapping(function(fallback)
           if cmp.visible() then
             cmp.select_prev_item() -- Wähle den vorherigen Autocomplete-Eintrag
           else
             fallback()
           end
-        end, { 'i', 'c' }),
+        end, { "i", "c" }),
         -- NEU: Pfeiltasten für Menü-Navigation, sonst normales Cursorverhalten
         ["<Down>"] = cmp.mapping(function(fallback)
-          if cmp.visible() then cmp.select_next_item() else fallback() end
+          if cmp.visible() then
+            cmp.select_next_item()
+          else
+            fallback()
+          end
         end, { "i", "c" }),
         ["<Up>"] = cmp.mapping(function(fallback)
-          if cmp.visible() then cmp.select_prev_item() else fallback() end
+          if cmp.visible() then
+            cmp.select_prev_item()
+          else
+            fallback()
+          end
         end, { "i", "c" }),
 
+        ["<D-b>"] = cmp.mapping.scroll_docs(-4),
 
-        ['<D-b>'] = cmp.mapping.scroll_docs(-4),
-
-        ['<D-f>'] = cmp.mapping.scroll_docs(4),
+        ["<D-f>"] = cmp.mapping.scroll_docs(4),
         -- ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Bestätigt die Auswahl mit Enter
         -- https://github.com/hrsh7th/nvim-cmp/wiki/Example-mappings#safely-select-entries-with-cr damit bei enter nicht etwas ausgewählt wird auch wenn nicht markiert ist
         ["<CR>"] = cmp.mapping({
@@ -183,17 +190,17 @@ return {
         -- { name = "orgmode" },
         -- { name = "pandoc" },
         -- { name = "omni" },
-        { name = "buffer",  keyword_length = 3 }, -- text within current buffer
-        {
-          name = "spell",
-          keyword_length = 4,
-          option = {
-            keep_all_entries = false,
-            enable_in_context = function()
-              return true
-            end
-          },
-        },
+        { name = "buffer", keyword_length = 3 }, -- text within current buffer
+        -- { -- auskommentieren, wenn spell vorschläge nicht im dropdown angezeigt werden tollen
+        --   name = "spell",
+        --   keyword_length = 4,
+        --   option = {
+        --     keep_all_entries = false,
+        --     enable_in_context = function()
+        --       return true
+        --     end,
+        --   },
+        -- },
         { name = "path" },
 
         { name = "cmp_r" },
@@ -203,7 +210,7 @@ return {
         select = false,
       },
       view = {
-        entries = 'custom',
+        entries = "custom",
       },
       window = {
         completion = cmp.config.window.bordered(),
@@ -222,7 +229,6 @@ return {
       },
     })
 
-
     -- -- `/` cmdline setup für suche.
     -- cmp.setup.cmdline('/', {
     --   mapping = cmp.mapping.preset.cmdline(),
@@ -240,9 +246,8 @@ return {
     --   }
     -- })
 
-
     -- -- `/` cmdline setup für suche.
-    cmp.setup.cmdline('/', {
+    cmp.setup.cmdline("/", {
       mapping = cmp.mapping.preset.cmdline({
         ["<CR>"] = cmp.mapping(function(fallback)
           if cmp.visible() and cmp.get_active_entry() then
@@ -250,19 +255,19 @@ return {
           else
             fallback()
           end
-        end, { "c" })
+        end, { "c" }),
       }),
       sources = cmp.config.sources({
-        { name = 'buffer', keyword_length = 3 }, -- Nur Wörter mit mindestens 3 Zeichen vorschlagen
-        { name = 'spell' }                       -- Optionale Rechtschreibprüfung
+        { name = "buffer", keyword_length = 3 }, -- Nur Wörter mit mindestens 3 Zeichen vorschlagen
+        -- { name = "spell" }, -- Optionale Rechtschreibprüfung  auskommentieren, wenn spell vorschläge nicht im dropdown angezeigt werden tollen
       }),
       completion = {
-        completeopt = 'menu,menuone,noselect', -- Verhindert automatische Auswahl
+        completeopt = "menu,menuone,noselect", -- Verhindert automatische Auswahl
       },
     })
 
     -- -- `:` cmdline setup für commandline.
-    cmp.setup.cmdline(':', {
+    cmp.setup.cmdline(":", {
       mapping = cmp.mapping.preset.cmdline({
         ["<CR>"] = cmp.mapping(function(fallback)
           if cmp.visible() and cmp.get_active_entry() then
@@ -270,16 +275,16 @@ return {
           else
             fallback()
           end
-        end, { "c" })
+        end, { "c" }),
       }),
       sources = cmp.config.sources({
-        { name = 'luasnip' },
-        { name = 'buffer' },
-        { name = 'path' },
-        { name = 'cmdline' }
+        { name = "luasnip" },
+        { name = "buffer" },
+        { name = "path" },
+        { name = "cmdline" },
       }),
       completion = {
-        completeopt = 'menu,menuone,noselect', -- Verhindert automatische Auswahl
+        completeopt = "menu,menuone,noselect", -- Verhindert automatische Auswahl
       },
     })
   end,
