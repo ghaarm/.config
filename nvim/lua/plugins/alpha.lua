@@ -49,7 +49,9 @@ return {
         local ok_ext = pcall(function()
           telescope.extensions.possession.list({})
         end)
-        if ok_ext then return end
+        if ok_ext then
+          return
+        end
       end
 
       -- Fallback, falls Telescope/Extension nicht verfügbar
@@ -67,7 +69,7 @@ return {
       dashboard.button("t", "  Templates", ":Telescope find_files cwd=~/.config/nvim/templates<cr>"),
       -- dashboard.button("c", "  Config", ":e $MYVIMRC <CR>"),
       -- dashboard.button("i", "  Info", "<cmd>e ~/.config/CheatSheet.md<cr>"),
-      dashboard.button("p", "  Plugins", "<cmd>Lazy<cr>"),
+      dashboard.button("p", "  Plugins", ":Telescope find_files cwd=~/.config/nvim/lua/plugins<cr>"),
       dashboard.button("h", "  Checkhealth", "<cmd>checkhealth<cr>"),
       dashboard.button("q", "  Quit", "<cmd>qa!<CR>"),
     }
