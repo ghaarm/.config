@@ -4,11 +4,20 @@ local t = ls.text_node
 local i = ls.insert_node
 local f = ls.function_node
 return {
-  -- tsup: Superscript hinter bereits getipptem Text
-
+  -- Autosnippets
+  --
+  --
   s({ trig = "g%", wordTrig = false, desr = "~\\% geschütztes Prozent", snippetType = "autosnippet" }, {
     t([[~\%]]),
   }),
+  s({ trig = "reff", wordTrig = true, dscr = "referenz latex", snippetType = "autosnippet" }, {
+    t("\\ref{"),
+    i(1),
+    t("}"),
+  }),
+  -- normale snippets
+  --
+  --
   -- s({
   --   trig = "g%",
   --   wordTrig = false, -- cmtsub, O2tsub, ...
