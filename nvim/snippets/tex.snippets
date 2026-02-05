@@ -445,7 +445,15 @@ snippet pngfigdown "png bilder im Unterordner" b
     	\label{fig:${3:$2}}
 	\end{figure}
 	${0}
-#
+
+snippet pngfigenter "png fig unterordner center für multicols"
+  \begin{center}
+      \centering
+      \includegraphics[width=0.5\textwidth]{./bilder/${1:Name}}
+      \caption{${2:Name}}
+      \label{fig:${2}}
+  \end{center}
+
 snippet pngtabup "png Tabelle im Überordner" b
 	
 	\begin{table}[H]
@@ -465,7 +473,14 @@ snippet pngtabdown "png Tabelle im Unterordner" b
     	\label{tab:${3:$2}}
 	\end{table}
 	${0}
-#
+
+snippet pngtabcenter "png tabelle unterordner center für multicols"
+  \begin{center}
+      \centering
+      \caption{${2:Name}}
+      \label{tab:${2}}
+      \includegraphics[width=0.5\textwidth]{./bilder/${1:Name}}
+  \end{center}
 
 # png same folder
 snippet pppsame "png same folder" b
@@ -714,3 +729,6 @@ snippet beginmulticols2 "begin multicols 2"
   \begin{multicols}{2}
 snippet endmulticols "end multicols"
   \end{multicols}
+
+snippet ref "reference latex"
+  \ref{$:1}
