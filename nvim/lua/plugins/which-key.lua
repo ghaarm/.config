@@ -139,6 +139,10 @@ return {
         nowait = true,
         remap = false,
       },
+      -- { "<leader>p", group = " " },
+      -- leader leader Gruppe
+      { "<leader><leader>", group = "quick" }, -- macht den Prefix sichtbar
+      { "<leader><leader>x", desc = "Source current file" },
     })
     -- wk.setup(opts.setup)
     -- wk.register(opts.defaults)

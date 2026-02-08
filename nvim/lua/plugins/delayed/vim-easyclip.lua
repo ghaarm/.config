@@ -13,6 +13,18 @@ return {
 
   -- Läuft NACH dem Laden des Plugins: Keymaps/Overrides
   config = function()
+    -- Optional: falls schon gemappt, erst löschen
+    pcall(vim.keymap.del, "n", "<leader>pp")
+    pcall(vim.keymap.del, "n", "<leader>pP")
+    -- Leader + p p -> unformatted paste after
+    vim.keymap.set("n", "<leader>pp", "<cmd>EasyClipPasteUnformattedAfter<CR>", {
+      silent = true,
+      desc = "EasyClip: paste unformatted after",
+    })
+    vim.keymap.set("n", "<leader>pP", "<cmd>EasyClipPasteUnformattedBefore<CR>", {
+      silent = true,
+      desc = "EasyClip: paste unformatted before",
+    })
     -- Erstellt eine Tastenkombination für 'gm', um einen Marker zu setzen
     -- vim.api.nvim_set_keymap("n", "gm", ":lua set_mark()<CR>", { noremap = true, silent = true })
 

@@ -9,7 +9,7 @@ return {
     -- add options here
     -- or leave it empty to use the default settings
     default = {
-
+      verbose = false,
       -- file and directory options
       -- expands dir_path to an absolute path
       -- When you paste a new image, and you hover over its path, instead of:
