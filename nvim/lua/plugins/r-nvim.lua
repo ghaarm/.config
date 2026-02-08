@@ -6,6 +6,7 @@ return {
   {
     "R-nvim/R.nvim",
     lazy = false,
+    submodules = true,
     config = function()
       -- Setzen der Sprachumgebung für R
       vim.cmd("let $LANG = 'en_US.UTF-8'")
@@ -50,7 +51,6 @@ return {
       -- macht die Farben so wie in meinem eingestellten colorscheme, andere varianten auf der Homepage
       vim.g.rout_follow_colorscheme = true
 
-
       -- Funktion um nach dem Knitten in R automatisch die geknittete HTML im Browser zu öffnen
       local function knit_and_open()
         -- Run the KnitRhtml command
@@ -66,7 +66,6 @@ return {
       -- Create a custom command KnitRhtmlAndOpen that knits the file and opens it
       vim.api.nvim_create_user_command("KnitRhtmlAndOpen", knit_and_open, {})
     end, -- Ende der config = function
-
   },
   {
     "nvim-treesitter/nvim-treesitter",
@@ -85,5 +84,5 @@ return {
       require("cmp_r").setup({})
     end,
   },
-  vim.api.nvim_set_keymap('t', 'jj', [[<C-\><C-n>]], { noremap = true, silent = true })
+  vim.api.nvim_set_keymap("t", "jj", [[<C-\><C-n>]], { noremap = true, silent = true }),
 }

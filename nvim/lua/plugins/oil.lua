@@ -43,15 +43,15 @@ return {
           local path = dir .. entry.name
 
           -- Nur Dateien (keine Ordner) und nur PDFs mit sioyek öffnen
-          if entry.type ~= "directory" and path:lower():match("%.pdf$") then
-            if vim.fn.executable("sioyek") ~= 1 then
-              vim.notify("sioyek nicht im PATH gefunden", vim.log.levels.WARN)
-              return
-            end
-            -- Listenform von jobstart: sicher bei Leerzeichen
-            vim.fn.jobstart({ "sioyek", path }, { detach = true })
-            return
-          end
+          -- if entry.type ~= "directory" and path:lower():match("%.pdf$") then
+          --   if vim.fn.executable("sioyek") ~= 1 then
+          --     vim.notify("sioyek nicht im PATH gefunden", vim.log.levels.WARN)
+          --     return
+          --   end
+          --   -- Listenform von jobstart: sicher bei Leerzeichen
+          --   vim.fn.jobstart({ "sioyek", path }, { detach = true })
+          --   return
+          -- end
           -- Standard-Enter-Verhalten für alles andere (Ordner/Dateien)
           require("oil.actions").select.callback()
         end,
