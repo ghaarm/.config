@@ -333,3 +333,8 @@ export PKG_CONFIG_PATH="/opt/homebrew/opt/cbc/lib/pkgconfig:/opt/homebrew/opt/cl
 export CPPFLAGS="-I/opt/homebrew/opt/cbc/include -I/opt/homebrew/opt/clp/include -I/opt/homebrew/opt/coinutils/include -I/opt/homebrew/opt/osi/include -I/opt/homebrew/opt/cgl/include $CPPFLAGS"
 export LDFLAGS="-L/opt/homebrew/opt/cbc/lib -L/opt/homebrew/opt/clp/lib -L/opt/homebrew/opt/coinutils/lib -L/opt/homebrew/opt/osi/lib -L/opt/homebrew/opt/cgl/lib $LDFLAGS"
 
+# OpenAI API Key (aus externer Datei laden)
+if [ -f "$HOME/.config/secrets/openai.env" ]; then
+  source "$HOME/.config/secrets/openai.env"
+fi
+

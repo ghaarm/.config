@@ -2,11 +2,13 @@
 
 vim.g.maplocalleader = ","
 
+vim.api.nvim_set_keymap("t", "jj", [[<C-\><C-n>]], { noremap = true, silent = true })
+
 return {
   {
     "R-nvim/R.nvim",
     lazy = false,
-    submodules = true,
+    -- submodules = true,
     config = function()
       -- Setzen der Sprachumgebung für R
       vim.cmd("let $LANG = 'en_US.UTF-8'")
@@ -76,13 +78,17 @@ return {
       })
     end,
   },
-  "R-nvim/cmp-r",
+  -- "R-nvim/cmp-r", -- no longer needed after major update 2026-02-08
   {
     "hrsh7th/nvim-cmp",
     config = function()
-      require("cmp").setup({ sources = { { name = "cmp_r" } } })
-      require("cmp_r").setup({})
+      require("cmp").setup({
+        sources = {
+          -- { name = "cmp_r" },
+        },
+      })
+      -- require("cmp_r").setup({})
     end,
   },
-  vim.api.nvim_set_keymap("t", "jj", [[<C-\><C-n>]], { noremap = true, silent = true }),
+  -- vim.api.nvim_set_keymap("t", "jj", [[<C-\><C-n>]], { noremap = true, silent = true }),
 }

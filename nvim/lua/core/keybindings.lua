@@ -123,63 +123,22 @@ vim.api.nvim_set_keymap("i", "<D-BS>", "<C-u>", { noremap = true, silent = true 
 ------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------
+-- Ersatz für vim-easy clip, ausschneiden mit m und gm für marks
+
+-- Normal: m / mm
+vim.keymap.set("n", "m", '"+x', { noremap = true, silent = true })
+vim.keymap.set("n", "mm", '"+dd', { noremap = true, silent = true })
+
+-- Visual: nur m
+vim.keymap.set("x", "m", '"+d', { noremap = true, silent = true })
+
+-- 3) Marks: m{a-zA-Z} -> gm{a-zA-Z}, `m` frei machen
+vim.keymap.set("n", "gm", "m", { noremap = true, silent = true })
+vim.keymap.set("n", "gM", "M", { noremap = true, silent = true }) -- optional: "M" (Middle of screen) bleibt sonst, je nach Geschmack
 ------------------------------------------------------------------------------------
--- datei im Finder öffnen
---
--- datei im Finder öffnen
-
--- Initialize tables to avoid nil errors
--- _G.cmp_mappings = _G.cmp_mappings or {}
--- _G.bibtex_mappings = _G.bibtex_mappings or {}
--- _G.telescope_mappings = _G.telescope_mappings or {}
-
--- nvim-cmp specific keybindings
--- _G.cmp_mappings = {
---   ["<C-k>"] = { "select_prev_item", { desc = "Previous suggestion" } },
---   ["<C-j>"] = { "select_next_item", { desc = "Next suggestion" } },
---   ["<C-b>"] = { "scroll_docs", { -4, desc = "Scroll docs up" } },
---   ["<C-f>"] = { "scroll_docs", { 4, desc = "Scroll docs down" } },
---   ["<C-Space>"] = { "complete", { desc = "Show completion suggestions" } },
---   ["<C-e>"] = { "abort", { desc = "Close completion window" } },
---   ["<CR>"] = { "confirm", { { select = false }, desc = "Confirm selection" } },
--- }
--- BibTeX specific keybindings
--- _G.bibtex_mappings = {
---   ["<CR>"] = { "key_append", '%s', { desc = "Append key" } },
---   ["<C-e>"] = { "entry_append", { desc = "Append entry" } },
---   ["<C-c>"] = { "citation_append", '{{author}} ({{year}}), {{title}}.', { desc = "Append citation" } },
--- }
-
--- -- Telescope actions keybindings
--- _G.telescope_mappings = {
---   ["<C-k>"] = { "move_selection_previous", { desc = "Move to prev result" } },
---   ["<C-j>"] = { "move_selection_next", { desc = "Move to next result" } },
---   ["<C-q>"] = { "send_selected_to_qflist", { desc = "Send selected to qflist" } },
---   ["<C-t>"] = { "smart_open_with_trouble", { desc = "Open with trouble" } },
--- }
-
--- neoscroll
--- neoscroll = require('neoscroll')
--- local keymap = {
---   ["<D-k>"] = function() neoscroll.ctrl_u({ duration = 250 }) end;
---   ["<D-j>"] = function() neoscroll.ctrl_d({ duration = 250 }) end;
---   -- -- ["<C-b>"] = function() neoscroll.ctrl_b({ duration = 450 }) end;
---   -- ["<C-f>"] = function() neoscroll.ctrl_f({ duration = 450 }) end;
---   -- ["<C-y>"] = function() neoscroll.scroll(-0.1, { move_cursor=false; duration = 100 }) end;
---   -- ["<C-e>"] = function() neoscroll.scroll(0.1, { move_cursor=false; duration = 100 }) end;
---   -- ["zt"]    = function() neoscroll.zt({ half_screen_duration = 250 }) end;
---   -- ["zz"]    = function() neoscroll.zz({ half_screen_duration = 250 }) end;
---   -- ["zb"]    = function() neoscroll.zb({ half_screen_duration = 250 }) end;
---   -- ["G"]     = function() neoscroll.G({ half_screen_duration = 250 }) end;
---   -- ["gg"]    = function() neoscroll.gg({ half_screen_duration = 250 }) end;
--- }
--- local modes = { 'n', 'v', 'x' }
--- for key, func in pairs(keymap) do
---   vim.keymap.set(modes, key, func)
--- end
 -----------------------------------------------------------------------------
 -----------------------------------------------------------------
--- aus functions.lua um dabtei im Finder zu öffnen
+-- aus functions.lua um Datei im Finder zu öffnen
 vim.api.nvim_set_keymap("n", "<leader>o", ":lua OpenInFinder()<CR>", { noremap = true, silent = true })
 ---
 ---

@@ -69,3 +69,5 @@ vim.keymap.set("n", "<leader><leader>x", function()
   end
   vim.notify("Sourced: " .. file)
 end, { desc = "Source current file" })
+
+vim.notify("functions.lua loaded (end)")

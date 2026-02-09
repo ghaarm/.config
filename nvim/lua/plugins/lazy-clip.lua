@@ -32,6 +32,6 @@ return {
   end,
 
   keys = {
-    { "<C-w>", "<cmd>LazyClip<CR>", desc = "Open Clipboard Manager" },
+    { "<leader>lc", "<cmd>LazyClip<CR>", desc = "Open Clipboard Manager" },
   },
 }
