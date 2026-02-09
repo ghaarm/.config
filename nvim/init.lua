@@ -1,5 +1,7 @@
-require("core")
+vim.g.mapleader = " " -- weil sonst die functions.lua keinen leader hat, der wird erst in den keybindings gesetzt
+vim.g.maplocalleader = ","
 
+require("core")
 
 -- Set the Python 3 host program to the virtual environment Pythoni
 -- für vimtex live preview, brauche eine virtuelle Umgebung damit pynvim läuft

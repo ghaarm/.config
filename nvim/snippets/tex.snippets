@@ -732,3 +732,11 @@ snippet endmulticols "end multicols"
 
 snippet ref "reference latex"
   \ref{$:1}
+
+snippet equationmulti "equation for multicols breite"
+  \begin{equation}
+  \resizebox{\columnwidth}{!}{$
+  \text{${1:ergebnis}} = ${2:formel}
+  $}
+  \end{equation}
+
