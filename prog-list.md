@@ -134,6 +134,10 @@ Nachdem die Installation abgeschlossen ist, starte den Finder einmal neu (du kan
 - [ ] Markdown für Finder
 
 - [ ] nerd font Sauce Code Pro
+- [ ] nerd font blexmono re: bashbunni youtube
+  - [ ] brew install --cask font-blex-mono-nerd-font
+- [ ] terminess nerd font re: bashbunni youtube
+  - [ ] brew install --cask font-terminess-ttf-nerd-font
 
 - [ ] fzf 
 

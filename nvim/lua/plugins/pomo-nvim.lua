@@ -10,6 +10,7 @@ return {
     { "<leader>p1", "<cmd>TimerSession pomo1<CR>", desc = "Pomo: Session pomo1" },
     { "<leader>p2", "<cmd>TimerSession pomo2<CR>", desc = "Pomo: Session pomo2" },
     { "<leader>p4", "<cmd>TimerSession pomo4<CR>", desc = "Pomo: Session pomo4" },
+    { "<leader>p5", "<cmd>TimerSession pomo50<CR>", desc = "Pomo: Session pomo50" },
     { "<leader>pf", "<cmd>TimerShow<CR>", desc = "Pomo: Front (show) Timer" },
     { "<leader>ph", "<cmd>TimerHide<CR>", desc = "Pomo: Hide timer" },
     { "<leader>pp", "<cmd>TimerPause<CR>", desc = "Pomo: Pause timer" },
@@ -84,6 +85,10 @@ return {
         { name = "Short Break", duration = "5m" },
         { name = "Work", duration = "25m" },
         { name = "Long Break", duration = "15m" },
+      },
+      pomo50 = {
+        { name = "Work", duration = "50m" },
+        { name = "Short Break", duration = "10m" },
       },
     },
   },

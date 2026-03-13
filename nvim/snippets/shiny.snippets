@@ -9,6 +9,16 @@ snippet selectIn "selectInput"
   ),
   ${0}
 
+snippet selectIn-ns "selectInput-ns"
+  selectInput(ns("${1:df-name})", "${2:display-name}",
+  choices = c(
+				  "${3:wahl-1}",
+				  "${4:wahl-2}",
+				  "${5:wahl-3}"),
+  selected = "${6:voreingestellt}",
+  ),
+  ${0}
+
 
 snippet textIn "textInput"
   textInput("${1:df-name}", "${2:display-name}")
@@ -16,6 +26,9 @@ snippet textIn "textInput"
 
 snippet numericIn "numericInput"
   numericInput("${1:df-name}", "${2:display-name}", value = "NULL")
+  ${0}
+snippet numericIn-ns "numericInput-ns"
+  numericInput("ns(${1:df-name})", "${2:display-name}", value = "NULL")
   ${0}
 
 

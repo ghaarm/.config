@@ -119,7 +119,9 @@ return {
     -- }
 
     -- Kürzel für Vimtex-Funktionen über den lokalen Leader
-    vim.api.nvim_set_keymap("n", "<Localleader>v", ":VimtexView<CR>", { noremap = true, silent = true })
+    vim.api.nvim_set_keymap("n", "<Localleader>lu", ":VimtexCompile<CR>", { noremap = true, silent = true })
+    vim.api.nvim_set_keymap("n", "<Localleader>vl", ":VimtexView<CR>", { noremap = true, silent = true })
+    vim.api.nvim_set_keymap("n", "<Localleader>vt", ":VimtexTocToggle<CR>", { noremap = true, silent = true })
 
     -- Mapping für :VimtexClean auf <leader>cc
     vim.api.nvim_set_keymap("n", "<leader>vc", ":VimtexClean<CR>", { noremap = true, silent = true })

@@ -49,15 +49,18 @@ vim.api.nvim_set_keymap("v", "<D-c>", '"+y', { noremap = true, silent = true })
 vim.keymap.set("n", "K", [[:silent keeppatterns s/\%#/\r/<CR>==]], { noremap = true, silent = true })
 
 vim.keymap.set("n", "<leader>K", function()
-  vim.cmd("normal! K") -- führt die ursprüngliche K-Aktion aus
-end, { noremap = true, silent = true })
+  vim.cmd("normal! K") -- Original: keywordprg (z.B. man/:help) fürs Wort unter Cursor
+end, { noremap = true, silent = true, desc = "Wie 'K': keywordprg-Doku (man/:help) fürs Wort unter Cursor" })
+-- vim.keymap.set("n", "<leader>K", function()
+--   vim.cmd("normal! K") -- führt die ursprüngliche K-Aktion aus
+-- end, { noremap = true, silent = true })
 
 local keymap = vim.keymap -- for conciseness
 
 keymap.set("i", "jj", "<ESC>", { desc = "Exit insert mode with jj" })
 keymap.set("i", "jk", "<ESC>", { desc = "Exit insert mode with jj" })
 keymap.set("i", "jl", "<ESC>", { desc = "Exit insert mode with jj" })
-keymap.set("i", "tn", "<ESC>", { desc = "Exit insert mode with jj" })
+-- keymap.set("i", "tn", "<ESC>", { desc = "Exit insert mode with jj" })
 
 keymap.set("n", "<leader><leader>n", ":source $MYVIMRC<CR>", { desc = "Reload Neovim Config" })
 
@@ -124,8 +127,25 @@ vim.api.nvim_set_keymap("i", "<D-BS>", "<C-u>", { noremap = true, silent = true 
 ------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------
 -- Ersatz für vim-easy clip, ausschneiden mit m und gm für marks
+-- Delete / change to black hole by default
+vim.keymap.set({ "n", "x" }, "d", '"_d', { noremap = true, silent = true })
+vim.keymap.set({ "n", "x" }, "c", '"_c', { noremap = true, silent = true })
+vim.keymap.set({ "n", "x" }, "x", '"_x', { noremap = true, silent = true })
+vim.keymap.set("n", "dd", '"_dd', { noremap = true, silent = true })
+vim.keymap.set("n", "D", '"_D', { noremap = true, silent = true })
+vim.keymap.set("n", "C", '"_C', { noremap = true, silent = true })
+vim.keymap.set("n", "s", '"_s', { noremap = true, silent = true })
+vim.keymap.set("n", "S", '"_S', { noremap = true, silent = true })
 
--- Normal: m / mm
+-- Delete / change to black hole by default
+vim.keymap.set({ "n", "x" }, "d", '"_d', { noremap = true, silent = true })
+vim.keymap.set({ "n", "x" }, "c", '"_c', { noremap = true, silent = true })
+vim.keymap.set({ "n", "x" }, "x", '"_x', { noremap = true, silent = true })
+vim.keymap.set("n", "dd", '"_dd', { noremap = true, silent = true })
+vim.keymap.set("n", "D", '"_D', { noremap = true, silent = true })
+vim.keymap.set("n", "C", '"_C', { noremap = true, silent = true })
+vim.keymap.set("n", "s", '"_s', { noremap = true, silent = true })
+vim.keymap.set("n", "S", '"_S', { noremap = true, silent = true })
 vim.keymap.set("n", "m", '"+x', { noremap = true, silent = true })
 vim.keymap.set("n", "mm", '"+dd', { noremap = true, silent = true })
 
@@ -135,11 +155,35 @@ vim.keymap.set("x", "m", '"+d', { noremap = true, silent = true })
 -- 3) Marks: m{a-zA-Z} -> gm{a-zA-Z}, `m` frei machen
 vim.keymap.set("n", "gm", "m", { noremap = true, silent = true })
 vim.keymap.set("n", "gM", "M", { noremap = true, silent = true }) -- optional: "M" (Middle of screen) bleibt sonst, je nach Geschmack
+---
+------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------
+--- spell
+vim.keymap.set("n", "<leader>sg", function()
+  vim.opt.spelllang = { "de" }
+end, { desc = "spell: DE" })
+vim.keymap.set("n", "<leader>sn", function()
+  vim.opt.spelllang = { "en" }
+end, { desc = "spell: EN" })
+vim.keymap.set("n", "<leader>sb", function()
+  vim.opt.spelllang = { "de", "en" }
+end, { desc = "spell: DE+EN" })
 ------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------
 -----------------------------------------------------------------
 -- aus functions.lua um Datei im Finder zu öffnen
 vim.api.nvim_set_keymap("n", "<leader>o", ":lua OpenInFinder()<CR>", { noremap = true, silent = true })
+
+-- tex und ctrl key für .*\.tex
+vim.keymap.set("c", "<C-k>", function()
+  local cmd = vim.fn.getcmdline()
+  local typ = vim.fn.getcmdtype()
+
+  if (typ == "/" or typ == "?") and cmd:sub(-3) == "tex" then
+    return "<BS><BS><BS>.*\\.tex"
+  end
+  return "<C-k>"
+end, { expr = true })
 ---
 ---
 --- HACK: How I navigate between buffers in neovim
@@ -185,3 +229,5 @@ vim.api.nvim_set_keymap("n", "<leader>o", ":lua OpenInFinder()<CR>", { noremap =
 --     initial_mode = "normal", -- optional
 --   }))
 -- end, { desc = "[P]Open telescope buffers" })
+--
+--
