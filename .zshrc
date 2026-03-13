@@ -134,6 +134,8 @@ alias aero="cd ~/.config/aerospace && nvim aerospace.toml"
 
 alias cdplug="cd ~/.config/nvim/lua/plugins && nvim" 
 
+alias cdcore="cd ~/.config/nvim/lua/core && nvim keybindings.lua" 
+
 alias cdpianmac="cd /Users/g/qmk_firmware/keyboards/beekeeb/piantor_pro/keymaps/piantor_colemak && nvim keymap.c" # öffnet neovim automatisch 
 
 alias cdpianwin="cd /Users/g/qmk_firmware/keyboards/beekeeb/piantor_pro/keymaps/piantor_win && nvim keymap.c" # öffnet neovim automatisch 
@@ -147,7 +149,7 @@ alias cdic="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/'!Docs iCloud'"
 
 alias cdedit="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/'!Docs iCloud'/Vorlagen && nvim vorlage-edit-nvim.md" 
 
-alias cdscan="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/@Tabea\ \&\ Golo\ iCloud/@Scans" 
+alias cdscan="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/@Tabea\ \&\ Golo\ iCloud/@Scans && y" 
 
 alias cdsteuer="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/@Tabea\ \&\ Golo\ iCloud/steuer-icloud && nvim" 
 
@@ -157,9 +159,13 @@ alias cdgit="/Users/g/Library/Mobile\ Documents/com~apple~CloudDocs/'!Docs iClou
 
 alias cdessen="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/@Tabea\ \&\ Golo\ iCloud/Rezepte\ Essen\ Golo" 
 
+# cd für js
+alias cdjs="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/'!Docs iCloud'/R\ Statistik,\ icloud/js-projects && nvim" 
 
 # cd für r
 alias bs="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/'!Docs iCloud'/R\ Statistik,\ icloud/R,\ projects/shiny-app/shiny-bslib && nvim" 
+
+alias bscodex="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/'!Docs iCloud'/R\ Statistik,\ icloud/R,\ projects/shiny-app/shiny-bslib-codex && nvim" 
 
 alias cdalpha="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/'!Docs iCloud'/R\ Statistik,\ icloud/R,\ projects/shiny-app/ShinyICUalpha && nvim server.r" 
 
@@ -181,6 +187,11 @@ alias cdrlukas="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/'!Docs iCloud
 
 alias cdrluisa="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/'!Docs iCloud'/Diplomarbeit\ 10\ II/Diplomarbeit\ Luisa\ Holzheu/luisa-analysen-r && nvim" 
 
+alias cdshinyzaboideen="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/'!Docs iCloud'/R\ Statistik,\ icloud/R,\ projects/shiny-app/ShinyZabo/shiny-zabo-ideen && nvim" 
+
+alias cdshinyzabo="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/'!Docs iCloud'/R\ Statistik,\ icloud/R,\ projects/shiny-app/ShinyZabo && nvim" 
+
+
 # cd für latex
 alias cdlat="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/'!Docs iCloud'/R\ Statistik,\ icloud/Latex,\ icloud/Latex\ Projekte && nvim" 
 
@@ -196,7 +207,7 @@ alias cdzabo="cd /Users/g/Library/Mobile\ Documents/com~apple~CloudDocs/'@Tabea 
 
 alias cdnext="cd /Users/g/Library/Mobile\ Documents/com~apple~CloudDocs/'@Tabea & Golo iCloud'/'Naomi (直美)'/Zaboracker/nextcloud-zaboracker && nvim" 
 
-alias cdagenda="cd /Users/g/Library/Mobile\ Documents/com~apple~CloudDocs/'@Tabea & Golo iCloud'/'Naomi (直美)'/Zaboracker/nextcloud-zaboracker/Vorstand && nvim !agenda-vorstandstreffen.md" 
+alias cdnextvorstand="cd /Users/g/Library/Mobile\ Documents/com~apple~CloudDocs/'@Tabea & Golo iCloud'/'Naomi (直美)'/Zaboracker/nextcloud-zaboracker/Vorstand && nvim" 
 
 alias cdvorstand="cd /Users/g/Library/Mobile\ Documents/com~apple~CloudDocs/'@Tabea & Golo iCloud'/'Naomi (直美)'/Zaboracker/vorstand-zaboracker && nvim" 
 
@@ -338,3 +349,27 @@ if [ -f "$HOME/.config/secrets/openai.env" ]; then
   source "$HOME/.config/secrets/openai.env"
 fi
 
+# pomodoro timer bashbunni https://gist.github.com/bashbunni/f6b04fc4703903a71ce9f70c58345106 
+# a pop up notification and sound alert (using the built-in sounds for macOS)
+
+# Requires https://github.com/caarlos0/timer to be installed
+# brew install caarlos0/tap/timer
+
+# Mac setup for pomo
+alias pomo25="timer 25m && terminal-notifier -message 'Pomodoro'\
+        -title 'Work Timer is up! Take a Break 😊'\
+        -appIcon '~/Pictures/pumpkin.png'\
+        -sound Crystal"
+alias pomo50="timer 50m && terminal-notifier -message 'Pomodoro'\
+        -title 'Work Timer is up! Take a Break 😊'\
+        -appIcon '~/Pictures/pumpkin.png'\
+        -sound Crystal"
+        
+alias rest10="timer 10m && terminal-notifier -message 'Pomodoro'\
+        -title 'Break is over! Get back to work 😬'\
+        -appIcon '~/Pictures/pumpkin.png'\
+        -sound Crystal"
+alias rest5="timer 5m && terminal-notifier -message 'Pomodoro'\
+        -title 'Break is over! Get back to work 😬'\
+        -appIcon '~/Pictures/pumpkin.png'\
+        -sound Crystal"

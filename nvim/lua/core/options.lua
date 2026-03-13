@@ -6,7 +6,6 @@ local opt = vim.opt
 vim.opt.mouse = "a"
 -- vim.opt.mouse = "" -- Maus deaktivieren
 
-
 opt.relativenumber = true
 
 opt.number = true
@@ -15,11 +14,10 @@ opt.number = true
 -- vim.opt.scrolloff = 10
 
 -- tabs & indentation & linebreak
-opt.tabstop = 3       -- 2 spaces for tabs (prettier default)
-opt.shiftwidth = 2    -- 2 spaces for indent width
-opt.expandtab = true  -- expand tab to spaces
+opt.tabstop = 3 -- 2 spaces for tabs (prettier default)
+opt.shiftwidth = 2 -- 2 spaces for indent width
+opt.expandtab = true -- expand tab to spaces
 opt.autoindent = true -- copy indent from current line when starting new one
-
 
 -- Zeilenumbruch aktivieren
 opt.wrap = true
@@ -33,10 +31,9 @@ vim.opt.breakindent = true
 -- Symbol für umgebrochene Zeilen
 vim.opt.showbreak = "↪"
 
-
 -- search settings
 opt.ignorecase = true -- ignore case when searching
-opt.smartcase = true  -- if you include mixed case in your search, assumes you want case-sensitive
+opt.smartcase = true -- if you include mixed case in your search, assumes you want case-sensitive
 
 opt.cursorline = true
 
@@ -44,7 +41,7 @@ opt.cursorline = true
 -- (have to use iterm2 or any other true color terminal)
 opt.termguicolors = true
 opt.background = "dark" -- colorschemes that can be light or dark will be made dark
-opt.signcolumn = "yes"  -- show sign column so that text doesn't shift
+opt.signcolumn = "yes" -- show sign column so that text doesn't shift
 
 -- backspace
 opt.backspace = "indent,eol,start" -- allow backspace on indent, end of line or insert mode start position
@@ -62,12 +59,20 @@ opt.swapfile = false
 -- Verzeichnis für Spellchecking erstellen
 -- vim.opt.spellfile = "~/.config/nvim/spell"
 
--- Spellchecking, Wörterbücher einstellen
-vim.opt.spelllang = { "de_de", "en_gb" }
-
 -- Rechtschreibung aktivieren
 vim.opt.spell = true
 
+-- Spellchecking, Wörterbücher einstellen
+-- vim.opt.spelllang = { "de_de", "en_gb" }
+vim.opt.spelllang = { "de", "en" } -- de wohl besser statt de_de
+
+vim.opt.spellfile = {
+  vim.fn.expand("~/.config/nvim/spell/de.utf-8.add"), -- meine persönliche Spell Liste
+  vim.fn.expand("~/.config/nvim/spell/medical-de.utf-8.add"),
+  -- vim.fn.expand("~/.config/nvim/spell/custom.utf-8.add"),
+}
+vim.opt.spellsuggest = "best,5"
+-- vim.opt.spellsuggest = "fast,5"
 -- vim.cmd [[highlight SpellBad ctermfg=white ctermbg=red guifg=#E0E0E0 guibg=#990000]] -- muss in der Colorscheme.lua stehen weil das Colorscheme sonst diese Einstellung überschreibt
 --
 -- vim.opt.foldlevel = 99 -- Öffnet alle Folds, außer die sehr tiefen

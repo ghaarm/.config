@@ -56,3 +56,8 @@ ysiwtstrong
 
 ## Oil
 - refresh: ctrl + l und R in der lua definiert
+
+## commands
+### für Latex
+- ersetzt \% durch ~\%
+%s/\(^\|[^~]\)\zs\\%/\~\\%/g

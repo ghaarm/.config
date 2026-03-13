@@ -446,13 +446,19 @@ snippet pngfigdown "png bilder im Unterordner" b
 	\end{figure}
 	${0}
 
-snippet pngfigenter "png fig unterordner center für multicols"
+snippet pngfigcenter "png fig unterordner center für multicols"
   \begin{center}
       \centering
       \includegraphics[width=0.5\textwidth]{./bilder/${1:Name}}
       \caption{${2:Name}}
       \label{fig:${2}}
   \end{center}
+
+snippet pngcenter "png fig float 1 spalte, unterordner center für multicols"
+   {\centering
+     \includegraphics[width=0.7\columnwidth]{./bilder/${1:name}.png}
+     \captionof{figure}{${2:caption}}
+   \label{fig:${3:$2}\par}
 
 snippet pngtabup "png Tabelle im Überordner" b
 	
@@ -740,3 +746,25 @@ snippet equationmulti "equation for multicols breite"
   $}
   \end{equation}
 
+snippet equation-simple "equation []"
+   \[
+     \text{${1:ergebnis}} = \text{${2:variable-1}} \cdot \text{${3:variable-2}}
+   \]
+
+snippet shiny-link "Shiny Link"
+  \href{https://foamicu.shinyapps.io/ShinyICUalpha/}{Shiny}
+
+snippet kg/$m^2$ ersetzten "kg/$m^2$ in command line erstetzen"
+  %s#kg/\$m\^2\$#\\si{kg/m^2}#g
+
+snippet kg/m2 "kg/m2 mit si package"
+  \si{kg/m^2}
+
+snippet sanford-guide-zotero "Sanford Guide Zotero"
+  \footnote{\cite{sanfordGuideApp}, ${1:name}, Stand 2026 ${2:datum}}
+
+snippet cmho "cm H2O"
+  \ignore{cmH2O}cm H\textsubscript{2}O
+
+snippet ____ "____"
+  \_\_\_\_ 

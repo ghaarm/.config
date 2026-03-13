@@ -43,15 +43,15 @@ return {
           local path = dir .. entry.name
 
           -- Nur Dateien (keine Ordner) und nur PDFs mit sioyek öffnen
-          -- if entry.type ~= "directory" and path:lower():match("%.pdf$") then
-          --   if vim.fn.executable("sioyek") ~= 1 then
-          --     vim.notify("sioyek nicht im PATH gefunden", vim.log.levels.WARN)
-          --     return
-          --   end
-          --   -- Listenform von jobstart: sicher bei Leerzeichen
-          --   vim.fn.jobstart({ "sioyek", path }, { detach = true })
-          --   return
-          -- end
+          if entry.type ~= "directory" and path:lower():match("%.pdf$") then
+            if vim.fn.executable("sioyek") ~= 1 then
+              vim.notify("sioyek nicht im PATH gefunden", vim.log.levels.WARN)
+              return
+            end
+            -- Listenform von jobstart: sicher bei Leerzeichen
+            vim.fn.jobstart({ "sioyek", path }, { detach = true })
+            return
+          end
           -- Standard-Enter-Verhalten für alles andere (Ordner/Dateien)
           require("oil.actions").select.callback()
         end,
@@ -86,31 +86,33 @@ return {
       --   -- Optional: „gx“ öffnet mit System-Default (Oil bringt das schon mit)
       --   -- ["gx"] = "actions.open_external",
       -- }
-      vim.api.nvim_create_autocmd("FileType", {
-        pattern = "oil",
-        callback = function(args)
-          local bufnr = args.buf
-          vim.keymap.set("n", "<leader>p", function()
-            local oil = require("oil")
-            local entry = oil.get_cursor_entry()
-            if not entry then
-              return
-            end
-            local dir = oil.get_current_dir() or ""
-            local path = dir .. entry.name
-            if path:match("%.pdf$") then
-              if vim.fn.executable("sioyek") ~= 1 then
-                vim.notify("sioyek nicht im PATH gefunden", vim.log.levels.WARN)
-                return
-              end
-              vim.fn.jobstart({ "sioyek", "--new-window", path }, { detach = true })
-              -- vim.fn.jobstart({ "sioyek", path }, { detach = true })
-            else
-              require("oil.actions").select.callback()
-            end
-          end, { buffer = bufnr, noremap = true, silent = true, desc = "Open PDF with sioyek" })
-        end,
-      }),
+      --
+      -- öffnet PDF mit Sioyek mit leader p
+      -- vim.api.nvim_create_autocmd("FileType", {
+      --   pattern = "oil",
+      --   callback = function(args)
+      --     local bufnr = args.buf
+      --     vim.keymap.set("n", "<leader>p", function()
+      --       local oil = require("oil")
+      --       local entry = oil.get_cursor_entry()
+      --       if not entry then
+      --         return
+      --       end
+      --       local dir = oil.get_current_dir() or ""
+      --       local path = dir .. entry.name
+      --       if path:match("%.pdf$") then
+      --         if vim.fn.executable("sioyek") ~= 1 then
+      --           vim.notify("sioyek nicht im PATH gefunden", vim.log.levels.WARN)
+      --           return
+      --         end
+      --         vim.fn.jobstart({ "sioyek", "--new-window", path }, { detach = true })
+      --         -- vim.fn.jobstart({ "sioyek", path }, { detach = true })
+      --       else
+      --         require("oil.actions").select.callback()
+      --       end
+      --     end, { buffer = bufnr, noremap = true, silent = true, desc = "Open PDF with sioyek" })
+      --   end,
+      -- }),
     })
   end,
   vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" }),

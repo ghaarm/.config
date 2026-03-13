@@ -1,4 +1,4 @@
--- Andrew Courter https://www.youtube.com/watch?v=eJ3XV-3uoug
+-- Anderw Carter https://www.youtube.com/watch?v=eJ3XV-3uoug
 
 return {
   "folke/flash.nvim",
@@ -6,7 +6,10 @@ return {
   opts = {
     -- use labels with f, t, F, T
     jump = {
+      -- • Updated your config to jump one character left by adding offset = -1
       pos = "end", -- <- landet am Ende des Matches (statt Wortanfang)
+      -- offset = -1, -- <- landet einen Buchstaben links vom Ende des Matches (statt Wortanfang)
+      offset = 0, -- <- landet einen Buchstaben links vom Ende des Matches (statt Wortanfang)
     },
     modes = {
       char = {
