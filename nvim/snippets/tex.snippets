@@ -119,8 +119,11 @@ snippet enquote "Anführungszeichen"
 	\enquote{${1:name}}
 
 # zitat normal 
+snippet cite "Zitat normal" 
+	\cite{${1:name}}, S. ${2:seite}}${0}
+
 snippet citen "Zitat normal" 
-	\cite{${1:name}}${0}
+	\cite{${1:name}}, S. ${2:seite}}${0}
 #
 
 # zitat foot 
@@ -335,14 +338,18 @@ snippet lab "Label" wi
 snippet fn "Footnote" wi
 	\footnote{${1:FOOTNOTE}}${0}
 #
+snippet fnquelle "Footnote Quelle"
+      # {\footnotesize\raggedright  Quelle: \cite{${1:name}}, S.${2:seite}\par}
+      {\footnotesize Quelle: \cite{${1:name}}, S.${2:seite}\par}
 
 snippet fig "Figure environment" b
 	\begin{figure}
-	\begin{center}
-		\includegraphics[scale=${1}]{Figures/${2}}
-	\end{center}
-	\caption{${3}}
-	\label{fig:${4}}
+	   \begin{center}
+		  \includegraphics[scale=${1}]{Figures/${2}}
+	   \end{center}
+	   \caption{${3}}
+	   \label{fig:${4:$3}}
+      {\footnotesize Quelle:${4:quelle}}
 	\end{figure}
 	${0}
 #
@@ -355,7 +362,8 @@ snippet tikz "Tikz environment" b
 	\end{tikzpicture}
 	\end{center}
 	\caption{${3}}%
-	\label{fig:${4}}
+	\label{fig:${4:$3}}
+   {\footnotesize Quelle:${5:quelle}}
 	\end{figure}
 	${0}
 
@@ -407,13 +415,32 @@ snippet example "Example" bi
 	\end{example}
 
 
+# snippet pngfig "png bild" b
+# 	
+# 	\begin{figure}[H]
+#     	\centering
+#       \begin{minipage}{1\textwidth}
+#         # \centering
+#     	  \includegraphics[width=\linewidth]{./bilder/${1:Name}}
+#     	  \caption{${2:Name}}
+#     	  \label{fig:$2}
+#         \par\smallskip
+#         # {\footnotesize\raggedright  Quelle: \cite{${4:zitat}}, S. ${5:seite}\par}
+#         {\footnotesize\raggedright  Quelle: \cite{${4:zitat}}, S. ${5:seite}\par}
+#       \end{minipage}
+# 	\end{figure}
+# 	${0}
 snippet pngfig "png bild" b
 	
 	\begin{figure}[H]
     	\centering
-    	\includegraphics[width=0.8\textwidth]{./bilder/${1:Name}}
-    	\caption{${2:Name}}
-    	\label{fig:${3:$2}}
+      \begin{minipage}{1\textwidth}
+    	  \includegraphics[width=\linewidth]{./bilder/${1:Name}}
+    	  \caption{${2:Name}}
+    	  \label{fig:$2}
+        \par\smallskip
+        {\footnotesize\raggedright  Quelle: \cite{${4:zitat}}, S. ${5:seite}\par}
+      \end{minipage}
 	\end{figure}
 	${0}
 snippet pngtab "png Tabelle" b
@@ -421,8 +448,12 @@ snippet pngtab "png Tabelle" b
 	\begin{table}[H]
     	\centering
     	\caption{${2:Name}}
-    	\label{tab:${3:$2}}
-    	\includegraphics[width=0.8\textwidth]{./bilder/${1:Name}}
+    	\label{tab:$2}
+      \begin{minipage}{1\textwidth}
+    	  \includegraphics[width=\linewidth]{./bilder/${1:Name}}
+        \par\smallskip
+        {\footnotesize Quelle: \cite{${4:zitat}}, S. ${5:seite}\par}
+      \end{minipage}
 	\end{table}
 	${0}
 
@@ -430,43 +461,63 @@ snippet pngfigup "png bilder im Überordner" b
 	
 	\begin{figure}[H]
     	\centering
-    	\includegraphics[width=0.8\textwidth]{../bilder/${1:Name}}
     	\caption{${2:Name}}
-    	\label{fig:${3:$2}}
+    	\label{fig:$2}
+      \begin{minipage}{1\textwidth}
+    	  \includegraphics[width=\linewidth]{./bilder/${1:Name}}
+        \par\smallskip
+        {\footnotesize Quelle: \cite{${4:zitat}}, S. ${5:seite}\par}
+      \end{minipage}
 	\end{figure}
-	${0}
-#
 snippet pngfigdown "png bilder im Unterordner" b
 	
 	\begin{figure}[H]
     	\centering
-    	\includegraphics[width=0.8\textwidth]{./bilder/${1:Name}}
-    	\caption{${2:Name}}
-    	\label{fig:${3:$2}}
+      \begin{minipage}{1\textwidth}
+        # \centering
+    	  \includegraphics[width=\linewidth]{./bilder/${1:Name}}
+    	  \caption{${2:Name}}
+    	  \label{fig:$2}
+        \par\smallskip
+        {\footnotesize Quelle: \cite{${4:zitat}}, S. ${5:seite}\par}
+      \end{minipage}
 	\end{figure}
 	${0}
 
 snippet pngfigcenter "png fig unterordner center für multicols"
   \begin{center}
-      \centering
-      \includegraphics[width=0.5\textwidth]{./bilder/${1:Name}}
-      \caption{${2:Name}}
-      \label{fig:${2}}
+    	\centering
+      \begin{minipage}{1\textwidth}
+    	  \includegraphics[width=\linewidth]{./bilder/${1:Name}}
+    	  \caption{${2:Name}}
+    	  \label{fig:$2}
+        \par\smallskip
+        {\footnotesize Quelle: \cite{${4:zitat}}, S. ${5:seite}\par}
+      \end{minipage}
   \end{center}
 
 snippet pngcenter "png fig float 1 spalte, unterordner center für multicols"
    {\centering
-     \includegraphics[width=0.7\columnwidth]{./bilder/${1:name}.png}
-     \captionof{figure}{${2:caption}}
-   \label{fig:${3:$2}\par}
+      \begin{minipage}{1\columnwidth}
+    	  \includegraphics[width=\linewidth]{./bilder/${1:Name}}
+    	  \captionof{figure}{${2:Name}}
+    	  \label{fig:$2}
+        \par\smallskip
+        {\footnotesize Quelle: \cite{${4:zitat}}, S. ${5:seite}\par}
+      \end{minipage}
+   \par}
 
 snippet pngtabup "png Tabelle im Überordner" b
 	
 	\begin{table}[H]
     	\centering
-    	\includegraphics[width=0.8\textwidth]{../bilder/${1:Name}}
     	\caption{${2:Name}}
-    	\label{tab:${3:$2}}
+    	\label{tab:$2}
+      \begin{minipage}{1\textwidth}
+    	  \includegraphics[width=\linewidth]{./bilder/${1:Name}}
+        \par\smallskip
+        {\footnotesize Quelle: \cite{${4:zitat}}, S. ${5:seite}\par}
+      \end{minipage}
 	\end{table}
 	${0}
 #
@@ -474,28 +525,39 @@ snippet pngtabdown "png Tabelle im Unterordner" b
 	
 	\begin{table}[H]
     	\centering
-    	\includegraphics[width=0.8\textwidth]{./bilder/${1:Name}}
     	\caption{${2:Name}}
-    	\label{tab:${3:$2}}
+    	\label{tab:$2}
+      \begin{minipage}{1\textwidth}
+    	  \includegraphics[width=\linewidth]{./bilder/${1:Name}}
+        \par\smallskip
+        {\footnotesize Quelle: \cite{${4:zitat}}, S. ${5:seite}\par}
+      \end{minipage}
 	\end{table}
 	${0}
 
 snippet pngtabcenter "png tabelle unterordner center für multicols"
-  \begin{center}
-      \centering
-      \caption{${2:Name}}
-      \label{tab:${2}}
-      \includegraphics[width=0.5\textwidth]{./bilder/${1:Name}}
-  \end{center}
-
+  \begin{table}
+    	\centering
+    	\caption{${2:Name}}
+    	\label{tab:$2}
+      \begin{minipage}{1\textwidth}
+    	  \includegraphics[width=\linewidth]{./bilder/${1:Name}}
+        \par\smallskip
+        {\footnotesize Quelle: \cite{${4:zitat}}, S. ${5:seite}\par}
+      \end{minipage}
+	\end{table}
 # png same folder
 snippet pppsame "png same folder" b
 	
 	\begin{figure}[H]
     	\centering
-    	\includegraphics[width=0.8\textwidth]{${1:Name}}
     	\caption{${2:Name}}
-    	\label{fig:${3:$2}}
+    	\label{fig:$2}
+      \begin{minipage}{1\textwidth}
+    	  \includegraphics[width=\linewidth]{./bilder/${1:Name}}
+        \par\smallskip
+        {\footnotesize Quelle: \cite{${4:zitat}}, S. ${5:seite}\par}
+      \end{minipage}
 	\end{figure}
 	${0}
 #
@@ -504,9 +566,13 @@ snippet pngsame "png same folder" b
 	
 	\begin{figure}[H]
     	\centering
-    	\includegraphics[width=0.8\textwidth]{${1:Name}}
     	\caption{${2:Name}}
-    	\label{fig:${3:$2}}
+    	\label{fig:$2}
+      \begin{minipage}{1\textwidth}
+    	  \includegraphics[width=\linewidth]{./bilder/${1:Name}}
+        \par\smallskip
+        {\footnotesize Quelle: \cite{${4:zitat}}, S. ${5:seite}\par}
+      \end{minipage}
 	\end{figure}
 	${0}
 #
@@ -516,9 +582,13 @@ snippet pppmulti "png multi" b
 	
 	\begin{figure}[H]
     	\centering
-    	\includegraphics[width=\linewidth]{./bilder/${1:Name}}
     	\caption{${2:Name}}
-    	\label{fig:${3:$2}}
+    	\label{fig:$2}
+       \begin{minipage}{1\textwidth}
+    	  \includegraphics[width=\linewidth]{./bilder/${1:Name}}
+        \par\smallskip
+        {\footnotesize Quelle: \cite{${4:zitat}}, S. ${5:seite}\par}
+      \end{minipage}
 	\end{figure}
 	${0}
 #
@@ -527,9 +597,13 @@ snippet pngmulti "pngmulti" b
 	
 	\begin{figure}[H]
     	\centering
-    	\includegraphics[width=\linewidth]{./bilder/${1:Name}}
     	\caption{${2:Name}}
-    	\label{fig:${3:$2}}
+    	\label{fig:$2}
+      \begin{minipage}{1\textwidth}
+    	  \includegraphics[width=\linewidth]{./bilder/${1:Name}}
+        \par\smallskip
+        {\footnotesize Quelle: \cite{${4:zitat}}, S. ${5:seite}\par}
+      \end{minipage}
 	\end{figure}
 	${0}
 #
@@ -539,9 +613,13 @@ snippet ecmopng "ecmopng" b
 	
 	\begin{figure}[H]
     	\centering
-    	\includegraphics[width=0.5\textwidth]{./ECMO-latex-png/${1:Name}.png}
     	\caption{${2:Name}}
-    	\label{fig:${3:$2}}
+    	\label{fig:$2}
+      \begin{minipage}{1\textwidth}
+     	\includegraphics[width=\linewidth]{./ECMO-latex-png/${1:Name}.png}
+        \par\smallskip
+        {\footnotesize Quelle: \cite{${4:zitat}}, S. ${5:seite}\par}
+      \end{minipage}
 	\end{figure}
 	${0}
 #
@@ -552,9 +630,13 @@ snippet ecmopdf "ecmopdf" b
 	
 	\begin{figure}[H]
     	\centering
-    	\includegraphics[width=0.5\textwidth]{./ECMO-latex-png/${1:Name}.pdf}
     	\caption{${2:Name}}
-    	\label{fig:${3:$2}}
+    	\label{fig:$2}
+        \begin{minipage}{0.8\textwidth}
+        \includegraphics[width=\linewidth]{./ECMO-latex-png/${1:Name}.pdf}
+        \par\smallskip
+        {\footnotesize Quelle: \cite{${4:zitat}}, S. ${5:seite}\par}
+      \end{minipage}
 	\end{figure}
 	${0}
 #
@@ -565,9 +647,13 @@ snippet ecmotbl "ecmotbl" b
 	
 	\begin{table}[H]
     	\centering
-    	\includegraphics[width=0.5\textwidth]{./ECMO-latex-png/${1:Name}.pdf}
     	\caption{${2:Name}}
-    	\label{fig:${3:Name}}
+    	\label{tab:$2}
+      \begin{minipage}{1\textwidth}
+        \includegraphics[width=\linewidth]{./ECMO-latex-png/${1:Name}.png}
+        \par\smallskip
+        {\footnotesize Quelle: \cite{${4:zitat}}, S. ${5:seite}\par}
+      \end{minipage}
 	\end{table}
 	${0}
 #
