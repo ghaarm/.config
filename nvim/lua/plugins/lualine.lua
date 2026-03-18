@@ -133,7 +133,6 @@
 --
 -- für lualine und possessions
 
-
 return {
   "nvim-lualine/lualine.nvim",
   dependencies = { "nvim-tree/nvim-web-devicons" },
@@ -144,9 +143,13 @@ return {
     -- IMPORTANT: Define this before lualine.setup()
     local function possession_name()
       local ok, session = pcall(require, "possession.session")
-      if not ok then return "" end
+      if not ok then
+        return ""
+      end
       local name = session.get_session_name()
-      if not name or name == "" then return "" end
+      if not name or name == "" then
+        return ""
+      end
       return "󱂬 " .. name
     end
 
@@ -257,7 +260,14 @@ return {
         },
 
         lualine_y = {},
-        lualine_z = {},
+        lualine_z = {
+          {
+            function()
+              return "L:" .. vim.api.nvim_buf_line_count(0)
+            end,
+          },
+          { "location" },
+        },
       },
 
       -- IMPORTANT: Prevent nil sections during refresh (fixes your stacktrace)

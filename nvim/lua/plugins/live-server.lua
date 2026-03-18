@@ -8,4 +8,4 @@ return {
     { "<leader>lc", "<cmd>LiveServerStop<CR>", desc = "Live Server Stop" },
   },
   config = true,
-}-
+}
