@@ -9,3 +9,4 @@ vim.g.python3_host_prog = "/Users/g/neovim-venv/bin/python3"
 
 -- vim.g.EasyClipUseGlobalPasteToggle = 0 -- weil es sonst einen error mit easyclip gibt
 require("lazy_bootstrap")
+require("config.winbar").setup()
