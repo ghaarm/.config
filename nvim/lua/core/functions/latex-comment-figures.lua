@@ -61,9 +61,6 @@ local function add_marker(line)
   return indent .. marker .. rest
 end
 
--- local function remove_marker(line)
---   return (line:gsub("^(%s*)%%+%s*LATEX_FLOAT_OFF%s*", "%1", 1))
--- end
 local function uncomment_line(line)
   local indent, rest = line:match("^(%s*)(.*)$")
   if not indent then
@@ -214,7 +211,6 @@ local function set_float_comments(comment)
         if comment then
           lines[k] = add_marker(lines[k])
         else
-          -- lines[k] = remove_marker(lines[k])
           lines[k] = uncomment_line(lines[k])
         end
       end
