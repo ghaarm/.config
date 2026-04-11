@@ -32,6 +32,38 @@ return {
 
     telescope.setup({
       defaults = {
+        layout_strategy = "flex",
+        layout_config = {
+          width = 0.95,
+          height = 0.90,
+
+          flex = {
+            flip_columns = 120, -- ab welcher Bildschirmbreite (Spalten wird der preview in vertical gewechselt)
+          },
+
+          horizontal = {
+            preview_width = 0.5,
+            preview_cutoff = 120,
+          },
+
+          vertical = {
+            preview_height = 0.45,
+            preview_cutoff = 1, -- 1 = preview soll immer sichtbar sein, auch bei kleinen fenstern
+          },
+        },
+        file_ignore_patterns = {
+          "%.aux$",
+          "%.bbl$",
+          "%.bcf$",
+          "%.blg$",
+          "%.fdb_latexmk$",
+          "%.fls$",
+          "%.lof$",
+          "%.log$",
+          "%.out$",
+          "%.run.xml$",
+          "%.synctex%.gz$",
+        },
         path_display = { "smart" },
         mappings = {
           i = {
@@ -129,9 +161,25 @@ return {
     -- set keymaps
     local keymap = vim.keymap -- for conciseness
 
-    -- keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "Fuzzy find files in cwd" })
-    -- keymap.set("n", "<leader>ff", function()
+    keymap.set("n", "<leader>ff", function()
+      require("telescope.builtin").find_files({
+        previewer = true,
+        hidden = false,
+        no_ignore = false,
+        no_ignore_parent = false,
+      })
+    end, { desc = "Fuzzy find files in cwd" })
+
     keymap.set("n", "<leader>fp", function()
+      require("telescope.builtin").find_files({
+        previewer = false,
+        hidden = false,
+        no_ignore = false,
+        no_ignore_parent = false,
+      })
+    end, { desc = "Fuzzy find files in cwd" })
+
+    keymap.set("n", "<leader>fi", function() -- zeigt alle ignorierten files, gitignore und übergeordnete ordner
       require("telescope.builtin").find_files({
         hidden = true,
         no_ignore = true,
