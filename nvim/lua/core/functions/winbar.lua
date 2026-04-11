@@ -3,25 +3,53 @@
 local M = {}
 local dir_levels = 1
 
+-- local function tail_path(path, n_dirs)
+--   if path == "" then
+--     return "[No Name]"
+--   end
+--
+--   local parts = vim.split(path, "/", { plain = true })
+--
+--   if #parts <= n_dirs + 1 then
+--     return table.concat(parts, "/")
+--   end
+--
+--   local start_idx = #parts - n_dirs
+--   local out = {}
+--
+--   for i = start_idx, #parts do
+--     table.insert(out, parts[i])
+--   end
+--
+--   return table.concat(out, "/")
+-- end
 local function tail_path(path, n_dirs)
   if path == "" then
     return "[No Name]"
   end
 
   local parts = vim.split(path, "/", { plain = true })
+  parts = vim.tbl_filter(function(p)
+    return p ~= ""
+  end, parts)
 
-  if #parts <= n_dirs + 1 then
-    return table.concat(parts, "/")
+  if #parts == 0 then
+    return "[No Name]"
   end
 
-  local start_idx = #parts - n_dirs
-  local out = {}
+  local file = parts[#parts]
+  local dirs = {}
 
-  for i = start_idx, #parts do
-    table.insert(out, parts[i])
+  local start_idx = math.max(1, #parts - n_dirs)
+  for i = start_idx, #parts - 1 do
+    table.insert(dirs, parts[i])
   end
 
-  return table.concat(out, "/")
+  if #dirs == 0 then
+    return file
+  end
+
+  return file .. " <- " .. table.concat(vim.fn.reverse(dirs), "/")
 end
 
 function M.render()
