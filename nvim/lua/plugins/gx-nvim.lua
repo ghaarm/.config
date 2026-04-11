@@ -2,7 +2,6 @@
 -- Deaktiviere die Default-Keymappings von vim-markdown, damit gx von gx in markdown funktioniert das in die vim-markdown.lua einfügen vim-markdown lua blockiert sonst gx (s. issue github https://github.com/chrishrb/gx.nvim/issues/82#issuecomment-2830124277)
 --    vim.g.vim_markdown_no_default_key_mappings = true
 
-
 return {
   "chrishrb/gx.nvim",
   event = { "BufEnter" },
@@ -11,22 +10,22 @@ return {
 
   -- you can specify also another config if you want
   config = function()
-    require("gx").setup {
+    require("gx").setup({
       -- open_browser_app = "os_specific",       -- specify your browser app; default for macOS is "open", Linux "xdg-open" and Windows "powershell.exe"
-      open_browser_app = "open",              -- specify your browser app; default for macOS is "open", Linux "xdg-open" and Windows "powershell.exe"
+      open_browser_app = "open", -- specify your browser app; default for macOS is "open", Linux "xdg-open" and Windows "powershell.exe"
       open_browser_args = { "--background" }, -- specify any arguments, such as --background for macOS' "open".
       handlers = {
-        plugin = true,                        -- open plugin links in lua (e.g. packer, lazy, ..)
-        github = true,                        -- open github issues
-        brewfile = true,                      -- open Homebrew formulaes and casks
-        package_json = true,                  -- open dependencies from package.json
-        search = true,                        -- search the web/selection on the web if nothing else is found
+        plugin = true, -- open plugin links in lua (e.g. packer, lazy, ..)
+        github = true, -- open github issues
+        brewfile = true, -- open Homebrew formulaes and casks
+        package_json = true, -- open dependencies from package.json
+        search = true, -- search the web/selection on the web if nothing else is found
       },
       handler_options = {
         -- search_engine = "google",                             -- you can select between google, bing, duckduckgo, and ecosia
         search_engine = "https://duckduckgo.com/?q=",
       },
-    }
+    })
   end,
 }
 --

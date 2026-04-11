@@ -1,0 +1,110 @@
+\documentclass[a4paper,11pt]{letter}
+
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{graphicx}
+\usepackage[absolute,overlay]{textpos}
+\usepackage{geometry}
+\geometry{left=25mm, right=25mm, top=25mm, bottom=25mm}
+\usepackage{parskip}
+%% FÜR Faltmarkierungen Anfang
+\usepackage{tikz}
+\usepackage{eso-pic}
+
+% Positionen der beiden Falzmarken gemessen von OBEN
+\newlength{\foldmarkA}
+\newlength{\foldmarkB}
+\setlength{\foldmarkA}{105mm}
+\setlength{\foldmarkB}{210mm}
+
+% Länge der Striche
+\newlength{\foldmarklen}
+\setlength{\foldmarklen}{5mm}
+
+\newcommand{\AddFoldMarks}{%
+  \AddToShipoutPictureFG*{%
+    \begin{tikzpicture}[remember picture,overlay]
+      % obere Falzmarke
+      \draw[line width=0.2pt]
+        (current page.north west) ++(0,-\foldmarkA) -- ++(\foldmarklen,0);
+      \draw[line width=0.2pt]
+        (current page.north east) ++(0,-\foldmarkA) -- ++(-\foldmarklen,0);
+
+      % untere Falzmarke
+      \draw[line width=0.2pt]
+        (current page.north west) ++(0,-\foldmarkB) -- ++(\foldmarklen,0);
+      \draw[line width=0.2pt]
+        (current page.north east) ++(0,-\foldmarkB) -- ++(-\foldmarklen,0);
+    \end{tikzpicture}%
+  }%
+}
+
+%% FÜR Faltmarkierungen Ende
+\setlength{\TPHorizModule}{1cm}
+\setlength{\TPVertModule}{1cm}
+
+\begin{document}
+\AddFoldMarks % Für Faltmarkierungen
+\thispagestyle{empty}
+
+% Briefkopf oben rechts, 13 cm vom linken Rand
+\begin{textblock}{8}(14,2.5) % 8 units wide, 13 cm from the left, 2.5 cm from the top
+	\begin{minipage}[t]{0.6\textwidth}
+	\flushleft
+	\fontsize{6}{10}\selectfont % Schriftgröße 8 pt mit Zeilenabstand 10 pt
+		Dr. med. Golo-Sung Haarmeyer, MHBA \\
+		\vspace{3mm} % Fügt einen vertikalen Abstand ein
+		Blütenstrasse 22 \\
+		90480 Nürnberg \\
+		Tel.: 0911 - 1332 6377 \\
+		Mobil: 0176 - 22 66 04 06 \\
+		E-Mail: golo-sung.haarmeyer@gmx.de \\
+	\end{minipage}
+\end{textblock}
+
+% Adressfeld für Fensterbriefumschlag
+\begin{textblock}{8}(2.5,6.5) % 8 units wide, 2.5 cm from the left, 6.5 cm from the top
+	\begin{minipage}[t]{0.7\textwidth}
+	\fontsize{6.5}{8}\selectfont
+	Dr. med. Golo-Sung Haarmeyer, MHBA \\ 
+	Blütenstrasse 22 \textbullet \ 90480 Nürnberg \\
+	\rule{\textwidth}{0.4pt} % Fügt eine horizontale Linie ein
+	\\
+	\\
+	____ \\
+\end{minipage}
+\end{textblock}
+
+% Platz für Betreff und Text, um Überschneidungen zu vermeiden
+\vspace*{6.5cm}
+\begin{flushright}
+	Nürnberg, \today
+\end{flushright}
+\vspace{5 mm} % Fügt einen vertikalen Abstand ein
+
+\textbf{Betreff: ____}
+
+\vspace{5 mm}
+
+Sehr geehrte Damen und Herren, 
+Sehr geehrter Herr ____, 
+Sehr geehrter Frau ____, 
+\vspace{5 mm}
+
+____ 
+
+\\
+\vspace{10 mm}
+Mit freundlichen Grüßen 
+
+\vspace{2 mm}
+% \begin{minipage}[t]{0.15\textwidth} % Anpassung der Breite entsprechend der Bildbreite
+%     \vspace{-\baselineskip} % Entfernt zusätzlichen vertikalen Raum
+\hspace{5 mm}
+\includegraphics[width=0.3\linewidth]{/Users/g/Library/Mobile Documents/com~apple~CloudDocs/!Docs iCloud/R Statistik, icloud/Latex, icloud/Latex Projekte/signature_latex.png}
+% \end{minipage}
+
+% \vspace{2 mm}
+Dr. med. Golo-Sung Haarmeyer, MHBA
+
+\end{document}

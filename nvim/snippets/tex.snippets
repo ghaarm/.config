@@ -1,4 +1,4 @@
-# -- SNIPPETS --
+#-- SNIPPETS --
 #
 # new glossary entry
 snippet gloss "Glossary Entry"  b
@@ -249,16 +249,17 @@ snippet sec "Section" b
 snippet sub "Sub Section" b
 	\subsection{${1:Name}}%
 		\label{sub:${2:$1}}
-		${0}
 #
 
 # Sub Sub Sectionben
 snippet ssub "Sub Sub Section" b
 	\subsubsection{${1:Name}}%
 		\label{sub:${2:$1}}
-		${0}
 #
-
+snippet nossub "Sub Sub Section no toc"
+   \notocsubsubsection{${1:Name}}
+      \label{sub:${2:$1}}
+# 
 
 # Hyper Section
 snippet hsec "Hyper Section" b
@@ -878,4 +879,14 @@ snippet 95ci "(95 %-CI)"
 
 snippet auc "AUC (95 %-CI)"
   0.${1:auc} (95~\%-CI 0.${2:wert-1} - 0.${3:wert-2}; p$<$\0.${4:p-wert})$0
+
+snippet empfänger "Briefkopf Empfänger"
+	${1:Name} \\
+	\\
+	${2:Straße} \\
+	${3:Stadt}
+
+snippet signaturelatex "Unterschrift"
+  \hspace{5 mm}
+  \includegraphics[width=0.3\linewidth]{/Users/g/Library/Mobile Documents/com~apple~CloudDocs/!Docs iCloud/R Statistik, icloud/Latex, icloud/Latex Projekte/signature_latex.png}
 

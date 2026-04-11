@@ -84,6 +84,20 @@ return {
         remap = false,
       },
       {
+        "<leader>te",
+        "<cmd>read ~/.config/nvim/templates/briefkopf-vorlage-latex-2026-04-10-med.tex<CR>",
+        desc = "Briefkopf med",
+        nowait = true,
+        remap = false,
+      },
+      {
+        "<leader>ti",
+        "<cmd>read ~/.config/nvim/templates/briefkopf-vorlage-latex-2026-04-10-no-med.tex<CR>",
+        desc = "Briefkopf NO med",
+        nowait = true,
+        remap = false,
+      },
+      {
         "<leader>tl",
         "<cmd>read ~/.config/nvim/templates/footer-footnotes.tex<CR>",
         desc = "footer-footnotes.tex",
