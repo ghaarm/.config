@@ -38,12 +38,12 @@ return {
           height = 0.90,
 
           flex = {
-            flip_columns = 120, -- ab welcher Bildschirmbreite (Spalten wird der preview in vertical gewechselt)
+            flip_columns = 100, -- ab welcher Bildschirmbreite (Spalten wird der preview in vertical gewechselt)
           },
 
           horizontal = {
             preview_width = 0.5,
-            preview_cutoff = 120,
+            preview_cutoff = 100,
           },
 
           vertical = {
@@ -179,13 +179,24 @@ return {
       })
     end, { desc = "Fuzzy find files in cwd" })
 
-    keymap.set("n", "<leader>fi", function() -- zeigt alle ignorierten files, gitignore und übergeordnete ordner
+    keymap.set("n", "<leader>fi", function()
+      local parent = vim.fn.expand("%:p:h:h:h") -- parent sucht von der aktuellen Datei aus vs cwd s.u. geht vom cwd aus, :h = ein parent Ordner
       require("telescope.builtin").find_files({
+        cwd = parent,
         hidden = true,
         no_ignore = true,
         no_ignore_parent = true,
       })
-    end, { desc = "Find files (ALL, no ignore)" })
+    end, { desc = "find ALL files from 3 levels up" })
+
+    -- keymap.set("n", "<leader>fi", function() -- zeigt alle ignorierten files, gitignore und übergeordnete ordner
+    --   require("telescope.builtin").find_files({
+    --     cwd = "..", -- damit auch übergeordnete Ordner durchsucht werden, geht vom cwd aus
+    --     hidden = true,
+    --     no_ignore = true,
+    --     no_ignore_parent = true,
+    --   })
+    -- end, { desc = "find files in parent dir incl. ignored)" })
 
     -- keymap.set("n", "<leader>fF", function()
     keymap.set("n", "<leader>fP", function()

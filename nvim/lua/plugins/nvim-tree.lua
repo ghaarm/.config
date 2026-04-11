@@ -7,7 +7,7 @@ end
 
 -- Funktion zum Duplizieren einer Datei
 function duplicate_file()
-  local api = require('nvim-tree.api')
+  local api = require("nvim-tree.api")
   local node = api.tree.get_node_under_cursor()
 
   if node == nil then
@@ -26,7 +26,7 @@ function duplicate_file()
   end
 
   -- Datei kopieren
-  vim.fn.system({ 'cp', filepath, new_filepath })
+  vim.fn.system({ "cp", filepath, new_filepath })
 
   -- Nvim-tree aktualisieren, um die neue Datei anzuzeigen
   api.tree.reload()
@@ -52,8 +52,6 @@ end
 --     require 'nvim-tree.actions.node.open-file'.fn('edit')
 --   end
 -- end
-
-
 
 return {
   "nvim-tree/nvim-tree.lua",
@@ -104,15 +102,19 @@ return {
     })
 
     -- set keymaps
-    local keymap = vim
-        .keymap                                                                                                         -- for conciseness
+    local keymap = vim.keymap -- for conciseness
 
-    keymap.set("n", "<leader>ee", "<cmd>NvimTreeToggle<CR>", { desc = "Toggle file explorer" })                         -- toggle file explorer
+    keymap.set("n", "<leader>ee", "<cmd>NvimTreeToggle<CR>", { desc = "Toggle file explorer" }) -- toggle file explorer
     keymap.set("n", "<leader>ef", "<cmd>NvimTreeFindFileToggle<CR>", { desc = "Toggle file explorer on current file" }) -- toggle file explorer on current file
-    keymap.set("n", "<leader>ec", "<cmd>NvimTreeCollapse<CR>", { desc = "Collapse file explorer" })                     -- collapse file explorer
-    keymap.set("n", "<leader>er", "<cmd>NvimTreeRefresh<CR>", { desc = "Refresh file explorer" })                       -- refresh file explorer
+    keymap.set("n", "<leader>ec", "<cmd>NvimTreeCollapse<CR>", { desc = "Collapse file explorer" }) -- collapse file explorer
+    keymap.set("n", "<leader>er", "<cmd>NvimTreeRefresh<CR>", { desc = "Refresh file explorer" }) -- refresh file explorer
 
-    keymap.set("n", "<leader>d", ":lua duplicate_file()<CR>", { noremap = true, silent = true, desc = "Duplicate file" })
+    keymap.set(
+      "n",
+      "<leader>dd",
+      ":lua duplicate_file()<CR>",
+      { noremap = true, silent = true, desc = "duplicate file" }
+    )
 
     -- keymap.set(
     --   'n',
@@ -120,5 +122,5 @@ return {
     --   function() open_with_sioyek(require 'nvim-tree.lib'.get_node_at_cursor()) end,
     --   { noremap = true, silent = true, desc = "Open PDF with sioyek" }
     -- )
-  end
+  end,
 }

@@ -64,7 +64,9 @@ keymap.set("i", "jl", "<ESC>", { desc = "Exit insert mode with jj" })
 
 keymap.set("n", "<leader><leader>n", ":source $MYVIMRC<CR>", { desc = "Reload Neovim Config" })
 
--- Navigation
+---------------------------------------------------------------------------
+-- NAVIGATION
+---------------------------------------------------------------------------
 vim.keymap.set("n", "<leader><leader>a", ":Alpha<CR>", { desc = "Return to Alpha Dashboard" })
 
 vim.keymap.set("n", "<leader>bn", ":bn<CR>", { desc = "Nächster Buffer" })
@@ -82,6 +84,10 @@ keymap.set("n", "<leader>hs", "<C-w>s", { desc = "Split window horizontally" }) 
 keymap.set("n", "<leader>se", "<C-w>=", { desc = "Make splits equal size" }) -- make split windows equal width & height
 keymap.set("n", "<leader>sx", "<cmd>close<CR>", { desc = "Close current split" }) -- close current split window
 
+keymap.set("n", "<leader>en", "<cmd>enew<cr>", { desc = "New empty buffer" })
+keymap.set("n", "<leader>vn", "<cmd>vnew<cr>", { desc = "New empty vertical split" })
+keymap.set("n", "<leader>hn", "<cmd>new<cr>", { desc = "New empty horizontal split" })
+
 keymap.set("n", "<leader>to", "<cmd>tabnew<CR>", { desc = "Open new tab" }) -- open new tab
 keymap.set("n", "<leader>tx", "<cmd>tabclose<CR>", { desc = "Close current tab" }) -- close current tab
 keymap.set("n", "<leader>tn", "<cmd>tabn<CR>", { desc = "Go to next tab" }) --  go to next tab
@@ -89,6 +95,14 @@ keymap.set("n", "<leader>tp", "<cmd>tabp<CR>", { desc = "Go to previous tab" }) 
 keymap.set("n", "<leader>tf", "<cmd>tabnew %<CR>", { desc = "Open current buffer in new tab" }) --  move current buffer to new tab
 keymap.set("n", "<leader>xa", "<cmd>xa<cr>", { desc = "Save all and exit" })
 keymap.set("n", "<leader>bd", "<cmd>bd<cr>", { desc = "Delete buffer" })
+
+keymap.set("n", "<leader>dt", "<cmd>diffthis<cr>", { desc = "diff this" })
+keymap.set("n", "<leader>do", "<cmd>diffoff!<cr>", { desc = "turn diff OFF" })
+keymap.set("n", "<leader>dg", "<cmd>diffget<cr>", { desc = "get change from other window" })
+keymap.set("n", "<leader>du", "<cmd>diffput<cr>", { desc = "put change to other window" })
+keymap.set("n", "<leader>dq", "<cmd>windo diffoff!<cr>", { desc = "turn diff off in all windows" })
+keymap.set("n", "<leader>dn", "]c", { desc = "next diff" })
+keymap.set("n", "<leader>dp", "[c", { desc = "previous diff" })
 
 -- Vimtex-specific keybindings
 vim.api.nvim_create_autocmd("FileType", {
