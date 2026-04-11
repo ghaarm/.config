@@ -9,6 +9,8 @@ local float_envs = {
 
 local function is_blank(line)
   return line:match("^%s*$") ~= nil
+    or line:match("^%s*%%%s*$") ~= nil
+    or line:match("^%s*%% NVIM_FLOAT_OFF %s*%%%s*$") ~= nil
 end
 
 local function begin_env(line)
