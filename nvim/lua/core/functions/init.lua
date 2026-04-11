@@ -1,0 +1,5 @@
+require("core.functions.open-in-finder")
+require("core.functions.winbar").setup()
+require("core.functions.bild-preview-mac")
+require("core.functions.leader-leader-x-source-file")
+require("core.functions.latex-comment-figures")

@@ -46,7 +46,7 @@ function M.render()
 end
 
 function M.setup()
-  vim.o.winbar = "%!v:lua.require'config.winbar'.render()"
+  vim.o.winbar = "%!v:lua.require'core.functions.winbar'.render()"
 end
 
 return M
