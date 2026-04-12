@@ -112,6 +112,29 @@ local function uncomment_line(line)
 
   return indent .. rest
 end
+local function uncomment_visual_selection()
+  local bufnr = vim.api.nvim_get_current_buf()
+
+  local start_line = vim.fn.getpos("'<")[2]
+  local end_line = vim.fn.getpos("'>")[2]
+
+  if start_line == 0 or end_line == 0 then
+    vim.notify("Keine visuelle Auswahl gefunden", vim.log.levels.WARN)
+    return
+  end
+
+  if start_line > end_line then
+    start_line, end_line = end_line, start_line
+  end
+
+  local lines = vim.api.nvim_buf_get_lines(bufnr, start_line - 1, end_line, false)
+
+  for i, line in ipairs(lines) do
+    lines[i] = uncomment_line(line)
+  end
+
+  vim.api.nvim_buf_set_lines(bufnr, start_line - 1, end_line, false, lines)
+end
 local function find_float_end(lines, start_idx, env_name)
   for i = start_idx, #lines do
     if end_env(lines[i]) == env_name then
@@ -266,3 +289,27 @@ end, {})
 vim.api.nvim_create_user_command("LatexUncommentFloats", function()
   set_float_comments(false)
 end, {})
+
+vim.api.nvim_create_user_command("LatexUncommentSelection", function()
+  uncomment_visual_selection()
+end, {})
+vim.api.nvim_create_user_command("LatexUncommentSelection", function(opts)
+  local bufnr = vim.api.nvim_get_current_buf()
+  local start_line = opts.line1
+  local end_line = opts.line2
+
+  if start_line > end_line then
+    start_line, end_line = end_line, start_line
+  end
+
+  local lines = vim.api.nvim_buf_get_lines(bufnr, start_line - 1, end_line, false)
+
+  for i, line in ipairs(lines) do
+    lines[i] = uncomment_line(line)
+  end
+
+  vim.api.nvim_buf_set_lines(bufnr, start_line - 1, end_line, false, lines)
+end, { range = true })
+vim.keymap.set("x", "<localleader>gc", ":<C-u>'<,'>LatexUncommentSelection<CR>", {
+  desc = "Uncomment selected LaTeX lines",
+})
