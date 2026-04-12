@@ -46,26 +46,66 @@ end
 
 local function has_caption(line)
   local s = strip_comment_prefix(line)
-  return s:match("\\caption%s*{") or s:match("\\captionof%s*{%s*(figure|table)%s*}")
+  return s:match("\\caption%s*{") or s:match("\\captionof%s*{%s*figure%s*}") or s:match("\\captionof%s*{%s*table%s*}")
 end
 
-local function add_marker(line)
-  if line:find("^%s*%%+%s*LATEX_FLOAT_OFF%s*", 1) then
-    return line
+local function find_brace_block(lines, idx)
+  local start_idx = nil
+
+  for i = idx, 1, -1 do
+    local s = strip_comment_prefix(lines[i])
+
+    if s:match("^%s*{%s*\\centering") or s:match("^%s*{%s*$") then
+      start_idx = i
+      break
+    end
   end
 
+  if not start_idx then
+    return nil
+  end
+
+  local depth = 0
+  local started = false
+
+  for j = start_idx, math.min(start_idx + 120, #lines) do
+    local s = strip_comment_prefix(lines[j])
+
+    for c in s:gmatch("[{}]") do
+      if c == "{" then
+        depth = depth + 1
+        started = true
+      elseif c == "}" then
+        depth = depth - 1
+      end
+    end
+
+    if started and depth == 0 then
+      return start_idx, j
+    end
+  end
+
+  return nil
+end
+local function add_marker(line, is_edge)
   local indent, rest = line:match("^(%s*)(.*)$")
+  indent = indent or ""
   rest = rest or ""
+
+  rest = rest:gsub("^%%+%s*LATEX_FLOAT_OFF%s*", "", 1)
   rest = rest:gsub("^%%+%s?", "", 1)
 
-  return indent .. marker .. rest
+  if is_edge then
+    return indent .. marker .. rest
+  else
+    return indent .. "% " .. rest
+  end
 end
 
 local function uncomment_line(line)
   local indent, rest = line:match("^(%s*)(.*)$")
-  if not indent then
-    return line
-  end
+  indent = indent or ""
+  rest = rest or ""
 
   rest = rest:gsub("^%%+%s*LATEX_FLOAT_OFF%s*", "", 1)
   rest = rest:gsub("^%%+%s?", "", 1)
@@ -139,10 +179,6 @@ local function find_brace_block(lines, idx)
       start_idx = i
       break
     end
-
-    if begin_env(lines[i]) or end_env(lines[i]) then
-      break
-    end
   end
 
   if not start_idx then
@@ -152,7 +188,7 @@ local function find_brace_block(lines, idx)
   local depth = 0
   local started = false
 
-  for j = start_idx, math.min(start_idx + 80, #lines) do
+  for j = start_idx, math.min(start_idx + 120, #lines) do
     local s = strip_comment_prefix(lines[j])
 
     for c in s:gmatch("[{}]") do
@@ -171,7 +207,6 @@ local function find_brace_block(lines, idx)
 
   return nil
 end
-
 local function set_float_comments(comment)
   local bufnr = vim.api.nvim_get_current_buf()
   local lines = vim.api.nvim_buf_get_lines(bufnr, 0, -1, false)
@@ -209,7 +244,8 @@ local function set_float_comments(comment)
     if block_start and block_end then
       for k = block_start, block_end do
         if comment then
-          lines[k] = add_marker(lines[k])
+          local is_edge = (k == block_start or k == block_end)
+          lines[k] = add_marker(lines[k], is_edge)
         else
           lines[k] = uncomment_line(lines[k])
         end
