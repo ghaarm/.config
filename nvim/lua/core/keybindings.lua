@@ -165,6 +165,7 @@ vim.keymap.set("n", "mm", '"+dd', { noremap = true, silent = true })
 
 -- Visual: nur m
 vim.keymap.set("x", "m", '"+d', { noremap = true, silent = true })
+vim.keymap.set("x", "p", '"_dP', { noremap = true, silent = true }) --  auch wenn dein Yank im System-Clipboard landet, überschreibt ein normales p über einer Visual-Auswahl oft den Registerinhalt durch das Ersetzen der Auswahl. Mit "_dP verhinderst du genau das.
 
 -- 3) Marks: m{a-zA-Z} -> gm{a-zA-Z}, `m` frei machen
 vim.keymap.set("n", "gm", "m", { noremap = true, silent = true })
