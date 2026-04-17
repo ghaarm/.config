@@ -145,25 +145,17 @@ vim.api.nvim_set_keymap("i", "<D-BS>", "<C-u>", { noremap = true, silent = true 
 vim.keymap.set({ "n", "x" }, "d", '"_d', { noremap = true, silent = true })
 vim.keymap.set({ "n", "x" }, "c", '"_c', { noremap = true, silent = true })
 vim.keymap.set({ "n", "x" }, "x", '"_x', { noremap = true, silent = true })
+
 vim.keymap.set("n", "dd", '"_dd', { noremap = true, silent = true })
 vim.keymap.set("n", "D", '"_D', { noremap = true, silent = true })
 vim.keymap.set("n", "C", '"_C', { noremap = true, silent = true })
 vim.keymap.set("n", "s", '"_s', { noremap = true, silent = true })
 vim.keymap.set("n", "S", '"_S', { noremap = true, silent = true })
 
--- Delete / change to black hole by default
-vim.keymap.set({ "n", "x" }, "d", '"_d', { noremap = true, silent = true })
-vim.keymap.set({ "n", "x" }, "c", '"_c', { noremap = true, silent = true })
-vim.keymap.set({ "n", "x" }, "x", '"_x', { noremap = true, silent = true })
-vim.keymap.set("n", "dd", '"_dd', { noremap = true, silent = true })
-vim.keymap.set("n", "D", '"_D', { noremap = true, silent = true })
-vim.keymap.set("n", "C", '"_C', { noremap = true, silent = true })
-vim.keymap.set("n", "s", '"_s', { noremap = true, silent = true })
-vim.keymap.set("n", "S", '"_S', { noremap = true, silent = true })
 vim.keymap.set("n", "m", '"+x', { noremap = true, silent = true })
 vim.keymap.set("n", "mm", '"+dd', { noremap = true, silent = true })
 
--- Visual: nur m
+-- Visual:
 vim.keymap.set("x", "m", '"+d', { noremap = true, silent = true })
 vim.keymap.set("x", "p", '"_dP', { noremap = true, silent = true }) --  auch wenn dein Yank im System-Clipboard landet, überschreibt ein normales p über einer Visual-Auswahl oft den Registerinhalt durch das Ersetzen der Auswahl. Mit "_dP verhinderst du genau das.
 
