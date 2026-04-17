@@ -58,20 +58,18 @@ return {
   "EdenEast/nightfox.nvim",
   config = function()
     -- Zuerst das Plugin mit den Standardoptionen initialisieren
-    require('nightfox').setup({
+    require("nightfox").setup({
       options = {
         -- Optionen hier, wenn nötig
-      }
+      },
     })
 
     -- Nordfox als dein Colorscheme setzen
     vim.cmd("colorscheme nordfox")
     -- vim.cmd [[highlight SpellBad ctermfg=white ctermbg=red guifg=#E0E0E0 guibg=#990000]] -- crimson red und grau im foreground,kann nicht in der Options stehen, weil sonst das colorscheme die Einstellung überschreibt.
-    vim.cmd [[highlight SpellBad ctermfg=red guifg=#991F00]] -- weinrot, kann nicht in der Options stehen, weil sonst das colorscheme die Einstellung überschreibt.
+    vim.cmd([[highlight SpellBad ctermfg=red guifg=#991F00]]) -- weinrot, kann nicht in der Options stehen, weil sonst das colorscheme die Einstellung überschreibt.
   end,
-
 }
-
 
 -- catpPuccin
 
