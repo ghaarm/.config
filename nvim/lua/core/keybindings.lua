@@ -152,9 +152,15 @@ vim.keymap.set("n", "C", '"_C', { noremap = true, silent = true })
 vim.keymap.set("n", "s", '"_s', { noremap = true, silent = true })
 vim.keymap.set("n", "S", '"_S', { noremap = true, silent = true })
 
-vim.keymap.set("n", "m", '"+x', { noremap = true, silent = true })
-vim.keymap.set("n", "mm", '"+dd', { noremap = true, silent = true })
+-- damit bei Makros nicht aus dem Systemclipboard gepasted wird, jetzt wird ausschnitt in z eingefügt und von dort gepasted
+vim.keymap.set("x", "m", '"zd', { noremap = true, silent = true })
+vim.keymap.set("n", "m", '"zx', { noremap = true, silent = true })
+vim.keymap.set("n", "mm", '"zdd', { noremap = true, silent = true })
 
+vim.keymap.set("n", "p", '"zp', { noremap = true, silent = true })
+vim.keymap.set("n", "P", '"zP', { noremap = true, silent = true })
+vim.keymap.set("x", "p", '"_d"zP', { noremap = true, silent = true })
+------------
 -- Visual:
 vim.keymap.set("x", "m", '"+d', { noremap = true, silent = true })
 vim.keymap.set("x", "p", '"_dP', { noremap = true, silent = true }) --  auch wenn dein Yank im System-Clipboard landet, überschreibt ein normales p über einer Visual-Auswahl oft den Registerinhalt durch das Ersetzen der Auswahl. Mit "_dP verhinderst du genau das.
