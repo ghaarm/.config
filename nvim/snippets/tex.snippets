@@ -837,10 +837,17 @@ snippet endmulticols "end multicols"
 snippet ref "reference latex"
   \ref{$:1}
 
-snippet equationmulti "equation for multicols breite"
+snippet equation-multi "equation for multicols breite"
   \begin{equation}
   \resizebox{\columnwidth}{!}{$
   \text{${1:ergebnis}} = ${2:formel}
+  $}
+  \end{equation}
+snippet equation-multi-label "equation for multicols breite mit Label"
+  \begin{equation}
+    \resizebox{\columnwidth}{!}{$
+    \text{${1:ergebnis}} = ${2:formel}
+    \{eq:${4:3abel}}
   $}
   \end{equation}
 
@@ -848,6 +855,11 @@ snippet equation-simple "equation []"
    \[
      \text{${1:ergebnis}} = \text{${2:variable-1}} \cdot \text{${3:variable-2}}
    \]
+snippet equation-simple-label "equation []"
+   \begin{equation}
+     \text{${1:ergebnis}} = \text{${2:variable-1}} \cdot \text{${3:variable-2}}
+     \{eq:${4:label}}
+   \end{equation}
 
 snippet shiny-link "Shiny Link"
   \href{https://foamicu.shinyapps.io/ShinyICUalpha/}{Shiny}
