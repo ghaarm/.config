@@ -4,7 +4,7 @@ return {
   "akinsho/toggleterm.nvim",
   config = function()
     require("toggleterm").setup({
-      open_mapping = [[<leader>tt]], -- Definiert die Tastenbelegung zum Öffnen des Terminals
+      open_mapping = [[<leader><leader>t]], -- Definiert die Tastenbelegung zum Öffnen des Terminals
       shade_terminals = false,
       -- add --login so ~/.zprofile is loaded
       -- https://vi.stackexchange.com/questions/16019/neovim-terminal-not-reading-bash-profile/16021#16021
@@ -12,7 +12,7 @@ return {
     })
   end,
   keys = {
-    { "<leader>tt", desc = "Toggle terminal" }, -- Nutzt dieselbe Tastenbelegung wie open_mapping
+    { "<leader><leader>t", desc = "Toggle terminal" }, -- Nutzt dieselbe Tastenbelegung wie open_mapping
     { "<leader>0", "<Cmd>2ToggleTerm<Cr>", desc = "Terminal #2" },
     {
       "<leader>td",

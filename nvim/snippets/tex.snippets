@@ -902,3 +902,81 @@ snippet signaturelatex "Unterschrift"
   \hspace{5 mm}
   \includegraphics[width=0.3\linewidth]{/Users/g/Library/Mobile Documents/com~apple~CloudDocs/!Docs iCloud/R Statistik, icloud/Latex, icloud/Latex Projekte/signature_latex.png}
 
+
+snippet checkbox "Checkbox benötigt amssymb"
+  $\square$
+
+snippet checkbox-pdf "Checkbox anklickbar benötigt hyperref"
+  \Checkbox[name=cb1]{}
+
+snippet checkbox-filled "Checkbox angekreuzt"
+  $\boxtimes$
+
+
+snippet likert-makros "Likert Makros für Prämbel"
+  %========================== Makros für Likert ============================
+  \usepackage{amssymb} % für Checkboxen
+  \usepackage{array} % für Anordnung tabular
+
+  \newcommand{\checkboxjanein}{
+    \\[-0.5em] % macht einen Abstand zum item
+    \noindent
+    \begin{tabular}{*{2}{>{\centering\arraybackslash}p{2.3cm}}}
+    \footnotesize Ja &
+    \footnotesize Nein \\[0.5em]
+    $\square$ & $\square$
+    \end{tabular}
+  }
+
+  \newcommand{\likertjanein}{
+    \\[-0.5em] % macht einen Abstand zum item
+    \noindent
+    \begin{tabular}{*{6}{>{\centering\arraybackslash}p{2.3cm}}}
+    \footnotesize Ja, eindeutig &
+    \footnotesize Ja &
+    \footnotesize Eher ja &
+    \footnotesize Eher nein &
+    \footnotesize Nein &
+    \footnotesize Nein, gar nicht \\[0.5em]
+    $\square$ & $\square$ & $\square$ & $\square$ & $\square$ & $\square$
+  \end{tabular}
+  }
+
+  \newcommand{\likertzahlen}{
+    \\[-0.5em] % macht einen Abstand zum item
+    \noindent
+    \begin{tabular}{*{6}{>{\centering\arraybackslash}p{2.3cm}}}
+    1 & 2 & 3 & 4 & 5 & 6 \\[0.4em]
+    $\square$ & $\square$ & $\square$ & $\square$ & $\square$ & $\square$
+    \end{tabular}
+  }
+
+  \newcommand{\likertzustimmungmitzahlen}{
+    \\[-0.5em] % macht einen Abstand zum item
+    \noindent
+    \begin{tabular}{*{6}{>{\centering\arraybackslash}p{2.3cm}}}
+    \footnotesize Stimme voll zu &
+    \footnotesize Stimme zu &
+    \footnotesize Stimme eher zu &
+    \footnotesize Stimme eher nicht zu &
+    \footnotesize Stimme nicht zu &
+    \footnotesize Stimme überhaupt nicht zu \\[0.5em]
+    1 & 2 & 3 & 4 & 5 & 6 \\[0.4em]
+    $\square$ & $\square$ & $\square$ & $\square$ & $\square$ & $\square$
+    \end{tabular}
+  }
+
+  \newcommand{\likertzustimmung}{
+    \\[-0.5em] % macht einen Abstand zum item
+    \noindent
+    \begin{tabular}{*{6}{>{\centering\arraybackslash}p{2.3cm}}}
+    \footnotesize Stimme voll zu &
+    \footnotesize Stimme zu &
+    \footnotesize Stimme eher zu &
+    \footnotesize Stimme eher nicht zu &
+    \footnotesize Stimme nicht zu &
+    \footnotesize Stimme überhaupt nicht zu \\[0.5em]
+    $\square$ & $\square$ & $\square$ & $\square$ & $\square$ & $\square$
+    \end{tabular}
+  }
+
