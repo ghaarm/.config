@@ -149,6 +149,8 @@ alias cdic="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/'!Docs iCloud'"
 
 alias cdedit="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/'!Docs iCloud'/Vorlagen && nvim vorlage-edit-nvim.md" 
 
+alias cdobsidian='builtin cd "/Users/g/Library/Mobile Documents/iCloud~md~obsidian/Documents/obsidian-icloud" && nvim'
+
 alias cdscan="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/@Tabea\ \&\ Golo\ iCloud/@Scans && y" 
 
 alias cdsteuer="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/@Tabea\ \&\ Golo\ iCloud/steuer-icloud && nvim" 
@@ -160,12 +162,14 @@ alias cdgit="/Users/g/Library/Mobile\ Documents/com~apple~CloudDocs/'!Docs iClou
 alias cdessen="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/@Tabea\ \&\ Golo\ iCloud/Rezepte\ Essen\ Golo" 
 
 # cd für js
-alias cdjs="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/'!Docs iCloud'/R\ Statistik,\ icloud/js-projects && nvim" 
+alias cdjs="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/'!Docs iCloud'/R\ Statistik,\ icloud/js-projects/textbausteine-js && nvim" 
 
 alias cdjsshiny="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/'!Docs iCloud'/R\ Statistik,\ icloud/js-projects/textbausteine-js/shiny-textbausteine-html && nvim" 
 
 # cd für r
 alias bs="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/'!Docs iCloud'/R\ Statistik,\ icloud/R,\ projects/shiny-app/shiny-bslib && nvim" 
+
+alias shinyjs="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/'!Docs iCloud'/R\ Statistik,\ icloud/R,\ projects/shiny-app/shiny-js && nvim" 
 
 alias bscodex="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/'!Docs iCloud'/R\ Statistik,\ icloud/R,\ projects/shiny-app/shiny-bslib-codex && nvim" 
 

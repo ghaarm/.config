@@ -14,4 +14,4 @@ push @generated_exts, "synctex.gz";
 push @generated_exts, "run.xml";
 
 # Setzt das Intervall für die Überprüfung von Änderungen auf 15 Sekunden
-$sleep_time = 0.5;
+$sleep_time = 5;
