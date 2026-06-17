@@ -11,31 +11,47 @@ return {
     local ts_context_commentstring = require("ts_context_commentstring.integrations.comment_nvim")
 
     comment.setup({
-      padding = true,  -- Add a space b/w comment and the line
-      sticky = true,   -- Whether the cursor should stay at its position
-      ignore = nil,    -- Lines to be ignored while (un)comment
-      toggler = {      -- LHS of toggle mappings in NORMAL mode
-        line = 'gcc',  -- Line-comment toggle keymap
-        block = 'gbc', -- Block-comment toggle keymap, deaktiviert für delete mit marks nvim
-        -- block = 'false', -- Block-comment toggle keymap
-      },
-      opleader = {    -- LHS of operator-pending mappings in NORMAL and VISUAL mode
-        line = 'gc',  -- Line-comment keymap
-        block = 'gb', -- Block-comment keymap, deaktiviert für delete mit marks nvim
+      padding = true,
+      sticky = true,
+      ignore = nil,
 
-        -- block = 'false',                                     -- Block-comment keymap
+      toggler = {
+        line = "gcc",
+        block = "gbc",
       },
-      extra = {                                              -- LHS of extra mappings
-        above = 'gcO',                                       -- Add comment on the line above
-        below = 'gco',                                       -- Add comment on the line below
-        eol = 'gcA',                                         -- Add comment at the end of line
+
+      opleader = {
+        line = "gc",
+        block = "gb",
       },
-      mappings = {                                           -- Enable keybindings
-        basic = true,                                        -- Operator-pending mapping; `gcc`, `gbc`, etc.
-        extra = true,                                        -- Extra mapping; `gco`, `gcO`, `gcA`
+
+      extra = {
+        above = "gcO",
+        below = "gco",
+        eol = "gcA",
       },
-      pre_hook = ts_context_commentstring.create_pre_hook(), -- for commenting tsx, jsx, svelte, html files
-      post_hook = nil,                                       -- Function to call after (un)comment
+
+      mappings = {
+        basic = true,
+        extra = true,
+      },
+
+      pre_hook = function(ctx)
+        local ft = vim.bo.filetype
+
+        if ft == "tex" or ft == "plaintex" or ft == "latex" then
+          return "%% %s"
+        end
+
+        return ts_context_commentstring.create_pre_hook()(ctx)
+      end,
+
+      post_hook = nil,
     })
+
+    local ft = require("Comment.ft")
+    ft.set("tex", "%% %s")
+    ft.set("plaintex", "%% %s")
+    ft.set("latex", "%% %s")
   end,
 }
