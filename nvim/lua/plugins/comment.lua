@@ -68,9 +68,9 @@ return {
     local ok_ts, ts_integration = pcall(require, "ts_context_commentstring.integrations.comment_nvim")
 
     -- Feste commentstrings für Filetypes, die oft nil / leer sind
-    ft.set("tex", "%% %s")
-    ft.set("plaintex", "%% %s")
-    ft.set("latex", "%% %s")
+    ft.set("tex", "% %s")
+    ft.set("plaintex", "% %s")
+    ft.set("latex", "% %s")
 
     ft.set({ "conf", "cfg", "ini", "toml", "yaml", "yml", "gitconfig", "desktop" }, "# %s")
     ft.set("dosini", "# %s")
