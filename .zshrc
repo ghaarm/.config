@@ -94,7 +94,9 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 plugins=(git zsh-autosuggestions zsh-syntax-highlighting web-search)
 
 source $ZSH/oh-my-zsh.sh
-
+ZSH_AUTOSUGGEST_STRATEGY=(history completion)
+source /opt/homebrew/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh
+bindkey '^M' accept-line # damit zsh autocomplete enter nicht blockiert
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
