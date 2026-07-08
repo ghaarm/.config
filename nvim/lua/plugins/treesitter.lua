@@ -50,63 +50,136 @@
 -- }
 
 -- alt before autotag test
+-- return {
+--   "nvim-treesitter/nvim-treesitter",
+--   event = { "BufReadPre", "BufNewFile" },
+--   build = ":TSUpdate",
+--   dependencies = {
+--     "windwp/nvim-ts-autotag",
+--   },
+--
+--   config = function()
+--     -- import nvim-treesitter plugin
+--     local treesitter = require("nvim-treesitter.configs")
+--
+--     -- configure treesitter
+--     treesitter.setup({ -- enable syntax highlighting
+--       highlight = {
+--         enable = true,
+--       },
+--       -- enable indentation
+--       indent = { enable = true },
+--       -- enable autotagging (w/ nvim-ts-autotag plugin)
+--       -- autotag = { -- deactivate because of nvim-ts-autotag 1.0.0
+--       --   enable = true,
+--       -- },
+--       -- ensure these language parsers are installed
+--       ensure_installed = {
+--         "json",
+--         "javascript",
+--         "typescript",
+--         "tsx",
+--         "yaml",
+--         "html",
+--         "css",
+--         "prisma",
+--         "markdown",
+--         "markdown_inline",
+--         "svelte",
+--         "graphql",
+--         "bash",
+--         "lua",
+--         "vim",
+--         "dockerfile",
+--         "gitignore",
+--         "query",
+--         "vimdoc",
+--         "c",
+--         "r",
+--         "rnoweb",
+--       },
+--       incremental_selection = {
+--         enable = true,
+--         keymaps = {
+--           init_selection = "<C-space>",
+--           node_incremental = "<C-space>",
+--           scope_incremental = false,
+--           node_decremental = "<bs>",
+--         },
+--       },
+--     })
+--   end,
+-- }
+--
+-- wegen nvim 0.12
+--
+--
 return {
   "nvim-treesitter/nvim-treesitter",
-  event = { "BufReadPre", "BufNewFile" },
+  lazy = false,
   build = ":TSUpdate",
-  dependencies = {
-    "windwp/nvim-ts-autotag",
-  },
 
   config = function()
-    -- import nvim-treesitter plugin
-    local treesitter = require("nvim-treesitter.configs")
+    local nts = require("nvim-treesitter")
 
-    -- configure treesitter
-    treesitter.setup({ -- enable syntax highlighting
-      highlight = {
-        enable = true,
-      },
-      -- enable indentation
-      indent = { enable = true },
-      -- enable autotagging (w/ nvim-ts-autotag plugin)
-      -- autotag = { -- deactivate because of nvim-ts-autotag 1.0.0
-      --   enable = true,
-      -- },
-      -- ensure these language parsers are installed
-      ensure_installed = {
+    nts.setup({
+      install_dir = vim.fn.stdpath("data") .. "/site",
+    })
+
+    nts.install({
+      "json",
+      "javascript",
+      "typescript",
+      "tsx",
+      "yaml",
+      "html",
+      "css",
+      "prisma",
+      "markdown",
+      "markdown_inline",
+      "svelte",
+      "graphql",
+      "bash",
+      "lua",
+      "vim",
+      "dockerfile",
+      "gitignore",
+      "query",
+      "vimdoc",
+      "c",
+      "r",
+      "rnoweb",
+    })
+
+    vim.api.nvim_create_autocmd("FileType", {
+      group = vim.api.nvim_create_augroup("TreesitterStart", { clear = true }),
+      pattern = {
         "json",
         "javascript",
         "typescript",
-        "tsx",
+        "typescriptreact",
+        "javascriptreact",
         "yaml",
         "html",
         "css",
         "prisma",
         "markdown",
-        "markdown_inline",
         "svelte",
         "graphql",
+        "sh",
         "bash",
         "lua",
         "vim",
         "dockerfile",
         "gitignore",
-        "query",
-        "vimdoc",
         "c",
         "r",
+        "rmd",
         "rnoweb",
       },
-      incremental_selection = {
-        enable = true,
-        keymaps = {
-          init_selection = "<C-space>",
-          node_incremental = "<C-space>",
-          scope_incremental = false,
-          node_decremental = "<bs>",
-        },
-      },
+      callback = function()
+        pcall(vim.treesitter.start)
+      end,
     })
   end,
 }
