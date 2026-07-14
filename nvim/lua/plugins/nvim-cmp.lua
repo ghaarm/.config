@@ -326,7 +326,7 @@ return {
     "saadparwaiz1/cmp_luasnip",
     "hrsh7th/cmp-cmdline",
     "petertriho/cmp-git",
-    -- "micangl/cmp-vimtex",
+    "micangl/cmp-vimtex",
   },
   config = function()
     local cmp = require("cmp")
