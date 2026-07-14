@@ -1,6 +1,8 @@
 return {
   "nvim-telescope/telescope.nvim",
-  branch = "0.1.x",
+  -- branch = "0.1.x",
+  -- branch = "master",
+  version = "*",
   dependencies = {
     "nvim-lua/plenary.nvim",
     { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
@@ -97,7 +99,8 @@ return {
         bibtex = {
           depth = 1,
           custom_formats = {
-            { id = "no_cite", cite_marker = "#label#" },
+            -- { id = "no_cite", cite_marker = "#label#" },
+            { id = "no_cite", cite_marker = "%s" },
           },
           format = "no_cite",
           global_files = { "/Users/g/Library/texmf/bibtex/bib/Zotero.bib" },
