@@ -99,8 +99,8 @@ return {
         bibtex = {
           depth = 1,
           custom_formats = {
-            -- { id = "no_cite", cite_marker = "#label#" },
-            { id = "no_cite", cite_marker = "%s" },
+            { id = "no_cite", cite_marker = "#label#" },
+            -- { id = "no_cite", cite_marker = "%s" },
           },
           format = "no_cite",
           global_files = { "/Users/g/Library/texmf/bibtex/bib/Zotero.bib" },
