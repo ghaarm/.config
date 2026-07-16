@@ -105,10 +105,17 @@ alt-comma = 'layout accordion horizontal vertical'
 alt-f = 'layout floating tiling'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#focus
-ctrl-alt-shift-h = 'focus left'
-ctrl-alt-shift-j = 'focus down'
-ctrl-alt-shift-k = 'focus up'
-ctrl-alt-shift-l = 'focus right'
+# Focus mit meh key
+# ctrl-alt-shift-h = 'focus left'
+# ctrl-alt-shift-j = 'focus down'
+# ctrl-alt-shift-k = 'focus up'
+# ctrl-alt-shift-l = 'focus right'
+
+# focus mit cmd
+cmd-h = 'focus left'
+cmd-j = 'focus down'
+cmd-k = 'focus up'
+cmd-l = 'focus right'
 
 # nicht so gut, weil es dann am Laptop umständlich ist
 # ctrl-alt-h = 'focus left'
