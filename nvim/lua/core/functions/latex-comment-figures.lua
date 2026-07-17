@@ -1,3 +1,319 @@
+-- local marker = "% LATEX_FLOAT_OFF "
+--
+-- local float_envs = {
+--   figure = true,
+--   ["figure*"] = true,
+--   table = true,
+--   ["table*"] = true,
+-- }
+--
+-- local function strip_comment_prefix(line)
+--   local s = line
+--   s = s:gsub("^%s*%%+%s*LATEX_FLOAT_OFF%s*", "", 1)
+--   s = s:gsub("^%s*%%%s?", "", 1)
+--   return s
+-- end
+--
+-- local function is_blank(line)
+--   local s = strip_comment_prefix(line)
+--   return s:match("^%s*$") ~= nil
+-- end
+--
+-- local function begin_env(line)
+--   local s = strip_comment_prefix(line)
+--   return s:match("\\begin%s*{%s*([^}]+)%s*}")
+-- end
+--
+-- local function end_env(line)
+--   local s = strip_comment_prefix(line)
+--   return s:match("\\end%s*{%s*([^}]+)%s*}")
+-- end
+--
+-- local function is_multicols_begin(line)
+--   local env = begin_env(line)
+--   return env == "multicols" or env == "multicols*"
+-- end
+--
+-- local function is_multicols_end(line)
+--   local env = end_env(line)
+--   return env == "multicols" or env == "multicols*"
+-- end
+--
+-- local function is_captionof_float(line)
+--   local s = strip_comment_prefix(line)
+--   return s:match("\\captionof%s*{%s*figure%s*}") or s:match("\\captionof%s*{%s*table%s*}")
+-- end
+--
+-- local function has_caption(line)
+--   local s = strip_comment_prefix(line)
+--   return s:match("\\caption%s*{") or s:match("\\captionof%s*{%s*figure%s*}") or s:match("\\captionof%s*{%s*table%s*}")
+-- end
+--
+-- local function find_brace_block(lines, idx)
+--   local start_idx = nil
+--
+--   for i = idx, 1, -1 do
+--     local s = strip_comment_prefix(lines[i])
+--
+--     if s:match("^%s*{%s*\\centering") or s:match("^%s*{%s*$") then
+--       start_idx = i
+--       break
+--     end
+--   end
+--
+--   if not start_idx then
+--     return nil
+--   end
+--
+--   local depth = 0
+--   local started = false
+--
+--   for j = start_idx, math.min(start_idx + 120, #lines) do
+--     local s = strip_comment_prefix(lines[j])
+--
+--     for c in s:gmatch("[{}]") do
+--       if c == "{" then
+--         depth = depth + 1
+--         started = true
+--       elseif c == "}" then
+--         depth = depth - 1
+--       end
+--     end
+--
+--     if started and depth == 0 then
+--       return start_idx, j
+--     end
+--   end
+--
+--   return nil
+-- end
+-- local function add_marker(line, is_edge)
+--   local indent, rest = line:match("^(%s*)(.*)$")
+--   indent = indent or ""
+--   rest = rest or ""
+--
+--   rest = rest:gsub("^%%+%s*LATEX_FLOAT_OFF%s*", "", 1)
+--   rest = rest:gsub("^%%+%s?", "", 1)
+--
+--   if is_edge then
+--     return indent .. marker .. rest
+--   else
+--     return indent .. "% " .. rest
+--   end
+-- end
+--
+-- local function uncomment_line(line)
+--   local indent, rest = line:match("^(%s*)(.*)$")
+--   indent = indent or ""
+--   rest = rest or ""
+--
+--   rest = rest:gsub("^%%+%s*LATEX_FLOAT_OFF%s*", "", 1)
+--   rest = rest:gsub("^%%+%s?", "", 1)
+--
+--   return indent .. rest
+-- end
+-- local function uncomment_visual_selection()
+--   local bufnr = vim.api.nvim_get_current_buf()
+--
+--   local start_line = vim.fn.getpos("'<")[2]
+--   local end_line = vim.fn.getpos("'>")[2]
+--
+--   if start_line == 0 or end_line == 0 then
+--     vim.notify("Keine visuelle Auswahl gefunden", vim.log.levels.WARN)
+--     return
+--   end
+--
+--   if start_line > end_line then
+--     start_line, end_line = end_line, start_line
+--   end
+--
+--   local lines = vim.api.nvim_buf_get_lines(bufnr, start_line - 1, end_line, false)
+--
+--   for i, line in ipairs(lines) do
+--     lines[i] = uncomment_line(line)
+--   end
+--
+--   vim.api.nvim_buf_set_lines(bufnr, start_line - 1, end_line, false, lines)
+-- end
+-- local function find_float_end(lines, start_idx, env_name)
+--   for i = start_idx, #lines do
+--     if end_env(lines[i]) == env_name then
+--       return i
+--     end
+--   end
+--   return start_idx
+-- end
+--
+-- local function extend_block_up(lines, start_idx)
+--   local j = start_idx - 1
+--   while j >= 1 and is_blank(lines[j]) do
+--     j = j - 1
+--   end
+--   if j >= 1 and is_multicols_end(lines[j]) then
+--     return j
+--   end
+--   return start_idx
+-- end
+--
+-- local function extend_block_down(lines, end_idx)
+--   local j = end_idx + 1
+--   while j <= #lines and is_blank(lines[j]) do
+--     j = j + 1
+--   end
+--   if j <= #lines and is_multicols_begin(lines[j]) then
+--     return j
+--   end
+--   return end_idx
+-- end
+--
+-- local function find_center_block(lines, idx)
+--   local start_idx = nil
+--   for i = idx, 1, -1 do
+--     local s = strip_comment_prefix(lines[i])
+--     if s:match("\\begin%s*{%s*center%s*}") then
+--       start_idx = i
+--       break
+--     end
+--     if begin_env(lines[i]) or end_env(lines[i]) then
+--       break
+--     end
+--   end
+--   if not start_idx then
+--     return nil
+--   end
+--
+--   for j = idx, #lines do
+--     local s = strip_comment_prefix(lines[j])
+--     if s:match("\\end%s*{%s*center%s*}") then
+--       return start_idx, j
+--     end
+--   end
+--
+--   return nil
+-- end
+--
+-- local function find_brace_block(lines, idx)
+--   local start_idx = nil
+--
+--   for i = idx, 1, -1 do
+--     local s = strip_comment_prefix(lines[i])
+--
+--     if s:match("^%s*{%s*\\centering") or s:match("^%s*{%s*$") then
+--       start_idx = i
+--       break
+--     end
+--   end
+--
+--   if not start_idx then
+--     return nil
+--   end
+--
+--   local depth = 0
+--   local started = false
+--
+--   for j = start_idx, math.min(start_idx + 120, #lines) do
+--     local s = strip_comment_prefix(lines[j])
+--
+--     for c in s:gmatch("[{}]") do
+--       if c == "{" then
+--         depth = depth + 1
+--         started = true
+--       elseif c == "}" then
+--         depth = depth - 1
+--       end
+--     end
+--
+--     if started and depth == 0 then
+--       return start_idx, j
+--     end
+--   end
+--
+--   return nil
+-- end
+-- local function set_float_comments(comment)
+--   local bufnr = vim.api.nvim_get_current_buf()
+--   local lines = vim.api.nvim_buf_get_lines(bufnr, 0, -1, false)
+--
+--   local i = 1
+--   while i <= #lines do
+--     local block_start, block_end
+--
+--     local env = begin_env(lines[i])
+--     if env and float_envs[env] then
+--       local float_start = i
+--       local float_end = find_float_end(lines, i, env)
+--       block_start = extend_block_up(lines, float_start)
+--       block_end = extend_block_down(lines, float_end)
+--     elseif is_captionof_float(lines[i]) then
+--       local s1, e1 = find_center_block(lines, i)
+--       if s1 and e1 then
+--         block_start = extend_block_up(lines, s1)
+--         block_end = extend_block_down(lines, e1)
+--       else
+--         local s2, e2 = find_brace_block(lines, i)
+--         if s2 and e2 then
+--           block_start = extend_block_up(lines, s2)
+--           block_end = extend_block_down(lines, e2)
+--         end
+--       end
+--     elseif has_caption(lines[i]) then
+--       local s1, e1 = find_center_block(lines, i)
+--       if s1 and e1 then
+--         block_start = extend_block_up(lines, s1)
+--         block_end = extend_block_down(lines, e1)
+--       end
+--     end
+--
+--     if block_start and block_end then
+--       for k = block_start, block_end do
+--         if comment then
+--           local is_edge = (k == block_start or k == block_end)
+--           lines[k] = add_marker(lines[k], is_edge)
+--         else
+--           lines[k] = uncomment_line(lines[k])
+--         end
+--       end
+--       i = block_end + 1
+--     else
+--       i = i + 1
+--     end
+--   end
+--
+--   vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, lines)
+-- end
+--
+-- vim.api.nvim_create_user_command("LatexCommentFloats", function()
+--   set_float_comments(true)
+-- end, {})
+--
+-- vim.api.nvim_create_user_command("LatexUncommentFloats", function()
+--   set_float_comments(false)
+-- end, {})
+--
+-- vim.api.nvim_create_user_command("LatexUncommentSelection", function()
+--   uncomment_visual_selection()
+-- end, {})
+-- vim.api.nvim_create_user_command("LatexUncommentSelection", function(opts)
+--   local bufnr = vim.api.nvim_get_current_buf()
+--   local start_line = opts.line1
+--   local end_line = opts.line2
+--
+--   if start_line > end_line then
+--     start_line, end_line = end_line, start_line
+--   end
+--
+--   local lines = vim.api.nvim_buf_get_lines(bufnr, start_line - 1, end_line, false)
+--
+--   for i, line in ipairs(lines) do
+--     lines[i] = uncomment_line(line)
+--   end
+--
+--   vim.api.nvim_buf_set_lines(bufnr, start_line - 1, end_line, false, lines)
+-- end, { range = true })
+-- vim.keymap.set("x", "<localleader>gc", ":<C-u>'<,'>LatexUncommentSelection<CR>", {
+--   desc = "Uncomment selected LaTeX lines",
+-- })
+
 local marker = "% LATEX_FLOAT_OFF "
 
 local float_envs = {
@@ -9,8 +325,10 @@ local float_envs = {
 
 local function strip_comment_prefix(line)
   local s = line
+
   s = s:gsub("^%s*%%+%s*LATEX_FLOAT_OFF%s*", "", 1)
   s = s:gsub("^%s*%%%s?", "", 1)
+
   return s
 end
 
@@ -41,54 +359,19 @@ end
 
 local function is_captionof_float(line)
   local s = strip_comment_prefix(line)
+
   return s:match("\\captionof%s*{%s*figure%s*}") or s:match("\\captionof%s*{%s*table%s*}")
 end
 
 local function has_caption(line)
   local s = strip_comment_prefix(line)
+
   return s:match("\\caption%s*{") or s:match("\\captionof%s*{%s*figure%s*}") or s:match("\\captionof%s*{%s*table%s*}")
 end
 
-local function find_brace_block(lines, idx)
-  local start_idx = nil
-
-  for i = idx, 1, -1 do
-    local s = strip_comment_prefix(lines[i])
-
-    if s:match("^%s*{%s*\\centering") or s:match("^%s*{%s*$") then
-      start_idx = i
-      break
-    end
-  end
-
-  if not start_idx then
-    return nil
-  end
-
-  local depth = 0
-  local started = false
-
-  for j = start_idx, math.min(start_idx + 120, #lines) do
-    local s = strip_comment_prefix(lines[j])
-
-    for c in s:gmatch("[{}]") do
-      if c == "{" then
-        depth = depth + 1
-        started = true
-      elseif c == "}" then
-        depth = depth - 1
-      end
-    end
-
-    if started and depth == 0 then
-      return start_idx, j
-    end
-  end
-
-  return nil
-end
 local function add_marker(line, is_edge)
   local indent, rest = line:match("^(%s*)(.*)$")
+
   indent = indent or ""
   rest = rest or ""
 
@@ -97,13 +380,14 @@ local function add_marker(line, is_edge)
 
   if is_edge then
     return indent .. marker .. rest
-  else
-    return indent .. "% " .. rest
   end
+
+  return indent .. "% " .. rest
 end
 
 local function uncomment_line(line)
   local indent, rest = line:match("^(%s*)(.*)$")
+
   indent = indent or ""
   rest = rest or ""
 
@@ -112,80 +396,70 @@ local function uncomment_line(line)
 
   return indent .. rest
 end
-local function uncomment_visual_selection()
-  local bufnr = vim.api.nvim_get_current_buf()
 
-  local start_line = vim.fn.getpos("'<")[2]
-  local end_line = vim.fn.getpos("'>")[2]
-
-  if start_line == 0 or end_line == 0 then
-    vim.notify("Keine visuelle Auswahl gefunden", vim.log.levels.WARN)
-    return
-  end
-
-  if start_line > end_line then
-    start_line, end_line = end_line, start_line
-  end
-
-  local lines = vim.api.nvim_buf_get_lines(bufnr, start_line - 1, end_line, false)
-
-  for i, line in ipairs(lines) do
-    lines[i] = uncomment_line(line)
-  end
-
-  vim.api.nvim_buf_set_lines(bufnr, start_line - 1, end_line, false, lines)
-end
 local function find_float_end(lines, start_idx, env_name)
   for i = start_idx, #lines do
     if end_env(lines[i]) == env_name then
       return i
     end
   end
-  return start_idx
+
+  return nil
 end
 
 local function extend_block_up(lines, start_idx)
-  local j = start_idx - 1
-  while j >= 1 and is_blank(lines[j]) do
-    j = j - 1
+  local i = start_idx - 1
+
+  while i >= 1 and is_blank(lines[i]) do
+    i = i - 1
   end
-  if j >= 1 and is_multicols_end(lines[j]) then
-    return j
+
+  if i >= 1 and is_multicols_end(lines[i]) then
+    return i
   end
+
   return start_idx
 end
 
 local function extend_block_down(lines, end_idx)
-  local j = end_idx + 1
-  while j <= #lines and is_blank(lines[j]) do
-    j = j + 1
+  local i = end_idx + 1
+
+  while i <= #lines and is_blank(lines[i]) do
+    i = i + 1
   end
-  if j <= #lines and is_multicols_begin(lines[j]) then
-    return j
+
+  if i <= #lines and is_multicols_begin(lines[i]) then
+    return i
   end
+
   return end_idx
 end
 
 local function find_center_block(lines, idx)
-  local start_idx = nil
+  local start_idx
+
   for i = idx, 1, -1 do
     local s = strip_comment_prefix(lines[i])
+
     if s:match("\\begin%s*{%s*center%s*}") then
       start_idx = i
       break
     end
+
     if begin_env(lines[i]) or end_env(lines[i]) then
       break
     end
   end
+
   if not start_idx then
     return nil
   end
 
-  for j = idx, #lines do
-    local s = strip_comment_prefix(lines[j])
+  for i = idx, #lines do
+    local s = strip_comment_prefix(lines[i])
+
     if s:match("\\end%s*{%s*center%s*}") then
-      return start_idx, j
+      return start_idx, i
     end
   end
 
@@ -193,7 +467,7 @@ local function find_center_block(lines, idx)
 end
 
 local function find_brace_block(lines, idx)
-  local start_idx = nil
+  local start_idx
 
   for i = idx, 1, -1 do
     local s = strip_comment_prefix(lines[i])
@@ -210,69 +484,132 @@ local function find_brace_block(lines, idx)
 
   local depth = 0
   local started = false
+  local max_line = math.min(start_idx + 120, #lines)
 
-  for j = start_idx, math.min(start_idx + 120, #lines) do
-    local s = strip_comment_prefix(lines[j])
+  for i = start_idx, max_line do
+    local s = strip_comment_prefix(lines[i])
 
-    for c in s:gmatch("[{}]") do
-      if c == "{" then
+    for brace in s:gmatch("[{}]") do
+      if brace == "{" then
         depth = depth + 1
         started = true
-      elseif c == "}" then
+      elseif brace == "}" then
         depth = depth - 1
       end
     end
 
     if started and depth == 0 then
-      return start_idx, j
+      return start_idx, i
     end
   end
 
   return nil
 end
+
+-- local function should_skip_float(lines, float_start)
+--   if float_start <= 1 then
+--     return false
+--   end
+--
+--   local line_above = lines[float_start - 1]
+--
+--   return line_above:lower():match("^%s*%%%s*nicht%s+kommentieren%s*$") ~= nil
+-- end
+local function should_skip_float(lines, float_start)
+  local i = float_start - 1
+
+  -- Leere Zeilen zwischen Hinweis und Float erlauben
+  while i >= 1 and lines[i]:match("^%s*$") do
+    i = i - 1
+  end
+
+  if i < 1 then
+    return false
+  end
+
+  local line = lines[i]:lower()
+
+  -- Erlaubt:
+  -- % nicht kommentieren
+  -- %% nicht kommentieren
+  -- %   nicht   kommentieren
+  return line:match("^%s*%%+%s*nicht%s+kommentieren%s*$") ~= nil
+end
+local function comment_block(lines, block_start, block_end)
+  for i = block_start, block_end do
+    local is_edge = i == block_start or i == block_end
+    lines[i] = add_marker(lines[i], is_edge)
+  end
+end
+
+local function uncomment_block(lines, block_start, block_end)
+  for i = block_start, block_end do
+    lines[i] = uncomment_line(lines[i])
+  end
+end
+
 local function set_float_comments(comment)
   local bufnr = vim.api.nvim_get_current_buf()
   local lines = vim.api.nvim_buf_get_lines(bufnr, 0, -1, false)
 
   local i = 1
+
   while i <= #lines do
-    local block_start, block_end
+    local block_start
+    local block_end
+    local actual_start
+    local skip_commenting = false
 
     local env = begin_env(lines[i])
+
     if env and float_envs[env] then
       local float_start = i
-      local float_end = find_float_end(lines, i, env)
-      block_start = extend_block_up(lines, float_start)
-      block_end = extend_block_down(lines, float_end)
+      local float_end = find_float_end(lines, float_start, env)
+
+      if float_end then
+        actual_start = float_start
+        block_start = extend_block_up(lines, float_start)
+        block_end = extend_block_down(lines, float_end)
+      end
     elseif is_captionof_float(lines[i]) then
-      local s1, e1 = find_center_block(lines, i)
-      if s1 and e1 then
-        block_start = extend_block_up(lines, s1)
-        block_end = extend_block_down(lines, e1)
+      local center_start, center_end = find_center_block(lines, i)
+
+      if center_start and center_end then
+        actual_start = center_start
+        block_start = extend_block_up(lines, center_start)
+        block_end = extend_block_down(lines, center_end)
       else
-        local s2, e2 = find_brace_block(lines, i)
-        if s2 and e2 then
-          block_start = extend_block_up(lines, s2)
-          block_end = extend_block_down(lines, e2)
+        local brace_start, brace_end = find_brace_block(lines, i)
+
+        if brace_start and brace_end then
+          actual_start = brace_start
+          block_start = extend_block_up(lines, brace_start)
+          block_end = extend_block_down(lines, brace_end)
         end
       end
     elseif has_caption(lines[i]) then
-      local s1, e1 = find_center_block(lines, i)
-      if s1 and e1 then
-        block_start = extend_block_up(lines, s1)
-        block_end = extend_block_down(lines, e1)
+      local center_start, center_end = find_center_block(lines, i)
+
+      if center_start and center_end then
+        actual_start = center_start
+        block_start = extend_block_up(lines, center_start)
+        block_end = extend_block_down(lines, center_end)
       end
     end
 
     if block_start and block_end then
-      for k = block_start, block_end do
-        if comment then
-          local is_edge = (k == block_start or k == block_end)
-          lines[k] = add_marker(lines[k], is_edge)
-        else
-          lines[k] = uncomment_line(lines[k])
-        end
+      if actual_start then
+        skip_commenting = should_skip_float(lines, actual_start)
       end
+
+      if comment then
+        if not skip_commenting then
+          comment_block(lines, block_start, block_end)
+        end
+      else
+        uncomment_block(lines, block_start, block_end)
+      end
+
       i = block_end + 1
     else
       i = i + 1
@@ -282,21 +619,8 @@ local function set_float_comments(comment)
   vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, lines)
 end
 
-vim.api.nvim_create_user_command("LatexCommentFloats", function()
-  set_float_comments(true)
-end, {})
-
-vim.api.nvim_create_user_command("LatexUncommentFloats", function()
-  set_float_comments(false)
-end, {})
-
-vim.api.nvim_create_user_command("LatexUncommentSelection", function()
-  uncomment_visual_selection()
-end, {})
-vim.api.nvim_create_user_command("LatexUncommentSelection", function(opts)
+local function uncomment_range(start_line, end_line)
   local bufnr = vim.api.nvim_get_current_buf()
-  local start_line = opts.line1
-  local end_line = opts.line2
 
   if start_line > end_line then
     start_line, end_line = end_line, start_line
@@ -309,7 +633,31 @@ vim.api.nvim_create_user_command("LatexUncommentSelection", function(opts)
   end
 
   vim.api.nvim_buf_set_lines(bufnr, start_line - 1, end_line, false, lines)
-end, { range = true })
+end
+
+vim.api.nvim_create_user_command("LatexCommentFloats", function()
+  set_float_comments(true)
+end, {
+  force = true,
+  desc = "LaTeX figures and tables comment out",
+})
+
+vim.api.nvim_create_user_command("LatexUncommentFloats", function()
+  set_float_comments(false)
+end, {
+  force = true,
+  desc = "LaTeX figures and tables uncomment",
+})
+
+vim.api.nvim_create_user_command("LatexUncommentSelection", function(opts)
+  uncomment_range(opts.line1, opts.line2)
+end, {
+  force = true,
+  range = true,
+  desc = "Selected LaTeX lines uncomment",
+})
+
 vim.keymap.set("x", "<localleader>gc", ":<C-u>'<,'>LatexUncommentSelection<CR>", {
+  silent = true,
   desc = "Uncomment selected LaTeX lines",
 })
