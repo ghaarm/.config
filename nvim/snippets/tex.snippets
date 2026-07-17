@@ -834,8 +834,8 @@ snippet beginmulticols2 "begin multicols 2"
 snippet endmulticols "end multicols"
   \end{multicols}
 
-snippet ref "reference latex"
-  \ref{$:1}
+snippet reff "reference latex"
+  \ref{${1:titel}}
 
 snippet equation-multi "equation for multicols breite"
   \begin{equation}
@@ -863,6 +863,12 @@ snippet equation-simple-label "equation []"
 
 snippet shiny-link "Shiny Link"
   \href{https://shinyicu.de}{Shiny}
+
+snippet shiny-gmics "Shiny gmics"
+  \href{https://shinyicu.de/gmics}{G'MICS} ${0}
+
+snippet gmics-shiny "Shiny gmics"
+  \href{https://shinyicu.de/gmics}{G'MICS} ${0}
 
 snippet kg/$m^2$ ersetzten "kg/$m^2$ in command line erstetzen"
   %s#kg/\$m\^2\$#\\si{kg/m^2}#g
@@ -996,10 +1002,10 @@ snippet geq "≥"
   \ignore{≥}$\geq$
 
 snippet co2 "co2"
-  \ignore{co2}\$CO_2$
+  \ce{CO2}
 
 snippet o2 "o2"
-  \ignore{o2}\$O_2$
+  \ce{O2}
 
 snippet vco2 "vco2"
   \ignore{vco2}\$VCO_2$
