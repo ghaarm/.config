@@ -1,4 +1,5 @@
 #-- SNIPPETS --
+extends tex-med
 #
 # new glossary entry
 snippet gloss "Glossary Entry"  b
@@ -808,11 +809,6 @@ snippet todo "todo tex"
 snippet latred "latex rot"
   \textcolor{red!70!black}{${1:Text}} ${0}
 
-snippet vfvj "Vf - Vj"
- V\textsubscript{f} - V\textsubscript{j}${0}
-
-snippet vavf "Va - Vf"
- V\textsubscript{f} - V\textsubscript{j}${0}
 
 snippet latp "Latex Prozent"
  \SI{${1:zahl}}{\percent}${0}
@@ -986,38 +982,9 @@ snippet likert-makros "Likert Makros für Prämbel"
     \end{tabular}
   }
 
-snippet fdo2 "fdo2"
-  \ignore{FdO2}$\text{F}_{d}\text{O}_{2}$
-
-snippet fio2 "fio2"
-  \ignore{FiO2}$\text{F}_{i}\text{O}_{2}$
-
-snippet spo2 "spo2"
-  \ignore{SpO2}$\text{S}_{p}\text{O}_{2}$
 
 snippet leq "≤"
   \ignore{≤}$\leq$
 
 snippet geq "≥"
   \ignore{≥}$\geq$
-
-snippet co2 "co2"
-  \ce{CO2}
-
-snippet o2 "o2"
-  \ce{O2}
-
-snippet vco2 "vco2"
-  \ignore{vco2}\$VCO_2$
-
-snippet vco2dot "vco2 dot ml/min"
-  \ignore{vco2dot}\$\dot VCO_2$
-
-snippet vo2 "vo2"
-  \ignore{vo2}\$VO_2$
-
-snippet vo2dot "vo2 dot ml/min"
-  \ignore{vo2dot}\$\dot VO_2$
-
-snippet etco2 "etco2"
-  \ignore{etCO2}\$\mathrm{etCO_2}$
