@@ -326,7 +326,8 @@ return {
     "saadparwaiz1/cmp_luasnip",
     "hrsh7th/cmp-cmdline",
     "petertriho/cmp-git",
-    "micangl/cmp-vimtex",
+    -- "micangl/cmp-vimtex", -- hatte 28.07. einen fehler im parser mit 104
+    "hrsh7th/cmp-omni",
   },
   config = function()
     local cmp = require("cmp")
@@ -438,23 +439,49 @@ return {
         }),
       }),
 
+      -- formatting = {
+      --   fields = { "kind", "abbr", "menu" },
+      --   format = function(entry, vim_item)
+      --     vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
+      --     vim_item.menu = ({
+      --       vimtex = vim_item.menu,
+      --       luasnip = "[Snippet]",
+      --       nvim_lsp = "[LSP]",
+      --       buffer = "[Buffer]",
+      --       spell = "[Spell]",
+      --       cmdline = "[CMD]",
+      --       path = "[Path]",
+      --     })[entry.source.name]
+      --     return vim_item
+      --   end,
+      -- },
       formatting = {
         fields = { "kind", "abbr", "menu" },
+
         format = function(entry, vim_item)
-          vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
+          if entry.source.name == "omni" then
+            -- Alle Zotero-/VimTeX-Einträge bekommen dasselbe Icon
+            vim_item.kind = "󰧮"
+            vim_item.menu = "[Zotero]"
+            return vim_item
+          end
+
+          vim_item.kind = kind_icons[vim_item.kind] or vim_item.kind
+
           vim_item.menu = ({
-            vimtex = vim_item.menu,
             luasnip = "[Snippet]",
             nvim_lsp = "[LSP]",
             buffer = "[Buffer]",
             spell = "[Spell]",
             cmdline = "[CMD]",
             path = "[Path]",
-          })[entry.source.name]
+            cmp_r = "[R]",
+            git = "[Git]",
+          })[entry.source.name] or ""
+
           return vim_item
         end,
       },
-
       sources = cmp.config.sources({
         { name = "nvim_lsp" },
         { name = "luasnip" },
@@ -486,7 +513,15 @@ return {
     -- cmp.setup.filetype({ "tex", "plaintex", "bib", "rnw" }, {
     cmp.setup.filetype({ "tex", "plaintex", "rnw" }, {
       sources = cmp.config.sources({
-        { name = "vimtex" },
+        -- { name = "vimtex" },
+        {
+          name = "omni",
+          option = {
+            disable_omnifuncs = {
+              "v:lua.vim.lsp.omnifunc",
+            },
+          },
+        },
         { name = "nvim_lsp" },
         { name = "luasnip" },
         { name = "buffer", keyword_length = 3 },
