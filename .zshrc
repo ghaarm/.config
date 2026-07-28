@@ -138,10 +138,12 @@ alias cdplug="cd ~/.config/nvim/lua/plugins && nvim"
 
 alias cdcore="cd ~/.config/nvim/lua/core && nvim keybindings.lua" 
 
-alias cdpianmac="cd /Users/g/qmk_firmware/keyboards/beekeeb/piantor_pro/keymaps/piantor_colemak && nvim keymap.c" # öffnet neovim automatisch 
 
-alias cdpianwin="cd /Users/g/qmk_firmware/keyboards/beekeeb/piantor_pro/keymaps/piantor_win && nvim keymap.c" # öffnet neovim automatisch 
+alias cdpianmac="builtin cd /Users/g/Library/Mobile\ Documents/com~apple~CloudDocs/'!Docs iCloud'/qmk-icloud/piantor_colemak && nvim keymap.c" # öffnet neovim automatisch 
 
+alias cdpianwin="builtin cd /Users/g/Library/Mobile\ Documents/com~apple~CloudDocs/'!Docs iCloud'/qmk-icloud/piantor_win && nvim keymap.c" # öffnet neovim automatisch 
+
+alias cdpianlinux="builtin cd /Users/g/Library/Mobile\ Documents/com~apple~CloudDocs/'!Docs iCloud'/qmk-icloud/piantor_linux && nvim keymap.c" # öffnet neovim automatisch 
 
 alias cdpianpro="/Users/g/Library/Mobile\ Documents/com~apple~CloudDocs/'!Docs iCloud'/GitHub,\ iCloud/piantor-bt-colemak/config && nvim piantor_pro_bt.keymap"
 alias cdpianbt="/Users/g/Library/Mobile\ Documents/com~apple~CloudDocs/'!Docs iCloud'/GitHub,\ iCloud/piantor-bt-colemak/config && nvim piantor_pro_bt.keymap"
