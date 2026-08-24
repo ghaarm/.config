@@ -136,6 +136,10 @@ alias cdconf="cd ~/.config && nvim"
 
 alias cdzsh="cd ~/.config && nvim .zshrc"
 
+alias cdnvim="cd ~/.config/nvim && nvim"
+
+alias cdtemp="cd ~/.config/nvim/templates && nvim"
+
 alias aero="cd ~/.config/aerospace && nvim aerospace.toml" 
 
 alias cdplug="cd ~/.config/nvim/lua/plugins && nvim" 
