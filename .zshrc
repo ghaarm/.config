@@ -93,6 +93,10 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git zsh-autosuggestions zsh-syntax-highlighting web-search)
 
+# Kitty-Completion aus fpath entfernen
+fpath=(${fpath:#/Applications/kitty.app/Contents/Resources/kitty/shell-integration/zsh/completions})
+
+# Zsh Completion initialisieren
 source $ZSH/oh-my-zsh.sh
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 source /opt/homebrew/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh
@@ -155,6 +159,16 @@ alias cdedit="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/'!Docs iCloud'/
 
 alias cdobsidian='builtin cd "/Users/g/Library/Mobile Documents/iCloud~md~obsidian/Documents/obsidian-icloud" && nvim'
 
+cd10o2root() {
+  builtin cd '/Users/g/Library/Mobile Documents/com~apple~CloudDocs/!Docs iCloud/10-o2-icloud' && nvim
+}
+
+cd10o2proj() {
+  builtin cd '/Users/g/Library/Mobile Documents/com~apple~CloudDocs/!Docs iCloud/10-o2-icloud/10-o2-project-list' && nvim
+}
+#
+# alias cd10o2proj='builtin cd "/Users/g/Library/Mobile Documents/iCloud~md~obsidian/Documents/10-o2-icloud/10o2-project-list" && nvim'
+
 alias cdlinux="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/'!Docs iCloud'/linux && nvim" 
 
 alias cdphd="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/'!Docs iCloud'/phd-pmu && nvim" 
@@ -173,6 +187,8 @@ alias cdessen="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/@Tabea\ \&\ Go
 alias cdjs="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/'!Docs iCloud'/R\ Statistik,\ icloud/js-projects/textbausteine-js && nvim" 
 
 alias cdjsshiny="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/'!Docs iCloud'/R\ Statistik,\ icloud/js-shiny-project && nvim" 
+
+alias cdshinyonecom="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/'!Docs iCloud'/R\ Statistik,\ icloud/js-shiny-one-com && nvim" 
 
 alias cdjstextbausteine="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/'!Docs iCloud'/R\ Statistik,\ icloud/js-projects/textbausteine-js/shiny-textbausteine-html && nvim" 
 
