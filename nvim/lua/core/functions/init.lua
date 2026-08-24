@@ -1,6 +1,8 @@
 require("core.functions.open-in-finder")
+require("core.functions.tex-to-docx")
 require("core.functions.winbar").setup()
 require("core.functions.bild-preview-mac")
 require("core.functions.leader-leader-x-source-file")
 require("core.functions.latex-comment-figures")
 require("core.functions.zotero-open-pdf")
+require("core.functions.macro")

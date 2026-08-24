@@ -176,8 +176,16 @@ snippet link-md-cornflowerblue-for-latex "link markdown cornflower-blue for late
 
 snippet yaml-date "yaml mit automatischem Datum"
   ---
-  title: "TEE Unterlagen Informationen"
+  title: "${1:Titel}"
   date: Stand \today
+  author: "Golo"
   lang: de-DE
   ---
 
+snippet yaml "yaml markdown"
+  ---
+  title: "${1:Titel}"
+  date: ${2:Datum}
+  author: "Golo"
+  lang: de-DE
+  ---
