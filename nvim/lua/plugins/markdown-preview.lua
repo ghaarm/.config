@@ -52,12 +52,12 @@ return {
       ":MarkdownPreview<CR>",
       { noremap = true, silent = true, desc = "Markdown Preview" }
     )
-    vim.keymap.set(
-      "n",
-      "<localleader>lu",
-      ":MarkdownPreview<CR>",
-      { noremap = true, silent = true, desc = "Markdown Preview" }
-    )
+    -- vim.keymap.set(
+    --   "n",
+    --   "<localleader>lu",
+    --   ":MarkdownPreview<CR>",
+    --   { noremap = true, silent = true, desc = "Markdown Preview" }
+    -- )
     vim.keymap.set(
       "n",
       "<localleader>mt",
