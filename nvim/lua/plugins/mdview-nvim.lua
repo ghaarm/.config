@@ -13,9 +13,12 @@ return {
 
   opts = {
 
+    scroll_sync = true,
     experimental = {
 
       any_file = true,
+      click_navigate = true,
+      reverse_scroll = true,
     },
   },
   -- config = function()

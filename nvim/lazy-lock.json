@@ -29,7 +29,6 @@
   "lib.nvim": { "branch": "main", "commit": "757deef0ee2dd7ae479c2eb1602e3e3645b70a1e" },
   "live-server.nvim": { "branch": "main", "commit": "f1a2defb7bc3bfc37bcb455fafdf6d61113d71c8" },
   "lualine.nvim": { "branch": "master", "commit": "221ce6b2d999187044529f49da6554a92f740a96" },
-  "luarocks.nvim": { "branch": "main", "commit": "1db9093915eb16ba2473cfb8d343ace5ee04130a" },
   "markdown-preview.nvim": { "branch": "master", "commit": "a923f5fc5ba36a3b17e289dc35dc17f66d0548ee" },
   "marks.nvim": { "branch": "master", "commit": "f353e8c08c50f39e99a9ed474172df7eddd89b72" },
   "mason-lspconfig.nvim": { "branch": "main", "commit": "1b621470c01bd8190bb32a290d21575d3e6470c5" },
@@ -87,5 +86,6 @@
   "vim-yoink": { "branch": "master", "commit": "89ed6934679fdbc3c20f552b50b1f869f624cd22" },
   "vimtex": { "branch": "master", "commit": "c1b96604d9a387cde5a98bec8f6687ae3078b571" },
   "which-key.nvim": { "branch": "main", "commit": "3aab2147e74890957785941f0c1ad87d0a44c15a" },
-  "yazi.nvim": { "branch": "main", "commit": "955a96ed05b4ac542e61b3968f62d536413cd06f" }
+  "yazi.nvim": { "branch": "main", "commit": "955a96ed05b4ac542e61b3968f62d536413cd06f" },
+  "zotcite": { "branch": "master", "commit": "282bd8963218f840d7286ce6874bafc7c6b4b535" }
 }
