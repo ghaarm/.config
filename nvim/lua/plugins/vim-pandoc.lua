@@ -207,8 +207,107 @@ return {
       desc = "Convert current Markdown to PDF with pandoc",
     })
 
+    -- ======================
+
+    -- Markdown -> DOCX
+
+    -- ======================
+
+    vim.api.nvim_create_user_command("MdToDocx", function()
+      local file = vim.api.nvim_buf_get_name(0)
+
+      if file == "" then
+        vim.notify("Buffer ist nicht in einer Datei gespeichert!", vim.log.levels.ERROR)
+
+        return
+      end
+
+      -- Änderungen speichern
+
+      vim.cmd("write")
+
+      -- Pfade / Dateinamen
+
+      local dir = vim.fn.fnamemodify(file, ":h")
+
+      local stem = vim.fn.fnamemodify(file, ":t:r")
+
+      local date_str = os.date("%Y-%m-%d")
+
+      local output = stem .. "-" .. date_str .. ".docx"
+
+      local docx = dir .. "/" .. output
+
+      print("📁 Arbeitsverzeichnis: " .. dir)
+
+      print("📄 Ausgabe: " .. docx)
+
+      local cmd = {
+
+        "pandoc",
+
+        file,
+
+        "-o",
+
+        output,
+
+        "--standalone",
+
+        "--citeproc",
+
+        "--resource-path=" .. dir,
+      }
+
+      local stderr_lines = {}
+
+      vim.fn.jobstart(cmd, {
+
+        cwd = dir,
+
+        stdout_buffered = true,
+
+        stderr_buffered = true,
+
+        on_stdout = function(_, data)
+          for _, line in ipairs(data) do
+            if line ~= "" then
+              print(line)
+            end
+          end
+        end,
+
+        on_stderr = function(_, data)
+          for _, line in ipairs(data) do
+            if line ~= "" then
+              table.insert(stderr_lines, line)
+            end
+          end
+        end,
+
+        on_exit = function(_, code)
+          if code == 0 then
+            vim.notify("DOCX erstellt: " .. docx, vim.log.levels.INFO)
+
+            -- macOS: DOCX automatisch öffnen
+
+            vim.fn.jobstart({ "open", docx }, {
+
+              detach = true,
+            })
+          else
+            vim.notify("Pandoc fehlgeschlagen:\n" .. table.concat(stderr_lines, "\n"), vim.log.levels.ERROR)
+          end
+        end,
+      })
+    end, {
+
+      desc = "Convert current Markdown to DOCX with pandoc",
+    })
+
     -- Shortcut für Markdown/Pandoc
     vim.api.nvim_create_autocmd("FileType", {
+
       pattern = { "markdown", "pandoc" },
 
       callback = function()
@@ -216,6 +315,12 @@ return {
           buffer = true,
           silent = true,
           desc = "Markdown → PDF",
+        })
+
+        vim.keymap.set("n", "<localleader>w", "<cmd>MdToDocx<CR>", {
+          buffer = true,
+          silent = true,
+          desc = "Markdown → DOCX",
         })
       end,
     })
