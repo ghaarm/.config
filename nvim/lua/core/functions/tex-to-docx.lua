@@ -1,6 +1,6 @@
 local M = {}
 
-local word_templates = require("core.functions.word_templates")
+local word_templates = require("core.functions.word-templates")
 
 function M.tex_to_docx()
   local tex = vim.api.nvim_buf_get_name(0)
@@ -21,37 +21,35 @@ function M.tex_to_docx()
     return
   end
 
+  word_templates.select(function(selected)
+    local args = {
+      "pandoc",
+      tex,
+      "--from=latex",
+      "--to=docx",
+      "--citeproc",
+      "--bibliography=" .. bib,
+      "--reference-doc=" .. selected.path,
+      "--resource-path=" .. dir,
+      "-o",
+      output,
+    }
 
-word_templates.select(function(selected)
-  local args = {
-    "pandoc",
-    tex,
-    "--from=latex",
-    "--to=docx",
-    "--citeproc",
-    "--bibliography=" .. bib,
-    "--reference-doc=" .. selected.path,
-    "--resource-path=" .. dir,
-    "-o",
-    output,
-  }
-
-  vim.system(args, {
-    cwd = dir,
-    text = true,
-  }, function(result)
-    vim.schedule(function()
-      if result.code == 0 then
-        vim.notify("DOCX erstellt: " .. output)
-      else
-        vim.notify(
-          "Pandoc-Fehler:\n" .. (result.stderr or ""),
-          vim.log.levels.ERROR
-        )
-      end
+    vim.system(args, {
+      cwd = dir,
+      text = true,
+    }, function(result)
+      vim.schedule(function()
+        if result.code == 0 then
+          vim.notify("DOCX erstellt: " .. output)
+        else
+          vim.notify("Pandoc-Fehler:\n" .. (result.stderr or ""), vim.log.levels.ERROR)
+        end
+      end)
     end)
   end)
-end)
+end
+
 vim.keymap.set("n", "<localleader>ld", M.tex_to_docx, {
   desc = "LaTeX → DOCX",
 })

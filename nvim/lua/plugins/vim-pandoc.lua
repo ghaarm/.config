@@ -4,6 +4,7 @@ return {
   "vim-pandoc/vim-pandoc",
 
   config = function()
+    local word_templates = require("core.functions.word-templates")
     -- Globale Default-Marge
     vim.g.pandoc_pdf_margin = "top=3.5cm,bottom=3.5cm,left=2.5cm,right=2.5cm"
 
@@ -20,24 +21,6 @@ return {
     -- PDF-Engine
     vim.g["pandoc#command#latex_engine"] = "xelatex"
 
-    -- Wordvorlagen für docx export mit ui-select
-    local word_template_dir =
-      "/Users/g/Library/Mobile Documents/com~apple~CloudDocs/!Docs iCloud/pandoc-icloud-vorlagen"
-
-    local word_templates = {
-      {
-        name = "Calibri 11",
-        path = word_template_dir .. "/reference-calibri-11.docx",
-      },
-      {
-        name = "Helvetica 11",
-        path = word_template_dir .. "/reference-helvetica-11.docx",
-      },
-      {
-        name = "Times 11",
-        path = word_template_dir .. "/reference-times-11.docx",
-      },
-    }
     -- ======================
     -- Markdown -> PDF
     -- ======================
@@ -152,23 +135,7 @@ return {
       local output = stem .. "-" .. date_str .. ".docx"
       local docx = dir .. "/" .. output
 
-      vim.ui.select(word_templates, {
-        prompt = "Word-Vorlage auswählen:",
-
-        format_item = function(item)
-          return item.name
-        end,
-      }, function(selected)
-        if not selected then
-          vim.notify("DOCX-Export abgebrochen", vim.log.levels.INFO)
-          return
-        end
-
-        if vim.fn.filereadable(selected.path) ~= 1 then
-          vim.notify("Word-Vorlage nicht gefunden:\n" .. selected.path, vim.log.levels.ERROR)
-          return
-        end
-
+      word_templates.select(function(selected)
         print("📁 Arbeitsverzeichnis: " .. dir)
         print("📄 Ausgabe: " .. docx)
         print("📝 Word-Vorlage: " .. selected.name)
