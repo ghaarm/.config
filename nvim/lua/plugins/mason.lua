@@ -127,6 +127,9 @@ return {
 
         -- Markdown
         "marksman",
+
+        -- YAML
+        "yamlls",
       },
 
       automatic_enable = true,

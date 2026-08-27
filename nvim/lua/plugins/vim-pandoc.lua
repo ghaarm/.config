@@ -18,39 +18,41 @@ return {
     -- ======================
     -- Neuer Command: MdToPdf mit relativen Pfaden - funktioniert
     -- ======================
-    vim.api.nvim_create_user_command('MdToPdf', function()
+    vim.api.nvim_create_user_command("MdToPdf", function()
       -- 1) Pfad der aktuellen Datei
       local file = vim.api.nvim_buf_get_name(0)
-      if file == '' then
-        print('❌ Fehler: Buffer ist nicht in einer Datei gespeichert!')
+      if file == "" then
+        print("❌ Fehler: Buffer ist nicht in einer Datei gespeichert!")
         return
       end
 
       -- 2) Änderungen speichern
-      vim.cmd('write')
+      vim.cmd("write")
 
       -- 3) Verzeichnis und Basisname extrahieren
-      local dir            = vim.fn.fnamemodify(file, ':h')
-      local basename       = vim.fn.fnamemodify(file, ':r')
-      local date_str       = os.date("%Y-%m-%d")
+      local dir = vim.fn.fnamemodify(file, ":h")
+      local basename = vim.fn.fnamemodify(file, ":r")
+      local date_str = os.date("%Y-%m-%d")
       local dated_basename = basename .. "-" .. date_str
-      local engine         = vim.g["pandoc#command#latex_engine"] or 'xelatex'
+      local engine = vim.g["pandoc#command#latex_engine"] or "xelatex"
 
       -- Debug: zeige, wo Pandoc später sucht
-      print('📁 Arbeitsverzeichnis: ' .. dir)
-      print('🔍 Resource-Path: ' .. dir)
-
+      print("📁 Arbeitsverzeichnis: " .. dir)
+      print("🔍 Resource-Path: " .. dir)
 
       local margin = vim.g.pandoc_pdf_margin or "top=3.5cm,bottom=3.5cm,left=2.5cm,right=2.5cm"
       -- 4) Pandoc-Kommando mit resource-path und datiertem Ausgabename
       local cmd = {
-        'pandoc',
+        "pandoc",
         file,
-        '-o', dated_basename .. '.pdf',
-        '--pdf-engine=' .. engine,
-        '--resource-path=' .. dir,
-        '-V', 'geometry:' .. margin, -- <<— kleinere Ränder
-        '--verbose'
+        "-o",
+        dated_basename .. ".pdf",
+        "--pdf-engine=" .. engine,
+        "--citeproc",
+        "--resource-path=" .. dir,
+        "-V",
+        "geometry:" .. margin, -- <<— kleinere Ränder
+        "--verbose",
       }
 
       -- 5) Job starten
@@ -58,29 +60,33 @@ return {
         cwd = dir,
         stdout_buffered = true,
         on_stdout = function(_, data)
-          for _, line in ipairs(data) do print(line) end
+          for _, line in ipairs(data) do
+            print(line)
+          end
         end,
         on_stderr = function(_, data)
-          for _, line in ipairs(data) do print(line) end
+          for _, line in ipairs(data) do
+            print(line)
+          end
         end,
         on_exit = function(_, code)
           if code == 0 then
-            print('✅ PDF erstellt: ' .. dir .. '/' .. dated_basename .. '.pdf')
+            print("✅ PDF erstellt: " .. dir .. "/" .. dated_basename .. ".pdf")
           else
-            print('❌ Pandoc-Exit-Code: ' .. code)
+            print("❌ Pandoc-Exit-Code: " .. code)
           end
         end,
       })
     end, {
-      desc = 'Convert current Markdown to PDF with pandoc (inkl. Bilder)',
+      desc = "Convert current Markdown to PDF with pandoc (inkl. Bilder)",
     })
 
     -- Shortcut für Markdown-Buffer
     vim.api.nvim_create_autocmd("FileType", {
       pattern = { "markdown", "pandoc" },
       callback = function()
-        vim.api.nvim_buf_set_keymap(0, 'n', '<localleader>p', ':MdToPdf<CR>', { noremap = true, silent = true })
-      end
+        vim.api.nvim_buf_set_keymap(0, "n", "<localleader>p", ":MdToPdf<CR>", { noremap = true, silent = true })
+      end,
     })
-  end
+  end,
 }
