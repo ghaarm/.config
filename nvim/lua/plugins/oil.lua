@@ -200,7 +200,6 @@ return {
             end
           end)
         end,
-
         ["<CR>"] = function()
           local oil = require("oil")
           local entry = oil.get_cursor_entry()
@@ -211,14 +210,44 @@ return {
 
           local dir = oil.get_current_dir() or ""
           local path = vim.fs.normalize(vim.fs.joinpath(dir, entry.name))
+          local lower_path = path:lower()
 
-          if entry.type ~= "directory" and path:lower():match("%.pdf$") then
+          -- PDF mit Sioyek öffnen
+          if entry.type ~= "directory" and lower_path:match("%.pdf$") then
             if vim.fn.executable("sioyek") ~= 1 then
               vim.notify("sioyek nicht im PATH gefunden", vim.log.levels.WARN)
               return
             end
 
-            vim.fn.jobstart({ "sioyek", path }, { detach = true })
+            vim.fn.jobstart({ "sioyek", path }, {
+              detach = true,
+            })
+            return
+          end
+
+          -- DOCX mit Word öffnen
+          if entry.type ~= "directory" and lower_path:match("%.docx$") then
+            vim.fn.jobstart({
+              "open",
+              "-a",
+              "Microsoft Word",
+              path,
+            }, {
+              detach = true,
+            })
+            return
+          end
+
+          -- XLS/XLSX mit Excel öffnen
+          if entry.type ~= "directory" and (lower_path:match("%.xls$") or lower_path:match("%.xlsx$")) then
+            vim.fn.jobstart({
+              "open",
+              "-a",
+              "Microsoft Excel",
+              path,
+            }, {
+              detach = true,
+            })
             return
           end
 
