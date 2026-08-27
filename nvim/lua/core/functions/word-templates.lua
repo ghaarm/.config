@@ -12,6 +12,10 @@ M.templates = {
     path = template_dir .. "/reference-geist-extralight-11.docx",
   },
   {
+    name = "Geist Regular 11",
+    path = template_dir .. "/reference-geist-regular-11.docx",
+  },
+  {
     name = "Helvetica 11",
     path = template_dir .. "/reference-helvetica-11.docx",
   },

@@ -146,6 +146,7 @@ alias cdplug="cd ~/.config/nvim/lua/plugins && nvim"
 
 alias cdcore="cd ~/.config/nvim/lua/core && nvim keybindings.lua" 
 
+alias cdfunctions="cd ~/.config/nvim/lua/core/functions && nvim" 
 
 alias cdpianmac="builtin cd /Users/g/Library/Mobile\ Documents/com~apple~CloudDocs/'!Docs iCloud'/qmk-icloud/piantor_colemak && nvim keymap.c" # öffnet neovim automatisch 
 
