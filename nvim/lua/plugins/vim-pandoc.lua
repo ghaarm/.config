@@ -160,15 +160,18 @@ return {
         "-V",
         "geometry:" .. margin,
 
-        "--verbose",
+        -- "--verbose", -- sonst wegen stderr sehr viele fehlermeldungen
       }
-
       -- 5) Pandoc starten
+
+      print("📄 Ausgabe: " .. pdf)
+
+      local stderr_lines = {}
+
       vim.fn.jobstart(cmd, {
         cwd = dir,
         stdout_buffered = true,
         stderr_buffered = true,
-
         on_stdout = function(_, data)
           for _, line in ipairs(data) do
             if line ~= "" then
@@ -180,7 +183,7 @@ return {
         on_stderr = function(_, data)
           for _, line in ipairs(data) do
             if line ~= "" then
-              print(line)
+              table.insert(stderr_lines, line)
             end
           end
         end,
@@ -190,11 +193,13 @@ return {
             vim.notify("PDF erstellt: " .. pdf, vim.log.levels.INFO)
 
             -- macOS: PDF automatisch öffnen
+
             vim.fn.jobstart({ "open", pdf }, {
+
               detach = true,
             })
           else
-            vim.notify("Pandoc fehlgeschlagen, Exit-Code: " .. code, vim.log.levels.ERROR)
+            vim.notify("Pandoc fehlgeschlagen:\n" .. table.concat(stderr_lines, "\n"), vim.log.levels.ERROR)
           end
         end,
       })
