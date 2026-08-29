@@ -5,23 +5,31 @@ vim.g.maplocalleader = ","
 
 return {
   "StefanBartl/mdview.nvim",
+
   dependencies = {
     "StefanBartl/lib.nvim",
   },
+
   ft = { "markdown", "pandoc" },
   cmd = { "MDView" },
 
   opts = {
-
     scroll_sync = true,
-    experimental = {
 
+    experimental = {
       any_file = true,
       click_navigate = true,
       reverse_scroll = true,
     },
   },
-  -- config = function()
-  --   require("mdview").setup()
-  -- end,
+
+  config = function(_, opts)
+    require("mdview").setup(opts)
+
+    vim.keymap.set("n", "<localleader>ll", ":MDView start<CR>", {
+      noremap = true,
+      silent = true,
+      desc = "MDView Start",
+    })
+  end,
 }
