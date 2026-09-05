@@ -17,6 +17,7 @@ local function build_beamer_handout()
   end
 
   local texfilename = vim.fn.fnamemodify(texfile, ":t")
+
   ---------------------------------------------------------------------------
   -- Prüfen, ob es ein Beamer-Dokument ist
   ---------------------------------------------------------------------------
@@ -53,12 +54,27 @@ local function build_beamer_handout()
   local dir = vim.fn.fnamemodify(texfile, ":h")
   local basename = vim.fn.fnamemodify(texfile, ":t:r")
 
-  local handout_name = basename .. "-handout"
+  local date = os.date("%Y-%m-%d")
+  local handout_name = basename .. "-handout-" .. date
+
   local handout_pdf = dir .. "/" .. handout_name .. ".pdf"
+
+  local handout_synctex = dir .. "/" .. handout_name .. ".synctex.gz"
+
+  ---------------------------------------------------------------------------
+  -- Sioyek / SyncTeX
+  ---------------------------------------------------------------------------
+
+  local current_line = vim.api.nvim_win_get_cursor(0)[1]
+
+  local nvim = vim.v.progpath
+
+  local inverse_search = '"' .. nvim .. '" --headless -c "VimtexInverseSearch %2 \'%1\'"'
 
   ---------------------------------------------------------------------------
   -- latexmk
   ---------------------------------------------------------------------------
+
   local cmd = {
     "latexmk",
     "-xelatex",
@@ -66,16 +82,19 @@ local function build_beamer_handout()
     "-file-line-error",
     "-synctex=1",
 
+    -- Hauptoutputs (.pdf, .synctex.gz) bleiben beim .tex-File
+    "-outdir=.",
+
     -- Hilfsdateien nach ./auxiliary_files/
     "-auxdir=auxiliary_files",
 
-    -- Handout bekommt eigenen Namen
+    -- Bei TeX Live getrenntes auxdir korrekt emulieren
+    "-emulate-aux-dir",
+
     "-jobname=" .. handout_name,
 
-    -- Beamer nur für diesen Build in den Handout-Modus setzen
     "-usepretex=\\PassOptionsToClass{handout}{beamer}",
 
-    -- Wichtig: nur der Dateiname, nicht der komplette iCloud-Pfad
     texfilename,
   }
 
@@ -100,11 +119,34 @@ local function build_beamer_handout()
 
     on_exit = function(_, code)
       vim.schedule(function()
+        ---------------------------------------------------------------------
+        -- Erfolgreich
+        ---------------------------------------------------------------------
+
         if code == 0 then
           vim.notify("Handout erstellt: " .. handout_name .. ".pdf", vim.log.levels.INFO)
 
+          -- Prüfen, ob SyncTeX wirklich erzeugt wurde
+          if vim.fn.filereadable(handout_synctex) ~= 1 then
+            vim.notify("Achtung: keine SyncTeX-Datei gefunden:\n" .. handout_synctex, vim.log.levels.WARN)
+          end
+
+          -------------------------------------------------------------------
+          -- Sioyek öffnen
+          -------------------------------------------------------------------
+
           vim.fn.jobstart({
             "sioyek",
+
+            "--inverse-search",
+            inverse_search,
+
+            "--forward-search-file",
+            texfile,
+
+            "--forward-search-line",
+            tostring(current_line),
+
             handout_pdf,
           }, {
             detach = true,
@@ -112,6 +154,10 @@ local function build_beamer_handout()
 
           return
         end
+
+        ---------------------------------------------------------------------
+        -- Fehler
+        ---------------------------------------------------------------------
 
         vim.notify("Handout-Kompilierung fehlgeschlagen", vim.log.levels.ERROR)
 
