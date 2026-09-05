@@ -90,6 +90,16 @@ return {
         nowait = true,
         remap = false,
       },
+      -- Beamer Templates
+      {
+        "<leader>tbk",
+        "<cmd>read ~/.config/nvim/templates/beamer-vorlage-kn.tex<CR>",
+        desc = "chapter template tex",
+        nowait = true,
+        remap = false,
+      },
+
+      -- andere Templates
       {
         "<leader>th",
         "<cmd>read ~/.config/nvim/templates/template.html<CR>",
