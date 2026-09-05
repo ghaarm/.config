@@ -238,6 +238,8 @@ alias cdicubook="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/'!Docs iClou
 
 alias cdgmics="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/'!Docs iCloud'/R\ Statistik,\ icloud/Latex,\ icloud/Latex\ Projekte/icu-latex/gmics-latex && nvim" 
 
+alias cdbeamer="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/'!Docs iCloud'/R\ Statistik,\ icloud/Latex,\ icloud/Latex\ Projekte/icu-latex/beamer-latex-icu && nvim" 
+
 
 # Zaboracker
 alias cdzabo="cd /Users/g/Library/Mobile\ Documents/com~apple~CloudDocs/'@Tabea & Golo iCloud'/'Naomi (直美)'/Zaboracker && nvim" 
