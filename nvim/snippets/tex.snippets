@@ -1,5 +1,6 @@
 #-- SNIPPETS --
 extends tex-med
+extends tex-beamer
 #
 # new glossary entry
 snippet gloss "Glossary Entry"  b
@@ -121,7 +122,11 @@ snippet enquote "Anführungszeichen"
 
 # zitat normal 
 snippet cite "Zitat normal" 
-	\cite{${1:name}}, S. ${2:seite}}${0}
+	\cite{${1:name}}, S. ~${2:seite}}
+
+# snippet cite "Zitat mit Seite für biblatex"
+# 	\cite[S.~${2:seite}]{${1:name}}${0}
+
 
 snippet citen "Zitat normal" 
 	\cite{${1:name}}, S. ${2:seite}}${0}
