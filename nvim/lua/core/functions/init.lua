@@ -1,4 +1,5 @@
 require("core.functions.open-in-finder")
+require("core.functions.open-in-yazi")
 require("core.functions.word-templates")
 require("core.functions.tex-to-docx")
 require("core.functions.winbar").setup()
