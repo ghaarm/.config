@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.4.17)  6 SEP 2026 00:16
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.4.17)  7 SEP 2026 08:51
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -718,7 +718,7 @@ l.3 ...{./beamer-templates/kn-beamer-preamble.tex}
 Here is how much of TeX's memory you used:
  20028 strings out of 473190
  381386 string characters out of 5715800
- 754503 words of memory out of 5000000
+ 754505 words of memory out of 5000000
  42923 multiletter control sequences out of 15000+600000
  559442 words of font info for 38 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
