@@ -107,7 +107,7 @@ return {
       {
         "<leader>tby",
         function()
-          vim.cmd.tabedit(vim.fn.fnameescape("~/.config/nvim/templates/beamer-vorlage-kn.tex"))
+          vim.cmd.tabedit(vim.fn.fnameescape("~/.config/nvim/templates/beamer-vorlage-knn.tex"))
         end,
         desc = "Beamer Vorlage KN EDIT",
         nowait = true,
