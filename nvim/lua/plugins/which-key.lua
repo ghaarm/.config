@@ -90,6 +90,29 @@ return {
         nowait = true,
         remap = false,
       },
+      -- Beamer Präambel
+      {
+        "<leader>tbz",
+        function()
+          vim.cmd.tabedit(
+            vim.fn.fnameescape(
+              "/Users/g/Library/Mobile Documents/com~apple~CloudDocs/!Docs iCloud/R Statistik, icloud/Latex, icloud/Latex Projekte/icu-latex/beamer-latex-icu/beamer-templates/kn-beamer-preamble.tex"
+            )
+          )
+        end,
+        desc = "Beamer Präambel KN EDIT",
+        nowait = true,
+        remap = false,
+      },
+      {
+        "<leader>tby",
+        function()
+          vim.cmd.tabedit(vim.fn.fnameescape("~/.config/nvim/templates/beamer-vorlage-kn.tex"))
+        end,
+        desc = "Beamer Vorlage KN EDIT",
+        nowait = true,
+        remap = false,
+      },
       -- Beamer Templates
       {
         "<leader>tbk",
