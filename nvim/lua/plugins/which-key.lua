@@ -117,7 +117,7 @@ return {
       {
         "<leader>tbk",
         "<cmd>read ~/.config/nvim/templates/beamer-vorlage-kn.tex<CR>",
-        desc = "chapter template tex",
+        desc = "Beamer KN template tex",
         nowait = true,
         remap = false,
       },
