@@ -1,3 +1,6 @@
+# =============================================================================
+# BEAMER — EINFACHE FRAMES
+# =============================================================================
 
 snippet frame-beamer-basic "Einfacher Beamer Frame"
   \begin{frame}{${1:folientitel}}
@@ -9,15 +12,33 @@ snippet frame-beamer-basic "Einfacher Beamer Frame"
 snippet frame-beamer-bullets "Frame mit Bullets"
   \begin{frame}{${1:folientitel}}
     \begin{itemize}[<+->]
-      \item ${2}
+      \item ${2:erster Punkt}
+      \item
       \item
       \item
     \end{itemize}
 
-    \source{${3:quellen-angabe}}
+    \source{quellen-angabe}
   \end{frame}
 
-snippet frame-beamer-2col "Frame mit 2 Spalten"
+snippet frame-beamer-enumerate "Frame mit nummerierter Liste"
+  \begin{frame}{${1:folientitel}}
+    \begin{enumerate}[<+->]
+      \item ${2:erster Punkt}
+      \item
+      \item
+      \item
+    \end{enumerate}
+
+    \source{quellen-angabe}
+  \end{frame}
+
+
+# =============================================================================
+# BEAMER — SPALTEN
+# =============================================================================
+
+snippet frame-beamer-2col "Frame mit 2 freien Spalten"
   \begin{frame}{${1:folientitel}}
     \begin{columns}[T,onlytextwidth]
 
@@ -29,69 +50,31 @@ snippet frame-beamer-2col "Frame mit 2 Spalten"
 
     \end{columns}
 
-    \source{${4:quellen-angabe}}
+    \source{quellen-angabe}
   \end{frame}
-  ${0}
 
-snippet frame-beamer-img-right "Text links, Bild rechts"
+snippet frame-beamer-2col-bullets "Frame mit Bullets in 2 Spalten"
   \begin{frame}{${1:folientitel}}
     \begin{columns}[T,onlytextwidth]
 
-      \column{0.54\textwidth}
-        \begin{itemize}[<+->]
-          \item ${2}
-          \item
-          \item
-        \end{itemize}
-
-      \column{0.42\textwidth}
-        \includegraphics[width=\linewidth]{${3:bildtitel}}
-
-    \end{columns}
-
-    \source{${4:quellen-angabe}}
-  \end{frame}
-  ${0}
-
-snippet frame-beamer-2col "Frame Beamer mit 2 Spalten"
-  \begin{frame}{${1:folientitel}}
-    \begin{columns}[T,onlytextwidth]
       \column{0.48\textwidth}
-        % linker Inhalt
         \begin{itemize}[<+->]
-          \item ${2:erste-bullet-links}
-          \item 
-          \item 
+          \item ${2:erster Punkt links}
+          \item
           \item
         \end{itemize}
+
       \column{0.48\textwidth}
-        % rechter Inhalt
         \begin{itemize}[<+->]
-          \item 
-          \item 
-          \item 
+          \item ${3:erster Punkt rechts}
+          \item
           \item
         \end{itemize}
+
     \end{columns}
 
     \source{quellen-angabe}
   \end{frame}
-
-snippet frame-beamer-img-swap "Frame mit wechselnden Bildern"
-  \begin{frame}{${1:folientitel}}
-    \centering
-
-    \only<1>{
-      \includegraphics[width=${2:0.8\linewidth}]{${3:bild1}}
-    }
-
-    \only<2->{
-      \includegraphics[width=${2:0.8\linewidth}]{${4:bild2}}
-    }
-
-    \source{${5:quellen-angabe}}
-  \end{frame}
-  ${0}
 
 snippet frame-beamer-compare "Vergleich in 2 Spalten"
   \begin{frame}{${1:folientitel}}
@@ -109,22 +92,70 @@ snippet frame-beamer-compare "Vergleich in 2 Spalten"
 
     \end{columns}
 
-    \source{${6:quellen-angabe}}
+    \source{quellen-angabe}
   \end{frame}
-  ${0}
 
-snippet frame-beamer-takehome "Frame mit Take-home"
+
+# =============================================================================
+# BEAMER — BILD + TEXT
+# =============================================================================
+
+snippet frame-beamer-img-left "Bild links, Text rechts"
   \begin{frame}{${1:folientitel}}
-    ${2:inhalt}
+    \begin{columns}[T,onlytextwidth]
 
-    \vfill
-    \uncover<${3:2}->{
-      \takehome{${4:take-home}}
-    }
+      \column{0.54\textwidth}
+        \includegraphics[width=\linewidth]{${2:bildtitel}}
 
-    \source{${5:quellen-angabe}}
+      \column{0.42\textwidth}
+        \begin{itemize}[<+->]
+          \item ${3:erster Punkt}
+          \item
+          \item
+        \end{itemize}
+
+    \end{columns}
+
+    \source{quellen-angabe}
   \end{frame}
-  ${0}
+
+snippet frame-beamer-img-right "Text links, Bild rechts"
+  \begin{frame}{${1:folientitel}}
+    \begin{columns}[T,onlytextwidth]
+
+      \column{0.54\textwidth}
+        \begin{itemize}[<+->]
+          \item ${2:erster Punkt}
+          \item
+          \item
+        \end{itemize}
+
+      \column{0.42\textwidth}
+        \includegraphics[width=\linewidth]{${3:bildtitel}}
+
+    \end{columns}
+
+    \source{quellen-angabe}
+  \end{frame}
+
+snippet frame-beamer-2img "Zwei Bilder nebeneinander"
+  \begin{frame}{${1:folientitel}}
+    \begin{columns}[T,onlytextwidth]
+
+      \column{0.49\textwidth}
+        \includegraphics[width=\linewidth]{${2:bild-links}}
+
+        {\scriptsize ${3:beschriftung links}}
+
+      \column{0.49\textwidth}
+        \includegraphics[width=\linewidth]{${4:bild-rechts}}
+
+        {\scriptsize ${5:beschriftung rechts}}
+
+    \end{columns}
+
+    \source{quellen-angabe}
+  \end{frame}
 
 snippet frame-beamer-plain-img "Plain Frame mit Vollbild"
   \begin{frame}[plain]
@@ -135,52 +166,13 @@ snippet frame-beamer-plain-img "Plain Frame mit Vollbild"
       keepaspectratio
     ]{${1:bildtitel}}
   \end{frame}
-  ${0}
 
-snippet frame-beamer-annotated-right "Text links, annotiertes Bild rechts"
-  \begin{frame}{${1:folientitel}}
-    \begin{columns}[T,onlytextwidth]
 
-      \column{0.42\textwidth}
-        \begin{itemize}[<+->]
-          \item ${2}
-          \item
-          \item
-        \end{itemize}
+# =============================================================================
+# BEAMER — ANNOTIERTE BILDER
+# =============================================================================
 
-      \column{0.54\textwidth}
-        \annotatedimage[\linewidth]{${3:bildtitel}}
-
-          % \imagegrid
-          % \imagecircle<2->{0.45}{0.55}{0.08}
-          % \imagearrow<3->{0.80}{0.75}{0.53}{0.60}
-          % \imagelabel<3->{0.78}{0.82}{Beschriftung}
-
-        \endannotatedimage
-
-    \end{columns}
-
-    \source{${4:quellen-angabe}}
-  \end{frame}
-  ${0}
-
-snippet frame-beamer-png "Frame Beamer mit PNG"
-  \begin{frame}{${1:folientitel}}
-    \begin{columns}[T,onlytextwidth]
-      \column{0.54\textwidth}
-        \includegraphics[width=\linewidth]{${2:bildtitel}}
-      \column{0.42\textwidth}
-      \begin{itemize}[<+->]
-        \item 
-        \item 
-        \item 
-        \item
-      \end{itemize}
-    \end{columns}
-    \source{quellen-angabe}
-  \end{frame}
-
-snippet frame-beamer-annotated "Frame Beamer mit annotiertem Bild"
+snippet frame-beamer-annotated "Frame mit annotiertem Bild"
   \begin{frame}{${1:folientitel}}
     \centering
 
@@ -194,29 +186,10 @@ snippet frame-beamer-annotated "Frame Beamer mit annotiertem Bild"
 
     \endannotatedimage
 
-    \source{${3:quellen-angabe}}
-  \end{frame}
-
-snippet frame-beamer-2col-img "Frame Beamer: Bild links, Text rechts"
-  \begin{frame}{${1:folientitel}}
-    \begin{columns}[T,onlytextwidth]
-
-      \column{0.54\textwidth}
-        \includegraphics[width=\linewidth]{${2:bildtitel}}
-
-      \column{0.42\textwidth}
-        \begin{itemize}[<+->]
-          \item ${3}
-          \item
-          \item
-        \end{itemize}
-
-    \end{columns}
-
     \source{quellen-angabe}
   \end{frame}
 
-snippet frame-beamer-2col-annotated "Frame Beamer: annotiertes Bild links, Text rechts"
+snippet frame-beamer-annotated-left "Annotiertes Bild links, Text rechts"
   \begin{frame}{${1:folientitel}}
     \begin{columns}[T,onlytextwidth]
 
@@ -233,7 +206,7 @@ snippet frame-beamer-2col-annotated "Frame Beamer: annotiertes Bild links, Text 
 
       \column{0.42\textwidth}
         \begin{itemize}[<+->]
-          \item ${3}
+          \item ${3:erster Punkt}
           \item
           \item
         \end{itemize}
@@ -243,7 +216,259 @@ snippet frame-beamer-2col-annotated "Frame Beamer: annotiertes Bild links, Text 
     \source{quellen-angabe}
   \end{frame}
 
-snippet beamer-video-extern "externes Video in Beamer"
+snippet frame-beamer-annotated-right "Text links, annotiertes Bild rechts"
+  \begin{frame}{${1:folientitel}}
+    \begin{columns}[T,onlytextwidth]
+
+      \column{0.42\textwidth}
+        \begin{itemize}[<+->]
+          \item ${2:erster Punkt}
+          \item
+          \item
+        \end{itemize}
+
+      \column{0.54\textwidth}
+        \annotatedimage[\linewidth]{${3:bildtitel}}
+
+          % \imagegrid
+
+          % \imagecircle<2->{0.45}{0.55}{0.08}
+          % \imagearrow<3->{0.80}{0.75}{0.53}{0.60}
+          % \imagelabel<3->{0.78}{0.82}{Beschriftung}
+
+        \endannotatedimage
+
+    \end{columns}
+
+    \source{quellen-angabe}
+  \end{frame}
+
+
+# =============================================================================
+# BEAMER — OVERLAYS UND ANIMATION
+# =============================================================================
+
+snippet frame-beamer-img-swap "Frame mit wechselnden Bildern"
+  \begin{frame}{${1:folientitel}}
+    \centering
+
+    \only<1>{
+      \includegraphics[width=0.8\linewidth]{${2:bild1}}
+    }
+
+    \only<2->{
+      \includegraphics[width=0.8\linewidth]{${3:bild2}}
+    }
+
+    \source{quellen-angabe}
+  \end{frame}
+
+snippet uncover-beamer "Inhalt ab Overlay einblenden"
+  \uncover<${1:2}->{
+    ${2:inhalt}
+  }
+
+snippet only-beamer "Inhalt nur auf Overlay"
+  \only<${1:2}>{
+    ${2:inhalt}
+  }
+
+snippet frame-beamer-transparent "Frame mit transparenten kommenden Overlays"
+  {
+  \setbeamercovered{transparent=18}
+
+  \begin{frame}{${1:folientitel}}
+    \begin{itemize}[<+->]
+      \item ${2:erster Punkt}
+      \item
+      \item
+      \item
+    \end{itemize}
+
+    \source{quellen-angabe}
+  \end{frame}
+  }
+
+
+# =============================================================================
+# BEAMER — BLOCKS UND HERVORHEBUNGEN
+# =============================================================================
+
+snippet block-beamer "Beamer Block"
+  \begin{block}<${1:1}->{
+    ${2:titel}
+  }
+    ${3:inhalt}
+  \end{block}
+
+snippet alertblock-beamer "Beamer Alertblock"
+  \begin{alertblock}<${1:1}->{
+    ${2:titel}
+  }
+    ${3:inhalt}
+  \end{alertblock}
+
+snippet exampleblock-beamer "Beamer Exampleblock"
+  \begin{exampleblock}<${1:1}->{
+    ${2:titel}
+  }
+    ${3:inhalt}
+  \end{exampleblock}
+
+snippet takehome-beamer "Take-home einblenden"
+  \uncover<${1:2}->{
+    \takehome{${2:take-home}}
+  }
+
+
+# =============================================================================
+# BEAMER — FORMELN
+# =============================================================================
+
+snippet frame-beamer-formula "Frame mit großer Formel"
+  \begin{frame}{${1:folientitel}}
+    \centering
+    \vfill
+
+    \LARGE
+    \[
+      ${2:formel}
+    \]
+
+    \vfill
+
+    \source{quellen-angabe}
+  \end{frame}
+
+snippet frame-beamer-formula-example "Formel mit Beispiel"
+  \begin{frame}{${1:folientitel}}
+    \centering
+
+    \LARGE
+    \[
+      ${2:formel}
+    \]
+
+    \vspace{0.8em}
+
+    \begin{columns}[T,onlytextwidth]
+
+      \column{0.31\textwidth}
+        \begin{block}<2->{${3:Schritt 1}}
+          \centering
+          ${4:Wert 1}
+        \end{block}
+
+      \column{0.31\textwidth}
+        \begin{block}<3->{${5:Schritt 2}}
+          \centering
+          ${6:Wert 2}
+        \end{block}
+
+      \column{0.31\textwidth}
+        \begin{block}<4->{${7:Schritt 3}}
+          \centering
+          ${8:Wert 3}
+        \end{block}
+
+    \end{columns}
+
+    \source{quellen-angabe}
+  \end{frame}
+
+
+# =============================================================================
+# BEAMER — TAKE-HOME / SCHLUSSFOLIEN
+# =============================================================================
+
+snippet frame-beamer-takehome "Frame mit Take-home"
+  \begin{frame}{${1:folientitel}}
+    ${2:inhalt}
+
+    \vfill
+
+    \uncover<${3:2}->{
+      \takehome{${4:take-home}}
+    }
+
+    \source{quellen-angabe}
+  \end{frame}
+
+snippet frame-beamer-final "Schlussfolie mit Kernaussage"
+  \begin{frame}{${1:Take-home}}
+    \begin{enumerate}[<+->]
+      \item ${2:erster Punkt}
+      \item
+      \item
+      \item
+    \end{enumerate}
+
+    \vfill
+
+    \centering
+    \uncover<${3:5}->{
+      \Large
+      \alert{${4:Kernaussage}}
+    }
+  \end{frame}
+
+
+# =============================================================================
+# BEAMER — PRÄSENTATION VS. HANDOUT
+# =============================================================================
+
+snippet beamer-handout-different "Unterschiedlicher Inhalt in Präsentation und Handout"
+  \mode<beamer>{
+    ${1:Inhalt Präsentation}
+  }
+
+  \mode<handout>{
+    ${2:Inhalt Handout}
+  }
+
+snippet beamer-img-swap-handout "Bilder wechseln, beide im Handout"
+  \mode<beamer>{
+    \only<1>{
+      \includegraphics[width=\linewidth]{${1:bild1}}
+    }
+
+    \only<2->{
+      \includegraphics[width=\linewidth]{${2:bild2}}
+    }
+  }
+
+  \mode<handout>{
+    \begin{columns}[T,onlytextwidth]
+
+      \column{0.49\textwidth}
+        \includegraphics[width=\linewidth]{${1:bild1}}
+
+      \column{0.49\textwidth}
+        \includegraphics[width=\linewidth]{${2:bild2}}
+
+    \end{columns}
+  }
+
+
+# =============================================================================
+# BEAMER — QUELLEN UND ZITATE
+# =============================================================================
+
+snippet source-beamer "Quellenangabe"
+  \source{${1:quellen-angabe}}
+
+snippet cite-beamer "Zitat mit manueller Seitenangabe"
+  \cite{${1:citation-key}}, S.~${2:seite}
+
+snippet cite-beamer-biblatex "Biblatex-Zitat mit Seite"
+  \cite[S.~${2:seite}]{${1:citation-key}}
+
+
+# =============================================================================
+# BEAMER — VIDEO
+# =============================================================================
+
+snippet beamer-video-extern "Externes Video in Beamer"
   \href{run:./videos/${1:videoname}.mp4}{%
-  \beamerbutton{Video abspielen}
+    \beamerbutton{${2:Video abspielen}}
   }
