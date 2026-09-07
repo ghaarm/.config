@@ -1,6 +1,6 @@
 # Fdb version 4
-["pdflatex"] 1788763874.72221 "/Users/g/.config/nvim/templates/beamer-vorlage-knn.tex" "beamer-vorlage-knn.pdf" "beamer-vorlage-knn" 1788763875.13666 2
-  "/Users/g/.config/nvim/templates/beamer-vorlage-knn.tex" 1788763874.63406 1048 d216112a1038e7c16e0be18baa4c7d95 ""
+["pdflatex"] 1788764685.86307 "/Users/g/.config/nvim/templates/beamer-vorlage-knn.tex" "beamer-vorlage-knn.pdf" "beamer-vorlage-knn" 1788764686.28257 2
+  "/Users/g/.config/nvim/templates/beamer-vorlage-knn.tex" 1788764685.79707 1339 d287bc3155f8318d52a27376da70a4a5 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/tfm/public/cm/cmr10.tfm" 1136768653 1296 45809c5a464d5f32c8f98ba97c1bb47f ""
   "/usr/local/texlive/2025/texmf-dist/fonts/tfm/public/cm/cmss10.tfm" 1136768653 1316 b636689f1933f24d1294acdf6041daaa ""
@@ -153,7 +153,7 @@
   "/usr/local/texlive/2025/texmf.cnf" 1741450484 577 418a7058ec8e006d8704f60ecd22c938 ""
   "beamer-templates/kn-beamer-preamble.tex" 0 -1 0 ""
   "beamer-vorlage-knn.aux" 1788646352.65227 32 3985256e7290058c681f74d7a3565a19 "pdflatex"
-  "nvim/templates/beamer-vorlage-knn.tex" 1788763874.63406 1048 d216112a1038e7c16e0be18baa4c7d95 ""
+  "nvim/templates/beamer-vorlage-knn.tex" 1788764685.79707 1339 d287bc3155f8318d52a27376da70a4a5 ""
   (generated)
   "beamer-vorlage-knn.aux"
   "beamer-vorlage-knn.log"
