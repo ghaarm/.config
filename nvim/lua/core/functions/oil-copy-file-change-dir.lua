@@ -83,6 +83,7 @@ local function copy_to_fuzzy_dir(change_dir)
             vim.notify("Kopiert nach:\n" .. target_dir)
 
             if change_dir then
+              vim.cmd.enew()
               require("oil").open(target_dir)
             end
           end)
