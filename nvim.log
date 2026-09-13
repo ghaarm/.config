@@ -1,0 +1,6 @@
+WRN 2026-09-13T11:21:05.211 c/nvim.80967.0 server_start:197: Failed to start server: operation not permitted: /var/folders/60/jc4d8msn1nj2xgv_102_hchh0000gn/T/nvim.g/AQEGjc/nvim.92597.0
+WRN 2026-09-13T11:21:05.232 c/nvim.80967.0 ga_set_growsize:57: trying to set an invalid ga_growsize: 0
+WRN 2026-09-13T11:49:00.115 c/nvim.80967.0 server_start:197: Failed to start server: operation not permitted: /var/folders/60/jc4d8msn1nj2xgv_102_hchh0000gn/T/nvim.g/2gnsR0/nvim.19968.0
+WRN 2026-09-13T11:55:14.591 c/nvim.23400.0 server_start:197: Failed to start server: operation not permitted: /var/folders/60/jc4d8msn1nj2xgv_102_hchh0000gn/T/nvim.g/qUvcW4/nvim.25174.0
+WRN 2026-09-13T11:55:14.604 c/nvim.23400.0 ga_set_growsize:57: trying to set an invalid ga_growsize: 0
+WRN 2026-09-13T11:55:53.989 c/nvim.23400.0 server_start:197: Failed to start server: operation not permitted: /var/folders/60/jc4d8msn1nj2xgv_102_hchh0000gn/T/nvim.g/zUe2FU/nvim.25844.0

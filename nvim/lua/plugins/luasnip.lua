@@ -63,7 +63,11 @@ return {
         ls.change_choice(1)
       end
     end)
-
+    vim.keymap.set({ "i", "s" }, "<C-H>", function()
+      if ls.choice_active() then
+        ls.change_choice(-1)
+      end
+    end)
     -- shortcut to source luasnip file again, which will reload snippets
     vim.keymap.set(
       "n",
