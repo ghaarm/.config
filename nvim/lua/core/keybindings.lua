@@ -18,6 +18,18 @@ vim.g.mapleader = " "
 -- vim.api.nvim_set_keymap("v", "<Right>", "<NOP>", { noremap = true, silent = true })
 --
 --
+vim.keymap.set("n", "<Down>", "gj", {
+  noremap = true,
+  silent = true,
+  desc = "Down by visual line",
+})
+
+vim.keymap.set("n", "<Up>", "gk", {
+  noremap = true,
+  silent = true,
+  desc = "Up by visual line",
+})
+--
 -- alles markieren
 vim.api.nvim_set_keymap("n", "<D-a>", "ggVG$", { noremap = true, silent = true })
 
