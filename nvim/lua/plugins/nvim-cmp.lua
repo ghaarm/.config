@@ -210,16 +210,34 @@ return {
     })
 
     -- 3) cmdline setups
+    local cmdline_mapping = cmp.mapping.preset.cmdline({
+      ["<Down>"] = cmp.mapping(function(fallback)
+        if cmp.visible() then
+          cmp.select_next_item()
+        else
+          fallback()
+        end
+      end, { "c" }),
+
+      ["<Up>"] = cmp.mapping(function(fallback)
+        if cmp.visible() then
+          cmp.select_prev_item()
+        else
+          fallback()
+        end
+      end, { "c" }),
+
+      ["<CR>"] = cmp.mapping(function(fallback)
+        if cmp.visible() and cmp.get_active_entry() then
+          cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
+        else
+          fallback()
+        end
+      end, { "c" }),
+    })
+
     cmp.setup.cmdline("/", {
-      mapping = cmp.mapping.preset.cmdline({
-        ["<CR>"] = cmp.mapping(function(fallback)
-          if cmp.visible() and cmp.get_active_entry() then
-            cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
-          else
-            fallback()
-          end
-        end, { "c" }),
-      }),
+      mapping = cmdline_mapping,
       sources = cmp.config.sources({
         { name = "buffer", keyword_length = 3 },
       }),
@@ -227,15 +245,7 @@ return {
     })
 
     cmp.setup.cmdline(":", {
-      mapping = cmp.mapping.preset.cmdline({
-        ["<CR>"] = cmp.mapping(function(fallback)
-          if cmp.visible() and cmp.get_active_entry() then
-            cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
-          else
-            fallback()
-          end
-        end, { "c" }),
-      }),
+      mapping = cmdline_mapping,
       sources = cmp.config.sources({
         { name = "luasnip" },
         { name = "buffer" },
