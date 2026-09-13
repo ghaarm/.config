@@ -3,6 +3,8 @@ local s = ls.snippet
 local t = ls.text_node
 local i = ls.insert_node
 local f = ls.function_node
+local c = ls.choice_node
+
 return {
   -- Autosnippets
   --
@@ -60,4 +62,23 @@ return {
       i(2, "Seite"),
     })
   ),
+  -- andere Snippets
+  s("OR", {
+    t("OR "),
+    i(1, "or"),
+    t(" (95~\\%-CI "),
+    i(2, "wert-1"),
+    t("--"),
+    i(3, "wert-2"),
+    t("; p $"),
+    c(4, {
+      t("="),
+      t("<"),
+      t(">"),
+    }),
+    t("$ "),
+    i(5, "p-wert"),
+    t(")"),
+    i(0),
+  }),
 }
