@@ -131,6 +131,11 @@ return {
       delete_to_trash = true,
       skip_confirm_for_simple_edits = true,
 
+      buf_options = {
+        buflisted = true,
+        bufhidden = "hide",
+      },
+
       view_options = {
         show_hidden = true,
         natural_order = true,
