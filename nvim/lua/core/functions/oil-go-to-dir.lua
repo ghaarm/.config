@@ -2,20 +2,27 @@
 
 local M = {}
 
-local search_root = "/Users/g/Library/Mobile Documents/com~apple~CloudDocs/!Docs iCloud"
+-- local search_root = "/Users/g/Library/Mobile Documents/com~apple~CloudDocs/!Docs iCloud"
+local search_root = "/Users/g/Library/Mobile Documents/com~apple~CloudDocs"
+
+local function to_absolute_dir(path)
+  if not path or path == "" then
+    return nil
+  end
+
+  if path:sub(1, 1) ~= "/" then
+    path = vim.fs.joinpath(search_root, path)
+  end
+
+  return vim.fs.normalize(path):gsub("/+$", "")
+end
 
 local function get_target_dir(selection)
   if not selection then
     return nil
   end
 
-  local target_dir = selection.path or vim.fs.joinpath(search_root, selection.value)
-
-  if not target_dir then
-    return nil
-  end
-
-  return target_dir:gsub("/+$", "")
+  return to_absolute_dir(selection.path or selection.filename or selection.value or selection[1])
 end
 
 function M.go_to_fuzzy_dir()
@@ -33,6 +40,8 @@ function M.go_to_fuzzy_dir()
       "d",
       "--exclude",
       ".git",
+      "--hidden",
+      "--no-ignore",
       "--strip-cwd-prefix",
     },
     attach_mappings = function(prompt_bufnr)

@@ -3,6 +3,20 @@
 
 local M = {}
 
+local search_root = "/Users/g/Library/Mobile Documents/com~apple~CloudDocs"
+
+local function to_absolute_dir(path)
+  if not path or path == "" then
+    return nil
+  end
+
+  if path:sub(1, 1) ~= "/" then
+    path = vim.fs.joinpath(search_root, path)
+  end
+
+  return vim.fs.normalize(path):gsub("/+$", "")
+end
+
 local function get_oil_source()
   local oil = require("oil")
 
@@ -31,7 +45,7 @@ local function copy_to_fuzzy_dir(change_dir)
   local actions = require("telescope.actions")
   local action_state = require("telescope.actions.state")
 
-  local search_root = "/Users/g/Library/Mobile Documents/com~apple~CloudDocs/!Docs iCloud"
+  -- local search_root = "/Users/g/Library/Mobile Documents/com~apple~CloudDocs/!Docs iCloud"
 
   builtin.find_files({
     prompt_title = "Zielverzeichnis",
@@ -43,6 +57,8 @@ local function copy_to_fuzzy_dir(change_dir)
       "d",
       "--exclude",
       ".git",
+      "--hidden",
+      "--no-ignore",
       "--strip-cwd-prefix",
     },
     attach_mappings = function(prompt_bufnr)
@@ -55,14 +71,12 @@ local function copy_to_fuzzy_dir(change_dir)
 
         actions.close(prompt_bufnr)
 
-        local target_dir = selection.path or vim.fs.joinpath(search_root, selection.value)
+        local target_dir = to_absolute_dir(selection.path or selection.filename or selection.value or selection[1])
 
         if not target_dir then
           vim.notify("Zielverzeichnis konnte nicht ermittelt werden", vim.log.levels.ERROR)
           return
         end
-
-        target_dir = target_dir:gsub("/+$", "")
 
         local target = vim.fs.joinpath(target_dir, source_info.name)
 
