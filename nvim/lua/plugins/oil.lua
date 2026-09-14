@@ -158,6 +158,7 @@ return {
         -- ["<leader>ga"] = function()
         ["ga"] = function()
           local oil = require("oil")
+          local image_preview = require("core.functions.bild-preview-mac")
           local entry = oil.get_cursor_entry()
           local dir = oil.get_current_dir()
 
@@ -171,42 +172,18 @@ return {
             return
           end
 
-          local extension = entry.name:match("%.([^./]+)$")
-          extension = extension and extension:lower()
+          local fullpath = vim.fs.normalize(vim.fs.joinpath(dir, entry.name))
 
-          local image_extensions = {
-            png = true,
-            jpg = true,
-            jpeg = true,
-          }
-
-          if not extension or not image_extensions[extension] then
+          if not image_preview.is_supported_image_path(fullpath) then
             vim.notify("Nur PNG- und JPEG-Dateien werden unterstützt.", vim.log.levels.INFO)
             return
           end
 
-          local fullpath = vim.fs.normalize(vim.fs.joinpath(dir, entry.name))
-
-          vim.system({
-            "open",
-            "-a",
-            "Preview",
-            fullpath,
-          }, {
-            text = true,
-          }, function(result)
-            if result.code ~= 0 then
-              vim.schedule(function()
-                vim.notify(
-                  "Bild konnte nicht geöffnet werden:\n" .. fullpath .. "\n" .. (result.stderr or ""),
-                  vim.log.levels.ERROR
-                )
-              end)
-            end
-          end)
+          image_preview.open_path_in_preview(fullpath)
         end,
         ["<CR>"] = function()
           local oil = require("oil")
+          local image_preview = require("core.functions.bild-preview-mac")
           local entry = oil.get_cursor_entry()
 
           if not entry then
@@ -216,6 +193,12 @@ return {
           local dir = oil.get_current_dir() or ""
           local path = vim.fs.normalize(vim.fs.joinpath(dir, entry.name))
           local lower_path = path:lower()
+
+          -- Bilder mit Preview im Bearbeitungsmodus öffnen
+          if entry.type ~= "directory" and image_preview.is_supported_image_path(lower_path) then
+            image_preview.open_path_in_preview(path)
+            return
+          end
 
           -- PDF mit Sioyek öffnen
           if entry.type ~= "directory" and lower_path:match("%.pdf$") then
