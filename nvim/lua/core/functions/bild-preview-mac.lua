@@ -130,6 +130,8 @@ local image_extensions = {
   jpeg = true,
 }
 
+local M = {}
+
 local function has_image_extension(path)
   local extension = path:match("%.([^./]+)$")
   extension = extension and extension:lower()
@@ -505,35 +507,15 @@ local function resolve_image_path(relative_path)
   return nil, candidates
 end
 
-local function open_image_in_preview()
-  -- In Oil nichts ausführen.
-  if vim.bo.filetype == "oil" then
-    return
-  end
+function M.is_supported_image_path(path)
+  return has_image_extension(path)
+end
 
-  -- Nur in LaTeX und Markdown aktiv.
-  local allowed_filetypes = {
-    tex = true,
-    plaintex = true,
-    markdown = true,
-  }
+function M.open_path_in_preview(path)
+  local fullpath = vim.loop.fs_realpath(path) or vim.fs.normalize(path)
 
-  if not allowed_filetypes[vim.bo.filetype] then
-    vim.notify("Bildvorschau ist nur in TeX- und Markdown-Dateien aktiv.", vim.log.levels.INFO)
-    return
-  end
-
-  local relative_path = get_path_from_line()
-
-  if not relative_path then
-    vim.notify("Kein PNG- oder JPEG-Pfad in geschweiften Klammern gefunden.", vim.log.levels.WARN)
-    return
-  end
-
-  local fullpath, checked_paths = resolve_image_path(relative_path)
-
-  if not fullpath then
-    vim.notify("Bilddatei nicht gefunden. Geprüft:\n" .. table.concat(checked_paths, "\n"), vim.log.levels.ERROR)
+  if vim.fn.filereadable(fullpath) ~= 1 then
+    vim.notify("Bilddatei nicht gefunden:\n" .. fullpath, vim.log.levels.ERROR)
     return
   end
 
@@ -571,10 +553,51 @@ local function open_image_in_preview()
   end)
 end
 
+local function open_image_in_preview()
+  -- In Oil nichts ausführen.
+  if vim.bo.filetype == "oil" then
+    return
+  end
+
+  -- Nur in LaTeX und Markdown aktiv.
+  local allowed_filetypes = {
+    tex = true,
+    plaintex = true,
+    markdown = true,
+  }
+
+  if not allowed_filetypes[vim.bo.filetype] then
+    vim.notify("Bildvorschau ist nur in TeX- und Markdown-Dateien aktiv.", vim.log.levels.INFO)
+    return
+  end
+
+  local relative_path = get_path_from_line()
+
+  if not relative_path then
+    vim.notify("Kein PNG- oder JPEG-Pfad in geschweiften Klammern gefunden.", vim.log.levels.WARN)
+    return
+  end
+
+  local fullpath, checked_paths = resolve_image_path(relative_path)
+
+  if not fullpath then
+    vim.notify("Bilddatei nicht gefunden. Geprüft:\n" .. table.concat(checked_paths, "\n"), vim.log.levels.ERROR)
+    return
+  end
+
+  M.open_path_in_preview(fullpath)
+end
+
+M.open_image_in_preview = open_image_in_preview
+
 -- vim.keymap.set("n", "<leader>ga", open_image_in_preview, {
 vim.keymap.set("n", "ga", open_image_in_preview, {
   silent = true,
   desc = "Bildpfad in Preview öffnen",
 })
 
-return open_image_in_preview
+return setmetatable(M, {
+  __call = function()
+    return open_image_in_preview()
+  end,
+})
