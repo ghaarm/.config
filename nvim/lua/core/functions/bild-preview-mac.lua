@@ -124,6 +124,387 @@
 --   end,
 -- })
 --
+local image_extensions = {
+  png = true,
+  jpg = true,
+  jpeg = true,
+}
+
+local function has_image_extension(path)
+  local extension = path:match("%.([^./]+)$")
+  extension = extension and extension:lower()
+  return extension and image_extensions[extension] == true
+end
+
+local function image_path_variants(path)
+  if has_image_extension(path) then
+    return { path }
+  end
+
+  return {
+    path .. ".png",
+    path .. ".jpg",
+    path .. ".jpeg",
+  }
+end
+
+local function find_balanced_content(text, start_pos, opening, closing)
+  if text:sub(start_pos, start_pos) ~= opening then
+    return nil
+  end
+
+  local depth = 0
+
+  for index = start_pos, #text do
+    local char = text:sub(index, index)
+
+    if char == opening then
+      depth = depth + 1
+    elseif char == closing then
+      depth = depth - 1
+
+      if depth == 0 then
+        return text:sub(start_pos + 1, index - 1), start_pos, index
+      end
+    end
+  end
+end
+
+local function skip_whitespace(text, start_pos)
+  local _, end_pos = text:find("^%s*", start_pos)
+  return end_pos + 1
+end
+
+local function includegraphics_argument_at(line, command_start)
+  local pos = command_start + #"\\includegraphics"
+  pos = skip_whitespace(line, pos)
+
+  if line:sub(pos, pos) == "[" then
+    local _, _, option_end = find_balanced_content(line, pos, "[", "]")
+
+    if option_end then
+      pos = skip_whitespace(line, option_end + 1)
+    end
+  end
+
+  if line:sub(pos, pos) ~= "{" then
+    return nil
+  end
+
+  return find_balanced_content(line, pos, "{", "}")
+end
+
+local function get_path_from_line()
+  local line = vim.api.nvim_get_current_line()
+  local cursor_col = vim.api.nvim_win_get_cursor(0)[2] + 1
+  local first_includegraphics_path
+
+  local search_from = 1
+
+  while true do
+    local command_start = line:find("\\includegraphics", search_from, true)
+
+    if not command_start then
+      break
+    end
+
+    local path, start_col, end_col = includegraphics_argument_at(line, command_start)
+
+    if path then
+      first_includegraphics_path = first_includegraphics_path or path
+
+      if start_col <= cursor_col and cursor_col <= end_col then
+        return path
+      end
+    end
+
+    search_from = command_start + 1
+  end
+
+  if first_includegraphics_path then
+    return first_includegraphics_path
+  end
+
+  for start_col, path, end_col in line:gmatch("(){([^}]+)}()") do
+    if has_image_extension(path) then
+      if start_col <= cursor_col and cursor_col < end_col then
+        return path
+      end
+
+      return path
+    end
+  end
+end
+
+local function get_vimtex_root()
+  local vimtex = vim.b.vimtex
+
+  if type(vimtex) == "table" and vimtex.root then
+    return vim.fn.fnamemodify(vimtex.root, ":p")
+  end
+
+  local ok, root = pcall(vim.fn["vimtex#paths#get_root"])
+  if ok and type(root) == "string" and root ~= "" then
+    return vim.fn.fnamemodify(root, ":p")
+  end
+end
+
+local function get_vimtex_main()
+  local vimtex = vim.b.vimtex
+
+  if type(vimtex) == "table" and vimtex.tex then
+    return vim.fn.fnamemodify(vimtex.tex, ":p")
+  end
+
+  local ok, main = pcall(vim.fn["vimtex#paths#get_main"])
+  if ok and type(main) == "string" and main ~= "" then
+    return vim.fn.fnamemodify(main, ":p")
+  end
+end
+
+local function dedupe_paths(paths)
+  local seen = {}
+  local deduped = {}
+
+  for _, path in ipairs(paths) do
+    if path and path ~= "" then
+      local normalized = vim.fs.normalize(path)
+
+      if not seen[normalized] then
+        seen[normalized] = true
+        table.insert(deduped, normalized)
+      end
+    end
+  end
+
+  return deduped
+end
+
+local function project_directories()
+  local root = get_vimtex_root()
+  local main_path = get_vimtex_main()
+  local main_directory = main_path and vim.fn.fnamemodify(main_path, ":p:h")
+  local buffer_directory = vim.fn.expand("%:p:h")
+
+  return dedupe_paths({
+    root,
+    main_directory,
+    buffer_directory,
+    vim.fn.getcwd(),
+  })
+end
+
+local function read_file(path)
+  local ok, lines = pcall(vim.fn.readfile, path)
+
+  if not ok then
+    return nil
+  end
+
+  return table.concat(lines, "\n")
+end
+
+local function find_balanced_brace_content(text, from)
+  local start_pos = text:find("{", from, true)
+
+  if not start_pos then
+    return nil
+  end
+
+  local depth = 0
+
+  for index = start_pos, #text do
+    local char = text:sub(index, index)
+
+    if char == "{" then
+      depth = depth + 1
+    elseif char == "}" then
+      depth = depth - 1
+
+      if depth == 0 then
+        return text:sub(start_pos + 1, index - 1)
+      end
+    end
+  end
+end
+
+local function tex_path_variants(path)
+  if path:match("%.tex$") then
+    return { path }
+  end
+
+  return { path .. ".tex", path }
+end
+
+local function resolve_tex_input_path(input_path, current_file_directory)
+  if vim.fn.fnamemodify(input_path, ":p") == input_path then
+    for _, variant in ipairs(tex_path_variants(input_path)) do
+      local normalized = vim.fs.normalize(variant)
+
+      if vim.fn.filereadable(normalized) == 1 then
+        return normalized
+      end
+    end
+  end
+
+  local base_directories = dedupe_paths(vim.list_extend({ current_file_directory }, project_directories()))
+
+  for _, base_directory in ipairs(base_directories) do
+    for _, variant in ipairs(tex_path_variants(input_path)) do
+      local candidate = vim.fs.normalize(vim.fs.joinpath(base_directory, variant))
+
+      if vim.fn.filereadable(candidate) == 1 then
+        return candidate
+      end
+    end
+  end
+end
+
+local function collect_input_files(tex_file, collected, seen)
+  tex_file = vim.fs.normalize(tex_file)
+
+  if seen[tex_file] or vim.fn.filereadable(tex_file) ~= 1 then
+    return
+  end
+
+  seen[tex_file] = true
+  table.insert(collected, tex_file)
+
+  local content = read_file(tex_file)
+  if not content then
+    return
+  end
+
+  local tex_file_directory = vim.fn.fnamemodify(tex_file, ":p:h")
+
+  for command_start, command in content:gmatch("()\\(input)%s*{") do
+    local input_path = find_balanced_brace_content(content, command_start)
+    local resolved = input_path and resolve_tex_input_path(input_path, tex_file_directory)
+
+    if resolved then
+      collect_input_files(resolved, collected, seen)
+    end
+  end
+
+  for command_start, command in content:gmatch("()\\(include)%s*{") do
+    local input_path = find_balanced_brace_content(content, command_start)
+    local resolved = input_path and resolve_tex_input_path(input_path, tex_file_directory)
+
+    if resolved then
+      collect_input_files(resolved, collected, seen)
+    end
+  end
+end
+
+local function tex_files_for_graphicspath()
+  local files = {}
+  local seen = {}
+  local root = get_vimtex_root()
+
+  for _, tex_file in ipairs({ get_vimtex_main(), vim.fn.expand("%:p") }) do
+    if tex_file and tex_file ~= "" then
+      collect_input_files(tex_file, files, seen)
+    end
+  end
+
+  if root and root ~= "" then
+    for _, tex_file in ipairs(vim.fn.globpath(root, "**/*.tex", false, true)) do
+      collect_input_files(tex_file, files, seen)
+    end
+  end
+
+  return dedupe_paths(files)
+end
+
+local function get_graphicspath_directories()
+  if vim.bo.filetype ~= "tex" and vim.bo.filetype ~= "plaintex" then
+    return {}
+  end
+
+  local directories = {}
+
+  for _, tex_file in ipairs(tex_files_for_graphicspath()) do
+    if vim.fn.filereadable(tex_file) == 1 then
+      local content = read_file(tex_file)
+
+      if content then
+        local search_from = 1
+
+        while true do
+          local graphicspath_start = content:find("\\graphicspath", search_from, true)
+
+          if not graphicspath_start then
+            break
+          end
+
+          local graphicspath_content = find_balanced_brace_content(content, graphicspath_start)
+
+          if graphicspath_content then
+            local tex_file_directory = vim.fn.fnamemodify(tex_file, ":p:h")
+
+            for graphics_directory in graphicspath_content:gmatch("{([^{}]+)}") do
+              table.insert(directories, vim.fs.joinpath(tex_file_directory, graphics_directory))
+
+              for _, project_directory in ipairs(project_directories()) do
+                table.insert(directories, vim.fs.joinpath(project_directory, graphics_directory))
+              end
+            end
+          end
+
+          search_from = graphicspath_start + 1
+        end
+      end
+    end
+  end
+
+  return dedupe_paths(directories)
+end
+
+local function resolve_image_path(relative_path)
+  if vim.fn.fnamemodify(relative_path, ":p") == relative_path then
+    local normalized = vim.fs.normalize(relative_path)
+    local realpath = vim.loop.fs_realpath(normalized)
+
+    if vim.fn.filereadable(normalized) == 1 or realpath then
+      return realpath or normalized
+    end
+
+    return nil, { normalized }
+  end
+
+  local buffer_directory = vim.fn.expand("%:p:h")
+  local direct_candidates = dedupe_paths({
+    vim.fs.joinpath(buffer_directory, relative_path),
+    vim.fs.joinpath(get_vimtex_root() or "", relative_path),
+    vim.fs.joinpath(vim.fn.getcwd(), relative_path),
+  })
+  local candidates = {}
+
+  for _, project_directory in ipairs(project_directories()) do
+    table.insert(direct_candidates, vim.fs.joinpath(project_directory, relative_path))
+  end
+
+  for _, candidate in ipairs(dedupe_paths(direct_candidates)) do
+    vim.list_extend(candidates, image_path_variants(candidate))
+  end
+
+  for _, graphics_directory in ipairs(get_graphicspath_directories()) do
+    for _, relative_variant in ipairs(image_path_variants(relative_path)) do
+      table.insert(candidates, vim.fs.joinpath(graphics_directory, relative_variant))
+    end
+  end
+
+  candidates = dedupe_paths(candidates)
+
+  for _, candidate in ipairs(candidates) do
+    if vim.fn.filereadable(candidate) == 1 then
+      return vim.loop.fs_realpath(candidate) or candidate
+    end
+  end
+
+  return nil, candidates
+end
+
 local function open_image_in_preview()
   -- In Oil nichts ausführen.
   if vim.bo.filetype == "oil" then
@@ -142,34 +523,17 @@ local function open_image_in_preview()
     return
   end
 
-  local line = vim.api.nvim_get_current_line()
-  local relative_path = line:match("{([^}]+)}")
+  local relative_path = get_path_from_line()
 
   if not relative_path then
-    vim.notify("Kein Pfad in geschweiften Klammern gefunden.", vim.log.levels.WARN)
+    vim.notify("Kein PNG- oder JPEG-Pfad in geschweiften Klammern gefunden.", vim.log.levels.WARN)
     return
   end
 
-  local extension = relative_path:match("%.([^./]+)$")
-  extension = extension and extension:lower()
+  local fullpath, checked_paths = resolve_image_path(relative_path)
 
-  local image_extensions = {
-    png = true,
-    jpg = true,
-    jpeg = true,
-  }
-
-  if not extension or not image_extensions[extension] then
-    vim.notify("Der gefundene Pfad ist keine PNG- oder JPEG-Datei.", vim.log.levels.INFO)
-    return
-  end
-
-  local buffer_directory = vim.fn.expand("%:p:h")
-
-  local fullpath = vim.fs.normalize(vim.fs.joinpath(buffer_directory, relative_path))
-
-  if vim.fn.filereadable(fullpath) ~= 1 then
-    vim.notify("Bilddatei nicht gefunden:\n" .. fullpath, vim.log.levels.ERROR)
+  if not fullpath then
+    vim.notify("Bilddatei nicht gefunden. Geprüft:\n" .. table.concat(checked_paths, "\n"), vim.log.levels.ERROR)
     return
   end
 
