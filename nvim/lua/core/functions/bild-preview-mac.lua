@@ -507,6 +507,36 @@ local function resolve_image_path(relative_path)
   return nil, candidates
 end
 
+local function clean_cfile_path(path)
+  if not path or path == "" then
+    return nil
+  end
+
+  return path
+    :gsub("^%s+", "")
+    :gsub("%s+$", "")
+    :gsub("^[{(%[]+", "")
+    :gsub("[})%],;:]+$", "")
+end
+
+local function resolve_cfile_image_path()
+  local cfile = clean_cfile_path(vim.fn.expand("<cfile>"))
+
+  if not cfile or not has_image_extension(cfile) then
+    return nil
+  end
+
+  local fullpath = resolve_image_path(cfile)
+  if fullpath then
+    return fullpath
+  end
+
+  local found = vim.fn.findfile(cfile, vim.o.path)
+  if found and found ~= "" then
+    return vim.loop.fs_realpath(found) or vim.fn.fnamemodify(found, ":p")
+  end
+end
+
 function M.is_supported_image_path(path)
   return has_image_extension(path)
 end
@@ -553,6 +583,56 @@ function M.open_path_in_preview(path)
   end)
 end
 
+function M.open_path_in_oil(path)
+  local fullpath = vim.loop.fs_realpath(path) or vim.fs.normalize(path)
+
+  if vim.fn.filereadable(fullpath) ~= 1 then
+    vim.notify("Bilddatei nicht gefunden:\n" .. fullpath, vim.log.levels.ERROR)
+    return
+  end
+
+  local directory = vim.fn.fnamemodify(fullpath, ":p:h")
+  local filename = vim.fn.fnamemodify(fullpath, ":t")
+  local oil = require("oil")
+  local oil_url = oil.get_url_for_path(directory)
+
+  require("oil.view").set_last_cursor(oil_url, filename)
+  oil.open(directory)
+end
+
+function M.open_current_image_in_oil()
+  local allowed_filetypes = {
+    tex = true,
+    plaintex = true,
+    markdown = true,
+  }
+
+  if not allowed_filetypes[vim.bo.filetype] then
+    vim.notify("Bildpfad in Oil ist nur in TeX- und Markdown-Dateien aktiv.", vim.log.levels.INFO)
+    return
+  end
+
+  local relative_path = get_path_from_line()
+
+  if relative_path then
+    local fullpath = resolve_image_path(relative_path)
+
+    if fullpath then
+      M.open_path_in_oil(fullpath)
+      return
+    end
+  end
+
+  local cfile_fullpath = resolve_cfile_image_path()
+
+  if cfile_fullpath then
+    M.open_path_in_oil(cfile_fullpath)
+    return
+  end
+
+  vim.notify("Kein auflösbarer PNG- oder JPEG-Pfad unter dem Cursor gefunden.", vim.log.levels.WARN)
+end
+
 local function open_image_in_preview()
   -- In Oil nichts ausführen.
   if vim.bo.filetype == "oil" then
@@ -590,10 +670,32 @@ end
 
 M.open_image_in_preview = open_image_in_preview
 
--- vim.keymap.set("n", "<leader>ga", open_image_in_preview, {
-vim.keymap.set("n", "ga", open_image_in_preview, {
-  silent = true,
-  desc = "Bildpfad in Preview öffnen",
+local function set_image_keymaps(bufnr)
+  local opts = {
+    buffer = bufnr,
+    silent = true,
+  }
+
+  vim.keymap.set("n", "ga", open_image_in_preview, vim.tbl_extend("force", opts, {
+    desc = "Bildpfad in Preview öffnen",
+  }))
+
+  vim.keymap.set("n", "gp", function()
+    M.open_current_image_in_oil()
+  end, vim.tbl_extend("force", opts, {
+    desc = "Bildpfad in Oil anzeigen",
+  }))
+end
+
+M.set_image_keymaps = set_image_keymaps
+
+set_image_keymaps(0)
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "tex", "plaintex", "markdown" },
+  callback = function(event)
+    set_image_keymaps(event.buf)
+  end,
 })
 
 return setmetatable(M, {
