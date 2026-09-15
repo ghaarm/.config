@@ -116,7 +116,7 @@ return {
       },
       -- Beamer Präambel
       {
-        "<leader>tbz",
+        "<leader>tbp",
         function()
           vim.cmd.tabedit(
             vim.fn.fnameescape(
