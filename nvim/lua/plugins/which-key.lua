@@ -77,6 +77,17 @@ return {
         remap = false,
       },
       {
+        "<leader>tte",
+        function()
+          vim.cmd.tabedit(
+            vim.fn.fnameescape(vim.fn.expand("~/.config/nvim/templates/footer-footnotes-bibliography.tex"))
+          )
+        end,
+        desc = "footer-footnotes-bibliography.tex EDIT",
+        nowait = true,
+        remap = false,
+      },
+      {
         "<leader>ttd",
         "<cmd>read ~/.config/nvim/templates/footer-footnotes-bibliography-knn.tex<CR>",
         desc = "footer-footnotes-bibliography-knn.tex",
@@ -87,6 +98,19 @@ return {
         "<leader>ttg",
         "<cmd>read ~/.config/nvim/templates/chapter.tex<CR>",
         desc = "chapter template tex",
+        nowait = true,
+        remap = false,
+      },
+      {
+        "<leader>ttp",
+        function()
+          vim.cmd.tabedit(
+            vim.fn.fnameescape(
+              "/Users/g/Library/Mobile Documents/com~apple~CloudDocs/!Docs iCloud/R Statistik, icloud/Latex, icloud/Latex Projekte/@Vorlagen-Latex/preamble-footnotes-bibliographie-neu.tex"
+            )
+          )
+        end,
+        desc = "Präambel Footnotes Bibliography EDIT",
         nowait = true,
         remap = false,
       },
