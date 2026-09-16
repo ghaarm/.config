@@ -252,10 +252,15 @@ return {
         --     return nil
         --   end
         --
-        --   -- Anzeige: nur Zeile:Spalte + TODO-Text
-        --   -- entry.display = string.format("%d:%d: %s", entry.lnum or 0, entry.col or 0, entry.text or "")
-        --   -- Anzeige der Zeile und Spalte NACH dem TODO Text
-        --   entry.display = string.format("%s  %d:%d", entry.text or "", entry.lnum or 0, entry.col or 0)
+        --   -- Text direkt aus der vimgrep-Ausgabe holen:
+        --   -- datei:zeile:spalte:text
+        --   local text = line:match("^.-:%d+:%d+:(.*)$") or ""
+        --
+        --   -- führende Leerzeichen entfernen
+        --   text = text:gsub("^%s+", "")
+        --
+        --   entry.display = string.format("%s  %d:%d", text, entry.lnum or 0, entry.col or 0)
+        --
         --   return entry
         -- end,
         entry_maker = function(line)
@@ -265,14 +270,23 @@ return {
             return nil
           end
 
-          -- Text direkt aus der vimgrep-Ausgabe holen:
-          -- datei:zeile:spalte:text
+          -- Text aus der vimgrep-Ausgabe holen
           local text = line:match("^.-:%d+:%d+:(.*)$") or ""
 
           -- führende Leerzeichen entfernen
           text = text:gsub("^%s+", "")
 
-          entry.display = string.format("%s  %d:%d", text, entry.lnum or 0, entry.col or 0)
+          local display = string.format("%s  %d:%d", text, entry.lnum or 0, entry.col or 0)
+
+          entry.display = function()
+            return display,
+              {
+                {
+                  { 0, #text },
+                  "TodoFgTODO",
+                },
+              }
+          end
 
           return entry
         end,
