@@ -212,7 +212,74 @@ return {
     keymap.set("n", "<leader>fr", "<cmd>Telescope oldfiles<cr>", { desc = "Fuzzy find recent files" })
     keymap.set("n", "<leader>fs", "<cmd>Telescope live_grep<cr>", { desc = "Find string in cwd" })
     keymap.set("n", "<leader>fc", "<cmd>Telescope grep_string<cr>", { desc = "Find string under cursor in cwd" })
-    keymap.set("n", "<leader>ft", "<cmd>TodoTelescope<cr>", { desc = "Find todos" })
+    -- keymap.set("n", "<leader>ft", "<cmd>TodoTelescope<cr>", { desc = "Find todos" })
+    -- Alle TODOs im aktuellen Working Directory
+    keymap.set("n", "<leader>fta", function()
+      telescope.extensions["todo-comments"].todo({})
+    end, {
+      desc = "Find all todos",
+    })
+
+    -- TODOs ab dem Verzeichnis der aktuellen Datei
+    keymap.set("n", "<leader>ftp", function()
+      telescope.extensions["todo-comments"].todo({
+        cwd = vim.fn.expand("%:p:h"),
+      })
+    end, {
+      desc = "Find todos in current path",
+    })
+
+    keymap.set("n", "<leader>fth", function()
+      local make_entry = require("telescope.make_entry")
+
+      local default_entry_maker = make_entry.gen_from_vimgrep({})
+
+      builtin.grep_string({
+        prompt_title = "TODOs in current file",
+
+        search = [[TODO|FIX|FIXME|BUG|HACK|WARN|WARNING|PERF|PERFORMANCE|NOTE|TEST]],
+
+        use_regex = true,
+
+        search_dirs = {
+          vim.fn.expand("%:p"),
+        },
+
+        -- entry_maker = function(line)
+        --   local entry = default_entry_maker(line)
+        --
+        --   if not entry then
+        --     return nil
+        --   end
+        --
+        --   -- Anzeige: nur Zeile:Spalte + TODO-Text
+        --   -- entry.display = string.format("%d:%d: %s", entry.lnum or 0, entry.col or 0, entry.text or "")
+        --   -- Anzeige der Zeile und Spalte NACH dem TODO Text
+        --   entry.display = string.format("%s  %d:%d", entry.text or "", entry.lnum or 0, entry.col or 0)
+        --   return entry
+        -- end,
+        entry_maker = function(line)
+          local entry = default_entry_maker(line)
+
+          if not entry then
+            return nil
+          end
+
+          -- Text direkt aus der vimgrep-Ausgabe holen:
+          -- datei:zeile:spalte:text
+          local text = line:match("^.-:%d+:%d+:(.*)$") or ""
+
+          -- führende Leerzeichen entfernen
+          text = text:gsub("^%s+", "")
+
+          entry.display = string.format("%s  %d:%d", text, entry.lnum or 0, entry.col or 0)
+
+          return entry
+        end,
+      })
+    end, {
+      desc = "Find todos in current file",
+    })
     keymap.set("n", "<leader>fb", builtin.buffers, { desc = "Fuzzy find open buffers" })
 
     -- keymap.set("n", "<leader>fb", function()
