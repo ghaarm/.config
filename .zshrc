@@ -157,7 +157,13 @@ alias cdpianlinux="builtin cd /Users/g/Library/Mobile\ Documents/com~apple~Cloud
 alias cdpianpro="/Users/g/Library/Mobile\ Documents/com~apple~CloudDocs/'!Docs iCloud'/GitHub,\ iCloud/piantor-bt-colemak/config && nvim piantor_pro_bt.keymap"
 alias cdpianbt="/Users/g/Library/Mobile\ Documents/com~apple~CloudDocs/'!Docs iCloud'/GitHub,\ iCloud/piantor-bt-colemak/config && nvim piantor_pro_bt.keymap"
 
+### DRACOON
+cddracoon() {
+  builtin cd "$HOME/Library/Application Support/DRACOON/Volumes.noindex/DRACOON.localized"
+}
+
 # cd iCloud
+
 alias cdic="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/'!Docs iCloud'" 
 
 alias cdedit="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/'!Docs iCloud'/Vorlagen && nvim vorlage-edit-nvim.md" 

@@ -487,3 +487,13 @@ snippet only-handout "only im Handout getrennt"
 snippet only-no-handout "only im Handout getrennt"
  \only<${1:nr-only}>
 
+
+# =============================================================================
+# BEAMER — BILDER EINBETTEN
+# =============================================================================
+
+snippet png-beamer-plain "png beamer plain"
+  \includegraphics
+    [width=\linewidth,
+    height=1\textheight,
+    keepaspectratio]{${1:name}.png}
