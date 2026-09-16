@@ -71,12 +71,12 @@ return {
     -- Set menu
     dashboard.section.buttons.val = {
       -- dashboard.button("s", "  Sessions", "<cmd>SessionManager load_session<CR>"),
-      dashboard.button("s", "  Sessions", "<cmd>AlphaSessions<CR>"),
-      -- dashboard.button(
-      --   "s",
-      --   "  Sessions",
-      --   "<cmd>lua require('telescope').extensions.possession.list({ only_cwd = true })<CR>"
-      -- ),
+      -- dashboard.button("s", "  Sessions", "<cmd>AlphaSessions<CR>"),
+      dashboard.button(
+        "s",
+        "  Sessions",
+        "<cmd>lua require('telescope').extensions.possession.list({ only_cwd = true })<CR>"
+      ),
       dashboard.button("r", "󰈚  Recent", ":Telescope oldfiles <CR>"),
       dashboard.button("e", "󰱼  Explorer", "<cmd>NvimTreeToggle<CR>"),
       dashboard.button("f", "  Find", ":Telescope find_files <CR>"),
