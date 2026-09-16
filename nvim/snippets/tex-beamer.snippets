@@ -476,3 +476,14 @@ snippet beamer-video-extern "Externes Video in Beamer"
   \href{run:./videos/${1:videoname}.mp4}{%
     \beamerbutton{${2:Video abspielen}}
   }
+
+
+snippet handout-only "only im Handout getrennt"
+ |handout:${1:nummer}> 
+
+snippet only-handout "only im Handout getrennt"
+ \only<${1:nr-only}|handout:${2:nummer}> 
+
+snippet only-no-handout "only im Handout getrennt"
+ \only<${1:nr-only}>
+

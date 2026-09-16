@@ -50,6 +50,10 @@ return {
     -- Kürzel für Vimtex-Funktionen über den lokalen Leader
     vim.api.nvim_set_keymap("n", "<Localleader>lu", ":VimtexCompile<CR>", { noremap = true, silent = true })
     vim.keymap.set("n", "<Localleader>lf", function()
+      -- Laufenden VimTeX-/latexmk-Continuous-Build stoppen
+      vim.cmd("VimtexStop")
+
+      -- Datei speichern
       vim.cmd("write")
 
       local texfile = vim.fn.expand("%:t")
