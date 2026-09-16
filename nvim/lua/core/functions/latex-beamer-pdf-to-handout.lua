@@ -86,7 +86,7 @@ local function build_beamer_handout()
     "-outdir=.",
 
     -- Hilfsdateien nach ./auxiliary_files/
-    "-auxdir=auxiliary_files",
+    -- "-auxdir=auxiliary_files",
 
     -- Bei TeX Live getrenntes auxdir korrekt emulieren
     "-emulate-aux-dir",
@@ -104,7 +104,11 @@ local function build_beamer_handout()
 
   vim.fn.jobstart(cmd, {
     cwd = dir,
+    -- damit die latexmkrc direkt final komprimiert für das Handout
+    env = {
 
+      LATEXMK_FINAL = "1",
+    },
     on_stdout = function(_, data)
       if data then
         vim.list_extend(output, data)
