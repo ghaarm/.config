@@ -49,6 +49,29 @@ return {
 
     -- Kürzel für Vimtex-Funktionen über den lokalen Leader
     vim.api.nvim_set_keymap("n", "<Localleader>lu", ":VimtexCompile<CR>", { noremap = true, silent = true })
+    vim.keymap.set("n", "<Localleader>lf", function()
+      vim.cmd("write")
+
+      local texfile = vim.fn.expand("%:t")
+      local dir = vim.fn.expand("%:p:h")
+      local basename = vim.fn.expand("%:t:r")
+      local date = os.date("%Y-%m-%d")
+
+      local cmd = string.format(
+        "cd %s && "
+          .. "LATEXMK_FINAL=1 latexmk -g -xelatex "
+          .. "-file-line-error -interaction=nonstopmode -synctex=1 %s "
+          .. "&& cp -- %s %s",
+        vim.fn.shellescape(dir),
+        vim.fn.shellescape(texfile),
+        vim.fn.shellescape(basename .. ".pdf"),
+        vim.fn.shellescape(basename .. "-" .. date .. ".pdf")
+      )
+
+      vim.cmd("botright split | terminal " .. cmd)
+    end, {
+      desc = "LaTeX finaler Build mit Datum",
+    })
     vim.api.nvim_set_keymap("n", "<Localleader>vc", ":VimtexClean<CR>", { noremap = true, silent = true })
     vim.api.nvim_set_keymap("n", "<Localleader>vC", ":VimtexClean!<CR>", { noremap = true, silent = true })
     vim.api.nvim_set_keymap("n", "<Localleader>ve", ":VimtexErrors<CR>", { noremap = true, silent = true })
@@ -101,12 +124,12 @@ return {
       executable = "latexmk",
       options = {
         "-shell-escape",
-        "-verbose",
+        -- "-verbose", -- gibt zusätzliche Informationen beim kompilieren, z.B. welche Programme gestartete werden, nicht zwingend notwendig
         "-file-line-error",
         "-interaction=nonstopmode",
         "-synctex=1",
       },
-      aux_dir = "auxiliary_files",
+      -- aux_dir = "auxiliary_files", -- ist in der latexmkrc definiert
     } -- Zusätzliche Konfigurationen damit vimtex immer das Verzeichnis der tex datei als arbeitsverzeichnis benutzt
     vim.g.vimtex_syntax_enabled = 1
     vim.g.vimtex_quickfix_open_on_warning = 0
