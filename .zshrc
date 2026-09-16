@@ -165,14 +165,14 @@ alias cdedit="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/'!Docs iCloud'/
 alias cdobsidian='builtin cd "/Users/g/Library/Mobile Documents/iCloud~md~obsidian/Documents/obsidian-icloud" && nvim'
 
 cd10o2root() {
-  builtin cd '/Users/g/Library/Mobile Documents/com~apple~CloudDocs/!Docs iCloud/10-o2-icloud' && nvim
+  builtin cd '/Users/g/Library/Mobile Documents/com~apple~CloudDocs/!Docs iCloud/10o2-icloud' && nvim
 }
 
 cd10o2proj() {
-  builtin cd '/Users/g/Library/Mobile Documents/com~apple~CloudDocs/!Docs iCloud/10-o2-icloud/10-o2-project-list' && nvim
+  builtin cd '/Users/g/Library/Mobile Documents/com~apple~CloudDocs/!Docs iCloud/10o2-icloud/10o2-project-list' && nvim
 }
 #
-# alias cd10o2proj='builtin cd "/Users/g/Library/Mobile Documents/iCloud~md~obsidian/Documents/10-o2-icloud/10o2-project-list" && nvim'
+# alias cd10o2proj='builtin cd "/Users/g/Library/Mobile Documents/iCloud~md~obsidian/Documents/10o2-icloud/10o2-project-list" && nvim'
 
 alias cdlinux="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/'!Docs iCloud'/linux && nvim" 
 
