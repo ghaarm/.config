@@ -58,13 +58,13 @@ return {
       require("telescope").extensions.possession.list(opts or {})
     end
 
-    vim.keymap.set("n", "<leader>sl", function()
+    vim.keymap.set("n", "<leader>sa", function()
       telescope_possession()
-    end, { desc = "Sessions: Liste (Telescope)" })
+    end, { desc = "Sessions: All (Telescope)" })
 
-    vim.keymap.set("n", "<leader>sL", function()
+    vim.keymap.set("n", "<leader>sp", function()
       telescope_possession({ only_cwd = true })
-    end, { desc = "Sessions: nur aktuelles CWD (Telescope)" })
+    end, { desc = "Sessions: this CWD (Telescope)" })
 
     vim.keymap.set("n", "<leader>sS", "<cmd>PossessionSave<cr>", { desc = "Session speichern" })
     vim.keymap.set("n", "<leader>sr", "<cmd>PossessionRename<cr>", { desc = "Session umbenennen" })
