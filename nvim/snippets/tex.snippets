@@ -457,29 +457,21 @@ snippet pngfig-tikz "png bild mit tikz annotation" b
 	\begin{figure}[H]
     	\centering
       \begin{minipage}{1\textwidth}
-
-    \annotatedimage[0.8\linewidth]{${1:name}}
-
-      % \imagegrid
-
+      \annotatedimage[0.8\linewidth]{./bilder/${1:name}}
+       \imagegrid
       % Kreis: 
-      % Mittelpunkt-x - Mittelpunkt-y - Radius
-      % \imagecircle{0.45}{0.55}{0.08}
-      
+        % Mittelpunkt-x - Mittelpunkt-y - Radius
+        % \imagecircle{0.45}{0.55}{0.08}
       % Pfeil:
-      % Start-x - Start-y - Ziel-x - Ziel-y
-      % \imagearrow{0.80}{0.75}{0.53}{0.60}
-      
+        % Start-x - Start-y - Ziel-x - Ziel-y
+        % \imagearrow{0.80}{0.75}{0.53}{0.60}
       % Rechteck:
-      % links - unten - rechts - oben
-      % \imagerect{0.30}{0.40}{0.70}{0.65}
-      
+        % links - unten - rechts - oben
+         \imagerect{0.30}{0.40}{0.70}{0.65}
       % Textlabel:
-      % Position-x - Position-y - Text
-      % \imagelabel{0.78}{0.82}{Beschriftung}
-
-    \endannotatedimage
-
+        % Position-x - Position-y - Text
+        % \imagelabel{0.78}{0.82}{Beschriftung}
+      \endannotatedimage
     	  \caption{${2:Name}}
     	  \label{fig:$2}
         \par\smallskip

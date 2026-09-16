@@ -100,7 +100,7 @@ end
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "tex",
   callback = function(args)
-    vim.keymap.set("n", "<localleader>vv", M.toggle_beamercovered, {
+    vim.keymap.set("n", "<localleader>vi", M.toggle_beamercovered, {
       buffer = args.buf,
       desc = "Toggle Beamer covered invisible/transparent",
     })
