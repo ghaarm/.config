@@ -175,27 +175,21 @@ snippet frame-beamer-plain-img "Plain Frame mit Vollbild"
 snippet frame-beamer-annotated "Frame mit annotiertem Bild"
   \begin{frame}{${1:folientitel}}
     \centering
-
     \annotatedimage[0.8\linewidth]{${2:bildtitel}}
-
+      \imagegrid
       % Kreis:
-      % Mittelpunkt-x - Mittelpunkt-y - Radius
-      % \imagecircle<2->{0.45}{0.55}{0.08}
-      
+        % Mittelpunkt-x - Mittelpunkt-y - Radius
+        % \imagecircle<2->{0.45}{0.55}{0.08}
       % Pfeil:
-      % Start-x - Start-y - Ziel-x - Ziel-y
-      % \imagearrow<3->{0.80}{0.75}{0.53}{0.60}
-      
+        % Start-x - Start-y - Ziel-x - Ziel-y
+        % \imagearrow<3->{0.80}{0.75}{0.53}{0.60}
       % Rechteck:
-      % links - unten - rechts - oben
-      % \imagerect<3->{0.30}{0.40}{0.70}{0.65}
-      
+        % links - unten - rechts - oben
+        \imagerect<3->{0.30}{0.40}{0.70}{0.65}
       % Textlabel:
-      % Position-x - Position-y - Text
-      % \imagelabel<3->{0.78}{0.82}{Beschriftung}
-
+        % Position-x - Position-y - Text
+        % \imagelabel<3->{0.78}{0.82}{Beschriftung}
     \endannotatedimage
-
     \source{quellen-angabe}
   \end{frame}
 
