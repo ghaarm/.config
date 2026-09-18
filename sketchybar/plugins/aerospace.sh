@@ -11,7 +11,10 @@ while IFS= read -r app; do
   [ -z "$app" ] && continue
   WINDOW_COUNT=$((WINDOW_COUNT + 1))
   ICON_STRIP="$ICON_STRIP $($CONFIG_DIR/plugins/icon_map_fn.sh "$app")"
-done < <(aerospace list-windows --workspace "$SID" --format '%{app-name}' 2>/dev/null)
+done < <(
+  aerospace list-windows --workspace "$SID" --format $'%{app-bundle-id}\t%{app-name}' 2>/dev/null \
+    | awk -F '\t' 'NF { key = ($1 != "" ? $1 : $2); if (!seen[key]++) print $2 }'
+)
 
 if [ -z "$ICON_STRIP" ]; then
   ICON_STRIP=" —"

@@ -22,13 +22,6 @@ for sid in $WORKSPACES; do
                    click_script="aerospace workspace $sid"
 done
 
-sketchybar --add item space_separator center \
-           --set space_separator icon="󰂊" \
-                                 icon.color="$ACCENT_COLOR" \
-                                 icon.padding_left=4 \
-                                 label.drawing=off \
-                                 background.drawing=off
-
 FOCUSED_WORKSPACE="$(aerospace list-workspaces --focused 2>/dev/null)"
 if [ -n "$FOCUSED_WORKSPACE" ]; then
   sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE="$FOCUSED_WORKSPACE"
