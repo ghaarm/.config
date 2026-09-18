@@ -62,6 +62,9 @@ source $ITEM_DIR/calendar.sh
 
 sketchybar --reorder battery cpu volume calendar media
 
+# Switch between the external-display and MacBook-notch layouts.
+source $ITEM_DIR/display_layout.sh
+
 
 ##### Finalizing Setup #####
 # The below command is only needed at the end of the initial configuration to
