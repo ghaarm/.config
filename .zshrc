@@ -148,6 +148,8 @@ alias cdcore="cd ~/.config/nvim/lua/core && nvim keybindings.lua"
 
 alias cdfunctions="cd ~/.config/nvim/lua/core/functions && nvim" 
 
+alias cdqmk="builtin cd /Users/g/Library/Mobile\ Documents/com~apple~CloudDocs/'!Docs iCloud'/qmk-icloud && nvim" # öffnet neovim automatisch 
+
 alias cdpianmac="builtin cd /Users/g/Library/Mobile\ Documents/com~apple~CloudDocs/'!Docs iCloud'/qmk-icloud/piantor_colemak && nvim keymap.c" # öffnet neovim automatisch 
 
 alias cdpianwin="builtin cd /Users/g/Library/Mobile\ Documents/com~apple~CloudDocs/'!Docs iCloud'/qmk-icloud/piantor_win && nvim keymap.c" # öffnet neovim automatisch 
@@ -155,7 +157,8 @@ alias cdpianwin="builtin cd /Users/g/Library/Mobile\ Documents/com~apple~CloudDo
 alias cdpianlinux="builtin cd /Users/g/Library/Mobile\ Documents/com~apple~CloudDocs/'!Docs iCloud'/qmk-icloud/piantor_linux && nvim keymap.c" # öffnet neovim automatisch 
 
 alias cdpianpro="/Users/g/Library/Mobile\ Documents/com~apple~CloudDocs/'!Docs iCloud'/GitHub,\ iCloud/piantor-bt-colemak/config && nvim piantor_pro_bt.keymap"
-alias cdpianbt="/Users/g/Library/Mobile\ Documents/com~apple~CloudDocs/'!Docs iCloud'/GitHub,\ iCloud/piantor-bt-colemak/config && nvim piantor_pro_bt.keymap"
+
+alias cdpianbt="/Users/g/Library/Mobile\ Documents/com~apple~CloudDocs/'!Docs iCloud'/GitHub,\ iCloud/piantor-bt-colemak && nvim config/piantor_pro_bt.keymap"
 
 ### DRACOON
 cddracoon() {
