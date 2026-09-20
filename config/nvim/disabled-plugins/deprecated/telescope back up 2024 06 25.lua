@@ -9,7 +9,7 @@ return {
     "nvim-/-bibtex.nvim",
   },
   config = function()
-    local  = require("")
+    local  = require("disabled-plugins.deprecated.init")
     local actions = require(".actions")
     
     .setup({
