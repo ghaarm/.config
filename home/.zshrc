@@ -132,21 +132,21 @@ export PATH="/path/to/lua-language-server/bin:$PATH"
 
 # cd configuration
 
-alias cdconf="cd ~/.config && nvim"
+alias cdconf="cd ~/dotfiles && nvim"
 
-alias cdzsh="cd ~/.config && nvim .zshrc"
+alias cdzsh="cd ~/dotfiles/home && nvim .zshrc"
 
-alias cdnvim="cd ~/.config/nvim && nvim"
+alias cdnvim="cd ~/dotfiles/config/nvim && nvim"
 
-alias cdtemp="cd ~/.config/nvim/templates && nvim"
+alias cdtemp="cd ~/dotfiles/config/nvim/templates && nvim"
 
-alias aero="cd ~/.config/aerospace && nvim aerospace.toml" 
+alias aero="cd ~/dotfiles/config/aerospace && nvim aerospace.toml"
 
-alias cdplug="cd ~/.config/nvim/lua/plugins && nvim" 
+alias cdplug="cd ~/dotfiles/config/nvim/lua/plugins && nvim"
 
-alias cdcore="cd ~/.config/nvim/lua/core && nvim keybindings.lua" 
+alias cdcore="cd ~/dotfiles/config/nvim/lua/core && nvim keybindings.lua"
 
-alias cdfunctions="cd ~/.config/nvim/lua/core/functions && nvim" 
+alias cdfunctions="cd ~/dotfiles/config/nvim/lua/core/functions && nvim"
 
 alias cdqmk="builtin cd /Users/g/Library/Mobile\ Documents/com~apple~CloudDocs/'!Docs iCloud'/qmk-icloud && nvim" # öffnet neovim automatisch 
 
