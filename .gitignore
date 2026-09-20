@@ -1,8 +1,38 @@
-secrets/
+# Local secrets and environment files
+**/secrets/
+**/.env
+**/.env.*
+!**/.env.example
+!**/.env.sample
+**/.authinfo*
+**/.netrc
+**/credentials*
 
+# GnuPG and SSH private material
+**/.gnupg/
+**/gnupg/
+**/.ssh/
+**/private-keys-v1.d/
+**/secring.gpg
+**/trustdb.gpg
+**/random_seed
+**/S.gpg-agent*
+**/*.gpg
+**/*.asc
+**/*.pem
+**/*.key
+**/*.p12
+**/*.pfx
+**/*.kdbx
+**/*.age
+
+# macOS keychains
+**/Keychains/
+**/*.keychain
+**/*.keychain-db
+
+# Application-specific local data
 avante.md
 
-
-
-
-
+# Migration backups created while adopting GNU Stow
+.migration-backup/
