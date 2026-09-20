@@ -11,7 +11,9 @@
 # GnuPG and SSH private material
 **/.gnupg/
 **/gnupg/
-**/.ssh/
+# SSH: keep private/runtime material out, but allow the portable config.
+**/.ssh/*
+!**/.ssh/config
 **/private-keys-v1.d/
 **/secring.gpg
 **/trustdb.gpg
