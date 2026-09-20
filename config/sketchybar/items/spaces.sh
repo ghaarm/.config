@@ -11,13 +11,19 @@ if [ -z "$WORKSPACES" ]; then
 fi
 
 for sid in $WORKSPACES; do
+  # Bisherige Darstellung der geoeffneten Programme hinter dem Workspace:
+  # label.font="sketchybar-app-font:Regular:16.0"
+  # label.padding_right=20
+  # label.y_offset=-1
+  #
+  # Neue Darstellung: nur der Workspace-Buchstabe, kein App-Label.
   sketchybar --add item "space.$sid" center \
              --subscribe "space.$sid" aerospace_workspace_change front_app_switched \
              --set "space.$sid" \
                    icon="$sid" \
-                   label.font="sketchybar-app-font:Regular:16.0" \
-                   label.padding_right=20 \
-                   label.y_offset=-1 \
+                   icon.padding_left=8 \
+                   icon.padding_right=8 \
+                   label.drawing=off \
                    script="$PLUGIN_DIR/aerospace.sh $sid" \
                    click_script="aerospace workspace $sid"
 done
