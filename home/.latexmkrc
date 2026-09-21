@@ -21,7 +21,7 @@ push @generated_exts, "run.xml";
 $aux_dir = "auxiliary_files";
 
 # Intervall bei kontinuierlicher Kompilierung
-$sleep_time = 5;
+$sleep_time = 2;
 
 
 # =============================================================================
