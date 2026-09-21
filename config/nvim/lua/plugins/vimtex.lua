@@ -48,33 +48,93 @@ return {
     -- }
 
     -- Kürzel für Vimtex-Funktionen über den lokalen Leader
-    vim.api.nvim_set_keymap("n", "<Localleader>lu", ":VimtexCompile<CR>", { noremap = true, silent = true })
-    vim.keymap.set("n", "<Localleader>lf", function()
-      -- Laufenden VimTeX-/latexmk-Continuous-Build stoppen
-      vim.cmd("VimtexStop")
+    -- vim.api.nvim_set_keymap("n", "<Localleader>lu", ":VimtexCompile<CR>", { noremap = true, silent = true })
+    --
+    -- vim.keymap.set("n", "<Localleader>lf", function()
+    --   -- Laufenden VimTeX-/latexmk-Continuous-Build stoppen
+    --   vim.cmd("VimtexStop")
+    --
+    --   -- Datei speichern
+    --   vim.cmd("write")
+    --
+    --   local texfile = vim.fn.expand("%:t")
+    --   local dir = vim.fn.expand("%:p:h")
+    --   local basename = vim.fn.expand("%:t:r")
+    --   local date = os.date("%Y-%m-%d")
+    --
+    --   local cmd = string.format(
+    --     "cd %s && "
+    --       .. "LATEXMK_FINAL=1 latexmk -g -xelatex "
+    --       .. "-file-line-error -interaction=nonstopmode -synctex=1 %s "
+    --       .. "&& cp -- %s %s",
+    --     vim.fn.shellescape(dir),
+    --     vim.fn.shellescape(texfile),
+    --     vim.fn.shellescape(basename .. ".pdf"),
+    --     vim.fn.shellescape(basename .. "-" .. date .. ".pdf")
+    --   )
+    --
+    --   vim.cmd("botright split | terminal " .. cmd)
+    -- end, {
+    --   desc = "LaTeX finaler Build mit Datum",
+    -- })
+    -- ============================================================================
+    -- Finale PDF mit qpdf
+    -- ============================================================================
 
-      -- Datei speichern
+    vim.keymap.set("n", "<Localleader>lf", function()
       vim.cmd("write")
 
-      local texfile = vim.fn.expand("%:t")
       local dir = vim.fn.expand("%:p:h")
       local basename = vim.fn.expand("%:t:r")
       local date = os.date("%Y-%m-%d")
 
+      local input_pdf = basename .. ".pdf"
+      local output_pdf = basename .. "-" .. date .. ".pdf"
+
       local cmd = string.format(
-        "cd %s && "
-          .. "LATEXMK_FINAL=1 latexmk -g -xelatex "
-          .. "-file-line-error -interaction=nonstopmode -synctex=1 %s "
-          .. "&& cp -- %s %s",
+        "cd %s && " .. "qpdf " .. "--stream-data=compress " .. "--recompress-flate " .. "%s %s",
         vim.fn.shellescape(dir),
-        vim.fn.shellescape(texfile),
-        vim.fn.shellescape(basename .. ".pdf"),
-        vim.fn.shellescape(basename .. "-" .. date .. ".pdf")
+        vim.fn.shellescape(input_pdf),
+        vim.fn.shellescape(output_pdf)
       )
 
       vim.cmd("botright split | terminal " .. cmd)
     end, {
-      desc = "LaTeX finaler Build mit Datum",
+      desc = "PDF finalisieren mit qpdf",
+    })
+
+    -- ============================================================================
+    -- Kleine PDF mit Ghostscript
+    -- ============================================================================
+
+    vim.keymap.set("n", "<Localleader>lp", function()
+      vim.cmd("write")
+
+      local dir = vim.fn.expand("%:p:h")
+      local basename = vim.fn.expand("%:t:r")
+      local date = os.date("%Y-%m-%d")
+
+      local input_pdf = basename .. ".pdf"
+      local output_pdf = basename .. "-" .. date .. "-small.pdf"
+
+      local cmd = string.format(
+        "cd %s && "
+          .. "gs "
+          .. "-sDEVICE=pdfwrite "
+          .. "-dCompatibilityLevel=1.7 "
+          .. "-dNOPAUSE "
+          .. "-dBATCH "
+          .. "-dQUIET "
+          .. "-sOutputFile=%s "
+          .. "%s",
+        vim.fn.shellescape(dir),
+        vim.fn.shellescape(output_pdf),
+        vim.fn.shellescape(input_pdf)
+      )
+
+      vim.cmd("botright split | terminal " .. cmd)
+    end, {
+      desc = "PDF stark komprimieren mit Ghostscript",
     })
     vim.api.nvim_set_keymap("n", "<Localleader>vc", ":VimtexClean<CR>", { noremap = true, silent = true })
     vim.api.nvim_set_keymap("n", "<Localleader>vC", ":VimtexClean!<CR>", { noremap = true, silent = true })
