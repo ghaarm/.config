@@ -58,7 +58,7 @@ local function build_beamer_handout()
   local handout_name = basename .. "-handout-" .. date
 
   local handout_pdf = dir .. "/" .. handout_name .. ".pdf"
-
+  local handout_tmp_pdf = dir .. "/" .. handout_name .. ".tmp.pdf"
   local handout_synctex = dir .. "/" .. handout_name .. ".synctex.gz"
 
   ---------------------------------------------------------------------------
@@ -85,9 +85,6 @@ local function build_beamer_handout()
     -- Hauptoutputs (.pdf, .synctex.gz) bleiben beim .tex-File
     "-outdir=.",
 
-    -- Hilfsdateien nach ./auxiliary_files/
-    -- "-auxdir=auxiliary_files",
-
     -- Bei TeX Live getrenntes auxdir korrekt emulieren
     "-emulate-aux-dir",
 
@@ -104,11 +101,10 @@ local function build_beamer_handout()
 
   vim.fn.jobstart(cmd, {
     cwd = dir,
-    -- damit die latexmkrc direkt final komprimiert für das Handout
-    env = {
 
-      LATEXMK_FINAL = "1",
-    },
+    -- Kein LATEXMK_FINAL=1:
+    -- ~/.latexmkrc verwendet dadurch xdvipdfmx -z 0
+
     on_stdout = function(_, data)
       if data then
         vim.list_extend(output, data)
@@ -124,43 +120,94 @@ local function build_beamer_handout()
     on_exit = function(_, code)
       vim.schedule(function()
         ---------------------------------------------------------------------
-        -- Erfolgreich
+        -- latexmk erfolgreich
         ---------------------------------------------------------------------
 
         if code == 0 then
-          vim.notify("Handout erstellt: " .. handout_name .. ".pdf", vim.log.levels.INFO)
-
-          -- Prüfen, ob SyncTeX wirklich erzeugt wurde
-          if vim.fn.filereadable(handout_synctex) ~= 1 then
-            vim.notify("Achtung: keine SyncTeX-Datei gefunden:\n" .. handout_synctex, vim.log.levels.WARN)
-          end
-
           -------------------------------------------------------------------
-          -- Sioyek öffnen
+          -- Handout mit qpdf komprimieren
           -------------------------------------------------------------------
+
+          vim.notify("Handout kompiliert – komprimiere mit qpdf ...", vim.log.levels.INFO)
 
           vim.fn.jobstart({
-            "sioyek",
-
-            "--inverse-search",
-            inverse_search,
-
-            "--forward-search-file",
-            texfile,
-
-            "--forward-search-line",
-            tostring(current_line),
-
+            "qpdf",
+            "--stream-data=compress",
+            "--recompress-flate",
             handout_pdf,
+            handout_tmp_pdf,
           }, {
-            detach = true,
+            on_exit = function(_, qpdf_code)
+              vim.schedule(function()
+                -------------------------------------------------------------
+                -- qpdf fehlgeschlagen
+                -------------------------------------------------------------
+
+                if qpdf_code ~= 0 then
+                  vim.notify(
+                    "qpdf-Kompression fehlgeschlagen; " .. "unkomprimiertes Handout bleibt erhalten",
+                    vim.log.levels.ERROR
+                  )
+
+                  -- Eventuell angelegte temporäre Datei entfernen
+                  vim.fn.delete(handout_tmp_pdf)
+
+                  return
+                end
+
+                -------------------------------------------------------------
+                -- Große PDF durch komprimierte PDF ersetzen
+                -------------------------------------------------------------
+
+                local rename_ok = os.rename(handout_tmp_pdf, handout_pdf)
+
+                if not rename_ok then
+                  vim.notify(
+                    "Komprimierte PDF konnte nicht " .. "an die Stelle des Originals verschoben werden",
+                    vim.log.levels.ERROR
+                  )
+                  return
+                end
+
+                vim.notify("Handout erstellt und komprimiert: " .. handout_name .. ".pdf", vim.log.levels.INFO)
+
+                -------------------------------------------------------------
+                -- SyncTeX prüfen
+                -------------------------------------------------------------
+
+                if vim.fn.filereadable(handout_synctex) ~= 1 then
+                  vim.notify("Achtung: keine SyncTeX-Datei gefunden:\n" .. handout_synctex, vim.log.levels.WARN)
+                end
+
+                -------------------------------------------------------------
+                -- Sioyek öffnen
+                -------------------------------------------------------------
+
+                vim.fn.jobstart({
+                  "sioyek",
+
+                  "--inverse-search",
+                  inverse_search,
+
+                  "--forward-search-file",
+                  texfile,
+
+                  "--forward-search-line",
+                  tostring(current_line),
+
+                  handout_pdf,
+                }, {
+                  detach = true,
+                })
+              end)
+            end,
           })
 
           return
         end
 
         ---------------------------------------------------------------------
-        -- Fehler
+        -- latexmk fehlgeschlagen
         ---------------------------------------------------------------------
 
         vim.notify("Handout-Kompilierung fehlgeschlagen", vim.log.levels.ERROR)
