@@ -497,3 +497,9 @@ snippet png-beamer-plain "png beamer plain"
     [width=\linewidth,
     height=1\textheight,
     keepaspectratio]{${1:name}.png}
+
+snippet beamer-scriptsize-8pt-umbruch "Zeilenumbruch mit 9 pt"
+  \parbox{\linewidth}{%
+    \fontsize{8}{9}\selectfont
+    ${1:text}%
+  }
