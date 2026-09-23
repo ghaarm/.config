@@ -1,0 +1,4 @@
+#!/bin/zsh
+
+source "$HOME/.config/secrets/openai.env"
+exec /opt/homebrew/bin/codex "$@"
