@@ -421,3 +421,14 @@ alias rest5="timer 5m && terminal-notifier -message 'Pomodoro'\
         -title 'Break is over! Get back to work 😬'\
         -appIcon '~/Pictures/pumpkin.png'\
         -sound Crystal"
+
+parakeet() {
+  if pgrep -x MacParakeet >/dev/null; then
+    echo "MacParakeet läuft bereits."
+    return 0
+  fi
+
+  /Applications/MacParakeet.app/Contents/MacOS/MacParakeet \
+    </dev/null >/dev/null 2>&1 &
+  disown
+}
