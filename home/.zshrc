@@ -432,3 +432,7 @@ parakeet() {
     </dev/null >/dev/null 2>&1 &
   disown
 }
+# Start MacParakeet once when the first Kitty shell starts
+if [[ "$TERM" == "xterm-kitty" ]] && ! pgrep -x MacParakeet >/dev/null; then
+  "$HOME/.local/bin/parakeet"
+fi

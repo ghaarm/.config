@@ -1,0 +1,9 @@
+#!/bin/zsh
+
+if pgrep -x MacParakeet >/dev/null; then
+  exit 0
+fi
+
+/Applications/MacParakeet.app/Contents/MacOS/MacParakeet \
+  </dev/null >/dev/null 2>&1 &
+disown
