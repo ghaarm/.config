@@ -294,6 +294,53 @@ return {
     end, {
       desc = "Find todos in current file",
     })
+    keymap.set("n", "<leader>ftm", function()
+      local make_entry = require("telescope.make_entry")
+
+      local default_entry_maker = make_entry.gen_from_vimgrep({})
+
+      builtin.grep_string({
+        prompt_title = "MEMOs in current file",
+
+        search = [[MEMO]],
+
+        use_regex = false,
+
+        search_dirs = {
+          vim.fn.expand("%:p"),
+        },
+
+        entry_maker = function(line)
+          local entry = default_entry_maker(line)
+
+          if not entry then
+            return nil
+          end
+
+          -- Text aus der vimgrep-Ausgabe holen
+          local text = line:match("^.-:%d+:%d+:(.*)$") or ""
+
+          -- führende Leerzeichen entfernen
+          text = text:gsub("^%s+", "")
+
+          local display = string.format("%s  %d:%d", text, entry.lnum or 0, entry.col or 0)
+
+          entry.display = function()
+            return display,
+              {
+                {
+                  { 0, #text },
+                  "TodoFgWARN",
+                },
+              }
+          end
+
+          return entry
+        end,
+      })
+    end, {
+      desc = "Find MEMOs in current file",
+    })
     keymap.set("n", "<leader>fb", builtin.buffers, { desc = "Fuzzy find open buffers" })
 
     -- keymap.set("n", "<leader>fb", function()

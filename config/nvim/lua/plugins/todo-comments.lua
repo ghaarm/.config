@@ -3,10 +3,10 @@ return {
   "folke/todo-comments.nvim",
   event = { "BufReadPre", "BufNewFile" },
   dependencies = { "nvim-lua/plenary.nvim" },
+
   config = function()
     local todo_comments = require("todo-comments")
-    -- set keymaps
-    local keymap = vim.keymap -- for conciseness
+    local keymap = vim.keymap
 
     keymap.set("n", "]t", function()
       todo_comments.jump_next()
@@ -16,6 +16,18 @@ return {
       todo_comments.jump_prev()
     end, { desc = "Previous todo comment" })
 
-    todo_comments.setup()
+    todo_comments.setup({
+      keywords = {
+        MEMO = {
+          -- icon = "󰍨 ",
+          icon = " ",
+          -- color = "warning",
+          color = "memo",
+        },
+      },
+      colors = {
+        memo = { "#d49a62" },
+      },
+    })
   end,
 }

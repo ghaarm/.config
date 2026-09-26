@@ -632,10 +632,10 @@ snippet pppmulti "png multi" b
 	
 	\begin{figure}[H]
     	\centering
-    	\caption{${2:Name}}
+    	\caption{${2:name-bild-links}}
     	\label{fig:$2}
        \begin{minipage}{1\textwidth}
-    	  \includegraphics[width=\linewidth]{./bilder/${1:Name}}
+    	  \includegraphics[width=\linewidth]{./bilder/${1:name-bild-links}}
         \par\smallskip
         {\footnotesize Quelle: \cite{${4:zitat}}, S. ${5:seite}\par}
       \end{minipage}
@@ -644,18 +644,42 @@ snippet pppmulti "png multi" b
 #
 # png multi
 snippet pngmulti "pngmulti" b
-	
-	\begin{figure}[H]
-    	\centering
-    	\caption{${2:Name}}
-    	\label{fig:$2}
-      \begin{minipage}{1\textwidth}
-    	  \includegraphics[width=\linewidth]{./bilder/${1:Name}}
-        \par\smallskip
-        {\footnotesize Quelle: \cite{${4:zitat}}, S. ${5:seite}\par}
-      \end{minipage}
-	\end{figure}
-	${0}
+  \end{multicols}
+       
+  \begin{multicols}{2}
+ 
+  \begin{figure}[H]
+   	\centering
+     \begin{minipage}{1\linewidth}
+   	  \begin{center}
+   	  \includegraphics[height=7cm,width=\linewidth,keepaspectratio]{./bilder/${1:name-bild-links}}
+   	  \end{center}
+   	\caption{${2:titel-bild-links}}
+   	\label{fig:$2}
+       \par\smallskip
+       {\footnotesize Quelle: \cite{${4:zitat}}, S. ${5:seite}\par}
+     \end{minipage}
+  \end{figure}
+
+  \columbreak
+
+  \begin{figure}[H]
+   	\centering
+     \begin{minipage}{1\linewidth}
+   	  \begin{center}
+   	  \includegraphics[height=7cm,width=\linewidth,keepaspectratio]{./bilder/${6:name-bild-rechts}}
+   	  \end{center}
+   	\caption{${7:titel-bild-rechts}}
+   	\label{fig:$7}
+       \par\smallskip
+       {\footnotesize Quelle: \cite{${8:zitat}}, S. ${9:seite}\par}
+     \end{minipage}
+  \end{figure}
+ 
+  \end{multicols}
+ 
+  \begin{multicols}{2}
+
 #
 
 # png ecmo 
@@ -842,6 +866,11 @@ snippet toc "toc und href"
 
 snippet todo "todo tex"
   %TODO: ${0}
+
+snippet memo "memo tex"
+  %MEMO: ${0}
+
+
 
 snippet latred "latex rot"
   \textcolor{red!70!black}{${1:Text}} ${0}
@@ -1041,3 +1070,5 @@ snippet vss ("versus mit Platzhaltern")
 snippet ign-comment "Tab oder fig nicht kommentieren"
   % nicht kommentieren
 
+snippet no-comment "Tab oder fig nicht kommentieren"
+  % nicht kommentieren

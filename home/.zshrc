@@ -146,7 +146,7 @@ alias cdplug="cd ~/dotfiles/config/nvim/lua/plugins && nvim"
 
 alias cdcore="cd ~/dotfiles/config/nvim/lua/core && nvim keybindings.lua"
 
-alias cdfunctions="cd ~/dotfiles/config/nvim/lua/core/functions && nvim"
+alias cdfunc="cd ~/dotfiles/config/nvim/lua/core/functions && nvim"
 
 alias cdqmk="builtin cd /Users/g/Library/Mobile\ Documents/com~apple~CloudDocs/'!Docs iCloud'/qmk-icloud && nvim" # öffnet neovim automatisch 
 
